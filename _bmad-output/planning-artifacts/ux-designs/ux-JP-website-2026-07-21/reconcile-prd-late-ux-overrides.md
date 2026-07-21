@@ -1,6 +1,6 @@
 # PRD reconciliation — later UX overrides
 
-Status: pending upstream PRD update before Architecture
+Status: resolved — PRD and addendum updated 2026-07-21
 
 The PRD and addendum remain authoritative for product scope, approved data, integrity, accessibility, and behavior. The user later changed presentation, Footer composition, and Contact routing decisions during the active UX run. The UX memlog records the changes in chronological override order; `DESIGN.md` and `EXPERIENCE.md` contain the current visual/behavior contract.
 
@@ -19,4 +19,4 @@ The PRD and addendum remain authoritative for product scope, approved data, inte
 
 No product identity, classification, filtering logic, technical-review rule, accessibility floor, or source/rights boundary changed. Any source attribution passed into Contact is analytics-only and is not exposed as a visible return route.
 
-Recommended handoff: run `bmad-prd` in update mode after UX confirmation so FR-6, NFR-13, and the addendum presentation paragraphs match the final spine before `bmad-architecture`.
+Completed handoff: `prd.md` and `addendum.md` now reflect the final Home, Product-card, Footer, and Contact decisions. Architecture may treat the PRD and final UX spines as aligned inputs.
