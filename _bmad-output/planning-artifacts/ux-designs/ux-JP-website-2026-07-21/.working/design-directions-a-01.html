@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>JP PUMP｜A 深藍銘牌排版方向</title>
+  <style>
+    /*
+      共用 A 色票：bg #F7F5EF; surface #FFFFFF; text #152033; muted #5C6675;
+      primary #122A59; accent #A87A24; border #CCD2DA; focus #E0A62E.
+      01 精密網格：sans stack; radius 2/4px; spacing 4/8/12/20/32; no shadow.
+      02 均衡工程：sans stack; radius 4/8px; spacing 4/8/16/24/40; shadow subtle.
+      03 歷史編輯：serif heading + sans body; radius 0/4px; spacing 6/12/20/32/52; rule-based.
+    */
+    *{box-sizing:border-box} body{margin:0;background:#e9edf1;color:#152033;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",Arial,sans-serif}
+    .page-head{padding:34px clamp(20px,5vw,70px);background:#122A59;color:white}.page-head h1{margin:0;font-size:clamp(1.7rem,3vw,2.8rem)}
+    .page-head p{max-width:900px;margin:10px 0 0;color:#dbe3ef;line-height:1.7}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding:28px;max-width:1760px;margin:auto}
+    .direction{--r:4px;--gap:12px;--shadow:none;overflow:hidden;border:1px solid #b9c2ce;border-radius:12px;background:white;box-shadow:0 12px 35px rgba(18,42,89,.08)}
+    .direction.preferred{outline:4px solid #122A59;outline-offset:3px}.meta{padding:22px 24px;border-bottom:1px solid #CCD2DA;background:#fff}
+    .eyebrow{font-size:.72rem;font-weight:900;letter-spacing:.12em;color:#A87A24}.meta h2{margin:5px 0 8px;color:#122A59;font-size:1.45rem}.meta p{margin:0;color:#5C6675;line-height:1.55;font-size:.9rem}
+    .browser{margin:18px;border:1px solid #CCD2DA;border-radius:var(--r);overflow:hidden;background:#F7F5EF;box-shadow:var(--shadow)}
+    .chrome{height:24px;display:flex;align-items:center;gap:5px;padding:0 9px;border-bottom:1px solid #CCD2DA;background:#eef1f5}.dot{width:6px;height:6px;border-radius:50%;background:#9aa6b5}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:13px 18px;background:white;border-bottom:1px solid #CCD2DA}.brand{font-weight:950;font-style:italic;color:#122A59;font-size:1.2rem}.links{display:flex;gap:13px;font-size:.7rem;font-weight:800}
+    .hero{padding:clamp(25px,4vw,48px) 22px 20px;background:#122A59;color:white}.hero small{color:#e7d7b3;font-weight:800;letter-spacing:.06em}.hero h3{max-width:470px;margin:8px 0;font-size:clamp(1.3rem,2.2vw,2rem);line-height:1.22}.hero p{max-width:500px;margin:0;color:#dbe3ef;font-size:.78rem;line-height:1.65}
+    .filter{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;margin-top:19px;padding:10px;background:white;border-radius:var(--r)}.field,.search{padding:9px 10px;border:1px solid #CCD2DA;border-radius:var(--r);font-size:.7rem}.field{color:#5C6675;background:#F7F5EF}.search{border-color:#A87A24;background:#A87A24;color:white;font-weight:900}
+    .content{padding:20px}.content h4{margin:0 0 12px;color:#122A59}.product{display:grid;grid-template-columns:38% 1fr;border:1px solid #CCD2DA;border-radius:var(--r);overflow:hidden;background:white;box-shadow:var(--shadow);outline:0}.product:focus-within{outline:3px solid #E0A62E;outline-offset:3px}
+    .visual{display:grid;place-items:center;min-height:145px;border-right:1px solid #CCD2DA;background:white}.pump{width:55px;height:76px;border:7px solid #122A59;border-radius:26px 26px 7px 7px;position:relative}.pump:after{content:"";position:absolute;left:-24px;bottom:5px;width:25px;border-top:8px solid #122A59}
+    .copy{padding:15px}.tag{display:inline-block;padding:3px 6px;border:1px solid #CCD2DA;border-radius:3px;color:#122A59;font-size:.62rem;font-weight:800}.copy h5{margin:7px 0 5px;color:#122A59}.copy p{margin:0 0 10px;color:#5C6675;font-size:.7rem;line-height:1.5}.spec{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding-top:9px;border-top:1px solid #CCD2DA;font-size:.66rem}.spec b{color:#152033}
+    .note{margin:0 18px 18px;padding:10px 12px;border-left:3px solid #A87A24;background:#F7F5EF;color:#5C6675;font-size:.72rem;line-height:1.5}
+    .precision{--r:2px;--shadow:none}.precision .nav,.precision .content{padding-left:14px;padding-right:14px}.precision .hero{padding-left:16px;padding-right:16px}.precision .meta h2,.precision h3,.precision h4,.precision h5{font-weight:900;letter-spacing:-.025em}.precision .product{grid-template-columns:34% 1fr}
+    .balanced{--r:8px;--shadow:0 7px 20px rgba(18,42,89,.08)}.balanced .meta{background:#F7F5EF}.balanced .hero h3{font-weight:850;letter-spacing:-.02em}.balanced .product{grid-template-columns:40% 1fr}.balanced .search{background:#122A59;border-color:#122A59}
+    .heritage{--r:0;--shadow:none}.heritage .meta h2,.heritage .hero h3,.heritage .content h4{font-family:"Noto Serif TC","Songti TC","PMingLiU",serif;font-weight:700}.heritage .hero{border-bottom:4px solid #A87A24}.heritage .hero small{text-transform:uppercase}.heritage .content{padding-top:28px}.heritage .content h4{padding-bottom:8px;border-bottom:1px solid #A87A24}.heritage .tag{border-width:0 0 1px;padding-left:0;padding-right:0}.heritage .product{grid-template-columns:42% 1fr}
+    @media(max-width:1150px){.grid{grid-template-columns:1fr}.direction{max-width:820px;margin:auto;width:100%}}
+    @media(max-width:560px){.grid{padding:14px}.links{display:none}.filter{grid-template-columns:1fr}.product{grid-template-columns:1fr!important}.visual{border-right:0;border-bottom:1px solid #CCD2DA}}
+  </style>
+</head>
+<body>
+  <header class="page-head"><h1>A「深藍銘牌」排版與元件方向</h1><p>A～E 配色風格均已保留。此頁只比較 A 主線內的字體、密度、圓角、間距與表面處理；產品卡刻意維持白、深藍、灰三色為主。</p></header>
+  <main class="grid">
+    <section class="direction precision"><header class="meta"><span class="eyebrow">01｜精密網格</span><h2>冷靜、緊湊、工程資料優先</h2><p>近直角、小間距、無陰影；適合規格密度高的畫面，但企業形象較冷。</p></header><div class="browser"><div class="chrome"><i class="dot"></i><i class="dot"></i><i class="dot"></i></div><nav class="nav"><span class="brand">JPump</span><div class="links"><span>產品總覽</span><span>服務與實績</span><span>關於傑平</span></div></nav><section class="hero"><small>可靠歷史 · 工程能力 · 快速回應</small><h3>以扎實經驗，守護每一套泵浦系統</h3><p>從設備選擇到工程服務，傑平以真誠溝通協助客戶找到合適方向。</p><div class="filter"><span class="field">品牌：全部</span><span class="field">用途：汙水處理泵</span><span class="search">搜尋產品</span></div></section><div class="content"><h4>產品系列</h4><article class="product" tabindex="0"><div class="visual"><i class="pump"></i></div><div class="copy"><span class="tag">立式加壓泵</span><h5>JP PUMP 產品系列</h5><p>產品說明依核准資料呈現。</p><div class="spec"><span>揚程最小／最大值</span><b>未提供</b><span>揚水量最小／最大值</span><b>未提供</b></div></div></article></div></div><p class="note">狀態示意：卡片取得鍵盤焦點時，只出現單一高對比焦點框。</p></section>
+    <section class="direction balanced preferred"><header class="meta"><span class="eyebrow">02｜均衡工程 · 建議主線</span><h2>專業清楚，也保留服務溫度</h2><p>中等密度、克制圓角、極淡陰影；能承載產品資料，也不讓公司形象過於冰冷。</p></header><div class="browser"><div class="chrome"><i class="dot"></i><i class="dot"></i><i class="dot"></i></div><nav class="nav"><span class="brand">JPump</span><div class="links"><span>產品總覽</span><span>服務與實績</span><span>關於傑平</span></div></nav><section class="hero"><small>可靠歷史 · 工程能力 · 快速回應</small><h3>以扎實經驗，守護每一套泵浦系統</h3><p>從設備選擇到工程服務，傑平以真誠溝通協助客戶找到合適方向。</p><div class="filter"><span class="field">品牌：全部</span><span class="field">用途：汙水處理泵</span><span class="search">搜尋產品</span></div></section><div class="content"><h4>產品系列</h4><article class="product" tabindex="0"><div class="visual"><i class="pump"></i></div><div class="copy"><span class="tag">立式加壓泵</span><h5>JP PUMP 產品系列</h5><p>清楚呈現核准內容與關鍵數據。</p><div class="spec"><span>揚程最小／最大值</span><b>未提供</b><span>揚水量最小／最大值</span><b>未提供</b></div></div></article></div></div><p class="note">狀態示意：細緻表面層次搭配單一焦點框，不加入額外裝飾色。</p></section>
+    <section class="direction heritage"><header class="meta"><span class="eyebrow">03｜歷史編輯</span><h2>老字號、敘事感、留白較多</h2><p>標題使用系統明體、金色分隔線與較大留白；歷史感最強，但產品列表會較長。</p></header><div class="browser"><div class="chrome"><i class="dot"></i><i class="dot"></i><i class="dot"></i></div><nav class="nav"><span class="brand">JPump</span><div class="links"><span>產品總覽</span><span>服務與實績</span><span>關於傑平</span></div></nav><section class="hero"><small>可靠歷史 · 工程能力 · 快速回應</small><h3>以扎實經驗，守護每一套泵浦系統</h3><p>從設備選擇到工程服務，傑平以真誠溝通協助客戶找到合適方向。</p><div class="filter"><span class="field">品牌：全部</span><span class="field">用途：汙水處理泵</span><span class="search">搜尋產品</span></div></section><div class="content"><h4>產品系列</h4><article class="product" tabindex="0"><div class="visual"><i class="pump"></i></div><div class="copy"><span class="tag">立式加壓泵</span><h5>JP PUMP 產品系列</h5><p>以留白襯托產品與公司長期經驗。</p><div class="spec"><span>揚程最小／最大值</span><b>未提供</b><span>揚水量最小／最大值</span><b>未提供</b></div></div></article></div></div><p class="note">狀態示意：以規則線與焦點框區分層級，避免仿舊紋理干擾資料。</p></section>
+  </main>
+</body>
+</html>

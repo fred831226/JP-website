@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JP PUMP 品牌配色方向比較</title>
+  <style>
+    /*
+      A 深藍銘牌：background #F7F5EF; surface #FFFFFF; text #152033; muted #5C6675;
+      primary #122A59; on-primary #FFFFFF; accent #A87A24; accent-soft #F1E7D2;
+      border #CCD2DA; success #237454; warning #94620B; error #B43D3D; focus #E0A62E.
+
+      B 精密工程：background #F3F7FA; surface #FFFFFF; text #17222B; muted #60717D;
+      primary #0D3974; on-primary #FFFFFF; accent #007C91; accent-soft #DDEFF1;
+      border #C5D1D9; success #197153; warning #9A6500; error #B33636; focus #18A7BD.
+
+      C 工坊信任：background #F4F1EC; surface #FFFEFC; text #27231F; muted #6B625A;
+      primary #172C55; on-primary #FFFFFF; accent #A84F2F; accent-soft #F2DED5;
+      border #D3C8BE; success #37705A; warning #94600D; error #AD3939; focus #CC6845.
+
+      D 清晰服務：background #F5F8F7; surface #FFFFFF; text #132622; muted #5D6F6A;
+      primary #133765; on-primary #FFFFFF; accent #167964; accent-soft #DDEDE8;
+      border #C7D4D0; success #176B4B; warning #8C6412; error #B23B45; focus #24A88A.
+
+      E 建築典藏：background #F6F3EB; surface #FFFFFF; text #1F2630; muted #636A72;
+      primary #182E5A; on-primary #FFFFFF; accent #7A6536; accent-soft #EAE3D2;
+      border #CAC6BB; success #2B7050; warning #8B620B; error #AB3D3D; focus #B18A36.
+    */
+
+    * { box-sizing: border-box; }
+    :root { color-scheme: light; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #e9edf1; color: #17222b; }
+    button, select { font: inherit; }
+    .page-head { max-width: 1480px; margin: 0 auto; padding: 42px 24px 26px; }
+    .eyebrow { margin: 0 0 8px; color: #44556a; font-size: .75rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+    h1 { margin: 0; font-size: clamp(1.8rem, 3vw, 3rem); letter-spacing: -.03em; }
+    .intro { max-width: 860px; margin: 12px 0 0; color: #526170; line-height: 1.7; }
+    .notice { max-width: 1480px; margin: 0 auto 24px; padding: 0 24px; }
+    .notice p { margin: 0; padding: 13px 16px; border-left: 4px solid #122A59; background: #fff; color: #455363; line-height: 1.6; }
+    .themes { max-width: 1480px; margin: 0 auto; padding: 0 24px 56px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+    .theme { --bg:#fff; --surface:#fff; --text:#111; --muted:#666; --primary:#122A59; --on-primary:#fff; --accent:#A87A24; --accent-soft:#eee; --border:#ccc; --success:#287654; --warning:#98620b; --error:#b43d3d; --focus:#e0a62e; overflow: hidden; border: 1px solid var(--border); border-radius: 18px; background: var(--bg); color: var(--text); box-shadow: 0 12px 36px rgba(24, 40, 64, .08); }
+    .theme-a { --bg:#F7F5EF; --surface:#FFFFFF; --text:#152033; --muted:#5C6675; --primary:#122A59; --on-primary:#FFFFFF; --accent:#A87A24; --accent-soft:#F1E7D2; --border:#CCD2DA; --success:#237454; --warning:#94620B; --error:#B43D3D; --focus:#E0A62E; outline:3px solid #122A59; outline-offset:3px; }
+    .theme-b { --bg:#F3F7FA; --surface:#FFFFFF; --text:#17222B; --muted:#60717D; --primary:#0D3974; --on-primary:#FFFFFF; --accent:#007C91; --accent-soft:#DDEFF1; --border:#C5D1D9; --success:#197153; --warning:#9A6500; --error:#B33636; --focus:#18A7BD; }
+    .theme-c { --bg:#F4F1EC; --surface:#FFFEFC; --text:#27231F; --muted:#6B625A; --primary:#172C55; --on-primary:#FFFFFF; --accent:#A84F2F; --accent-soft:#F2DED5; --border:#D3C8BE; --success:#37705A; --warning:#94600D; --error:#AD3939; --focus:#CC6845; }
+    .theme-d { --bg:#F5F8F7; --surface:#FFFFFF; --text:#132622; --muted:#5D6F6A; --primary:#133765; --on-primary:#FFFFFF; --accent:#167964; --accent-soft:#DDEDE8; --border:#C7D4D0; --success:#176B4B; --warning:#8C6412; --error:#B23B45; --focus:#24A88A; }
+    .theme-e { --bg:#F6F3EB; --surface:#FFFFFF; --text:#1F2630; --muted:#636A72; --primary:#182E5A; --on-primary:#FFFFFF; --accent:#7A6536; --accent-soft:#EAE3D2; --border:#CAC6BB; --success:#2B7050; --warning:#8B620B; --error:#AB3D3D; --focus:#B18A36; }
+    .theme-meta { padding: 24px 24px 18px; background: var(--surface); border-bottom: 1px solid var(--border); }
+    .theme-num { color: var(--accent); font-weight: 900; font-size: .76rem; letter-spacing: .12em; }
+    .theme h2 { margin: 5px 0 5px; color: var(--primary); font-size: 1.55rem; }
+    .mood { margin: 0; color: var(--muted); line-height: 1.55; }
+    .tokens { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 7px; padding: 16px 24px; background: var(--bg); }
+    .token { min-width: 0; font-size: .64rem; color: var(--muted); text-align: center; }
+    .swatch { display: block; height: 26px; margin-bottom: 5px; border: 1px solid color-mix(in srgb, var(--border), #000 10%); border-radius: 6px; background: var(--swatch); }
+    .snippet { margin: 0 24px 24px; overflow: hidden; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+    .mini-nav { display:flex; align-items:center; justify-content:space-between; gap:12px; padding: 12px 15px; border-bottom:1px solid var(--border); }
+    .logo { color:var(--primary); font-size:1.25rem; font-weight:900; font-style:italic; letter-spacing:-.06em; white-space:nowrap; }
+    .logo span { margin-left:3px; font-size:.62em; letter-spacing:-.02em; }
+    .nav-links { display:flex; gap:12px; color:var(--text); font-size:.72rem; font-weight:700; }
+    .hero { position:relative; padding: 28px 20px 20px; background: linear-gradient(128deg, var(--primary), color-mix(in srgb, var(--primary) 70%, #000)); color:var(--on-primary); }
+    .hero::after { content:""; position:absolute; inset:0 0 0 auto; width:42%; opacity:.26; background:repeating-linear-gradient(125deg, transparent 0 18px, var(--accent) 19px 21px); }
+    .hero-copy { position:relative; z-index:1; max-width:74%; }
+    .hero-kicker { margin:0 0 5px; color: color-mix(in srgb, var(--accent-soft) 72%, white); font-size:.68rem; font-weight:800; letter-spacing:.09em; }
+    .hero h3 { margin:0; font-size:clamp(1.18rem, 2vw, 1.72rem); line-height:1.18; }
+    .hero p { margin:8px 0 13px; color:color-mix(in srgb, var(--on-primary) 82%, transparent); font-size:.76rem; line-height:1.55; }
+    .text-link { color:var(--on-primary); font-weight:800; font-size:.76rem; text-decoration:underline; text-decoration-color:var(--accent); text-underline-offset:4px; }
+    .filter { position:relative; z-index:2; display:grid; grid-template-columns:1fr 1fr auto; gap:8px; margin-top:18px; padding:10px; border-radius:9px; background:var(--surface); }
+    select { width:100%; min-width:0; padding:9px 10px; border:1px solid var(--border); border-radius:6px; background:var(--bg); color:var(--text); font-size:.72rem; }
+    .button { display:inline-flex; align-items:center; justify-content:center; padding:9px 14px; border:1px solid var(--primary); border-radius:6px; background:var(--primary); color:var(--on-primary); font-size:.74rem; font-weight:800; white-space:nowrap; }
+    .body { padding:18px; background:var(--bg); }
+    .body-title { display:flex; align-items:end; justify-content:space-between; gap:14px; margin-bottom:11px; }
+    .body h4 { margin:0; color:var(--primary); font-size:1rem; }
+    .body-note { color:var(--muted); font-size:.65rem; }
+    .product { display:grid; grid-template-columns:36% 1fr; min-height:150px; overflow:hidden; border:1px solid var(--border); border-radius:8px; background:var(--surface); }
+    .product-image { display:grid; place-items:center; padding:14px; border-right:1px solid var(--border); background:var(--surface); }
+    .pump { position:relative; width:62px; height:82px; border:7px solid var(--primary); border-radius:30px 30px 10px 10px; }
+    .pump::before { content:""; position:absolute; left:13px; bottom:-21px; width:24px; height:18px; border:6px solid var(--primary); border-top:0; }
+    .pump::after { content:""; position:absolute; left:-24px; bottom:2px; width:28px; border-top:8px solid var(--primary); }
+    .product-copy { padding:14px; }
+    .tag { display:inline-block; padding:3px 7px; border:1px solid var(--border); border-radius:4px; background:var(--surface); color:var(--primary); font-size:.62rem; font-weight:800; }
+    .product h5 { margin:7px 0 5px; color:var(--primary); font-size:.94rem; }
+    .product p { margin:0 0 8px; color:var(--muted); font-size:.68rem; line-height:1.45; }
+    .specs { display:grid; grid-template-columns:1fr auto; gap:3px 10px; padding-top:8px; border-top:1px solid var(--border); font-size:.66rem; }
+    .specs b { color:var(--text); }
+    .actions { display:none; }
+    .ghost { background:transparent; color:var(--primary); }
+    .state-strip { display:none; }
+    .state { flex:1; padding:6px 4px; border-radius:5px; color:white; font-size:.58rem; font-weight:800; text-align:center; }
+    .success { background:var(--success); } .warning { background:var(--warning); } .error { background:var(--error); } .focus { background:var(--focus); color:#101820; }
+    .theme-e { grid-column: 1 / -1; }
+    .theme-e .theme-body { display:grid; grid-template-columns: minmax(300px, .78fr) minmax(480px, 1.22fr); }
+    .theme-e .tokens { grid-template-columns:repeat(4, minmax(0, 1fr)); align-content:start; }
+    .theme-e .snippet { margin-top:16px; }
+    @media (max-width: 980px) {
+      .themes { grid-template-columns:1fr; }
+      .theme-e { grid-column:auto; }
+      .theme-e .theme-body { display:block; }
+      .theme-e .tokens { grid-template-columns:repeat(6, minmax(0,1fr)); }
+    }
+    @media (max-width: 620px) {
+      .page-head { padding-top:28px; }
+      .themes, .notice { padding-left:14px; padding-right:14px; }
+      .tokens, .theme-e .tokens { grid-template-columns:repeat(4, minmax(0,1fr)); }
+      .nav-links { display:none; }
+      .hero-copy { max-width:92%; }
+      .filter { grid-template-columns:1fr; }
+      .product { grid-template-columns:1fr; }
+      .product-image { min-height:135px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-head">
+    <p class="eyebrow">UX Discovery · Color Themes · Light Mode</p>
+    <h1>JP PUMP 品牌配色方向比較</h1>
+    <p class="intro">方向 A「深藍銘牌」是目前優先發展的品牌方向；B～E 全數保留為未來客戶 mockup 的風格庫，不視為淘汰方案。金色只作歷史感與少量重點提示。</p>
+  </header>
+  <aside class="notice"><p><strong>證據邊界：</strong>實拍招牌支持歷史與金屬材質語彙；AI 美化招牌只供氣氛參考，不作 Logo、字形或真實品牌色的證據。</p></aside>
+
+  <main class="themes">
+    <section class="theme theme-a">
+      <header class="theme-meta"><span class="theme-num">方向 A · 目前優先</span><h2>深藍銘牌</h2><p class="mood">沉穩、可靠、帶有節制的老字號金屬質感。</p></header>
+      <div class="tokens">
+        <span class="token"><i class="swatch" style="--swatch:var(--bg)"></i>背景</span><span class="token"><i class="swatch" style="--swatch:var(--surface)"></i>表面</span><span class="token"><i class="swatch" style="--swatch:var(--text)"></i>文字</span><span class="token"><i class="swatch" style="--swatch:var(--muted)"></i>次要文字</span><span class="token"><i class="swatch" style="--swatch:var(--primary)"></i>主色</span><span class="token"><i class="swatch" style="--swatch:var(--on-primary)"></i>主色上文字</span><span class="token"><i class="swatch" style="--swatch:var(--accent)"></i>強調</span><span class="token"><i class="swatch" style="--swatch:var(--accent-soft)"></i>柔和強調</span><span class="token"><i class="swatch" style="--swatch:var(--border)"></i>邊框</span><span class="token"><i class="swatch" style="--swatch:var(--success)"></i>成功</span><span class="token"><i class="swatch" style="--swatch:var(--warning)"></i>警示</span><span class="token"><i class="swatch" style="--swatch:var(--error)"></i>錯誤</span>
+      </div>
+      <div class="snippet"><div class="mini-nav"><div class="logo">JP<span>PUMP</span></div><div class="nav-links"><span>產品總覽</span><span>服務與實績</span><span>關於傑平</span></div></div><div class="hero"><div class="hero-copy"><p class="hero-kicker">可靠歷史 · 工程能力 · 快速回應</p><h3>以扎實經驗，守護每一套泵浦系統</h3><p>從設備選擇到工程服務，傑平以真誠溝通協助客戶找到合適方向。</p><span class="text-link">認識我們</span></div><div class="filter"><select aria-label="品牌"><option>品牌：全部</option></select><select aria-label="用途"><option>用途：汙水處理泵</option></select><button class="button">搜尋產品</button></div></div><div class="body"><div class="body-title"><h4>產品系列</h4><span class="body-note">整張卡片可進入詳細頁</span></div><div class="product"><div class="product-image"><i class="pump"></i></div><div class="product-copy"><span class="tag">立式加壓泵</span><h5>JP PUMP 產品系列</h5><p>產品說明依核准資料呈現，協助快速確認用途與關鍵範圍。</p><div class="specs"><span>揚程最小值</span><b>未提供</b><span>揚程最大值</span><b>未提供</b><span>揚水量範圍</span><b>未提供</b></div></div></div><div class="actions"><span class="button">聯絡我們</span><span class="button ghost">返回產品總覽</span></div><div class="state-strip"><span class="state success">成功</span><span class="state warning">警示</span><span class="state error">錯誤</span><span class="state focus">焦點</span></div></div></div>
+    </section>
+
+    <section class="theme theme-b">
+      <header class="theme-meta"><span class="theme-num">方向 B</span><h2>精密工程</h2><p class="mood">冷靜、清晰、偏現代設備與技術資料的專業感。</p></header>
+      <div class="tokens">
+        <span class="token"><i class="swatch" style="--swatch:var(--bg)"></i>背景</span><span class="token"><i class="swatch" style="--swatch:var(--surface)"></i>表面</span><span class="token"><i class="swatch" style="--swatch:var(--text)"></i>文字</span><span class="token"><i class="swatch" style="--swatch:var(--muted)"></i>次要文字</span><span class="token"><i class="swatch" style="--swatch:var(--primary)"></i>主色</span><span class="token"><i class="swatch" style="--swatch:var(--on-primary)"></i>主色上文字</span><span class="token"><i class="swatch" style="--swatch:var(--accent)"></i>強調</span><span class="token"><i class="swatch" style="--swatch:var(--accent-soft)"></i>柔和強調</span><span class="token"><i class="swatch" style="--swatch:var(--border)"></i>邊框</span><span class="token"><i class="swatch" style="--swatch:var(--success)"></i>成功</span><span class="token"><i class="swatch" style="--swatch:var(--warning)"></i>警示</span><span class="token"><i class="swatch" style="--swatch:var(--error)"></i>錯誤</span>
+      </div>
+      <div class="snippet"><div class="mini-nav"><div class="logo">JP<span>PUMP</span></div><div class="nav-links"><span>產品總覽</span><span>服務與實績</span><span>關於傑平</span></div></div><div class="hero"><div class="hero-copy"><p class="hero-kicker">工程資訊，清楚可核實</p><h3>從用途出發，更快找到合適產品</h3><p>品牌與用途採單選篩選，搜尋後直接抵達已篩選的產品總覽。</p><span class="text-link">認識我們</span></div><div class="filter"><select><option>品牌：全部</option></select><select><option>用途：立式加壓泵</option></select><button class="button">搜尋產品</button></div></div><div class="body"><div class="body-title"><h4>產品系列</h4><span class="body-note">已覆核資料優先</span></div><div class="product"><div class="product-image"><i class="pump"></i></div><div class="product-copy"><span class="tag">汙水處理泵</span><h5>JP PUMP 產品系列</h5><p>規格以對齊表格呈現；缺漏資料明確標示，不做推測。</p><div class="specs"><span>揚程範圍（m）</span><b>未提供</b><span>揚水量（L/min）</span><b>未提供</b></div></div></div><div class="actions"><span class="button">聯絡我們</span><span class="button ghost">返回產品總覽</span></div><div class="state-strip"><span class="state success">成功</span><span class="state warning">警示</span><span class="state error">錯誤</span><span class="state focus">焦點</span></div></div></div>
+    </section>
+
+    <section class="theme theme-c">
+      <header class="theme-meta"><span class="theme-num">方向 C</span><h2>工坊信任</h2><p class="mood">有人味、務實、以暖銹紅傳達現場服務與行動力。</p></header>
+      <div class="tokens">
+        <span class="token"><i class="swatch" style="--swatch:var(--bg)"></i>背景</span><span class="token"><i class="swatch" style="--swatch:var(--surface)"></i>表面</span><span class="token"><i class="swatch" style="--swatch:var(--text)"></i>文字</span><span class="token"><i class="swatch" style="--swatch:var(--muted)"></i>次要文字</span><span class="token"><i class="swatch" style="--swatch:var(--primary)"></i>主色</span><span class="token"><i class="swatch" style="--swatch:var(--on-primary)"></i>主色上文字</span><span class="token"><i class="swatch" style="--swatch:var(--accent)"></i>強調</span><span class="token"><i class="swatch" style="--swatch:var(--accent-soft)"></i>柔和強調</span><span class="token"><i class="swatch" style="--swatch:var(--border)"></i>邊框</span><span class="token"><i class="swatch" style="--swatch:var(--success)"></i>成功</span><span class="token"><i class="swatch" style="--swatch:var(--warning)"></i>警示</span><span class="token"><i class="swatch" style="--swatch:var(--error)"></i>錯誤</span>
+      </div>
+      <div class="snippet"><div class="mini-nav"><div class="logo">JP<span>PUMP</span></div><div class="nav-links"><span>產品總覽</span><span>服務與實績</span><span>關於傑平</span></div></div><div class="hero"><div class="hero-copy"><p class="hero-kicker">真誠服務 · 快速回應</p><h3>懂設備，也重視每一次現場溝通</h3><p>以工程經驗與實際需求為起點，提供清楚、可追溯的產品資訊。</p><span class="text-link">認識我們</span></div><div class="filter"><select><option>品牌：全部</option></select><select><option>用途：請選擇</option></select><button class="button">搜尋產品</button></div></div><div class="body"><div class="body-title"><h4>產品系列</h4><span class="body-note">實用而直接</span></div><div class="product"><div class="product-image"><i class="pump"></i></div><div class="product-copy"><span class="tag">用途標籤</span><h5>JP PUMP 產品系列</h5><p>系列介紹聚焦使用情境，再接多型號規格供後續核對。</p><div class="specs"><span>揚程最小／最大值</span><b>未提供</b><span>揚水量最小／最大值</span><b>未提供</b></div></div></div><div class="actions"><span class="button">聯絡我們</span><span class="button ghost">返回產品總覽</span></div><div class="state-strip"><span class="state success">成功</span><span class="state warning">警示</span><span class="state error">錯誤</span><span class="state focus">焦點</span></div></div></div>
+    </section>
+
+    <section class="theme theme-d">
+      <header class="theme-meta"><span class="theme-num">方向 D</span><h2>清晰服務</h2><p class="mood">親和、迅速、用工程青綠強化服務反應與可操作性。</p></header>
+      <div class="tokens">
+        <span class="token"><i class="swatch" style="--swatch:var(--bg)"></i>背景</span><span class="token"><i class="swatch" style="--swatch:var(--surface)"></i>表面</span><span class="token"><i class="swatch" style="--swatch:var(--text)"></i>文字</span><span class="token"><i class="swatch" style="--swatch:var(--muted)"></i>次要文字</span><span class="token"><i class="swatch" style="--swatch:var(--primary)"></i>主色</span><span class="token"><i class="swatch" style="--swatch:var(--on-primary)"></i>主色上文字</span><span class="token"><i class="swatch" style="--swatch:var(--accent)"></i>強調</span><span class="token"><i class="swatch" style="--swatch:var(--accent-soft)"></i>柔和強調</span><span class="token"><i class="swatch" style="--swatch:var(--border)"></i>邊框</span><span class="token"><i class="swatch" style="--swatch:var(--success)"></i>成功</span><span class="token"><i class="swatch" style="--swatch:var(--warning)"></i>警示</span><span class="token"><i class="swatch" style="--swatch:var(--error)"></i>錯誤</span>
+      </div>
+      <div class="snippet"><div class="mini-nav"><div class="logo">JP<span>PUMP</span></div><div class="nav-links"><span>產品總覽</span><span>服務與實績</span><span>關於傑平</span></div></div><div class="hero"><div class="hero-copy"><p class="hero-kicker">需求清楚，路徑更短</p><h3>快速篩選，直接查看符合用途的系列</h3><p>產品導覽最多八項用途，讓熟悉需求的客戶減少不必要層級。</p><span class="text-link">認識我們</span></div><div class="filter"><select><option>品牌：全部</option></select><select><option>用途：汙水處理泵</option></select><button class="button">搜尋產品</button></div></div><div class="body"><div class="body-title"><h4>產品系列</h4><span class="body-note">清楚的行動層級</span></div><div class="product"><div class="product-image"><i class="pump"></i></div><div class="product-copy"><span class="tag">立式加壓泵</span><h5>JP PUMP 產品系列</h5><p>卡片資訊精簡，整張可點擊，手機版維持單欄易讀。</p><div class="specs"><span>揚程（m）</span><b>未提供</b><span>揚水量（L/min）</span><b>未提供</b></div></div></div><div class="actions"><span class="button">聯絡我們</span><span class="button ghost">返回產品總覽</span></div><div class="state-strip"><span class="state success">成功</span><span class="state warning">警示</span><span class="state error">錯誤</span><span class="state focus">焦點</span></div></div></div>
+    </section>
+
+    <section class="theme theme-e">
+      <header class="theme-meta"><span class="theme-num">方向 E</span><h2>建築典藏</h2><p class="mood">克制、成熟、像工程顧問與長期合作夥伴的低調質感。</p></header>
+      <div class="theme-body">
+        <div class="tokens">
+          <span class="token"><i class="swatch" style="--swatch:var(--bg)"></i>背景</span><span class="token"><i class="swatch" style="--swatch:var(--surface)"></i>表面</span><span class="token"><i class="swatch" style="--swatch:var(--text)"></i>文字</span><span class="token"><i class="swatch" style="--swatch:var(--muted)"></i>次要文字</span><span class="token"><i class="swatch" style="--swatch:var(--primary)"></i>主色</span><span class="token"><i class="swatch" style="--swatch:var(--on-primary)"></i>主色上文字</span><span class="token"><i class="swatch" style="--swatch:var(--accent)"></i>強調</span><span class="token"><i class="swatch" style="--swatch:var(--accent-soft)"></i>柔和強調</span><span class="token"><i class="swatch" style="--swatch:var(--border)"></i>邊框</span><span class="token"><i class="swatch" style="--swatch:var(--success)"></i>成功</span><span class="token"><i class="swatch" style="--swatch:var(--warning)"></i>警示</span><span class="token"><i class="swatch" style="--swatch:var(--error)"></i>錯誤</span>
+        </div>
+        <div class="snippet"><div class="mini-nav"><div class="logo">JP<span>PUMP</span></div><div class="nav-links"><span>產品總覽</span><span>服務與實績</span><span>關於傑平</span></div></div><div class="hero"><div class="hero-copy"><p class="hero-kicker">長期經驗 · 穩健工程</p><h3>可靠，不只是口號，而是每一次交付</h3><p>透過可核實的產品資料與工程實績，建立值得長期合作的信任。</p><span class="text-link">認識我們</span></div><div class="filter"><select><option>品牌：全部</option></select><select><option>用途：請選擇</option></select><button class="button">搜尋產品</button></div></div><div class="body"><div class="body-title"><h4>產品系列</h4><span class="body-note">歷史感僅作細節</span></div><div class="product"><div class="product-image"><i class="pump"></i></div><div class="product-copy"><span class="tag">用途標籤</span><h5>JP PUMP 產品系列</h5><p>以低彩度材質襯托真實產品圖與工程資訊，不讓裝飾搶走內容。</p><div class="specs"><span>揚程最小／最大值</span><b>未提供</b><span>揚水量最小／最大值</span><b>未提供</b></div></div></div><div class="actions"><span class="button">聯絡我們</span><span class="button ghost">返回產品總覽</span></div><div class="state-strip"><span class="state success">成功</span><span class="state warning">警示</span><span class="state error">錯誤</span><span class="state focus">焦點</span></div></div></div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
