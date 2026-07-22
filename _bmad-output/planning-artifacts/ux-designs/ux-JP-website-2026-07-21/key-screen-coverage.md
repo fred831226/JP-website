@@ -8,7 +8,7 @@ This inventory closes visual coverage for the current UX scope. DESIGN.md and EX
 
 | Surface | Visual reference | Why it needs an independent mock |
 |---|---|---|
-| Home | [mockup](mockups/key-screen-home-responsive-01.html) | Establishes the global Header/Footer, brand Hero, quick product entry, trust sequence, purpose-card grid, gateways, featured evidence, partner teaser, and Contact CTA; News is intentionally absent |
+| Home | [mockup](mockups/key-screen-home-responsive-01.html) | Establishes the global Header/Footer, brand Hero, quick product entry, decorated trust sequence, purpose-card grid, responsive gateway interaction, featured evidence, partner teaser, and direct Footer transition; separate Contact CTA and News are intentionally absent |
 | Product overview | [mockup](mockups/key-screen-product-overview-responsive-01.html) | Owns the most complex public filtering, result, empty-state, and product-card behavior |
 | Series detail + image enlargement | [mockup](mockups/key-screen-product-series-detail-responsive-01.html) | Owns dense technical data, long model tables, media enlargement, use tags, and Contact action hierarchy |
 | Services & projects | [mockup](mockups/key-screen-services-projects-responsive-01.html) | Owns the service-capability Hero and verified project-evidence list; prevents project evidence from being styled like generic marketing cards |
@@ -25,11 +25,11 @@ This inventory closes visual coverage for the current UX scope. DESIGN.md and EX
 | News list/detail | Published content list, date/summary/body, media rules, standard detail reading width | Conventional editorial surfaces with no new interaction |
 | Not found/removed | Empty/error panel state with nearest valid destination, Product overview, and Contact | State behavior is already explicit |
 
-## Operational surfaces intentionally spine-only
+## V1 maintainer workflow intentionally has no custom key screen
 
-Sign in, account recovery, content workspace, News editor, Project editor, Media picker, publish result, product change intake, difference review, product validation, release/version/rollback, and partner change review remain platform-neutral. Their state, validation, accessibility, and recovery contracts are defined in EXPERIENCE.md.
+V1 has no sign-in, account recovery, CMS workspace, News/Project editor, media picker, custom product-maintenance UI, backend, or database. All content uses the external Git/validation/Vercel workflow defined in EXPERIENCE.md: source preparation, change review, validation report, Vercel Preview, JP PUMP approval, Production promotion, and named deployment rollback.
 
-A new operational key screen becomes necessary only if Architecture selects a custom maintenance UI whose interaction model is not supplied by the chosen CMS/admin system.
+Those stages use provider/tool interfaces and do not inherit JP PUMP public-site styling. A new operational key screen becomes necessary only if V2 adopts a CMS or custom backend after a validated self-service/runtime need.
 
 ## Closed decisions
 

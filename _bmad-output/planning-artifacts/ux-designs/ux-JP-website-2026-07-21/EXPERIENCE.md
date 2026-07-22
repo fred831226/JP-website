@@ -2,10 +2,11 @@
 name: "JP PUMP Website Experience"
 status: final
 created: 2026-07-21
-updated: 2026-07-21
+updated: 2026-07-22
 sources:
   - ../../prds/prd-JP-Website-2026-07-20/prd.md
   - ../../prds/prd-JP-Website-2026-07-20/addendum.md
+  - ../../architecture/architecture-JP-Website-2026-07-21/ARCHITECTURE-SPINE.md
   - imports/competitor-navigation-about-us.png
   - imports/homepage-header-reference.png
   - imports/field-engineers-reference-01.png
@@ -21,13 +22,13 @@ sources:
 
 # JP PUMP — Experience Spine
 
-> Responsive public website, single-administrator content workspace, and controlled product-data maintenance flow. `DESIGN.md` owns visual identity; this file owns information architecture, behavior, states, interaction, accessibility, and journeys. The two spines win on conflict with mocks or imported references.
+> Responsive public website plus a designated-maintainer Git and Vercel release journey. `DESIGN.md` owns public visual identity; this file owns public information architecture, behavior, states, interaction, accessibility, and the operational release journey. The two spines win on conflict with mocks or imported references.
 
 ## Foundation
 
 The primary surface is a Traditional Chinese responsive website under `/zh-tw/`. Mobile and desktop expose the same core content and actions. V1 is a public professional catalog and digital trust entry point: visitors find, understand, verify, and contact. It does not automate engineering selection, suitability guarantees, quotation, ordering, payment, CRM, or customer accounts.
 
-The secondary surface is a platform-neutral, single-administrator content workspace for news and case studies. A separate controlled maintenance flow handles partners and product data. The final CMS and backend are intentionally undecided; this contract describes required behavior without prescribing Sanity, Decap, Payload, or another vendor.
+V1 has no CMS, backend, database, sign-in, account recovery, content dashboard, editor, media picker, or management API. All News, Projects, company/partner content, catalog data, redirects, and approved web media are maintained as version-controlled sources. The secondary journey uses existing Git, automated validation, and Vercel interfaces rather than a custom JP PUMP operational surface. V2 may add a CMS only after a validated self-service need and requires a new UX decision.
 
 `DESIGN.md` is the visual identity reference. Public-facing terminology uses **用途**; the governed data model and maintenance interface use **應用情境**. Both refer to the same controlled classification.
 
@@ -56,34 +57,20 @@ Header order: `產品總覽`, `服務與實績`, `關於傑平`, `聯絡我們`.
 
 Brand, pump-type, and use-case pages remain crawlable through ordinary links in the Product overview and relevant content. They are not hidden inside filter-only state.
 
-### Content workspace
+### Maintainer release workflow
 
-| Surface | Purpose | Journey |
+These are workflow stages supplied by repository, CI, and Vercel tooling, not custom JP PUMP screens.
+
+| Stage | Purpose | Journeys |
 |---|---|---|
-| Sign in / account recovery | Secure access for the single administrator | UJ-4 |
-| Content dashboard | Reach News, Projects, drafts, published, unpublished, and archived items | UJ-4 |
-| News editor | Create, validate, publish, unpublish, and archive news | UJ-4 |
-| Project editor | Maintain approved project facts, scope, outcome, images, and related products | UJ-4 |
-| Media picker | Upload/select case and news images with alt text, source, and rights metadata | UJ-4 |
-| Publish result | Confirm success and open the public page | UJ-4 |
+| Source preparation | Update schema-governed News, Projects, company/partner content, catalog releases, redirects, and media manifests | UJ-4, UJ-5 |
+| Change review | Show the Git difference, affected content, stable IDs/slugs, additions, removals, duplicates, missing fields, and rights metadata | UJ-4, UJ-5 |
+| Validation report | Block content, technical, rights, link, SEO, accessibility, or build failures without changing Production | UJ-4, UJ-5 |
+| Vercel Preview | Review the complete public site at a non-indexable Preview URL | UJ-4, UJ-5 |
+| Approval and Production promotion | Record JP PUMP confirmation and promote one named commit/deployment atomically | UJ-4, UJ-5 |
+| Deployment rollback | Restore a named last-known-good deployment without partial content rollback | UJ-4, UJ-5 |
 
-The client workspace does not manage products, partners, or Home hero media.
-
-### Controlled product maintenance
-
-| Surface | Purpose | Journey |
-|---|---|---|
-| Change intake | Import or enter a new controlled product-data version | UJ-5 |
-| Difference review | Show added, changed, duplicate, missing, excluded data, and affected pages | UJ-5 |
-| Validation report | Block critical errors; classify records as reviewed, pending, insufficient, or excluded | UJ-5 |
-| Release preview | Review the complete public impact before publishing | UJ-5 |
-| Versions & rollback | Publish an identifiable version or restore the last usable version | UJ-5 |
-
-### Controlled partner maintenance
-
-| Surface | Purpose | Journey |
-|---|---|---|
-| Partner change review | Let the designated maintainer verify approved partner name, relationship copy, Logo/trademark rights, and official URL before a controlled release | UJ-2 support |
+News, Projects, partners, and catalog content share this release path. Product intake may still begin with Excel/CSV, but the spreadsheet is not a public runtime source or a custom upload UI.
 
 ## Voice and Tone
 
@@ -112,9 +99,9 @@ Behavioral rules below use the visual definitions in `DESIGN.md.Components`.
 | Home quick filter | Home Hero | Brand and Purpose are single-select and both default to `全部`. Submit always navigates to Product overview with the selected or default conditions represented in restorable URL state; untouched controls never create a validation error. |
 | Home company summary | Home | Shows only concise approved company context and links to Company information. Each missing fact is omitted; the summary must not become a second full Company page. |
 | Home purpose card | Home | Entire card navigates to Product overview with Brand=`全部` and exactly one governed Purpose applied in restorable URL/filter state. Image zoom is visual reinforcement only. Accessible name includes the Purpose and destination; there is no nested `Learn more` action. |
-| Home gateway block | Home | Provides three whole-block links to Product overview, Services & projects, and Contact. It explains the routes and never duplicates or mutates the Hero filter state. |
+| Home gateway block | Home | Provides three whole-block links to Product overview, Services & projects, and Contact. Wide pointer layouts keep them equal at rest; hover or keyboard focus expands the active block and contracts its siblings, and leaving the group restores equal widths. The transition reveals no new content and never becomes the only route cue. Touch and narrow layouts stay fixed and stacked. The block never duplicates or mutates the Hero filter state. |
 | Home content teaser | Home | Featured projects and partners reuse their destination components. Each teaser has one destination and never exposes unapproved evidence. News remains on its dedicated list/detail surfaces. |
-| Catalog sidebar | Product overview | Three accordion sections: `產品分類`, `產品搜尋`, and `產品篩選`. Category hierarchy appears as removable path tags. Search accepts a series/model term. Brand, pump type, and use use dropdown pickers that add visible removable selections; no checkbox list. `套用篩選` commits pending selections and `清除篩選` resets them. Within one dimension use OR; across dimensions use AND. Applied state is URL-backed. |
+| Catalog sidebar | Product overview | One always-visible filter rail contains series/model Search, an exclusive segmented Brand group, multi-select Pump type chips, multi-select Purpose chips, removable active-condition tags, and one clear-all action. Every selection filters immediately without a separate apply step. Multiple Pump type selections use OR because each Series has one governed type; multiple Purpose selections narrow to Series carrying every selected Purpose. Brand, type, Purpose, and search dimensions combine with AND. Every change updates restorable URL state, exposes programmatic selected state, and keeps pointer, touch, and keyboard behavior equivalent. |
 | Product card | Product overview and category pages | Entire card is one link to the unique series page. `看更多` is a text-only visual cue inside that link, never a nested action. Key data is summarized in one or two compact lines at the lower-left. Pointer, touch, and keyboard produce the same destination. Accessible name includes series and relevant category context. |
 | Result summary | Product overview | Announces result count and filter changes. Shows `重設全部條件` whenever any filter is active. |
 | Product image | Series detail | Click, touch, or keyboard opens one modal enlargement. Modal traps focus; clear close button and `Escape` close it; closing returns focus to the image trigger. |
@@ -127,9 +114,8 @@ Behavioral rules below use the visual definitions in `DESIGN.md.Components`.
 | Partner block | Partners | One partner per vertical block. `拜訪網站` appears only for a confirmed official URL and indicates an external destination. |
 | Project evidence block | Services & projects, Project detail | Entire list block links to one Project detail. Only approved facts and rights-cleared real media appear. Scope, outcome, and related products are omitted individually when absent; the block does not imply missing achievements. |
 | Footer | All public surfaces | Uses three content groups: company Logo/identity, primary navigation, and approved contact information. Narrow layouts stack in that order. It does not introduce a second IA; missing or unapproved facts and legal links are omitted. Footer navigation remains keyboard reachable with 44px targets. |
-| Empty/error panel | Public lists, category pages, workspace, maintenance | Explains what happened, preserves recoverable state, and exposes one primary recovery plus an optional Contact path. It never substitutes generic success content for an error. |
-| Publish action | Content workspace | Runs required-field and rights checks before publishing. Blocking errors receive focus and a summary; no partial public write. |
-| Version release | Product maintenance | Shows full change impact and explicit version identity. Critical validation failures disable release. Rollback targets a named last-known-good version. |
+| Empty/error panel | Public lists and category pages | Explains what happened, preserves recoverable state, and exposes one primary recovery plus an optional Contact path. It never substitutes generic success content for an error. |
+| Release evidence | Maintainer workflow | Git/CI/Vercel must expose commit/deployment identity, affected pages, validation outcome, Preview URL, approval state, Production result, and rollback target. These are operational evidence requirements, not a custom visual component. |
 
 ## State Patterns
 
@@ -139,9 +125,9 @@ Behavioral rules below use the visual definitions in `DESIGN.md.Components`.
 | Home media reduced/failed | Home | Reduced motion, data-saving/mobile degradation, or media failure shows the final static image immediately. Copy, filter, and links remain identical. |
 | Home optional content absent | Home | Omit the entire featured-project or partner section when its source has no approved records. Purpose cards appear only for governed published purposes with approved imagery; preserve the remaining section order without empty cards or invented filler. |
 | No published projects | Services & projects | Keep the approved service-capability Hero and explanation, state that no public project records are currently available, then offer Contact. Never substitute Home atmosphere or generic stock imagery. |
-| Public content loading/failed | Category, Services & projects, Project, Company, Partners, News | Preserve the page heading and navigation. Loading uses stable content-shaped placeholders; failure explains that content could not load and offers retry plus the nearest stable parent. Never show fabricated fallback facts. |
+| Public route and content delivery | Category, Services & projects, Project, Company, Partners, News | Primary content arrives in the statically generated HTML; do not hide it behind client-only loading skeletons. Missing governed content is handled as an empty/omitted state, and an unavailable or retired route follows the explicit 404/redirect contract. Individual media failure uses its labelled fallback without fabricating facts. |
 | Category empty | Brand, pump-type, use-case | Keep the approved category introduction. State that no published series are currently available, then offer Product overview and Contact; do not hide the whole indexed page or manufacture cards. |
-| Filter loading | Product overview | Stable card-shaped skeletons preserve layout. Existing filter controls remain visible; do not clear URL state. |
+| Filter updating | Product overview | Each Brand, Pump type, Purpose, search, removal, or clear-all action immediately evaluates the embedded Series-level metadata and replaces the current URL state without a remote request. Keep controls and current results stable during state replacement; never clear unrelated URL state or flash an empty list. |
 | Filter results | Product overview | Show count, active conditions, and matching cards. Announce count changes without moving focus. |
 | Filter empty | Product overview | `沒有符合目前條件的產品。` Provide individual chip removal, `重設全部條件`, and a direct Contact path. |
 | Missing specification | Card, series, table | Display `未提供`. Never substitute zero, dash-only, estimated range, or copied neighboring data. |
@@ -153,18 +139,14 @@ Behavioral rules below use the visual definitions in `DESIGN.md.Components`.
 | Contact reached from any origin | Contact | Render the same direct one-page experience regardless of source. Privacy-safe attribution may retain a source identifier internally; no source name or return-to-product action is shown. |
 | Contact FAQ absent | Contact | Omit the FAQ section and let Contact information use the available width. Never publish draft questions or invented answers. |
 | Contact map unavailable | Contact | Omit the entire map section until the address and embedding method are approved. The working mock's labelled map is a conditional layout reference, not a public fallback. |
-| Sign-in invalid/session expired | Sign in/workspace | Keep the entered account identifier when safe, explain the problem, focus the error summary, and offer recovery or re-authentication. Unsaved editor data must not be silently discarded on session expiry. |
-| Account recovery requested/failed | Account recovery | Confirm that instructions were requested without revealing account existence. On failure provide retry and support guidance without exposing security detail. |
-| Content draft | Workspace | Private, labelled `草稿`, editable. Opening a draft never changes public content. |
-| Editor unsaved/upload failed | News editor, Project editor, Media picker | Preserve text and successful media metadata. Identify the failed file/field, expose retry/remove, and prevent publish while required rights/source data is unresolved. |
-| Publish blocked | Workspace | Error summary names each missing/invalid/rights issue and links focus to the field. Preserve all entered data. |
-| Published | Workspace | Confirm timestamp/status and offer `開啟公開頁確認`, `取消發布`, and edit. |
-| Archived | Workspace | Removed from active lists and public access; recoverable according to CMS capability. |
-| Product intake no changes/import failed | Change intake | A no-change version cannot proceed to release. Import failure names the file-level problem without partially replacing the current controlled source. |
-| Difference review | Difference review | Separate added, changed, removed, duplicate, missing, insufficient, and excluded records; always show affected public pages and preserve review position. |
-| Product validation blocked | Maintenance | Critical duplicate identity, required field, numeric/unit, relationship, or rights failure prevents release. |
-| Release failed | Maintenance | Previous public version stays active. Show failure reason and retry path; never leave a partial catalog. |
-| Rollback success/failed | Versions & rollback | Success identifies both restored and superseded versions. Failure leaves the current public version unchanged and exposes a safe retry/escalation path. |
+| Uncommitted or branch-only content | Git source | Not public. The change retains its file/commit identity and must not appear in sitemap, navigation, analytics, or Production. |
+| Content/media validation blocked | Validation report | Name every missing/invalid field, duplicate ID/slug, unresolved rights/alt issue, broken relationship, link, unit, or technical error. Preserve sources and do not create a partial Preview/Production release. |
+| Product intake no changes/import failed | Catalog intake | A no-change release cannot proceed. Import failure names the file-level problem without partially replacing the current controlled source. |
+| Difference review | Git/validation output | Separate added, changed, removed, duplicate, missing, insufficient, and excluded records; always identify affected public pages and the source version. |
+| Preview ready | Vercel Preview | Identify commit/deployment, affected public pages, validation result, and non-indexable Preview URL. Preview must make it clear that it is not Production. |
+| Preview rejected | Review | Record the reason outside public content; corrections create a new validated Preview. Production remains unchanged. |
+| Production promotion success/failed | Vercel deployment | Success identifies the promoted commit/deployment and public URL. Failure leaves the previous Production deployment active and provides a retry/escalation path. |
+| Rollback success/failed | Vercel deployment | Success identifies both restored and superseded deployments. Failure leaves the current public deployment unchanged and exposes a safe retry/escalation path. |
 | Not found/removed | Public | Explain that content is unavailable, link the closest valid category when known, then Product overview and Contact. Do not redirect every retired URL to Home. |
 
 ## Interaction Primitives
@@ -174,8 +156,8 @@ Behavioral rules below use the visual definitions in `DESIGN.md.Components`.
 - Browser Back must preserve a visitor's product filters, result position, and source-page position when practical. Contact does not add a custom return-to-product control.
 - Share or reload of a filtered Product overview restores the same visible conditions. Arbitrary filter URLs remain non-indexable.
 - No hover-only navigation or content. Hover may reinforce an already visible affordance.
-- No infinite scroll for product models or content management lists. Use bounded tables and explicit pagination where volume requires it.
-- No drag-only operation, auto-submitting filter selection, autoplay loop, sticky contact overlay, or nested modal.
+- No infinite scroll for product models. Series pages retain bounded semantic tables; operational Git/Vercel lists use provider behavior and are outside the JP PUMP interaction contract.
+- No drag-only operation, hidden filter submission step, autoplay loop, sticky contact overlay, or nested modal. Product-overview filters intentionally update immediately because every active condition remains visible and removable.
 - Analytics records product-list views, series selections/views, filter use, and phone/email clicks without personal data or free text. Refusing non-essential analytics never blocks core actions.
 
 ## Accessibility Floor
@@ -185,7 +167,7 @@ Behavioral rules below use the visual definitions in `DESIGN.md.Components`.
 - General text contrast is at least 4.5:1; contrast ownership is in `DESIGN.md`.
 - Touch targets are at least 44 by 44 CSS px; compact table controls must still meet the target.
 - Heading levels form a real document outline. Landmarks identify Header/navigation, main content, and footer.
-- Form controls retain visible labels. Errors are connected to fields and summarized at the top of a failed submission or publish attempt.
+- Public form/filter controls retain visible labels. Public errors connect to their control and are summarized when multiple conditions fail; maintainer validation reports must identify the source file/record and actionable rule.
 - Product result count and validation changes use polite live announcements. Do not announce every keystroke.
 - Product and project images require useful alt text. Decorative atmosphere uses empty alt; AI atmosphere is not described as a real project.
 - The 320 CSS px layout loses no core information or function and has no page-level horizontal scrolling. Only a labelled model-table container may scroll horizontally.
@@ -208,7 +190,7 @@ The same navigation items, order, destinations, current-location semantics, cont
 
 - Company details, partner claims, project facts, product specifications, contact information, and media rights must remain traceable to approved sources.
 - AI construction scenes may appear only as Home atmosphere. Project evidence uses verified real media. AI product images require specification review and cannot become evidence by visual plausibility alone.
-- Case-study editors may polish supplied language but cannot invent project names, scope, outcomes, numbers, or responsibility.
+- Website maintainers may polish supplied case-study language but cannot invent project names, scope, outcomes, numbers, or responsibility.
 - Public product content shows only technically reviewed values and a last-updated date. Internal reviewer identities and documents stay private.
 - Series pages always state that final selection, purchase, and suitability require confirmation with JP PUMP. V1 has no extra performance section and no PDF/technical-document download surface.
 - Cross-type series such as VBSG retain one canonical Series page, are reachable from every approved pump type, and show model-level pump type only where the controlled source supports it.
@@ -220,7 +202,7 @@ The same navigation items, order, destinations, current-location semantics, cont
 - **Lifted from `imports/homepage-header-reference.png`:** Header above a media-led Hero with a prominent discovery entry. Replaced broad search with the approved brand/use selects. `imports/field-engineers-reference-01.png` and `imports/field-engineer-reference-02.png` inform atmosphere/composition only and cannot become project evidence.
 - **Lifted from `imports/flowserve-purpose-portfolio-reference-06.png`:** large-image purpose cards, medium category title, compact descriptive copy, and an image-led grid. JP PUMP replaces `Learn more` with a translucent arrow and keeps the whole card as the only link to Product overview with Brand=`全部` plus the selected Purpose.
 - **Lifted from `imports/product-series-card-reference.png` and `imports/flowserve-product-card-reference-03.png`:** top-image composition, compact category label, series title, short description, borderless white surface with ambient shadow, compact lower-left key data, and a lower-right text cue. Image media blends into card content without a hard frame or divider; later decisions supersede the older reference's outline and four-row data treatment.
-- **Lifted from `imports/flowserve-product-catalog-reference-01.png` and `imports/flowserve-product-filter-reference-02.png`:** compact page Hero below Header, a left accordion sidebar for category/search/filter, removable category-path tags, results-and-sort header, and a spacious two-column card grid. JP PUMP retains its own colors, copy, data rules, and whole-card link behavior.
+- **Lifted from `imports/flowserve-product-catalog-reference-01.png` and `imports/flowserve-product-filter-reference-02.png`:** compact page Hero below Header, a persistent left filter rail, visible active conditions, a compact result summary, and a spacious two-column card grid. JP PUMP replaces the reference dropdown/apply/sort pattern with its selected segmented Brand and multi-select chip interaction while retaining its own colors, copy, data rules, and whole-card link behavior.
 - **Rejected from that card reference:** nested `規格` and `尺寸範圍` buttons. JP PUMP uses one whole-card link.
 - **Rejected from earlier working HTML:** side-by-side image/content product cards, hard card outlines, framed image placeholders, heavy internal separators, and four-row specification blocks. The current contract uses top-image cards, a two-column desktop/one-column narrow grid, restrained card shadow, and no obvious outer outline.
 - **Rejected:** autoplay loops, decorative category colors, unsupported slogans, AI case-study evidence, hover-only menus, and fake contact or technical data.
@@ -259,40 +241,40 @@ Failure: an unapproved partner or project is absent rather than padded with plac
 
 Failure: the model is not approved/published → no guessed row appears; the page routes him to Contact for confirmation.
 
-### UJ-4 — 王小姐 publishes an approved project
+### UJ-4 — 阿哲 publishes an approved project
 
-1. 王小姐 signs in to the single-administrator workspace.
-2. She creates a Project draft and enters the approved project name/type, scope, outcome, and related products.
-3. She uploads photos with alt text, source, and rights status.
-4. She selects Publish; required-field and rights validation runs.
-5. **Climax:** publication succeeds and `開啟公開頁確認` takes her to the exact public page.
-6. If she detects a problem, she edits or unpublishes without developer assistance.
+1. 阿哲, the designated website maintainer, receives approved source copy and photos from JP PUMP.
+2. He creates the Project in the governed content format and records the stable ID/slug, approved name/type, scope, outcome, related products, media alt text, source, and rights state.
+3. He reviews the Git difference and runs required-field, relationship, rights, link, SEO, and build validation.
+4. Vercel creates a non-indexable Preview showing the exact public Project and affected navigation/sitemap state.
+5. JP PUMP confirms the Preview; he promotes the named deployment to Production.
+6. **Climax:** the public Project, sitemap, links, and media change atomically, with the previous Production deployment still available for rollback.
 
-Failure: rights or required facts are missing → publish is blocked, data is preserved, and focus moves to the error summary.
+Failure: rights, facts, links, or build checks fail → Production remains unchanged, the report identifies the source file/record, and a corrected change produces a new Preview.
 
 ### UJ-5 — 阿哲 completes the annual product update
 
-1. 阿哲, the designated maintainer, creates a new controlled data version from the supplied spreadsheet and images.
+1. 阿哲, the designated maintainer, creates a new controlled release from the supplied spreadsheet and images for approximately 10 Series pages; approximately 603 Models remain specification rows rather than individual pages.
 2. Difference review identifies additions, changes, duplicates, missing fields, exclusions, and affected pages.
 3. He assigns the four governed dispositions—reviewed, pending, insufficient, or excluded—and records the offline technical reviewer and review date.
-4. Validation stress-tests the largest series, including the approximately 491-model SB/SBI/SBN case.
-5. He reviews the complete public impact and publishes a named version.
-6. **Climax:** the public catalog changes atomically, the prior usable version remains recoverable, and another maintainer can follow the operating document.
+4. Validation stress-tests HS at approximately 12 rows and the largest combined SB/SBI/SBN Series page at approximately 491 rows.
+5. He reviews the complete public impact in Vercel Preview and obtains JP PUMP confirmation.
+6. **Climax:** he promotes the named deployment, the public catalog changes atomically, the prior usable deployment remains recoverable, and another maintainer can follow the operating document.
 
 Failure: a critical validation or release step fails → the prior public version stays live and rollback/retry remains explicit.
 
 ## Source Reconciliation
 
-Later user-confirmed UX decisions supersede older presentation and Contact-routing details still present in the PRD/addendum: Product overview uses a two-column wide grid rather than three columns; Product cards use a borderless elevated surface rather than a thin outlined/no-shadow surface; card key data is summarized as two explicit-unit range lines with a text-only `看更多` cue rather than four full specification rows; every Footer uses brand/navigation/contact groups; Contact is a deep-dark direct one-page experience with no visible return to Product or Series; and both Home quick-filter dimensions default to `全部`, so untouched submit is valid. Home also now includes approved-content previews below the originally specified Hero. Approved-data, no-form, accessibility, and integrity requirements remain unchanged. See `reconcile-prd-late-ux-overrides.md`; the upstream PRD should be updated before Architecture treats both documents as equal inputs.
+The final PRD/addendum and Architecture Spine now agree with the late public UX overrides recorded in `reconcile-prd-late-ux-overrides.md` and with the static-first V1 decision. Product overview uses the two-column wide grid and borderless elevated cards; Contact is the deep-dark direct page with no return-to-product action; both Home quick filters default to `全部`; News stays off Home. Operationally, the former single-administrator CMS journey is superseded by the Git validation → Vercel Preview → JP PUMP approval → Production promotion/rollback journey. Approved-data, no-form, accessibility, URL, and integrity requirements remain unchanged.
 
 ## Mockup Coverage
 
-- Approved mockup: [Home](mockups/key-screen-home-responsive-01.html) — complete Home Header, Hero/media fallback, default-to-all quick filter, company summary, purpose-card grid, three gateways, featured projects, partners, Contact CTA, Footer, and mobile adaptation. News is intentionally absent from Home.
+- Approved mockup: [Home](mockups/key-screen-home-responsive-01.html) — complete Home Header, narrower Hero/media composition, default-to-all quick filter, decorated company summary, purpose-card grid, responsive three-gateway interaction, featured projects, partners, direct Footer transition, and mobile adaptation. Separate Contact CTA and News are intentionally absent from Home.
 - Approved mockup: [Product overview](mockups/key-screen-product-overview-responsive-01.html) — full filters, active state, result count, top-image cards, and empty/missing-data patterns.
 - Approved mockup: [Series detail](mockups/key-screen-product-series-detail-responsive-01.html) — ordered Series content, dense model table, image-dialog reference state, and responsive actions.
 - Approved mockup: [Services & projects](mockups/key-screen-services-projects-responsive-01.html) — service-capability Hero, verified-project integrity boundary, responsive whole-block evidence list, Contact CTA, and global Footer.
 - Approved mockup: [Contact](mockups/key-screen-contact-responsive-01.html) — deep-dark direct Contact Hero, service summary, approved-field omission rule, phone/Email/address/conditional LINE, approved FAQ structure, conditional map, three-group Footer, and no return-to-product action.
-- Spine-only by explicit closure: category pages, Project detail, Company, Partners, News, not-found, content workspace, controlled partner maintenance, and controlled product maintenance. Category layouts reuse the catalog/content patterns. Internal operational surfaces remain platform-neutral until Architecture selects CMS and maintenance tooling. Full rationale is recorded in `key-screen-coverage.md`.
+- Spine-only by explicit closure: category pages, Project detail, Company, Partners, News, and not-found. Category layouts reuse the catalog/content patterns. The V1 maintainer journey uses existing Git, validation, and Vercel interfaces and therefore has no custom JP PUMP key-screen mock. Full rationale is recorded in `key-screen-coverage.md`.
 
 The approved mockups instantiate the key compositions and responsive behavior defined by the two spines.
 
@@ -300,6 +282,6 @@ The approved mockups instantiate the key compositions and responsive behavior de
 
 - **Reviewer gate:** skipped by explicit user decision for this finalization round.
 - **Content dependency, not a UX blocker:** approved company/contact facts, initial foreign brands, governed categories, product imagery/specifications, partners, and project evidence are still required before public-content acceptance.
-- **Architecture dependency, not a UX blocker:** CMS/backend selection and the exact internal operational UI remain platform-neutral. If Architecture chooses a custom product-maintenance UI, Difference review becomes the next required operational key screen.
+- **V2 dependency, not a V1 UX blocker:** CMS/backend selection and any custom operational UI are deferred until a validated self-service or runtime-write need exists. Choosing a V2 CMS requires a new UX pass for authentication, editing, media, validation, preview, error, recovery, and accessibility states.
 - **Technical dependency, not a UX blocker:** the exact public model-table fields beyond the four series key ranges require JP PUMP technical confirmation; the table contract supports additional approved columns without changing page structure.
 - English product exploration remains deferred. V1 publishes Traditional Chinese only and must not create empty or machine-filled `/en/` pages.

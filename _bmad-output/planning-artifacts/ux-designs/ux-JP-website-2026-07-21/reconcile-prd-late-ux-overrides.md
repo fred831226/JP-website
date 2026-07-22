@@ -20,3 +20,15 @@ The PRD and addendum remain authoritative for product scope, approved data, inte
 No product identity, classification, filtering logic, technical-review rule, accessibility floor, or source/rights boundary changed. Any source attribution passed into Contact is analytics-only and is not exposed as a visible return route.
 
 Completed handoff: `prd.md` and `addendum.md` now reflect the final Home, Product-card, Footer, and Contact decisions. Architecture may treat the PRD and final UX spines as aligned inputs.
+
+## Static-first V1 synchronization
+
+Status: resolved — PRD, UX, and Architecture synchronized 2026-07-21
+
+The former single-administrator CMS journey is no longer part of V1. `EXPERIENCE.md` now defines one designated-maintainer release journey using governed source files, Git difference review, automated validation, Vercel Preview, JP PUMP confirmation, Production promotion, and named deployment rollback. `DESIGN.md` does not define custom publish or version controls because Git/CI/Vercel use their provider interfaces. Public IA, visual contracts, accessibility, and the five approved public key-screen mockups remain the governing inputs.
+
+## Post-final Home refinement
+
+Status: resolved — Home mockup, PRD, and UX spines synchronized 2026-07-22
+
+The Home Hero content/filter panel is approximately 30% narrower on wide layouts; the Header increases logo scale and reduces navigation-label type size; feature sections gain restrained technical depth, including a decorative semi-transparent pipe and water-flow effect behind Company summary; the three destination gateways expand the hovered or keyboard-focused block while contracting its siblings on wide pointer layouts; and the separate pre-Footer Contact CTA is removed. Contact remains reachable from Header, the gateway block, and Footer. These presentation changes do not alter public IA or Architecture invariants.

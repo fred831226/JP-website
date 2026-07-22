@@ -3,10 +3,11 @@ name: "JP PUMP Technical Blueprint"
 description: "A restrained industrial B2B visual system for trustworthy product discovery, evidence-led company credibility, and direct contact."
 status: final
 created: 2026-07-21
-updated: 2026-07-21
+updated: 2026-07-22
 sources:
   - ../../prds/prd-JP-Website-2026-07-20/prd.md
   - ../../prds/prd-JP-Website-2026-07-20/addendum.md
+  - ../../architecture/architecture-JP-Website-2026-07-21/ARCHITECTURE-SPINE.md
   - imports/company-sign-original.jpg
   - imports/company-sign-ai-enhanced.png
   - imports/jp-pump-logo-source.png
@@ -198,7 +199,7 @@ The system uses an 8px base rhythm with 4px available for precise alignment. Pub
 
 Homepage hero composition, informed by `imports/homepage-header-reference.png`, `imports/field-engineers-reference-01.png`, and `imports/field-engineer-reference-02.png`, has two layers: an approved media field and a readable content/filter panel. Header is a separate surface above the hero. The media cannot be the only carrier of meaning; the field-engineer references are composition references, not project evidence.
 
-Below the Hero, Home follows one complete trust-and-routing sequence: concise company summary and approved fact preview; a purpose-based product feature; three gateways for Product overview, Services & projects, and Contact; featured verified projects; approved partner preview; Contact CTA; then Footer. News stays on its dedicated list/detail surfaces and does not appear on Home. Each section uses its destination page's established component language. Optional sections are omitted when no approved content exists rather than filled with generic marketing material.
+Below the Hero, Home follows one complete trust-and-routing sequence: concise company summary and approved fact preview; a purpose-based product feature; three gateways for Product overview, Services & projects, and Contact; featured verified projects; approved partner preview; then Footer. Home has no separate Contact CTA and no News preview. Each section uses its destination page's established component language. Optional sections are omitted when no approved content exists rather than filled with generic marketing material.
 
 Product overview begins with a compact technical page Hero directly below the Header. It contains the page title and a short, verifiable catalog introduction; approved media is optional and must never be replaced by unverified product or project evidence. Filtering begins in the content region below.
 
@@ -220,16 +221,16 @@ Controls use `{rounded.md}`; general panels and product cards do not exceed `{ro
 
 ## Components
 
-- **Global header** — White surface, linked logo at the start edge, primary navigation at the end edge, and the same order and destinations on every public surface. Active-page state uses text weight plus an underline or left rule, never color alone. At narrow widths it exposes a labelled menu trigger rather than silently hiding navigation.
+- **Global header** — White surface, linked logo at the start edge, primary navigation at the end edge, and the same order and destinations on every public surface. On wide layouts, the logo receives more visual scale while navigation labels use a slightly smaller compact type size; minimum targets remain 44px. Active-page state uses text weight plus an underline or left rule, never color alone. At narrow widths it exposes a labelled menu trigger rather than silently hiding navigation.
 - **Header dropdown** — Product and About triggers show expanded state and a directional indicator. Menus use `floating-layer`; their links retain 44px targets and visible focus.
-- **Hero media** — Full-width Home image field with a navy readability overlay. AI-generated construction imagery must be labelled and used only as atmosphere; it cannot appear in a case-study or proof context. The static final frame must support all text contrast without depending on animation.
+- **Hero media** — Full-width Home image field with a navy readability overlay. The wide-layout content/filter panel is approximately 30% narrower than the prior mock so more media remains visible; compact layouts restore a full-width stacked panel. AI-generated construction imagery must be labelled and used only as atmosphere; it cannot appear in a case-study or proof context. The static final frame must support all text contrast without depending on animation.
 - **Home quick filter** — Two labelled `form-control` selects and one `button-primary`. Brand and Purpose both default to `全部`; no required placeholder or empty-submit error is used. Desktop may align them in a single row; narrow screens stack them. Labels stay visible above values.
-- **Home company summary** — One concise editorial column and one approved-fact preview surface. Facts without approved values are omitted in production; the whole preview may collapse to the editorial column.
+- **Home company summary** — One concise editorial column and one approved-fact preview surface. Its background may use a low-contrast, semi-transparent 3D pipe with an abstract left-to-right water-flow ribbon. The effect is decorative, remains behind readable surfaces, carries no alt text or evidence meaning, and must not be mistaken for a real project. Facts without approved values are omitted in production; the whole preview may collapse to the editorial column.
 - **Home purpose card** — Uses the proportion and hierarchy studied in `imports/flowserve-purpose-portfolio-reference-06.png` while retaining JP PUMP styling: a large approved use image, medium use title, two short descriptive sentences, and one translucent arrow at lower right. `Learn more` text is not shown. The entire card is one link; hover/focus may zoom the image up to roughly 1.06× without moving the card or obscuring text.
-- **Home gateway block** — Three equal destination blocks for Product overview, Services & projects, and Contact. Each block is one link with a short explanation and visible text cue; it does not duplicate the Hero filter.
+- **Home gateway block** — Three destination blocks for Product overview, Services & projects, and Contact. They are equal at rest; on hover or keyboard focus in wide pointer layouts, the active block expands while both siblings contract, then all return to equal width when interaction leaves. Each block remains one link with a short explanation and visible text cue; it does not duplicate the Hero filter. Touch and narrow layouts stay fixed and stacked.
 - **Home content teaser** — Featured projects reuse `project-evidence-block`; partners reuse `partner-block`. Empty optional sources remove their entire section.
-- **Catalog sidebar** — A cool-gray vertical rail divided into three accordion sections: product category, product search, and product filters. Category context appears as removable hierarchical tags. Brand, pump type, and use are selected through full-width dropdown controls; checkbox lists are not used. The filter section ends with one filled apply action and one elevated secondary clear action.
-- **Result summary** — Page heading, result count, active-state recovery link, and sorting control share one responsive region. `重設全部條件` is text-led and remains visible whenever any filter is active.
+- **Catalog sidebar** — A seamless cool-gray rail holds a labelled series/model search field, one exclusive segmented Brand group, multi-select Pump type chips, multi-select Purpose chips, and removable active-condition tags. The selected states use the existing Technical Blueprint navy/action colors and restrained motion; checkbox lists, dropdown fields, sorting, and a separate apply button are not shown. Normal-state visual dimensions may remain compact, but each control provides an effective 44px touch target, visible keyboard focus, and programmatic selected state.
+- **Result summary** — Page heading and a live result count form one compact responsive region. Active conditions appear as removable tags in the filter rail with one text-led clear-all action. No sorting control is shown in V1.
 - **Product card** — One link wraps the full card. Anatomy: a compact approved image or explicitly labelled approval-pending media area that blends directly into the card without an inner frame or hard divider; a soft tonal category tag; series title; short approved description; one or two compact key-data lines at bottom-left with explicit units; and a text-only `看更多` cue at bottom-right. The cue is not a nested link or button. Avoid excessive blank image padding. Hover adds only a restrained lift/shadow; focus uses a 3px `{colors.focus-ring}` outline with a 2px surface offset.
 - **Product image** — Approved series media sits on a borderless white surface with restrained elevation. The entire image surface is the enlargement trigger and keeps a 3px `{colors.focus-ring}` outline on keyboard focus.
 - **Key data block** — Four fields only: minimum/maximum head in `m`, minimum/maximum flow in `L/min`. Missing values show `未提供`; do not gray them into illegibility.
@@ -242,8 +243,7 @@ Controls use `{rounded.md}`; general panels and product cards do not exceed `{ro
 - **Project evidence block** — Rights-cleared project media and approved facts receive equal hierarchy. Use one linked block per project with a large media region, title/type, concise scope/outcome, and related-product context only when approved. Never use AI atmosphere or generic stock media as evidence.
 - **Footer** — `{components.footer}` spans every public surface and follows `imports/footer-brand-navigation-contact-reference-04.png`: brand Logo/company identity at left, `主導覽` in the middle, and approved `聯絡資訊` at right. It stacks in that order on narrow screens. Navigation uses 44px links; unavailable facts and unapproved legal links are omitted in production rather than represented by placeholders.
 - **Empty/error panel** — Plain language, reason, one recovery action, and an optional contact path. It uses a tonal surface, spacing, and optional restrained elevation rather than an obvious outer outline or an illustration that could be mistaken for content.
-- **Publish action** — Uses `button-primary`; blocked status is expressed by an adjacent error summary and field state, not by decorative color alone. Published status may offer one secondary open-public-page action.
-- **Version release** — A compact operational surface that prioritizes version identity, affected-page count, critical-blocker summary, and one release action. Destructive rollback is visually separated from release and requires the named target version.
+- **Operational tooling boundary** — Git, validation reports, Vercel Preview, Production promotion, and rollback use their provider/tool interfaces in V1. Do not skin those interfaces as JP PUMP product surfaces or add custom publish controls to the public design system.
 
 ## Do's and Don'ts
 
