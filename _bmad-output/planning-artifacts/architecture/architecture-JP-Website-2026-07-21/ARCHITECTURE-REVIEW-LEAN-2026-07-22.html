@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>JP PUMP V1 Architecture Review</title>
+  <style>
+    :root{--bg:#eef3f5;--surface:#fff;--ink:#111b22;--muted:#50636d;--navy:#0b2a3d;--action:#006d8f;--gold:#a87a24;--good:#186247;--warn:#8a5a05;--bad:#9f2f2f}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.65}.wrap{max-width:1120px;margin:auto;padding:40px 24px 72px}.hero{padding:44px;border-radius:12px;background:linear-gradient(135deg,#071820,var(--navy));color:#fff;box-shadow:0 18px 45px rgba(11,42,61,.16)}.eyebrow{color:#78c8d9;font-weight:800;letter-spacing:.12em}.hero h1{margin:8px 0 10px;font-size:40px;line-height:1.18}.hero p{max-width:760px;margin:0;color:#d7e5ea}.verdict{display:inline-block;margin-top:22px;padding:8px 12px;border-radius:5px;background:#fff;color:var(--bad);font-weight:900}.section{margin-top:24px;padding:30px;border-radius:10px;background:var(--surface);box-shadow:0 10px 28px rgba(11,42,61,.08)}h2{margin:0 0 15px;color:var(--navy)}h3{color:var(--navy)}ul,ol{padding-left:22px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.card{padding:18px;border-radius:8px;background:#f5f8f9}.card b{display:block;margin-bottom:5px;color:var(--navy)}table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:13px;text-align:left;vertical-align:top;border-bottom:1px solid #dbe3e6}th{background:#edf3f5;color:var(--navy)}.keep{color:var(--good);font-weight:900}.cut{color:var(--bad);font-weight:900}.decide{color:var(--warn);font-weight:900}.source{color:var(--muted);font-size:14px}a{color:var(--action)}@media(max-width:720px){.wrap{padding:18px 12px 48px}.hero{padding:28px 22px}.hero h1{font-size:30px}.section{padding:22px 18px}.grid{grid-template-columns:1fr}.table-wrap{overflow-x:auto}table{min-width:720px}}
+  </style>
+</head>
+<body><main class="wrap">
+  <section class="hero"><div class="eyebrow">ARCHITECTURE REVIEW · 2026-07-22</div><h1>精簡架構已收斂，等待來源文件同步</h1><p>正式採用乾淨 Next.js App Router、Tailwind、無資料庫與 Vercel；大型專案級抽象、監測與測試成本已移除。</p><span class="verdict">REVISED · SOURCE RECONCILIATION PENDING</span></section>
+  <section class="section"><h2>最先處理的五件事</h2><ol><li>將現有 Vinext／Cloudflare／Drizzle starter 換成乾淨 Next.js App Router。</li><li>修正篩選契約：泵浦類型 OR、用途 AND，並移除 sort。</li><li>靜態篩選網址只負責還原 UI；使用乾淨 canonical 與 sitemap 排除，不承諾每組 query 都有獨立伺服器 noindex。</li><li>商業網站使用 Vercel Pro 或其他商用合格方案，並確認公司帳號所有權與 MFA。</li><li>Preview 核准來源 commit；Production 可能以正式環境重新 build，不宣稱兩者是同一 artifact。</li></ol></section>
+  <section class="section"><h2>嚴謹程度怎麼降</h2><div class="grid"><div class="card"><b class="keep">必須嚴謹</b>產品規格、單位、缺值、技術覆核、圖片權利、基本無障礙、穩定網址、Git/Vercel 回復。</div><div class="card"><b class="cut">可以大幅簡化</b>六角架構、CMS 抽象、release snapshot 狀態機、media entity graph、完整 telemetry layer、每次三瀏覽器 E2E、正式 SLA 與季度演練。</div></div></section>
+  <section class="section"><h2>確認的最小技術組合</h2><ul><li>乾淨 Next.js App Router、React、TypeScript。</li><li>Tailwind 4 組合 JP PUMP semantic tokens；不再加另一套 UI framework。</li><li>原生 HTML 優先；不加 state store、client fetch cache 或 carousel 套件。</li><li>Zod 用於 Excel 衍生產品資料與內容驗證。</li><li>靜態 TypeScript／JSON 與 repository 內的最佳化圖片。</li><li>商用合格 Vercel、Preview、main Production、dashboard rollback。</li></ul></section>
+  <section class="section"><h2>已確認的 V1 範圍</h2><div class="table-wrap"><table><thead><tr><th>項目</th><th>決定</th><th>架構影響</th></tr></thead><tbody>
+    <tr><td>最新資訊</td><td class="cut">刪除 V1</td><td>不建立文章模型、列表／詳情、封存、SEO 與導覽</td></tr>
+    <tr><td>品牌／類型／用途獨立內容頁</td><td>保留 V1</td><td>保留 locale-prefixed landing routes 與正式內容</td></tr>
+    <tr><td>建案個別詳情頁</td><td class="cut">延後</td><td>另一組內容模型、路由、關聯及移除生命週期</td></tr>
+    <tr><td>GA4／聯絡歸因／consent／RUM</td><td class="cut">上線後再說</td><td>Telemetry adapter、event schema、同意狀態與測試</td></tr>
+    <tr><td>/zh-tw/ 前綴</td><td>保留</td><td>根網址導向 /zh-tw/</td></tr>
+    <tr><td>首頁動態與產品即時篩選</td><td class="keep">保留</td><td>這是已選定體驗，不需要新增 framework</td></tr>
+    <tr><td>完整系列規格表</td><td class="keep">保留</td><td>核心產品價值；用 server HTML 即可</td></tr>
+  </tbody></table></div></section>
+  <section class="section"><h2>本輪結論</h2><p>Architecture Spine 已完成 Lean Update。實作前尚需依 SOURCE-RECONCILIATION-LEAN-2026-07-22.md 同步 PRD 與 UX，之後才建立乾淨 Next.js App Router + Tailwind 專案並移植既有視覺成果。</p><p class="source">完整 markdown：ARCHITECTURE-REVIEW-LEAN-2026-07-22.md<br>Reviewer：reviews/review-lean-rubric.md · review-current-tech-lean.md · review-adversarial-lean.md</p></section>
+</main></body></html>
