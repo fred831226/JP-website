@@ -5,15 +5,13 @@
     "products": {
       "label": "產品總覽",
       "href": "/zh-tw/products",
-      "purposes": [
-        { "id": "water-supply", "label": "給水", "href": "/zh-tw/purposes/water-supply" },
-        { "id": "drainage", "label": "排水", "href": "/zh-tw/purposes/drainage" },
-        { "id": "circulation", "label": "循環", "href": "/zh-tw/purposes/circulation" },
-        { "id": "pressure-boosting", "label": "加壓", "href": "/zh-tw/purposes/pressure-boosting" },
-        { "id": "sewage", "label": "污水", "href": "/zh-tw/purposes/sewage" },
-        { "id": "industrial", "label": "工業用", "href": "/zh-tw/purposes/industrial" },
-        { "id": "fire-fighting", "label": "消防", "href": "/zh-tw/purposes/fire-fighting" },
-        { "id": "agricultural", "label": "農業用", "href": "/zh-tw/purposes/agricultural" }
+      "pumpTypes": [
+        { "id": "submersible-well-pump", "label": "沉水式揚水泵", "href": "/zh-tw/products?type=submersible-well-pump" },
+        { "id": "horizontal-pump", "label": "臥式泵", "href": "/zh-tw/products?type=horizontal-pump" },
+        { "id": "sewage-pump", "label": "污水泵", "href": "/zh-tw/products?type=sewage-pump" },
+        { "id": "self-priming-pump", "label": "陸上式自吸式泵", "href": "/zh-tw/products?type=self-priming-pump" },
+        { "id": "pressure-boosting-pump", "label": "電子穩壓加壓泵", "href": "/zh-tw/products?type=pressure-boosting-pump" },
+        { "id": "vertical-multistage-pump", "label": "立式揚水泵", "href": "/zh-tw/products?type=vertical-multistage-pump" }
       ]
     },
     "services": {

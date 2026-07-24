@@ -51,16 +51,16 @@ development_status:
   # ── Epic 1: Verify JP PUMP and Make Direct Contact ──
   epic-1: done
   1-1-set-up-initial-project-from-starter-template: done
-  1-2-navigate-public-trust-surfaces: review
-  1-3-understand-jp-pump-on-home: review
-  1-4-verify-company-and-partners: review
-  1-5-review-services-and-project-evidence: review
-  1-6-contact-jp-pump-directly: review
+  1-2-navigate-public-trust-surfaces: done
+  1-3-understand-jp-pump-on-home: done
+  1-4-verify-company-and-partners: done
+  1-5-review-services-and-project-evidence: done
+  1-6-contact-jp-pump-directly: done
   epic-1-retrospective: optional
 
   # ── Epic 2: Find and Verify a Product Series ──
   epic-2: done
-  2-1-publish-a-governed-catalog-foundation: review
+  2-1-publish-a-governed-catalog-foundation: done
   2-2-browse-product-overview-and-taxonomy-pages: done
   2-3-filter-and-share-product-results: done
   2-4-review-a-canonical-series-overview: done
@@ -70,21 +70,21 @@ development_status:
   epic-2-retrospective: optional
 
   # ── Epic 3: Govern and Release Trustworthy Content ──
-  epic-3: backlog
-  3-1-maintain-one-authoritative-content-source: backlog
-  3-2-promote-approved-media-safely: backlog
-  3-3-import-and-reconcile-the-excel-catalog: backlog
-  3-4-validate-content-and-technical-release-readiness: backlog
-  3-5-verify-public-release-quality: backlog
-  3-6-preview-approve-and-promote-one-atomic-release: backlog
-  3-7-recover-releases-and-hand-off-maintenance: backlog
+  epic-3: in-progress
+  3-1-maintain-one-authoritative-content-source: done
+  3-2-promote-approved-media-safely: done
+  3-3-import-and-reconcile-the-excel-catalog: done
+  3-4-validate-content-and-technical-release-readiness: done
+  3-5-verify-public-release-quality: done
+  3-6-preview-approve-and-promote-one-atomic-release: done
+  3-7-recover-releases-and-hand-off-maintenance: done
   epic-3-retrospective: optional
 
   # ── Epic 4: Make Published Content Discoverable and Resilient ──
-  epic-4: backlog
-  4-1-publish-locale-explicit-public-routes: backlog
-  4-2-provide-accurate-metadata-and-crawlable-paths: backlog
-  4-3-generate-production-sitemap-and-crawl-controls: backlog
-  4-4-describe-organization-and-navigation-with-structured-data: backlog
-  4-5-recover-from-renamed-removed-and-invalid-urls: backlog
+  epic-4: done
+  4-1-publish-locale-explicit-public-routes: done
+  4-2-provide-accurate-metadata-and-crawlable-paths: done
+  4-3-generate-production-sitemap-and-crawl-controls: done
+  4-4-describe-organization-and-navigation-with-structured-data: done
+  4-5-recover-from-renamed-removed-and-invalid-urls: done
   epic-4-retrospective: optional

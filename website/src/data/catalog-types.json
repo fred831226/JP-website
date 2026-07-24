@@ -1,26 +1,38 @@
 [
   {
-    "id": "centrifugal",
-    "name": "離心泵浦",
-    "slug": "centrifugal",
-    "description": "透過離心力將液體加壓送出，適用於大流量低揚程應用。"
+    "id": "submersible-well-pump",
+    "name": "沉水式揚水泵",
+    "slug": "submersible-well-pump",
+    "description": "沉水式揚水泵完全浸沒於液體中運轉，適用於大樓揚水與深井取水，具備高效能與耐用特性。"
   },
   {
-    "id": "vertical",
-    "name": "豎軸泵浦",
-    "slug": "vertical",
-    "description": "垂直安裝設計，節省空間，適用於深井與加壓站。"
+    "id": "horizontal-pump",
+    "name": "臥式泵",
+    "slug": "horizontal-pump",
+    "description": "臥式泵採用機械軸封設計，效率高、水量大、體積小，適用於給水、空調循環及灌溉。"
   },
   {
-    "id": "submersible",
-    "name": "沉水泵浦",
-    "slug": "submersible",
-    "description": "完全浸沒於液體中運轉，適用於污水、排水與深井取水。"
+    "id": "sewage-pump",
+    "name": "污水泵",
+    "slug": "sewage-pump",
+    "description": "污水泵適用於污水排放與廢水處理，具備過熱保護與耐磨耗設計，適合工程及工業使用。"
   },
   {
-    "id": "gear",
-    "name": "齒輪泵浦",
-    "slug": "gear",
-    "description": "以嚙合齒輪輸送液體，適用於潤滑性流體與油壓系統。"
+    "id": "self-priming-pump",
+    "name": "陸上式自吸式泵",
+    "slug": "self-priming-pump",
+    "description": "陸上式自吸式泵具備高自吸能力，不必加裝底閥，適用於含固體雜質的液體輸送。"
+  },
+  {
+    "id": "pressure-boosting-pump",
+    "name": "電子穩壓加壓泵",
+    "slug": "pressure-boosting-pump",
+    "description": "電子穩壓加壓泵整合馬達與電子控制器，實現恆壓自動供水，體積小、運轉安靜。"
+  },
+  {
+    "id": "vertical-multistage-pump",
+    "name": "立式揚水泵",
+    "slug": "vertical-multistage-pump",
+    "description": "立式揚水泵適用於加壓供水、工業清洗、消防及空調循環，採用多段不鏽鋼設計。"
   }
 ]

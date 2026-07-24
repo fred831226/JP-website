@@ -10,17 +10,21 @@
     "build": "next build",
     "start": "next start",
     "test": "playwright test",
+    "import-catalog": "node scripts/import-catalog.mjs",
+    "validate": "node scripts/validate-content.mjs",
+    "check": "npm run validate && npm run lint && npm run build",
     "lint": "eslint src/"
   },
   "dependencies": {
     "next": "16.2.10",
     "react": "19.2.7",
     "react-dom": "19.2.7",
+    "xlsx": "^0.18.5",
     "zod": "4.4.3"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "4.3.3",
     "@playwright/test": "1.61.1",
+    "@tailwindcss/postcss": "4.3.3",
     "@types/node": "22.19.19",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",

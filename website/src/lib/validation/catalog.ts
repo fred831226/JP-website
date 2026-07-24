@@ -32,9 +32,11 @@ export const SeriesSchema = z.object({
   name: z.string().min(1),
   slug: z.string().min(1),
   description: z.string(),
+  introduction: z.string(),
   image: z.string().nullable(),
   pumpTypeIds: z.array(z.string()),
   purposeIds: z.array(z.string()),
+  purposeTags: z.array(z.string()),
   headMin: TechnicalDecimal,
   headMax: TechnicalDecimal,
   flowMin: TechnicalDecimal,
@@ -42,7 +44,8 @@ export const SeriesSchema = z.object({
   models: z.array(z.object({
     id: z.string().min(1),
     name: z.string().min(1),
-    specs: z.record(z.string(), TechnicalDecimal),
+    pumpType: z.string(),
+    specs: z.record(z.string(), z.string()),
   })),
 });
 

@@ -13,7 +13,7 @@ interface NavItem {
 
 interface NavDropdown {
   label: string;
-  purposes?: { id: string; label: string; href: string }[];
+  pumpTypes?: { id: string; label: string; href: string }[];
   children?: { id: string; label: string; href: string }[];
 }
 
@@ -43,12 +43,12 @@ const desktopItems: DesktopItem[] = [
     key: "products",
     label: products.label,
     dropdown: [
-      ...(products.purposes ?? []).map((p) => ({
+      { id: "all-products", label: "全部產品", href: "/zh-tw/products" },
+      ...(products.pumpTypes ?? []).map((p) => ({
         id: p.id,
         label: p.label,
         href: p.href,
       })),
-      { id: "all-products", label: "全部產品", href: "/zh-tw/products" },
     ],
   },
   { key: "services", label: services.label, href: services.href },
@@ -69,12 +69,12 @@ const mobileItems: MobileChild[] = [
     id: "products",
     label: products.label,
     children: [
-      ...(products.purposes ?? []).map((p) => ({
+      { id: "all-products", label: "全部產品", href: "/zh-tw/products" },
+      ...(products.pumpTypes ?? []).map((p) => ({
         id: p.id,
         label: p.label,
         href: p.href,
       })),
-      { id: "all-products", label: "全部產品", href: "/zh-tw/products" },
     ],
   },
   { id: "services", label: services.label, href: services.href },

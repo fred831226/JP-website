@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "../globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Script from "next/script";
 
 export function generateStaticParams() {
   return [{ locale: "zh-tw" }];
@@ -31,6 +32,25 @@ export default function LocaleLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <Script
+          id="schema-org"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "傑平有限公司",
+              alternateName: "JP PUMP",
+              url: "https://www.jp-pump.com.tw",
+              telephone: "+886-2-1234-5678",
+              contactPoint: {
+                "@type": "ContactPoint",
+                telephone: "+886-2-1234-5678",
+                contactType: "sales",
+              },
+            }),
+          }}
+        />
       </body>
     </html>
   );

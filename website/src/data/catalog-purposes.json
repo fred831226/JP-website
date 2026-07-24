@@ -1,50 +1,44 @@
 [
   {
-    "id": "water-supply",
-    "name": "給水",
-    "slug": "water-supply",
-    "description": "穩定供水方案，適用於住宅、商業與工業建案。"
+    "id": "一般工業用水",
+    "name": "一般工業用水",
+    "slug": "一般工業用水",
+    "description": "工業用水應用，適用於製程冷卻、清洗與一般工業給水。"
   },
   {
-    "id": "drainage",
-    "name": "排水",
-    "slug": "drainage",
-    "description": "高效排水系統，滿足地下結構與防洪需求。"
+    "id": "空調循環給水",
+    "name": "空調循環給水",
+    "slug": "空調循環給水",
+    "description": "空調系統循環給水，提供穩定流量與節能表現。"
   },
   {
-    "id": "circulation",
-    "name": "循環",
-    "slug": "circulation",
-    "description": "空調與製程循環泵浦，提供穩定流量與節能表現。"
+    "id": "農業灌溉用水",
+    "name": "農業灌溉用水",
+    "slug": "農業灌溉用水",
+    "description": "農業灌溉與排水，適用於農田與畜牧用水。"
   },
   {
-    "id": "pressure-boosting",
-    "name": "加壓",
-    "slug": "pressure-boosting",
-    "description": "恆壓供水技術，解決高樓與遠端用水挑戰。"
+    "id": "工業系統",
+    "name": "工業系統",
+    "slug": "工業系統",
+    "description": "工業製程系統，適用於化學、石化與能源產業。"
   },
   {
-    "id": "sewage",
-    "name": "污水",
-    "slug": "sewage",
-    "description": "污水處理與排放泵浦，適用於都市與工業廢水系統。"
+    "id": "船舶-礦山排水",
+    "name": "船舶/礦山排水",
+    "slug": "船舶-礦山排水",
+    "description": "船舶與礦山排水應用，適用於特殊環境的排水需求。"
   },
   {
-    "id": "industrial",
-    "name": "工業用",
-    "slug": "industrial",
-    "description": "工業製程泵浦，適用於化學、石化與能源產業。"
+    "id": "釀造食品",
+    "name": "釀造食品",
+    "slug": "釀造食品",
+    "description": "食品釀造產業用水，適用於製程與清洗應用。"
   },
   {
-    "id": "fire-fighting",
-    "name": "消防",
-    "slug": "fire-fighting",
-    "description": "消防泵浦，滿足法規要求之緊急供水與滅火系統。"
-  },
-  {
-    "id": "agricultural",
-    "name": "農業用",
-    "slug": "agricultural",
-    "description": "農業灌溉與排水泵浦，適用於農田與畜牧用水。"
+    "id": "冷凍及空調",
+    "name": "冷凍及空調",
+    "slug": "冷凍及空調",
+    "description": "冷凍及空調系統循環泵浦。"
   }
 ]

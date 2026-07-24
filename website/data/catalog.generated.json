@@ -1,0 +1,3956 @@
+{
+  "generatedAt": "2026-07-24T07:44:51.418Z",
+  "source": "泵浦產品規格資料庫_JP.updated5.xlsx",
+  "series": [
+    {
+      "id": "hs",
+      "name": "HS",
+      "productName": "沉水式揚水泵",
+      "pumpType": "沉水式揚水泵",
+      "purposeTags": [],
+      "modelCount": 12,
+      "models": [
+        {
+          "id": "傑平|HS|HS-37-80",
+          "name": "HS-37-80",
+          "specs": {
+            "outlet_inch": "2-3",
+            "rated_head_m": "40",
+            "rated_flow_lmin": "300"
+          }
+        },
+        {
+          "id": "傑平|HS|HS-55-80",
+          "name": "HS-55-80",
+          "specs": {
+            "outlet_inch": "2-3",
+            "rated_head_m": "45",
+            "rated_flow_lmin": "430"
+          }
+        },
+        {
+          "id": "傑平|HS|HS-75-80",
+          "name": "HS-75-80",
+          "specs": {
+            "outlet_inch": "2-3",
+            "rated_head_m": "60",
+            "rated_flow_lmin": "430"
+          }
+        },
+        {
+          "id": "傑平|HS|HS-110-80",
+          "name": "HS-110-80",
+          "specs": {
+            "outlet_inch": "2-3",
+            "rated_head_m": "80",
+            "rated_flow_lmin": "460"
+          }
+        },
+        {
+          "id": "傑平|HS|HS-150-80",
+          "name": "HS-150-80",
+          "specs": {
+            "outlet_inch": "3-4",
+            "rated_head_m": "80",
+            "rated_flow_lmin": "620"
+          }
+        },
+        {
+          "id": "傑平|HS|HS-187-80",
+          "name": "HS-187-80",
+          "specs": {
+            "outlet_inch": "3-4",
+            "rated_head_m": "90",
+            "rated_flow_lmin": "720"
+          }
+        },
+        {
+          "id": "傑平|HS|HS-220-100",
+          "name": "HS-220-100",
+          "specs": {
+            "outlet_inch": "3-4",
+            "rated_head_m": "120",
+            "rated_flow_lmin": "720"
+          }
+        },
+        {
+          "id": "傑平|HS|HS-262-100",
+          "name": "HS-262-100",
+          "specs": {
+            "outlet_inch": "3-4",
+            "rated_head_m": "120",
+            "rated_flow_lmin": "870"
+          }
+        },
+        {
+          "id": "傑平|HS|HS-37-50",
+          "name": "HS-37-50",
+          "specs": {
+            "outlet_inch": "2-3",
+            "rated_head_m": "50",
+            "rated_flow_lmin": "200",
+            "weight_kg": "高揚程"
+          }
+        },
+        {
+          "id": "傑平|HS|HS-55-50",
+          "name": "HS-55-50",
+          "specs": {
+            "outlet_inch": "2-3",
+            "rated_head_m": "60",
+            "rated_flow_lmin": "310",
+            "weight_kg": "高揚程"
+          }
+        },
+        {
+          "id": "傑平|HS|HS-75-50",
+          "name": "HS-75-50",
+          "specs": {
+            "outlet_inch": "2-3",
+            "rated_head_m": "80",
+            "rated_flow_lmin": "300",
+            "weight_kg": "高揚程"
+          }
+        },
+        {
+          "id": "傑平|HS|HS-110-50",
+          "name": "HS-110-50",
+          "specs": {
+            "outlet_inch": "2-3",
+            "rated_head_m": "100",
+            "rated_flow_lmin": "300",
+            "weight_kg": "高揚程"
+          }
+        }
+      ]
+    },
+    {
+      "id": "jq",
+      "name": "JQ",
+      "productName": "電子穩壓加壓泵",
+      "pumpType": "電子穩壓加壓泵",
+      "purposeTags": [],
+      "modelCount": 3,
+      "models": [
+        {
+          "id": "傑平|JQ|JQ 200 系列",
+          "name": "JQ 200 系列",
+          "specs": {
+            "horsepower_hp": "0.2",
+            "outlet_inch": "3/4",
+            "weight_kg": "JQ200(V)/JQ200N(V)/JQ200S(V)；60Hz；2葉輪；最高揚程22m；最大水量55L/min；重量依材質7.5-10kg"
+          }
+        },
+        {
+          "id": "傑平|JQ|JQ 400 系列",
+          "name": "JQ 400 系列",
+          "specs": {
+            "horsepower_hp": "0.4",
+            "outlet_inch": "1",
+            "weight_kg": "JQ400(V)/JQ400N(V)/JQ400S(V)；60Hz；2葉輪；最高揚程26m；最大水量68L/min；重量依材質9-11.5kg"
+          }
+        },
+        {
+          "id": "傑平|JQ|JQ 800 系列",
+          "name": "JQ 800 系列",
+          "specs": {
+            "horsepower_hp": "0.8",
+            "outlet_inch": "1 or 1-1/2",
+            "weight_kg": "JQ800(V)/JQ800N(V)/JQ800S(V)；60Hz；2葉輪；最高揚程32m；最大水量98L/min；重量依材質12-14.5kg"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cv",
+      "name": "CV",
+      "productName": "污水泵",
+      "pumpType": "汙水汞",
+      "purposeTags": [],
+      "modelCount": 6,
+      "models": [
+        {
+          "id": "傑平|CV|(A)CV-04-50",
+          "name": "(A)CV-04-50",
+          "specs": {
+            "horsepower_hp": "0.4",
+            "weight_kg": "可掛浮球"
+          }
+        },
+        {
+          "id": "傑平|CV|(A)CV-07-50",
+          "name": "(A)CV-07-50",
+          "specs": {
+            "horsepower_hp": "0.75",
+            "weight_kg": "可掛浮球"
+          }
+        },
+        {
+          "id": "傑平|CV|(A)CV-15-50/80",
+          "name": "(A)CV-15-50/80",
+          "specs": {
+            "horsepower_hp": "1.5",
+            "weight_kg": "可掛浮球"
+          }
+        },
+        {
+          "id": "傑平|CV|CV-22-50/80",
+          "name": "CV-22-50/80",
+          "specs": {
+            "horsepower_hp": "2.2",
+            "weight_kg": "不可掛浮球"
+          }
+        },
+        {
+          "id": "傑平|CV|CV-37-80/100",
+          "name": "CV-37-80/100",
+          "specs": {
+            "horsepower_hp": "3.7",
+            "weight_kg": "不可掛浮球"
+          }
+        },
+        {
+          "id": "傑平|CV|CV-55-80/100",
+          "name": "CV-55-80/100",
+          "specs": {
+            "horsepower_hp": "5.5",
+            "weight_kg": "不可掛浮球"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sn",
+      "name": "SN",
+      "productName": "污水泵",
+      "pumpType": "汙水汞",
+      "purposeTags": [],
+      "modelCount": 9,
+      "models": [
+        {
+          "id": "傑平|SN|(A)SN-04-50",
+          "name": "(A)SN-04-50",
+          "specs": {
+            "horsepower_hp": "0.4",
+            "weight_kg": "可掛浮球"
+          }
+        },
+        {
+          "id": "傑平|SN|(A)SN-07-50",
+          "name": "(A)SN-07-50",
+          "specs": {
+            "horsepower_hp": "0.75",
+            "weight_kg": "可掛浮球"
+          }
+        },
+        {
+          "id": "傑平|SN|(A)SN-07-50/80",
+          "name": "(A)SN-07-50/80",
+          "specs": {
+            "horsepower_hp": "0.75",
+            "weight_kg": "可掛浮球"
+          }
+        },
+        {
+          "id": "傑平|SN|(A)SN-15-50/80",
+          "name": "(A)SN-15-50/80",
+          "specs": {
+            "horsepower_hp": "1.5",
+            "weight_kg": "可掛浮球"
+          }
+        },
+        {
+          "id": "傑平|SN|(A)SN-15-50/80H",
+          "name": "(A)SN-15-50/80H",
+          "specs": {
+            "horsepower_hp": "1.5",
+            "weight_kg": "可掛浮球"
+          }
+        },
+        {
+          "id": "傑平|SN|SN-22-50/80",
+          "name": "SN-22-50/80",
+          "specs": {
+            "horsepower_hp": "2.2",
+            "weight_kg": "不可掛浮球"
+          }
+        },
+        {
+          "id": "傑平|SN|SN-22-50/80H",
+          "name": "SN-22-50/80H",
+          "specs": {
+            "horsepower_hp": "2.2",
+            "weight_kg": "不可掛浮球"
+          }
+        },
+        {
+          "id": "傑平|SN|SN-37-80/100",
+          "name": "SN-37-80/100",
+          "specs": {
+            "horsepower_hp": "3.7",
+            "weight_kg": "不可掛浮球"
+          }
+        },
+        {
+          "id": "傑平|SN|SN-55-80/100",
+          "name": "SN-55-80/100",
+          "specs": {
+            "horsepower_hp": "5.5",
+            "weight_kg": "不可掛浮球"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tp",
+      "name": "TP",
+      "productName": "污水泵",
+      "pumpType": "污水泵",
+      "purposeTags": [],
+      "modelCount": 6,
+      "models": [
+        {
+          "id": "傑平|TP|TP-04-50",
+          "name": "TP-04-50",
+          "specs": {
+            "horsepower_hp": "0.4"
+          }
+        },
+        {
+          "id": "傑平|TP|ATP-04-50",
+          "name": "ATP-04-50",
+          "specs": {
+            "horsepower_hp": "0.4"
+          }
+        },
+        {
+          "id": "傑平|TP|GTP-04-50",
+          "name": "GTP-04-50",
+          "specs": {
+            "horsepower_hp": "0.4"
+          }
+        },
+        {
+          "id": "傑平|TP|TP-07-50(80)",
+          "name": "TP-07-50(80)",
+          "specs": {
+            "horsepower_hp": "0.75"
+          }
+        },
+        {
+          "id": "傑平|TP|ATP-07-50(80)",
+          "name": "ATP-07-50(80)",
+          "specs": {
+            "horsepower_hp": "0.75"
+          }
+        },
+        {
+          "id": "傑平|TP|GTP-07-50(80)",
+          "name": "GTP-07-50(80)",
+          "specs": {
+            "horsepower_hp": "0.75"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gp",
+      "name": "GP",
+      "productName": "同軸渦卷泵浦",
+      "pumpType": "臥式泵",
+      "purposeTags": [
+        "一般工業用水",
+        "空調循環給水",
+        "農業灌溉用水"
+      ],
+      "modelCount": 1,
+      "models": [
+        {
+          "id": "傑平|GP|GP 系列",
+          "name": "GP 系列",
+          "specs": {
+            "weight_kg": "型錄僅列性能曲線與機型編號原則；未提供可可靠擷取的逐型號規格表。"
+          }
+        }
+      ]
+    },
+    {
+      "id": "y",
+      "name": "Y系列",
+      "productName": "自吸式泵",
+      "pumpType": "陸上式自吸式泵",
+      "purposeTags": [
+        "工業系統",
+        "船舶/礦山排水",
+        "農業灌溉用水",
+        "釀造食品"
+      ],
+      "modelCount": 14,
+      "models": [
+        {
+          "id": "傑平|Y系列|Y20115",
+          "name": "Y20115",
+          "specs": {
+            "outlet_inch": "1-1/2 x 1-1/2",
+            "weight_kg": "2極"
+          }
+        },
+        {
+          "id": "傑平|Y系列|Y20220",
+          "name": "Y20220",
+          "specs": {
+            "outlet_inch": "2 x 2",
+            "weight_kg": "2極"
+          }
+        },
+        {
+          "id": "傑平|Y系列|Y20325",
+          "name": "Y20325",
+          "specs": {
+            "outlet_inch": "2-1/2 x 2-1/2",
+            "weight_kg": "2極"
+          }
+        },
+        {
+          "id": "傑平|Y系列|Y20530",
+          "name": "Y20530",
+          "specs": {
+            "outlet_inch": "3 x 3",
+            "weight_kg": "2極"
+          }
+        },
+        {
+          "id": "傑平|Y系列|Y20740",
+          "name": "Y20740",
+          "specs": {
+            "outlet_inch": "4 x 4",
+            "weight_kg": "2極"
+          }
+        },
+        {
+          "id": "傑平|Y系列|Y21040",
+          "name": "Y21040",
+          "specs": {
+            "outlet_inch": "4 x 4",
+            "weight_kg": "2極"
+          }
+        },
+        {
+          "id": "傑平|Y系列|Y40115",
+          "name": "Y40115",
+          "specs": {
+            "outlet_inch": "1-1/2 x 1-1/2",
+            "weight_kg": "4極"
+          }
+        },
+        {
+          "id": "傑平|Y系列|Y40220",
+          "name": "Y40220",
+          "specs": {
+            "outlet_inch": "2 x 2",
+            "weight_kg": "4極"
+          }
+        },
+        {
+          "id": "傑平|Y系列|Y40325",
+          "name": "Y40325",
+          "specs": {
+            "outlet_inch": "2-1/2 x 2-1/2",
+            "weight_kg": "4極"
+          }
+        },
+        {
+          "id": "傑平|Y系列|Y40530",
+          "name": "Y40530",
+          "specs": {
+            "outlet_inch": "3 x 3",
+            "weight_kg": "4極"
+          }
+        },
+        {
+          "id": "傑平|Y系列|Y40740",
+          "name": "Y40740",
+          "specs": {
+            "outlet_inch": "4 x 4",
+            "weight_kg": "4極"
+          }
+        },
+        {
+          "id": "傑平|Y系列|Y41040",
+          "name": "Y41040",
+          "specs": {
+            "outlet_inch": "4 x 4",
+            "weight_kg": "4極"
+          }
+        },
+        {
+          "id": "傑平|Y系列|Y41560",
+          "name": "Y41560",
+          "specs": {
+            "outlet_inch": "6 x 6",
+            "weight_kg": "4極"
+          }
+        },
+        {
+          "id": "傑平|Y系列|Y42060",
+          "name": "Y42060",
+          "specs": {
+            "outlet_inch": "6 x 6",
+            "weight_kg": "4極"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sb-sbi-sbn",
+      "name": "SB/SBI/SBN",
+      "productName": "立式多段不銹鋼管道泵浦",
+      "pumpType": "立式揚水泵",
+      "purposeTags": [
+        "冷凍及空調",
+        "工業系統",
+        "農業灌溉用水"
+      ],
+      "modelCount": 491,
+      "models": [
+        {
+          "id": "傑平|SB/SBI/SBN|SB1-2",
+          "name": "SB1-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB1-3",
+          "name": "SB1-3",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB1-4",
+          "name": "SB1-4",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB1-5",
+          "name": "SB1-5",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB1-6",
+          "name": "SB1-6",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB1-7",
+          "name": "SB1-7",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB1-8",
+          "name": "SB1-8",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB1-9",
+          "name": "SB1-9",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB1-10",
+          "name": "SB1-10",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB1-11",
+          "name": "SB1-11",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB1-12",
+          "name": "SB1-12",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB1-13",
+          "name": "SB1-13",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB1-15",
+          "name": "SB1-15",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB1-17",
+          "name": "SB1-17",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB1-19",
+          "name": "SB1-19",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB1-21",
+          "name": "SB1-21",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB1-23",
+          "name": "SB1-23",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB1-25",
+          "name": "SB1-25",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB1-27",
+          "name": "SB1-27",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI1-2",
+          "name": "SBI1-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN1-2",
+          "name": "SBN1-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI1-3",
+          "name": "SBI1-3",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN1-3",
+          "name": "SBN1-3",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI1-4",
+          "name": "SBI1-4",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN1-4",
+          "name": "SBN1-4",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI1-5",
+          "name": "SBI1-5",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN1-5",
+          "name": "SBN1-5",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI1-6",
+          "name": "SBI1-6",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN1-6",
+          "name": "SBN1-6",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI1-7",
+          "name": "SBI1-7",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN1-7",
+          "name": "SBN1-7",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI1-8",
+          "name": "SBI1-8",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN1-8",
+          "name": "SBN1-8",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI1-9",
+          "name": "SBI1-9",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN1-9",
+          "name": "SBN1-9",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI1-10",
+          "name": "SBI1-10",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN1-10",
+          "name": "SBN1-10",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI1-11",
+          "name": "SBI1-11",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN1-11",
+          "name": "SBN1-11",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI1-12",
+          "name": "SBI1-12",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN1-12",
+          "name": "SBN1-12",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI1-15",
+          "name": "SBI1-15",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN1-15",
+          "name": "SBN1-15",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI1-17",
+          "name": "SBI1-17",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN1-17",
+          "name": "SBN1-17",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI1-19",
+          "name": "SBI1-19",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN1-19",
+          "name": "SBN1-19",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI1-21",
+          "name": "SBI1-21",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN1-21",
+          "name": "SBN1-21",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI1-23",
+          "name": "SBI1-23",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN1-23",
+          "name": "SBN1-23",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI1-25",
+          "name": "SBI1-25",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN1-25",
+          "name": "SBN1-25",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI1-27",
+          "name": "SBI1-27",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN1-27",
+          "name": "SBN1-27",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=1；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB3-2",
+          "name": "SB3-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB3-3",
+          "name": "SB3-3",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB3-4",
+          "name": "SB3-4",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB3-5",
+          "name": "SB3-5",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB3-6",
+          "name": "SB3-6",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB3-7",
+          "name": "SB3-7",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB3-8",
+          "name": "SB3-8",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB3-9",
+          "name": "SB3-9",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB3-10",
+          "name": "SB3-10",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB3-11",
+          "name": "SB3-11",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB3-12",
+          "name": "SB3-12",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB3-13",
+          "name": "SB3-13",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB3-15",
+          "name": "SB3-15",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB3-17",
+          "name": "SB3-17",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB3-19",
+          "name": "SB3-19",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI3-2",
+          "name": "SBI3-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN3-2",
+          "name": "SBN3-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI3-3",
+          "name": "SBI3-3",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN3-3",
+          "name": "SBN3-3",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI3-4",
+          "name": "SBI3-4",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN3-4",
+          "name": "SBN3-4",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI3-5",
+          "name": "SBI3-5",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN3-5",
+          "name": "SBN3-5",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI3-6",
+          "name": "SBI3-6",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN3-6",
+          "name": "SBN3-6",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI3-7",
+          "name": "SBI3-7",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN3-7",
+          "name": "SBN3-7",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI3-8",
+          "name": "SBI3-8",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN3-8",
+          "name": "SBN3-8",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI3-9",
+          "name": "SBI3-9",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN3-9",
+          "name": "SBN3-9",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI3-10",
+          "name": "SBI3-10",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN3-10",
+          "name": "SBN3-10",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI3-11",
+          "name": "SBI3-11",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN3-11",
+          "name": "SBN3-11",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI3-12",
+          "name": "SBI3-12",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN3-12",
+          "name": "SBN3-12",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI3-13",
+          "name": "SBI3-13",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN3-13",
+          "name": "SBN3-13",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI3-15",
+          "name": "SBI3-15",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN3-15",
+          "name": "SBN3-15",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI3-17",
+          "name": "SBI3-17",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN3-17",
+          "name": "SBN3-17",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI3-19",
+          "name": "SBI3-19",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN3-19",
+          "name": "SBN3-19",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI3-21",
+          "name": "SBI3-21",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN3-21",
+          "name": "SBN3-21",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI3-23",
+          "name": "SBI3-23",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN3-23",
+          "name": "SBN3-23",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI3-25",
+          "name": "SBI3-25",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN3-25",
+          "name": "SBN3-25",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=3；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB5-2",
+          "name": "SB5-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB5-3",
+          "name": "SB5-3",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB5-4",
+          "name": "SB5-4",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB5-5",
+          "name": "SB5-5",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB5-6",
+          "name": "SB5-6",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB5-7",
+          "name": "SB5-7",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB5-8",
+          "name": "SB5-8",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB5-9",
+          "name": "SB5-9",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB5-10",
+          "name": "SB5-10",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB5-11",
+          "name": "SB5-11",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB5-12",
+          "name": "SB5-12",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB5-13",
+          "name": "SB5-13",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB5-14",
+          "name": "SB5-14",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB5-15",
+          "name": "SB5-15",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB5-16",
+          "name": "SB5-16",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB5-18",
+          "name": "SB5-18",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB5-20",
+          "name": "SB5-20",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB5-22",
+          "name": "SB5-22",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB5-24",
+          "name": "SB5-24",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI5-2",
+          "name": "SBI5-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN5-2",
+          "name": "SBN5-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI5-3",
+          "name": "SBI5-3",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN5-3",
+          "name": "SBN5-3",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI5-4",
+          "name": "SBI5-4",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN5-4",
+          "name": "SBN5-4",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI5-5",
+          "name": "SBI5-5",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN5-5",
+          "name": "SBN5-5",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI5-6",
+          "name": "SBI5-6",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN5-6",
+          "name": "SBN5-6",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI5-7",
+          "name": "SBI5-7",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN5-7",
+          "name": "SBN5-7",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI5-8",
+          "name": "SBI5-8",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN5-8",
+          "name": "SBN5-8",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI5-9",
+          "name": "SBI5-9",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN5-9",
+          "name": "SBN5-9",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI5-10",
+          "name": "SBI5-10",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN5-10",
+          "name": "SBN5-10",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI5-11",
+          "name": "SBI5-11",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN5-11",
+          "name": "SBN5-11",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI5-12",
+          "name": "SBI5-12",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN5-12",
+          "name": "SBN5-12",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI5-13",
+          "name": "SBI5-13",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN5-13",
+          "name": "SBN5-13",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI5-14",
+          "name": "SBI5-14",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN5-14",
+          "name": "SBN5-14",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI5-15",
+          "name": "SBI5-15",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN5-15",
+          "name": "SBN5-15",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI5-16",
+          "name": "SBI5-16",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN5-16",
+          "name": "SBN5-16",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI5-18",
+          "name": "SBI5-18",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN5-18",
+          "name": "SBN5-18",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI5-20",
+          "name": "SBI5-20",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN5-20",
+          "name": "SBN5-20",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI5-22",
+          "name": "SBI5-22",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN5-22",
+          "name": "SBN5-22",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI5-24",
+          "name": "SBI5-24",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN5-24",
+          "name": "SBN5-24",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=5；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB10-1",
+          "name": "SB10-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB10-2",
+          "name": "SB10-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB10-3",
+          "name": "SB10-3",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB10-4",
+          "name": "SB10-4",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB10-5",
+          "name": "SB10-5",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB10-6",
+          "name": "SB10-6",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB10-7",
+          "name": "SB10-7",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB10-8",
+          "name": "SB10-8",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB10-9",
+          "name": "SB10-9",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB10-10",
+          "name": "SB10-10",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB10-12",
+          "name": "SB10-12",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB10-14",
+          "name": "SB10-14",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB10-16",
+          "name": "SB10-16",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB10-17",
+          "name": "SB10-17",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI10-1",
+          "name": "SBI10-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN10-1",
+          "name": "SBN10-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI10-2",
+          "name": "SBI10-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN10-2",
+          "name": "SBN10-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI10-3",
+          "name": "SBI10-3",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN10-3",
+          "name": "SBN10-3",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI10-4",
+          "name": "SBI10-4",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN10-4",
+          "name": "SBN10-4",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI10-5",
+          "name": "SBI10-5",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN10-5",
+          "name": "SBN10-5",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI10-6",
+          "name": "SBI10-6",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN10-6",
+          "name": "SBN10-6",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI10-7",
+          "name": "SBI10-7",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN10-7",
+          "name": "SBN10-7",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI10-8",
+          "name": "SBI10-8",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN10-8",
+          "name": "SBN10-8",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI10-9",
+          "name": "SBI10-9",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN10-9",
+          "name": "SBN10-9",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI10-10",
+          "name": "SBI10-10",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN10-10",
+          "name": "SBN10-10",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI10-12",
+          "name": "SBI10-12",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN10-12",
+          "name": "SBN10-12",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI10-14",
+          "name": "SBI10-14",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN10-14",
+          "name": "SBN10-14",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI10-16",
+          "name": "SBI10-16",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN10-16",
+          "name": "SBN10-16",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI10-17",
+          "name": "SBI10-17",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN10-17",
+          "name": "SBN10-17",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=10；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB15-1",
+          "name": "SB15-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB15-2",
+          "name": "SB15-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB15-3",
+          "name": "SB15-3",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB15-4",
+          "name": "SB15-4",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB15-5",
+          "name": "SB15-5",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB15-6",
+          "name": "SB15-6",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB15-7",
+          "name": "SB15-7",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB15-8",
+          "name": "SB15-8",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB15-9",
+          "name": "SB15-9",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB15-10",
+          "name": "SB15-10",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB15-12",
+          "name": "SB15-12",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI15-1",
+          "name": "SBI15-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN15-1",
+          "name": "SBN15-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI15-2",
+          "name": "SBI15-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN15-2",
+          "name": "SBN15-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI15-3",
+          "name": "SBI15-3",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN15-3",
+          "name": "SBN15-3",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI15-4",
+          "name": "SBI15-4",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN15-4",
+          "name": "SBN15-4",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI15-5",
+          "name": "SBI15-5",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN15-5",
+          "name": "SBN15-5",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI15-6",
+          "name": "SBI15-6",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN15-6",
+          "name": "SBN15-6",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI15-7",
+          "name": "SBI15-7",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN15-7",
+          "name": "SBN15-7",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI15-8",
+          "name": "SBI15-8",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN15-8",
+          "name": "SBN15-8",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI15-9",
+          "name": "SBI15-9",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN15-9",
+          "name": "SBN15-9",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI15-10",
+          "name": "SBI15-10",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN15-10",
+          "name": "SBN15-10",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI15-12",
+          "name": "SBI15-12",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN15-12",
+          "name": "SBN15-12",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=15；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB20-1",
+          "name": "SB20-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB20-2",
+          "name": "SB20-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB20-3",
+          "name": "SB20-3",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB20-4",
+          "name": "SB20-4",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB20-5",
+          "name": "SB20-5",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB20-6",
+          "name": "SB20-6",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB20-7",
+          "name": "SB20-7",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB20-8",
+          "name": "SB20-8",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB20-10",
+          "name": "SB20-10",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI20-1",
+          "name": "SBI20-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN20-1",
+          "name": "SBN20-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI20-2",
+          "name": "SBI20-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN20-2",
+          "name": "SBN20-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI20-3",
+          "name": "SBI20-3",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN20-3",
+          "name": "SBN20-3",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI20-4",
+          "name": "SBI20-4",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN20-4",
+          "name": "SBN20-4",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI20-5",
+          "name": "SBI20-5",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN20-5",
+          "name": "SBN20-5",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI20-6",
+          "name": "SBI20-6",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN20-6",
+          "name": "SBN20-6",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI20-7",
+          "name": "SBI20-7",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN20-7",
+          "name": "SBN20-7",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI20-8",
+          "name": "SBI20-8",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN20-8",
+          "name": "SBN20-8",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI20-10",
+          "name": "SBI20-10",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN20-10",
+          "name": "SBN20-10",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=20；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB32-1-1",
+          "name": "SB32-1-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB32-1",
+          "name": "SB32-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB32-2-2",
+          "name": "SB32-2-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB32-2-1",
+          "name": "SB32-2-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB32-2",
+          "name": "SB32-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB32-3-2",
+          "name": "SB32-3-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB32-3",
+          "name": "SB32-3",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB32-4-2",
+          "name": "SB32-4-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB32-4",
+          "name": "SB32-4",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB32-5-2",
+          "name": "SB32-5-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB32-5",
+          "name": "SB32-5",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB32-6-2",
+          "name": "SB32-6-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB32-6",
+          "name": "SB32-6",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB32-7-2",
+          "name": "SB32-7-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB32-7",
+          "name": "SB32-7",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB32-8-2",
+          "name": "SB32-8-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB32-8",
+          "name": "SB32-8",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB32-9-2",
+          "name": "SB32-9-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB32-9",
+          "name": "SB32-9",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB32-10-2",
+          "name": "SB32-10-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI32-1-1",
+          "name": "SBI32-1-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN32-1-1",
+          "name": "SBN32-1-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI32-1",
+          "name": "SBI32-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN32-1",
+          "name": "SBN32-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI32-2-2",
+          "name": "SBI32-2-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN32-2-2",
+          "name": "SBN32-2-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI32-2-1",
+          "name": "SBI32-2-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN32-2-1",
+          "name": "SBN32-2-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI32-2",
+          "name": "SBI32-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN32-2",
+          "name": "SBN32-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI32-3-2",
+          "name": "SBI32-3-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN32-3-2",
+          "name": "SBN32-3-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI32-3",
+          "name": "SBI32-3",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN32-3",
+          "name": "SBN32-3",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI32-4-2",
+          "name": "SBI32-4-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN32-4-2",
+          "name": "SBN32-4-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI32-4",
+          "name": "SBI32-4",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN32-4",
+          "name": "SBN32-4",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI32-5-2",
+          "name": "SBI32-5-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN32-5-2",
+          "name": "SBN32-5-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI32-5",
+          "name": "SBI32-5",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN32-5",
+          "name": "SBN32-5",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI32-6-2",
+          "name": "SBI32-6-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN32-6-2",
+          "name": "SBN32-6-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI32-6",
+          "name": "SBI32-6",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN32-6",
+          "name": "SBN32-6",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI32-7-2",
+          "name": "SBI32-7-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN32-7-2",
+          "name": "SBN32-7-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI32-7",
+          "name": "SBI32-7",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN32-7",
+          "name": "SBN32-7",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI32-8",
+          "name": "SBI32-8",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN32-8",
+          "name": "SBN32-8",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI32-9-2",
+          "name": "SBI32-9-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN32-9-2",
+          "name": "SBN32-9-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI32-9",
+          "name": "SBI32-9",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN32-9",
+          "name": "SBN32-9",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI32-10-2",
+          "name": "SBI32-10-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN32-10-2",
+          "name": "SBN32-10-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=32；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB45-1-1",
+          "name": "SB45-1-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB45-1",
+          "name": "SB45-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB45-2-2",
+          "name": "SB45-2-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB45-2-1",
+          "name": "SB45-2-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB45-2",
+          "name": "SB45-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB45-3-2",
+          "name": "SB45-3-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB45-3-1",
+          "name": "SB45-3-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB45-3",
+          "name": "SB45-3",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB45-4-2",
+          "name": "SB45-4-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB45-4-1",
+          "name": "SB45-4-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB45-4",
+          "name": "SB45-4",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB45-5-2",
+          "name": "SB45-5-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB45-5-1",
+          "name": "SB45-5-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB45-5",
+          "name": "SB45-5",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB45-6-2",
+          "name": "SB45-6-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB45-6-1",
+          "name": "SB45-6-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB45-6",
+          "name": "SB45-6",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB45-7-2",
+          "name": "SB45-7-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB45-7-1",
+          "name": "SB45-7-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB45-7",
+          "name": "SB45-7",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI45-1-1",
+          "name": "SBI45-1-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN45-1-1",
+          "name": "SBN45-1-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI45-1",
+          "name": "SBI45-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN45-1",
+          "name": "SBN45-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI45-2-2",
+          "name": "SBI45-2-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN45-2-2",
+          "name": "SBN45-2-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI45-2-1",
+          "name": "SBI45-2-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN45-2-1",
+          "name": "SBN45-2-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI45-2",
+          "name": "SBI45-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN45-2",
+          "name": "SBN45-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI45-3-2",
+          "name": "SBI45-3-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN45-3-2",
+          "name": "SBN45-3-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI45-3-1",
+          "name": "SBI45-3-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN45-3-1",
+          "name": "SBN45-3-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI45-3",
+          "name": "SBI45-3",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN45-3",
+          "name": "SBN45-3",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI45-4-2",
+          "name": "SBI45-4-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN45-4-2",
+          "name": "SBN45-4-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI45-4-1",
+          "name": "SBI45-4-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN45-4-1",
+          "name": "SBN45-4-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI45-4",
+          "name": "SBI45-4",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN45-4",
+          "name": "SBN45-4",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI45-5-2",
+          "name": "SBI45-5-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN45-5-2",
+          "name": "SBN45-5-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI45-5-1",
+          "name": "SBI45-5-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN45-5-1",
+          "name": "SBN45-5-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI45-5",
+          "name": "SBI45-5",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN45-5",
+          "name": "SBN45-5",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI45-6-2",
+          "name": "SBI45-6-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN45-6-2",
+          "name": "SBN45-6-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI45-6-1",
+          "name": "SBI45-6-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN45-6-1",
+          "name": "SBN45-6-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI45-6",
+          "name": "SBI45-6",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN45-6",
+          "name": "SBN45-6",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI45-7-2",
+          "name": "SBI45-7-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN45-7-2",
+          "name": "SBN45-7-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI45-7-1",
+          "name": "SBI45-7-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN45-7-1",
+          "name": "SBN45-7-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI45-7",
+          "name": "SBI45-7",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN45-7",
+          "name": "SBN45-7",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=45；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB64-1-1",
+          "name": "SB64-1-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB64-1",
+          "name": "SB64-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB64-2-2",
+          "name": "SB64-2-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB64-2-1",
+          "name": "SB64-2-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB64-2",
+          "name": "SB64-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB64-3",
+          "name": "SB64-3",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB64-4-1",
+          "name": "SB64-4-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB64-4",
+          "name": "SB64-4",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB64-5-2",
+          "name": "SB64-5-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI64-1-1",
+          "name": "SBI64-1-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN64-1-1",
+          "name": "SBN64-1-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI64-1",
+          "name": "SBI64-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN64-1",
+          "name": "SBN64-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI64-2-2",
+          "name": "SBI64-2-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN64-2-2",
+          "name": "SBN64-2-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI64-2-1",
+          "name": "SBI64-2-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN64-2-1",
+          "name": "SBN64-2-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI64-2",
+          "name": "SBI64-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN64-2",
+          "name": "SBN64-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI64-3-2",
+          "name": "SBI64-3-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN64-3-2",
+          "name": "SBN64-3-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI64-3-1",
+          "name": "SBI64-3-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN64-3-1",
+          "name": "SBN64-3-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI64-3",
+          "name": "SBI64-3",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN64-3",
+          "name": "SBN64-3",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI64-4-2",
+          "name": "SBI64-4-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN64-4-2",
+          "name": "SBN64-4-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI64-4-1",
+          "name": "SBI64-4-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN64-4-1",
+          "name": "SBN64-4-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI64-4",
+          "name": "SBI64-4",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN64-4",
+          "name": "SBN64-4",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI64-5-2",
+          "name": "SBI64-5-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN64-5-2",
+          "name": "SBN64-5-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=64；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB90-1-1",
+          "name": "SB90-1-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB90-1",
+          "name": "SB90-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB90-2-2",
+          "name": "SB90-2-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB90-2-1",
+          "name": "SB90-2-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB90-2",
+          "name": "SB90-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB90-3-2",
+          "name": "SB90-3-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB90-3-1",
+          "name": "SB90-3-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB90-3",
+          "name": "SB90-3",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB90-4-2",
+          "name": "SB90-4-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI90-1-1",
+          "name": "SBI90-1-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN90-1-1",
+          "name": "SBN90-1-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI90-1",
+          "name": "SBI90-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN90-1",
+          "name": "SBN90-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI90-2-2",
+          "name": "SBI90-2-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN90-2-2",
+          "name": "SBN90-2-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI90-2-1",
+          "name": "SBI90-2-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN90-2-1",
+          "name": "SBN90-2-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI90-2",
+          "name": "SBI90-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN90-2",
+          "name": "SBN90-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI90-3-2",
+          "name": "SBI90-3-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN90-3-2",
+          "name": "SBN90-3-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI90-3-1",
+          "name": "SBI90-3-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN90-3-1",
+          "name": "SBN90-3-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI90-3",
+          "name": "SBI90-3",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN90-3",
+          "name": "SBN90-3",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI90-4-2",
+          "name": "SBI90-4-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN90-4-2",
+          "name": "SBN90-4-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=90；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB120-1",
+          "name": "SB120-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=120；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB120-2-2",
+          "name": "SB120-2-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=120；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB120-2-1",
+          "name": "SB120-2-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=120；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB120-2",
+          "name": "SB120-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=120；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB120-3-1",
+          "name": "SB120-3-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=120；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB120-3",
+          "name": "SB120-3",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=120；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB120-4-1",
+          "name": "SB120-4-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=120；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB120-5-2",
+          "name": "SB120-5-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=120；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI120-1",
+          "name": "SBI120-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=120；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN120-1",
+          "name": "SBN120-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=120；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI120-2-2",
+          "name": "SBI120-2-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=120；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN120-2-2",
+          "name": "SBN120-2-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=120；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI120-2-1",
+          "name": "SBI120-2-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=120；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN120-2-1",
+          "name": "SBN120-2-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=120；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI120-2",
+          "name": "SBI120-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=120；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN120-2",
+          "name": "SBN120-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=120；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI120-3-1",
+          "name": "SBI120-3-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=120；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN120-3-1",
+          "name": "SBN120-3-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=120；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI120-3",
+          "name": "SBI120-3",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=120；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN120-3",
+          "name": "SBN120-3",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=120；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI120-4-1",
+          "name": "SBI120-4-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=120；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN120-4-1",
+          "name": "SBN120-4-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=120；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI120-5-2",
+          "name": "SBI120-5-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=120；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN120-5-2",
+          "name": "SBN120-5-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=120；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI150-1-1",
+          "name": "SBI150-1-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=150；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN150-1-1",
+          "name": "SBN150-1-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=150；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI150-1",
+          "name": "SBI150-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=150；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN150-1",
+          "name": "SBN150-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=150；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI150-2-2",
+          "name": "SBI150-2-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=150；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN150-2-2",
+          "name": "SBN150-2-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=150；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI150-2-1",
+          "name": "SBI150-2-1",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=150；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN150-2-1",
+          "name": "SBN150-2-1",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=150；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI150-2",
+          "name": "SBI150-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=150；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN150-2",
+          "name": "SBN150-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=150；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI150-3-2",
+          "name": "SBI150-3-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=150；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN150-3-2",
+          "name": "SBN150-3-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=150；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI150-3",
+          "name": "SBI150-3",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=150；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN150-3",
+          "name": "SBN150-3",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=150；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBI150-4-2",
+          "name": "SBI150-4-2",
+          "specs": {
+            "weight_kg": "型式=SBI；尺寸級別=150；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SBN150-4-2",
+          "name": "SBN150-4-2",
+          "specs": {
+            "weight_kg": "型式=SBN；尺寸級別=150；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB150-1-1",
+          "name": "SB150-1-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=150；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB150-1",
+          "name": "SB150-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=150；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB150-2-2",
+          "name": "SB150-2-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=150；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB150-2-1",
+          "name": "SB150-2-1",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=150；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB150-2",
+          "name": "SB150-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=150；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB150-3-2",
+          "name": "SB150-3-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=150；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB150-3",
+          "name": "SB150-3",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=150；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        },
+        {
+          "id": "傑平|SB/SBI/SBN|SB150-4-2",
+          "name": "SB150-4-2",
+          "specs": {
+            "weight_kg": "型式=SB；尺寸級別=150；逐型號馬達、電流、尺寸及重量詳見「傑平SB-SBI-SBN」分頁。"
+          }
+        }
+      ]
+    }
+  ]
+}
