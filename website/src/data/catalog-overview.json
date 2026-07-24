@@ -1,0 +1,12 @@
+{
+  "series": [
+    { "id": "cv",        "purposeTags": ["污水"],                                                                                        "headMin": "6",  "headMax": "6",   "flowMin": "150", "flowMax": "150" },
+    { "id": "gp",        "purposeTags": ["工業系統", "大樓揚水", "空調循環給水", "農業灌溉用水"],                                         "headMin": null,  "headMax": "100", "flowMin": null,  "flowMax": "500" },
+    { "id": "hs",        "purposeTags": ["大樓揚水"],                                                                                     "headMin": "40", "headMax": "56",  "flowMin": "300", "flowMax": "680" },
+    { "id": "jq",        "purposeTags": [],                                                                                               "headMin": "15", "headMax": "15",  "flowMin": "28",  "flowMax": "28"  },
+    { "id": "sb-sbi-sbn","purposeTags": ["冷凍及空調", "大樓揚水", "工業系統", "農業灌溉用水"],                                            "headMin": "0",  "headMax": "250", "flowMin": "0",   "flowMax": "50"  },
+    { "id": "sn",        "purposeTags": ["污水"],                                                                                        "headMin": "6",  "headMax": "6",   "flowMin": "200", "flowMax": "200" },
+    { "id": "tp",        "purposeTags": ["污水"],                                                                                        "headMin": "6",  "headMax": "6",   "flowMin": "100", "flowMax": "100" },
+    { "id": "y",         "purposeTags": ["化工液體", "工業系統", "船舶/礦山排水", "農業灌溉用水", "釀造食品"],                              "headMin": null,  "headMax": null,  "flowMin": null,  "flowMax": null  }
+  ]
+}

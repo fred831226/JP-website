@@ -1,7 +1,159 @@
 @import "tailwindcss";
 @import "../styles/tokens.css" layer(base);
 
+/* ==========================================================================
+   Reveal-on-scroll (transition-based — no flicker)
+   ========================================================================== */
+.rv {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);
+}
+.rv.is-in {
+  opacity: 1;
+  transform: none;
+}
+.rv-d1 { transition-delay: .08s; }
+.rv-d2 { transition-delay: .16s; }
+.rv-d3 { transition-delay: .24s; }
+.rv-d4 { transition-delay: .32s; }
+.rv-d5 { transition-delay: .40s; }
+.rv-d6 { transition-delay: .48s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rv {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   Hero animations — static elements
+   ========================================================================== */
+@keyframes ping-soft {
+  0%   { transform: scale(.4); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+@keyframes title-shine {
+  0%, 100% { background-position: 0% center; }
+  50%      { background-position: 100% center; }
+}
+
+.kicker-dot {
+  position: relative;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d8c18d;
+  margin-right: 8px;
+}
+.kicker-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid #d8c18d;
+  animation: ping-soft 2.6s ease-out infinite;
+}
+
+/* ==========================================================================
+   Company section — pipe-flow decorative paths
+   ========================================================================== */
+@keyframes flow-path {
+  to { stroke-dashoffset: -220; }
+}
+
+.company-pipe {
+  pointer-events: none;
+}
+.company-pipe .flow-line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 18 28;
+  animation: flow-path 5s linear infinite;
+}
+.company-pipe .flow-line:nth-child(2) {
+  animation-duration: 7s;
+  opacity: .5;
+}
+
+.company-preview::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: -9%;
+  top: 29%;
+  width: 78%;
+  height: 170px;
+  border: 18px solid rgba(136, 201, 216, 0.22);
+  border-radius: 46% 54% 49% 51% / 52% 44% 56% 48%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.54), rgba(55, 173, 201, 0.18) 42%, rgba(0, 109, 143, 0.27) 58%, rgba(255, 255, 255, 0.32));
+  box-shadow: inset 0 12px 24px rgba(255, 255, 255, 0.74), inset 0 -18px 30px rgba(0, 92, 122, 0.17), 0 24px 54px rgba(11, 42, 61, 0.12);
+  transform: rotate(-7deg) skewX(-12deg);
+  filter: saturate(1.08);
+}
+
+.company-preview::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 8%;
+  top: 46%;
+  width: 54%;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(126, 224, 239, 0.7) 20%, rgba(0, 122, 165, 0.62) 50%, rgba(173, 235, 244, 0.72) 78%, rgba(255, 255, 255, 0));
+  box-shadow: 0 0 24px rgba(0, 139, 177, 0.28);
+  transform: rotate(-7deg) skewX(-15deg);
+}
+
+/* ==========================================================================
+   Purpose card hover
+   ========================================================================== */
+.purpose-card {
+  transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s, border-color .35s;
+}
+.purpose-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 56px rgba(11, 42, 61, .18), 0 0 0 1px rgba(0, 109, 143, .2);
+}
+.purpose-card:hover .purpose-arrow-hover {
+  color: var(--color-action);
+  transform: translate(4px, -4px);
+}
+
+/* ==========================================================================
+   Gateways — grid bg, ghost numbers, expanding :has()
+   ========================================================================== */
+.gateways-section {
+  background:
+    linear-gradient(rgba(0, 109, 143, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 109, 143, .045) 1px, transparent 1px);
+  background-size: 48px 48px, 48px 48px;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.gateways-section .gateway-no {
+  font-size: 3.2rem;
+  font-weight: 900;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(11, 42, 61, .25);
+  transition: .35s;
+}
+.gateways-section .gateway:hover .gateway-no {
+  -webkit-text-stroke-color: rgba(0, 109, 143, .55);
+  text-shadow: 0 0 26px rgba(0, 109, 143, .12);
+}
+
 @media (width >= 720px) {
+  .gateway-grid {
+    transition: grid-template-columns .42s cubic-bezier(.2,.8,.2,1);
+  }
   .gateway-grid:has(.gateway:nth-child(1):hover),
   .gateway-grid:has(.gateway:nth-child(1):focus-visible) {
     grid-template-columns: 1.42fr 0.79fr 0.79fr;
@@ -13,5 +165,86 @@
   .gateway-grid:has(.gateway:nth-child(3):hover),
   .gateway-grid:has(.gateway:nth-child(3):focus-visible) {
     grid-template-columns: 0.79fr 0.79fr 1.42fr;
+  }
+}
+
+/* ==========================================================================
+   Featured Projects — card hover + media shine sweep
+   ========================================================================== */
+@keyframes shine-sweep {
+  to { transform: translateX(100%); }
+}
+
+.project-card:hover .project-shine {
+  animation: shine-sweep .9s cubic-bezier(.2,.7,.2,1) forwards;
+}
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 52px rgba(11, 42, 61, .16);
+  border-color: rgba(168, 122, 36, .35);
+}
+
+/* ==========================================================================
+   Partners
+   ========================================================================== */
+.partner-row:hover {
+  transform: translateX(8px);
+  border-color: rgba(0, 109, 143, .4);
+  box-shadow: 0 8px 26px rgba(11, 42, 61, .1);
+}
+
+/* ==========================================================================
+   Fact tiles — dot indicator on hover
+   ========================================================================== */
+.fact-tile .fact-dot {
+  transition: background .35s, opacity .35s, box-shadow .35s;
+}
+.fact-tile:hover .fact-dot {
+  background: var(--color-action);
+  opacity: 1;
+  box-shadow: 0 0 10px var(--color-action);
+}
+
+/* ==========================================================================
+   Product overview — card hover
+   ========================================================================== */
+.pcat-card {
+  transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s, border-color .35s;
+}
+.pcat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 56px rgba(11, 42, 61, .16), 0 0 0 1px rgba(0, 109, 143, .15);
+  border-color: rgba(0, 109, 143, .3);
+}
+.pcat-card:hover .pcat-arrow {
+  color: var(--color-action);
+}
+
+/* ==========================================================================
+   Series detail — decorative backgrounds & table
+   ========================================================================== */
+.series-sect {
+  background: radial-gradient(ellipse 60% 50% at 20% 30%, rgba(0, 109, 143, .045), transparent 70%), var(--color-background);
+}
+
+.keydata-tile {
+  transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s, border-color .3s;
+}
+.keydata-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(11, 42, 61, .1);
+  border-color: rgba(0, 109, 143, .25);
+}
+
+.model-table tbody tr:hover td,
+.model-table tbody tr:hover th {
+  background: rgba(0, 109, 143, .05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kicker-dot::after,
+  .company-pipe .flow-line,
+  .project-card:hover .project-shine {
+    animation: none !important;
   }
 }

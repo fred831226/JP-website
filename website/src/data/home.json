@@ -31,5 +31,34 @@
       "description": "直接以電話或 Email 與我們聯繫。",
       "href": "/zh-tw/contact"
     }
+  ],
+  "projects": [
+    {
+      "id": "project-1",
+      "type": "空調系統維保 · 類型示意",
+      "title": "正式建案名稱待核准",
+      "description": "工作範圍、解決內容與成果只呈現 JP PUMP 已核准事實。"
+    },
+    {
+      "id": "project-2",
+      "type": "高樓建築 · 類型示意",
+      "title": "正式建案名稱待核准",
+      "description": "核准後呈現案型、工作範圍、成果與相關產品。"
+    },
+    {
+      "id": "project-3",
+      "type": "交通設施 · 類型示意",
+      "title": "正式建案名稱待核准",
+      "description": "未通過公開權利或安全檢查的內容不會顯示。"
+    }
+  ],
+  "partners": [
+    {
+      "id": "grundfos",
+      "name": "Grundfos 葛蘭富",
+      "description": "格蘭富是全球泵浦領導品牌，與 JP PUMP 合作提供台灣市場在地化技術支援與選型服務。",
+      "logo": "/media/Grundfos.avif",
+      "website": "https://www.grundfos.com"
+    }
   ]
 }

@@ -6,6 +6,7 @@ import typesRaw from "@/data/catalog-types.json";
 import purposesRaw from "@/data/catalog-purposes.json";
 import generatedRaw from "@/data/catalog.generated.json";
 import contentRaw from "@/data/catalog-content.json";
+import overviewRaw from "@/data/catalog-overview.json";
 
 type GeneratedSeries = {
   id: string;
@@ -25,13 +26,24 @@ type ContentSeries = {
   introduction: string;
 };
 
+type OverviewSeries = {
+  id: string;
+  purposeTags: string[];
+  headMin: string | null;
+  headMax: string | null;
+  flowMin: string | null;
+  flowMax: string | null;
+};
+
 const generated = generatedRaw as { series: GeneratedSeries[] };
 const content = contentRaw as { series: ContentSeries[] };
+const overview = overviewRaw as { series: OverviewSeries[] };
 
 const PUMP_TYPE_ID_MAP: Record<string, string> = {
   "沉水式揚水泵": "submersible-well-pump",
   "臥式泵": "horizontal-pump",
   "污水泵": "sewage-pump",
+  "汙水泵": "sewage-pump",
   "陸上式自吸式泵": "self-priming-pump",
   "電子穩壓加壓泵": "pressure-boosting-pump",
   "立式揚水泵": "vertical-multistage-pump",
@@ -42,9 +54,17 @@ for (const c of content.series) {
   contentMap.set(c.id, c);
 }
 
+const overviewMap = new Map<string, OverviewSeries>();
+for (const o of overview.series) {
+  overviewMap.set(o.id, o);
+}
+
 const seriesList: Series[] = generated.series.map((gs) => {
   const c = contentMap.get(gs.id);
+  const o = overviewMap.get(gs.id);
   const ptId = PUMP_TYPE_ID_MAP[gs.pumpType];
+  /* 用途標籤以網頁_產品總覽 sheet 為權威來源；無覆蓋時 fallback 到 generated */
+  const purposeTags = o?.purposeTags ?? gs.purposeTags;
   return {
     id: gs.id,
     brandId: "jp-pump",
@@ -54,12 +74,12 @@ const seriesList: Series[] = generated.series.map((gs) => {
     introduction: c?.introduction ?? "",
     image: c?.image ?? null,
     pumpTypeIds: ptId ? [ptId] : [],
-    purposeIds: gs.purposeTags.map((t) => t.replace(/\s+/g, "-").replace(/[\/]/g, "-")),
-    purposeTags: gs.purposeTags,
-    headMin: null,
-    headMax: null,
-    flowMin: null,
-    flowMax: null,
+    purposeIds: purposeTags.map((t) => t.replace(/\s+/g, "-").replace(/[\/]/g, "-")),
+    purposeTags,
+    headMin: o?.headMin ?? null,
+    headMax: o?.headMax ?? null,
+    flowMin: o?.flowMin ?? null,
+    flowMax: o?.flowMax ?? null,
     models: gs.models.map((m) => ({
       id: m.id,
       name: m.name,

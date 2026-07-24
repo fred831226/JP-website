@@ -165,7 +165,7 @@
       "id": "cv",
       "name": "CV",
       "productName": "污水泵",
-      "pumpType": "汙水汞",
+      "pumpType": "污水泵",
       "purposeTags": [],
       "modelCount": 6,
       "models": [
@@ -223,7 +223,7 @@
       "id": "sn",
       "name": "SN",
       "productName": "污水泵",
-      "pumpType": "汙水汞",
+      "pumpType": "污水泵",
       "purposeTags": [],
       "modelCount": 9,
       "models": [
