@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "title": "專業泵浦供應與技術服務",
+    "subtitle": "傑平有限公司 — 三十年泵浦領域經驗，提供選型、供應、安裝、維修與顧問整合服務。",
+    "ctaLabel": "認識我們",
+    "ctaHref": "/zh-tw/company",
+    "images": []
+  },
+  "companySummary": {
+    "heading": "值得信賴的泵浦夥伴",
+    "body": "傑平有限公司（JP PUMP）專注於泵浦領域，以技術實證與完整服務鏈協助國內外建案與工業客戶。從估價、選型到安裝維修，每個環節皆可追溯。",
+    "facts": []
+  },
+  "purposes": [],
+  "gateways": [
+    {
+      "id": "products",
+      "title": "產品總覽",
+      "description": "瀏覽全系列泵浦產品，依品牌、類型或用途快速篩選。",
+      "href": "/zh-tw/products"
+    },
+    {
+      "id": "services",
+      "title": "服務與實績",
+      "description": "了解我們的服務能力與經核准的真實建案。",
+      "href": "/zh-tw/services"
+    },
+    {
+      "id": "contact",
+      "title": "聯絡我們",
+      "description": "直接以電話或 Email 與我們聯繫。",
+      "href": "/zh-tw/contact"
+    }
+  ]
+}

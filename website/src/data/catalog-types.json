@@ -1,0 +1,26 @@
+[
+  {
+    "id": "centrifugal",
+    "name": "離心泵浦",
+    "slug": "centrifugal",
+    "description": "透過離心力將液體加壓送出，適用於大流量低揚程應用。"
+  },
+  {
+    "id": "vertical",
+    "name": "豎軸泵浦",
+    "slug": "vertical",
+    "description": "垂直安裝設計，節省空間，適用於深井與加壓站。"
+  },
+  {
+    "id": "submersible",
+    "name": "沉水泵浦",
+    "slug": "submersible",
+    "description": "完全浸沒於液體中運轉，適用於污水、排水與深井取水。"
+  },
+  {
+    "id": "gear",
+    "name": "齒輪泵浦",
+    "slug": "gear",
+    "description": "以嚙合齒輪輸送液體，適用於潤滑性流體與油壓系統。"
+  }
+]

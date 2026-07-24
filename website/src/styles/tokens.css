@@ -1,0 +1,108 @@
+@layer base {
+  :root {
+    /* Colors - Technical Blueprint palette */
+    --color-background: #F4F7F8;
+    --color-surface: #FFFFFF;
+    --color-surface-subtle: #EAF0F2;
+    --color-text: #111B22;
+    --color-text-muted: #4B5D68;
+    --color-primary: #0B2A3D;
+    --color-primary-muted: #3B6477;
+    --color-on-primary: #FFFFFF;
+    --color-action: #006D8F;
+    --color-on-action: #FFFFFF;
+    --color-border: #C9D3D8;
+    --color-border-strong: #7D929E;
+    --color-focus-ring: #006D8F;
+    --color-identity-detail: #A87A24;
+    --color-error: #A32D2D;
+    --color-on-error: #FFFFFF;
+    --color-warning-surface: #FFF4D6;
+    --color-warning-text: #5C4200;
+    --color-contact-surface: #06141B;
+    --color-contact-surface-raised: #102C37;
+    --color-contact-text-muted: #B8C9CF;
+
+    /* Typography - Base font family */
+    --font-family-base: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+
+    /* Typography - Display */
+    --font-display-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+    --font-display-size: 48px;
+    --font-display-weight: 800;
+    --font-display-line-height: 1.14;
+    --font-display-letter-spacing: -0.02em;
+
+    --font-display-mobile-size: 34px;
+    --font-display-mobile-weight: 800;
+    --font-display-mobile-line-height: 1.2;
+    --font-display-mobile-letter-spacing: -0.015em;
+
+    /* Typography - Heading */
+    --font-heading-lg-size: 32px;
+    --font-heading-lg-weight: 750;
+    --font-heading-lg-line-height: 1.25;
+
+    --font-heading-md-size: 24px;
+    --font-heading-md-weight: 700;
+    --font-heading-md-line-height: 1.35;
+
+    --font-heading-sm-size: 18px;
+    --font-heading-sm-weight: 700;
+    --font-heading-sm-line-height: 1.4;
+
+    /* Typography - Body */
+    --font-body-size: 16px;
+    --font-body-weight: 400;
+    --font-body-line-height: 1.7;
+
+    --font-body-sm-size: 14px;
+    --font-body-sm-weight: 400;
+    --font-body-sm-line-height: 1.6;
+
+    /* Typography - Label */
+    --font-label-size: 14px;
+    --font-label-weight: 650;
+    --font-label-line-height: 1.4;
+
+    /* Border Radius */
+    --radius-none: 0px;
+    --radius-xs: 2px;
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-full: 9999px;
+
+    /* Spacing (4px base) */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 40px;
+    --space-8: 48px;
+    --space-9: 64px;
+    --space-10: 80px;
+    --content-max: 1200px;
+    --text-max: 720px;
+    --page-gutter-desktop: 32px;
+    --page-gutter-mobile: 20px;
+
+    /* Component tokens */
+    --button-primary-bg: var(--color-action);
+    --button-primary-fg: var(--color-on-action);
+    --button-primary-radius: var(--radius-md);
+    --button-primary-min-height: 44px;
+    --button-primary-padding-inline: var(--space-4);
+
+    --product-card-shadow: 0 12px 32px rgba(11, 42, 61, 0.12);
+    --product-card-radius: var(--radius-lg);
+
+    --floating-layer-shadow: 0 18px 48px rgba(11, 42, 61, 0.18);
+    --floating-layer-radius: var(--radius-lg);
+
+    --footer-bg: var(--color-contact-surface);
+    --footer-fg: var(--color-on-primary);
+  }
+}

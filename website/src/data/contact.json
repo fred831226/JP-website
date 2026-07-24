@@ -1,0 +1,13 @@
+{
+  "hero": {
+    "title": "聯絡我們",
+    "summary": "對產品、選型或服務有任何問題？歡迎直接來電或來信，我們將盡快回覆。"
+  },
+  "info": {
+    "phone": null,
+    "email": null,
+    "address": null,
+    "line": null
+  },
+  "faq": []
+}

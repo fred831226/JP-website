@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JP PUMP｜SB／SBI／SBN 系列 — Direction A「深夜流量」概念稿</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./shared.css">
+<style>
+  /* ================= 頁首 ================= */
+  .series-head {
+    position: relative; isolation: isolate; overflow: hidden;
+    padding: 72px 0 48px;
+    background: var(--bg-1);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .series-head .aurora { position: absolute; z-index: -1; width: 480px; height: 480px; right: -6%; top: -80%; border-radius: 50%; filter: blur(100px); background: radial-gradient(circle, rgba(14, 156, 196, .32), transparent 65%); animation: drift1 16s ease-in-out infinite alternate; }
+  @keyframes drift1 { to { transform: translate(-60px, 50px) scale(1.12); } }
+  .crumb { font-size: .82rem; color: var(--muted); letter-spacing: .06em; }
+  .crumb a { color: var(--cyan); text-decoration: none; }
+  .title-row { display: flex; align-items: start; justify-content: space-between; gap: 28px; margin-top: 18px; }
+  .series-head h1 { font-size: clamp(2rem, 3.8vw, 2.9rem); font-weight: 900; letter-spacing: -.02em; }
+  .series-head h1 em {
+    font-style: normal;
+    background: linear-gradient(100deg, var(--cyan), var(--teal));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .series-head .lede { margin-top: 14px; max-width: 640px; color: var(--muted); }
+  .pending-badge {
+    flex: 0 0 auto; padding: 9px 15px; border-radius: 999px;
+    background: rgba(220, 180, 92, .1); border: 1px solid rgba(220, 180, 92, .35);
+    color: var(--gold); font-size: .76rem; font-weight: 700; letter-spacing: .06em;
+    white-space: nowrap;
+  }
+
+  .main { padding: 0 0 96px; background: var(--bg-0); }
+
+  /* ================= 選型提示 ================= */
+  .trust-note {
+    position: relative; margin: 40px 0 48px; padding: 18px 22px 18px 26px;
+    border-radius: var(--r-md); overflow: hidden;
+    background: linear-gradient(120deg, rgba(14, 156, 196, .12), rgba(51, 216, 195, .05));
+    border: 1px solid rgba(59, 199, 238, .25);
+    color: var(--muted); font-size: .9rem;
+  }
+  .trust-note::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: linear-gradient(180deg, var(--cyan), var(--teal));
+  }
+  .trust-note strong { color: var(--text); }
+
+  /* ================= 產品圖 + 關鍵數據 ================= */
+  .media-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(300px, .65fr); gap: 28px; align-items: stretch; }
+  .image-trigger {
+    position: relative; overflow: hidden;
+    display: grid; place-items: center;
+    min-height: 480px; padding: 40px;
+    border-radius: var(--r-lg);
+    background:
+      radial-gradient(circle at 50% 22%, rgba(255, 255, 255, .9), rgba(226, 236, 241, .92) 45%, rgba(198, 214, 222, .9)),
+      #E8EFF3;
+    border: 1px solid var(--line);
+    cursor: zoom-in;
+    transition: box-shadow .4s, transform .4s var(--ease-out);
+  }
+  .image-trigger:hover { box-shadow: 0 24px 60px rgba(2, 10, 16, .5), 0 0 0 1px rgba(59, 199, 238, .3); }
+  .image-trigger img { max-height: 440px; object-fit: contain; filter: drop-shadow(0 30px 34px rgba(2, 10, 16, .35)); transition: transform .55s var(--ease-out); }
+  .image-trigger:hover img { transform: scale(1.035); }
+  .zoom-cue {
+    position: absolute; right: 18px; bottom: 18px;
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 10px 16px; border-radius: 999px;
+    background: rgba(6, 13, 18, .82); border: 1px solid var(--line);
+    color: var(--text); font-size: .8rem; font-weight: 600;
+    backdrop-filter: blur(8px);
+    transition: background .3s, box-shadow .3s;
+  }
+  .image-trigger:hover .zoom-cue { background: rgba(14, 156, 196, .9); box-shadow: 0 8px 22px rgba(14, 156, 196, .4); }
+  .media-flag {
+    position: absolute; left: 18px; top: 18px;
+    padding: 6px 12px; border-radius: 8px;
+    background: rgba(6, 13, 18, .78); border: 1px solid var(--line-soft);
+    color: var(--muted); font-size: .7rem; letter-spacing: .05em;
+  }
+
+  .keydata {
+    display: grid; grid-template-rows: auto repeat(4, 1fr); gap: 12px;
+  }
+  .keydata > h2 { font-size: 1.05rem; font-weight: 800; letter-spacing: .04em; display: flex; align-items: center; gap: 10px; }
+  .keydata > h2::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: linear-gradient(135deg, var(--cyan), var(--teal)); transform: rotate(45deg); }
+  .datum {
+    position: relative; padding: 18px 20px;
+    border-radius: var(--r-md);
+    background: linear-gradient(150deg, var(--panel), var(--bg-2));
+    border: 1px solid var(--line-soft);
+    display: flex; flex-direction: column; justify-content: center;
+    transition: border-color .3s, transform .3s var(--ease-out), box-shadow .3s;
+  }
+  .datum:hover { border-color: rgba(59, 199, 238, .4); transform: translateX(6px); box-shadow: var(--shadow-2); }
+  .datum span { font-size: .76rem; font-weight: 600; letter-spacing: .1em; color: var(--muted); }
+  .datum b {
+    margin-top: 6px; font-size: 1.5rem; font-weight: 900; letter-spacing: -.01em;
+    font-variant-numeric: tabular-nums;
+    background: linear-gradient(100deg, #fff, #9FD9EE);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .datum b.na {
+    font-size: 1.05rem; font-weight: 700;
+    background: none; -webkit-text-fill-color: rgba(220, 180, 92, .9); color: rgba(220, 180, 92, .9);
+  }
+
+  /* ================= 內容區 ================= */
+  .content-section { margin-top: 72px; }
+  .content-section > h2 {
+    font-size: clamp(1.35rem, 2.4vw, 1.7rem); font-weight: 800;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .content-section > h2::before {
+    content: ""; width: 26px; height: 2px; flex: 0 0 auto;
+    background: linear-gradient(90deg, var(--cyan), transparent);
+  }
+  .prose { margin-top: 18px; max-width: 720px; color: var(--muted); line-height: 1.85; }
+
+  /* ================= 型號規格表 ================= */
+  .table-note {
+    margin-top: 16px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+    font-size: .8rem; color: var(--muted);
+  }
+  .table-note strong { color: var(--gold); font-weight: 700; }
+  .table-wrap {
+    margin-top: 16px; max-height: 480px; overflow: auto;
+    border-radius: var(--r-md); border: 1px solid var(--line-soft);
+    background: var(--panel);
+    scrollbar-width: thin; scrollbar-color: rgba(59, 199, 238, .4) rgba(150, 205, 228, .06);
+  }
+  .table-wrap::-webkit-scrollbar { height: 10px; width: 10px; }
+  .table-wrap::-webkit-scrollbar-thumb { background: rgba(59, 199, 238, .35); border-radius: 6px; }
+  .table-wrap::-webkit-scrollbar-track { background: rgba(150, 205, 228, .05); }
+  table { width: 100%; border-collapse: collapse; min-width: 760px; }
+  caption { padding: 14px 18px; text-align: left; font-size: .78rem; color: var(--muted); background: var(--bg-2); }
+  thead th {
+    position: sticky; top: 0; z-index: 2;
+    padding: 15px 18px; text-align: left;
+    background: linear-gradient(180deg, #13242F, #0F1E29);
+    color: var(--cyan); font-size: .8rem; font-weight: 700; letter-spacing: .08em;
+    border-bottom: 1px solid rgba(59, 199, 238, .3);
+    white-space: nowrap;
+  }
+  tbody th, tbody td { padding: 14px 18px; font-size: .88rem; border-bottom: 1px solid var(--line-soft); white-space: nowrap; }
+  tbody th[scope="row"] {
+    position: sticky; left: 0; z-index: 1;
+    background: var(--panel);
+    color: var(--text); font-weight: 700; text-align: left;
+    border-right: 1px solid var(--line-soft);
+  }
+  tbody tr { transition: background .2s; }
+  tbody tr:hover { background: rgba(59, 199, 238, .06); }
+  tbody tr:hover th[scope="row"] { background: #132635; }
+  td.na { color: rgba(220, 180, 92, .8); }
+  td.status { color: var(--muted); font-size: .8rem; }
+  .scroll-cue { display: none; margin-top: 10px; font-size: .76rem; color: var(--cyan); }
+
+  /* ================= 用途標籤（僅辨識） ================= */
+  .use-tags { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .use-tag {
+    padding: 9px 16px; border-radius: 8px;
+    background: var(--glass); border: 1px solid var(--line-soft);
+    color: var(--muted); font-size: .84rem; font-weight: 500;
+    cursor: default; user-select: none;
+  }
+  .use-tags .hint { width: 100%; margin-top: 4px; font-size: .74rem; color: rgba(140, 166, 180, .65); }
+
+  /* ================= 操作區 ================= */
+  .actions {
+    margin-top: 64px; padding: 34px 36px;
+    border-radius: var(--r-lg);
+    background: linear-gradient(120deg, rgba(14, 156, 196, .14), rgba(51, 216, 195, .06));
+    border: 1px solid rgba(59, 199, 238, .25);
+    display: grid; grid-template-columns: 1fr auto auto; gap: 16px; align-items: center;
+  }
+  .actions .lead { font-size: 1.05rem; font-weight: 700; }
+  .actions .lead small { display: block; margin-top: 6px; font-size: .82rem; font-weight: 400; color: var(--muted); }
+  .updated { margin-top: 22px; font-size: .78rem; color: rgba(140, 166, 180, .7); }
+
+  /* ================= 圖片放大層 ================= */
+  .lightbox {
+    position: fixed; inset: 0; z-index: 300;
+    display: none; align-items: center; justify-content: center;
+    padding: 32px;
+    background: rgba(3, 7, 11, .9);
+    backdrop-filter: blur(10px);
+  }
+  .lightbox.is-open { display: flex; animation: lb-in .28s var(--ease-out); }
+  @keyframes lb-in { from { opacity: 0; } to { opacity: 1; } }
+  .lightbox-panel {
+    position: relative; max-width: min(920px, 94vw); max-height: 88vh;
+    padding: 28px; border-radius: var(--r-lg);
+    background: linear-gradient(170deg, #F4F8FA, #DDE8ED);
+    box-shadow: var(--shadow-1);
+    animation: lb-pop .32s var(--ease-out);
+    overflow: auto;
+  }
+  @keyframes lb-pop { from { opacity: 0; transform: scale(.94) translateY(12px); } to { opacity: 1; transform: none; } }
+  .lightbox-panel img { max-height: 72vh; margin: 0 auto; object-fit: contain; }
+  .lightbox-close {
+    position: absolute; top: 14px; right: 14px;
+    width: 48px; height: 48px; border: 0; border-radius: 50%;
+    background: rgba(6, 13, 18, .85); color: #fff; font-size: 1.3rem; cursor: pointer;
+    transition: background .25s, transform .25s var(--ease-out);
+  }
+  .lightbox-close:hover { background: var(--cyan-deep); transform: rotate(90deg); }
+  .lightbox-note { margin-top: 14px; text-align: center; color: #3A4E59; font-size: .78rem; }
+
+  @media (max-width: 960px) {
+    .media-grid { grid-template-columns: 1fr; }
+    .image-trigger { min-height: 380px; }
+    .keydata { grid-template-rows: none; grid-template-columns: 1fr 1fr; }
+    .keydata > h2 { grid-column: 1 / -1; }
+    .actions { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 719px) {
+    .series-head { padding: 56px 0 40px; }
+    .title-row { display: block; }
+    .pending-badge { display: inline-block; margin-top: 16px; }
+    .image-trigger { min-height: 300px; padding: 24px; }
+    .image-trigger img { max-height: 300px; }
+    .table-wrap { max-height: 420px; }
+    .scroll-cue { display: block; }
+    .actions { padding: 26px 22px; }
+    .actions .btn, .actions .btn-ghost { width: 100%; }
+    .actions .btn { order: -1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .series-head .aurora { animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="./home.html" aria-label="JP PUMP 首頁">
+      <span class="brand-chip"><img src="../../../imports/jp-pump-logo-source.png" alt="JP PUMP"></span>
+    </a>
+    <nav class="desktop-nav" aria-label="主要導覽">
+      <details class="nav-item" data-nav>
+        <summary class="nav-summary" style="color:#fff">產品總覽 <span class="nav-caret" aria-hidden="true">▾</span></summary>
+        <div class="nav-menu">
+          <a href="./overview.html?purpose=wastewater">污水處理泵 <span class="pending-note">用途捷徑範例</span></a>
+          <a href="./overview.html?purpose=boosting">立式加壓泵 <span class="pending-note">用途捷徑範例</span></a>
+          <a href="./overview.html">正式用途待技術覆核 <span class="pending-note">最多 8 項</span></a>
+          <a class="all-link" href="./overview.html">全部產品 <span class="menu-arrow" aria-hidden="true">→</span></a>
+        </div>
+      </details>
+      <a class="nav-link" href="#">服務與實績</a>
+      <details class="nav-item" data-nav>
+        <summary class="nav-summary">關於傑平 <span class="nav-caret" aria-hidden="true">▾</span></summary>
+        <div class="nav-menu">
+          <a href="#">公司資訊</a>
+          <a href="#">合作夥伴</a>
+        </div>
+      </details>
+      <a class="nav-link" href="#">聯絡我們</a>
+    </nav>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav">選單</button>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="手機主要導覽">
+    <a href="./home.html">首頁</a>
+    <a href="./overview.html">產品總覽</a>
+    <a href="#">服務與實績</a>
+    <details>
+      <summary>關於傑平 <span aria-hidden="true">▾</span></summary>
+      <div class="mobile-sub">
+        <a href="#">公司資訊</a>
+        <a href="#">合作夥伴</a>
+      </div>
+    </details>
+    <a href="#">聯絡我們</a>
+  </nav>
+</header>
+
+<!-- ================= 頁首 ================= -->
+<section class="series-head">
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="crumb"><a href="./overview.html">產品總覽</a> ／ 系列詳細頁</p>
+    <div class="title-row">
+      <div>
+        <h1>SB／SBI／SBN <em>系列</em></h1>
+        <p class="lede">系列名稱已存在於來源資料；正式介紹、分類、圖片與數值須完成 JP PUMP 技術及權利覆核後才可發布。</p>
+      </div>
+      <span class="pending-badge">版型壓力測試 · 非公開內容</span>
+    </div>
+  </div>
+</section>
+
+<article class="main">
+  <div class="wrap">
+
+    <p class="trust-note rv"><strong>選型與適用性確認：</strong>網站資料協助建立產品脈絡；實際選型、採購與使用條件仍請聯絡 JP PUMP 確認。</p>
+
+    <!-- 產品圖 + 關鍵數據 -->
+    <section class="media-grid" aria-label="產品圖片與關鍵數據">
+      <button class="image-trigger rv" type="button" id="image-trigger" aria-label="放大檢視產品圖片">
+        <img src="../../../imports/jp-cv-series-product.png" alt="SB／SBI／SBN 系列產品照片（示意，權利覆核中）">
+        <span class="media-flag">示意圖 · 正式圖片待來源與權利覆核</span>
+        <span class="zoom-cue" aria-hidden="true">⤢ 點擊放大</span>
+      </button>
+      <div class="keydata">
+        <h2>關鍵數據</h2>
+        <div class="datum rv rv-d1"><span>揚程最小值（m）</span><b class="na">未提供</b></div>
+        <div class="datum rv rv-d2"><span>揚程最大值（m）</span><b class="na">未提供</b></div>
+        <div class="datum rv rv-d3"><span>揚水量最小值（L/min）</span><b class="na">未提供</b></div>
+        <div class="datum rv rv-d4"><span>揚水量最大值（L/min）</span><b class="na">未提供</b></div>
+      </div>
+    </section>
+
+    <!-- 系列介紹 -->
+    <section class="content-section rv" aria-labelledby="intro-title">
+      <h2 id="intro-title">系列介紹</h2>
+      <p class="prose">正式文案只使用已核准的產品資訊。此版位示範長度與閱讀層級，不補寫適用性、效能、材料或工程承諾。系列介紹核准後，將在此說明設計重點、典型使用情境與系列內型號配置邏輯，協助專業買方建立產品脈絡。</p>
+    </section>
+
+    <!-- 型號規格表 -->
+    <section class="content-section rv" aria-labelledby="models-title">
+      <h2 id="models-title">型號規格</h2>
+      <div class="table-note">
+        <strong>極端資料量參考：約 491 筆型號</strong>
+        <span>手機僅此容器可水平捲動；第一欄保持型號關係。</span>
+      </div>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="型號規格表，可水平捲動">
+        <table>
+          <caption>以下是版型測試列，不是核准型號資料。缺漏資料一律顯示「未提供」，不以零值或推測值替代。</caption>
+          <thead>
+            <tr><th scope="col">型號</th><th scope="col">規格欄 A</th><th scope="col">規格欄 B</th><th scope="col">規格欄 C</th><th scope="col">規格欄 D</th><th scope="col">覆核狀態</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">版型測試列 001</th><td class="na">未提供</td><td class="na">未提供</td><td class="na">未提供</td><td class="na">未提供</td><td class="status">待覆核</td></tr>
+            <tr><th scope="row">版型測試列 002</th><td class="na">未提供</td><td class="na">未提供</td><td class="na">未提供</td><td class="na">未提供</td><td class="status">待覆核</td></tr>
+            <tr><th scope="row">版型測試列 003</th><td class="na">未提供</td><td class="na">未提供</td><td class="na">未提供</td><td class="na">未提供</td><td class="status">待覆核</td></tr>
+            <tr><th scope="row">版型測試列 004</th><td class="na">未提供</td><td class="na">未提供</td><td class="na">未提供</td><td class="na">未提供</td><td class="status">待覆核</td></tr>
+            <tr><th scope="row">版型測試列 005</th><td class="na">未提供</td><td class="na">未提供</td><td class="na">未提供</td><td class="na">未提供</td><td class="status">待覆核</td></tr>
+            <tr><th scope="row">版型測試列 006</th><td class="na">未提供</td><td class="na">未提供</td><td class="na">未提供</td><td class="na">未提供</td><td class="status">待覆核</td></tr>
+            <tr><th scope="row">版型測試列 007</th><td class="na">未提供</td><td class="na">未提供</td><td class="na">未提供</td><td class="na">未提供</td><td class="status">待覆核</td></tr>
+            <tr><th scope="row">版型測試列 …</th><td class="na">未提供</td><td class="na">未提供</td><td class="na">未提供</td><td class="na">未提供</td><td class="status">持續至完整核准資料</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <span class="scroll-cue" aria-hidden="true">← 左右滑動查看完整規格欄位 →</span>
+    </section>
+
+    <!-- 用途標籤 -->
+    <section class="content-section rv" aria-labelledby="uses-title">
+      <h2 id="uses-title">用途</h2>
+      <div class="use-tags" aria-label="用途標籤，僅供辨識">
+        <span class="use-tag">用途待正式映射</span>
+        <span class="use-tag">不可點擊</span>
+        <span class="hint">用途標籤僅供辨識，不具連結、篩選或其他導向功能。</span>
+      </div>
+    </section>
+
+    <!-- 頁尾操作區 -->
+    <div class="actions rv">
+      <p class="lead">需要確認選型、維修或供應？<small>系列頁不直接顯示電話與 Email；請前往獨立聯絡頁使用正式聯絡方式。</small></p>
+      <a class="btn" href="#">前往聯絡頁<span aria-hidden="true">→</span></a>
+      <a class="btn-ghost" href="./overview.html">返回產品總覽</a>
+    </div>
+    <p class="updated">最後更新日期：正式發布時顯示；內部覆核人員與文件不公開。</p>
+  </div>
+</article>
+
+<!-- ================= Footer ================= -->
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <section class="footer-brand" aria-label="公司資訊">
+      <a class="brand" href="./home.html" aria-label="JP PUMP 首頁">
+        <span class="brand-chip"><img src="../../../imports/jp-pump-logo-source.png" alt="JP PUMP"></span>
+      </a>
+      <p>提供泵浦選型、供應與相關技術服務；正式公司介紹核准後於此呈現。<br><span style="font-size:.8rem">正式公司名稱待核准</span></p>
+    </section>
+    <nav aria-label="頁尾主導覽">
+      <h2 class="footer-title">主導覽</h2>
+      <div class="footer-links">
+        <a href="./home.html">首頁</a>
+        <a href="./overview.html">產品總覽</a>
+        <a href="#">服務與實績</a>
+        <a href="#">公司資訊</a>
+        <a href="#">合作夥伴</a>
+        <a href="#">聯絡我們</a>
+      </div>
+    </nav>
+    <section aria-label="聯絡資訊">
+      <h2 class="footer-title">聯絡資訊</h2>
+      <div class="footer-contact">
+        <span><b>地址</b>正式地址待核准</span>
+        <span><b>電話</b>正式電話待核准</span>
+        <span><b>Email</b>正式 Email 待核准</span>
+        <span><b>LINE</b>官方帳號待核准</span>
+      </div>
+    </section>
+  </div>
+  <div class="wrap footer-fine">
+    <span>JP PUMP · 概念稿僅供視覺評審，非公開內容</span>
+    <span>Direction A · Midnight Current</span>
+  </div>
+</footer>
+
+<!-- ================= 圖片放大層 ================= -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="產品圖片放大檢視">
+  <div class="lightbox-panel">
+    <button class="lightbox-close" type="button" id="lightbox-close" aria-label="關閉放大檢視">×</button>
+    <img src="../../../imports/jp-cv-series-product.png" alt="SB／SBI／SBN 系列產品照片放大檢視（示意，權利覆核中）">
+    <p class="lightbox-note">浮層只顯示已確認的原圖或衍生圖 · Escape 或 × 關閉</p>
+  </div>
+</div>
+
+<a class="mock-badge" href="../index.html"><b>A-3</b> 系列詳細頁 · 返回概念稿索引</a>
+
+<script src="./shared.js"></script>
+<script>
+(function () {
+  "use strict";
+  /* 圖片放大層：滑鼠／觸控／鍵盤開啟；Esc 或關閉鈕結束；焦點回原觸發器 */
+  var trigger = document.getElementById("image-trigger");
+  var box = document.getElementById("lightbox");
+  var closeBtn = document.getElementById("lightbox-close");
+
+  function open() {
+    box.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+    closeBtn.focus();
+  }
+  function close() {
+    box.classList.remove("is-open");
+    document.body.style.overflow = "";
+    trigger.focus();
+  }
+  trigger.addEventListener("click", open);
+  closeBtn.addEventListener("click", close);
+  box.addEventListener("click", function (e) { if (e.target === box) close(); });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && box.classList.contains("is-open")) close();
+  });
+})();
+</script>
+</body>
+</html>

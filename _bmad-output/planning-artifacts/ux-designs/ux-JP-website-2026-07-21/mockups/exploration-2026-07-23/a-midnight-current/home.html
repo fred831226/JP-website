@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JP PUMP｜首頁 — Direction A「深夜流量」概念稿</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./shared.css">
+<style>
+  /* ================= HERO：單次輪播 ≤5s、極光、水線、浮塵 ================= */
+  .hero { position: relative; isolation: isolate; min-height: 92vh; display: flex; align-items: center; overflow: hidden; background: var(--bg-0); }
+  .hero-media { position: absolute; inset: 0; z-index: -4; }
+  .hero-frame { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+  .hero-frame.f1 { animation: kf-f1 4.8s ease forwards; }
+  .hero-frame.f2 { animation: kf-f2 4.8s ease forwards; }
+  .hero-frame.f3 { animation: kf-f3 4.8s ease forwards; }
+  @keyframes kf-f1 { 0% { opacity: 1; } 26% { opacity: 1; } 36%, 100% { opacity: 0; } }
+  @keyframes kf-f2 { 0%, 26% { opacity: 0; } 36%, 58% { opacity: 1; } 68%, 100% { opacity: 0; } }
+  @keyframes kf-f3 { 0%, 58% { opacity: 0; } 68%, 100% { opacity: 1; } }
+  .hero-veil {
+    position: absolute; inset: 0; z-index: -3;
+    background:
+      linear-gradient(100deg, rgba(5, 11, 16, .97) 8%, rgba(5, 11, 16, .88) 42%, rgba(5, 11, 16, .42) 75%, rgba(5, 11, 16, .68)),
+      linear-gradient(0deg, var(--bg-0) 0%, transparent 22%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; z-index: -2; opacity: .5;
+    background:
+      linear-gradient(rgba(59, 199, 238, .05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59, 199, 238, .05) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 90% 80% at 30% 40%, #000 20%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 90% 80% at 30% 40%, #000 20%, transparent 75%);
+  }
+  .aurora { position: absolute; z-index: -2; border-radius: 50%; filter: blur(90px); opacity: .5; pointer-events: none; }
+  .aurora.a1 { width: 560px; height: 560px; right: -6%; top: -14%; background: radial-gradient(circle, rgba(14, 156, 196, .5), transparent 65%); animation: drift1 14s ease-in-out infinite alternate; }
+  .aurora.a2 { width: 460px; height: 460px; right: 22%; bottom: -30%; background: radial-gradient(circle, rgba(51, 216, 195, .32), transparent 65%); animation: drift2 18s ease-in-out infinite alternate; }
+  @keyframes drift1 { to { transform: translate(-70px, 60px) scale(1.15); } }
+  @keyframes drift2 { to { transform: translate(60px, -50px) scale(1.1); } }
+  .current { position: absolute; left: 0; right: 0; bottom: 0; z-index: -1; height: 200px; pointer-events: none; }
+  .current path { fill: none; stroke-linecap: round; stroke-dasharray: 18 26; animation: flow 3.2s linear infinite; }
+  .current .c2 { animation-duration: 4.6s; opacity: .5; }
+  @keyframes flow { to { stroke-dashoffset: -176; } }
+  .dust i {
+    position: absolute; bottom: -8px; width: 4px; height: 4px; border-radius: 50%;
+    background: rgba(120, 220, 245, .7); filter: blur(.4px); opacity: 0;
+    animation: rise 9s linear infinite;
+  }
+  @keyframes rise {
+    0% { transform: translateY(0); opacity: 0; }
+    12% { opacity: .8; }
+    100% { transform: translateY(-88vh); opacity: 0; }
+  }
+  .media-label {
+    position: absolute; right: 24px; bottom: 20px; z-index: 2;
+    max-width: 350px; padding: 8px 14px; border-radius: 8px;
+    background: rgba(6, 13, 18, .78); border: 1px solid var(--line-soft);
+    backdrop-filter: blur(8px);
+    color: var(--muted); font-size: .72rem; letter-spacing: .04em;
+  }
+
+  .hero-inner { position: relative; width: 100%; max-width: 1240px; margin: 0 auto; padding: 120px 32px 140px; }
+  .hero-panel {
+    width: min(600px, 58%);
+    padding: 40px 44px;
+    border-radius: var(--r-lg);
+    background: linear-gradient(160deg, rgba(14, 29, 40, .82), rgba(8, 18, 24, .66));
+    border: 1px solid var(--line);
+    backdrop-filter: blur(16px) saturate(1.25);
+    -webkit-backdrop-filter: blur(16px) saturate(1.25);
+    box-shadow: var(--shadow-1);
+    position: relative;
+  }
+  .hero-panel::before {
+    content: ""; position: absolute; left: 0; top: 26px; bottom: 26px; width: 3px;
+    border-radius: 3px;
+    background: linear-gradient(180deg, var(--gold), rgba(220, 180, 92, 0));
+  }
+  .kicker { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 16px; font-size: .82rem; font-weight: 700; letter-spacing: .18em; color: var(--gold); }
+  .kicker .live { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); }
+  .kicker .live::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 1px solid var(--cyan); animation: ping 2.2s ease-out infinite; }
+  @keyframes ping { 0% { transform: scale(.5); opacity: 1; } 100% { transform: scale(1.8); opacity: 0; } }
+  .hero h1 {
+    font-size: clamp(2.3rem, 4.6vw, 3.6rem); font-weight: 900; letter-spacing: -.02em; line-height: 1.14;
+  }
+  .hero h1 .shine {
+    background: linear-gradient(100deg, #fff 20%, var(--cyan) 48%, var(--teal) 60%, #fff 85%);
+    background-size: 220% 100%;
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    animation: shine 7s ease-in-out infinite;
+  }
+  @keyframes shine { 0%, 100% { background-position: 0% 0; } 50% { background-position: 100% 0; } }
+  .hero-copy { margin-top: 18px; max-width: 480px; color: #C6D8E0; font-size: 1.04rem; font-weight: 300; }
+  .copy-status { display: inline-block; margin-top: 12px; font-size: .74rem; color: rgba(140, 166, 180, .8); letter-spacing: .03em; }
+  .hero-about { margin-top: 10px; }
+
+  .quick-filter {
+    margin-top: 30px; padding: 22px;
+    border-radius: var(--r-md);
+    background: rgba(6, 13, 18, .72);
+    border: 1px solid var(--line);
+    backdrop-filter: blur(10px);
+  }
+  .quick-filter h2 { font-size: 1rem; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+  .quick-filter h2::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: linear-gradient(135deg, var(--cyan), var(--teal)); transform: rotate(45deg); }
+  .filter-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 14px; align-items: end; }
+  .filter-note { margin-top: 12px; font-size: .76rem; color: rgba(140, 166, 180, .75); }
+
+  /* ================= 動態說明條 ================= */
+  .motion-strip {
+    border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft);
+    background: var(--bg-1);
+  }
+  .motion-strip .wrap { display: flex; gap: 14px; align-items: center; padding-top: 14px; padding-bottom: 14px; font-size: .8rem; color: var(--muted); }
+  .motion-strip b { color: var(--cyan); font-weight: 700; white-space: nowrap; }
+
+  /* ================= 公司摘要：流管背景 ================= */
+  .company { background: var(--bg-1); }
+  .pipe-flow { position: absolute; inset: 0; pointer-events: none; opacity: .55; }
+  .pipe-flow path { fill: none; stroke-linecap: round; stroke-dasharray: 16 24; animation: flow 4s linear infinite; }
+  .company-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.05fr .95fr; gap: 64px; align-items: center; }
+  .company-copy p { margin-top: 18px; color: var(--muted); max-width: 480px; }
+  .fact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .fact {
+    position: relative; padding: 24px 22px 22px;
+    border-radius: var(--r-md); background: var(--glass);
+    border: 1px solid var(--line-soft);
+    transition: transform .35s var(--ease-out), border-color .35s, box-shadow .35s;
+  }
+  .fact::before {
+    content: ""; position: absolute; top: 18px; right: 18px; width: 7px; height: 7px; border-radius: 50%;
+    background: rgba(59, 199, 238, .35); transition: background .3s, box-shadow .3s;
+  }
+  .fact:hover { transform: translateY(-5px); border-color: rgba(59, 199, 238, .4); box-shadow: var(--glow-cyan); }
+  .fact:hover::before { background: var(--cyan); box-shadow: 0 0 12px var(--cyan); }
+  .fact b { display: block; font-size: 1.02rem; font-weight: 700; }
+  .fact span { display: block; margin-top: 8px; font-size: .82rem; color: var(--muted); }
+
+  /* ================= 用途卡 ================= */
+  .purpose { background: radial-gradient(ellipse 60% 45% at 85% 0%, rgba(14, 156, 196, .14), transparent 65%), var(--bg-0); }
+  .purpose-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .purpose-card {
+    position: relative; overflow: hidden; display: flex; flex-direction: column;
+    border-radius: var(--r-lg); background: var(--panel);
+    border: 1px solid var(--line-soft);
+    text-decoration: none; color: inherit;
+    transition: transform .4s var(--ease-out), border-color .4s, box-shadow .4s;
+  }
+  .purpose-card:hover { transform: translateY(-8px); border-color: rgba(59, 199, 238, .45); box-shadow: 0 24px 60px rgba(2, 10, 16, .6), 0 0 0 1px rgba(59, 199, 238, .2), 0 12px 40px rgba(14, 156, 196, .18); }
+  .purpose-media { position: relative; height: 220px; overflow: hidden; }
+  .purpose-visual {
+    position: absolute; inset: 0;
+    transition: transform .6s var(--ease-out);
+  }
+  .purpose-card:hover .purpose-visual { transform: scale(1.06); }
+  /* 待核准圖片的設計化占位：深淵漸層 + 水紋圈 */
+  .pv-1 { background: radial-gradient(circle at 30% 30%, rgba(59, 199, 238, .35), transparent 55%), linear-gradient(150deg, #0E2231, #081520 70%); }
+  .pv-2 { background: radial-gradient(circle at 70% 25%, rgba(51, 216, 195, .3), transparent 55%), linear-gradient(150deg, #10222A, #081318 70%); }
+  .pv-3 { background: radial-gradient(circle at 40% 70%, rgba(59, 199, 238, .28), transparent 55%), linear-gradient(150deg, #0C1E2C, #070F16 70%); }
+  .pv-4 { background: radial-gradient(circle at 65% 60%, rgba(220, 180, 92, .22), transparent 55%), linear-gradient(150deg, #11202B, #080F15 70%); }
+  .pv-5 { background: radial-gradient(circle at 25% 65%, rgba(51, 216, 195, .26), transparent 55%), linear-gradient(150deg, #0F2430, #07131A 70%); }
+  .pv-6 { background: radial-gradient(circle at 55% 35%, rgba(59, 199, 238, .3), transparent 55%), linear-gradient(150deg, #0D2029, #081118 70%); }
+  .purpose-visual::before, .purpose-visual::after {
+    content: ""; position: absolute; border-radius: 50%; border: 1px solid rgba(150, 205, 228, .16);
+  }
+  .purpose-visual::before { width: 190px; height: 190px; right: -50px; bottom: -60px; }
+  .purpose-visual::after { width: 110px; height: 110px; right: 20px; bottom: -20px; border-color: rgba(59, 199, 238, .2); }
+  .purpose-pending {
+    position: absolute; left: 18px; bottom: 14px; z-index: 1;
+    padding: 5px 10px; border-radius: 6px;
+    background: rgba(6, 13, 18, .7); border: 1px solid var(--line-soft);
+    font-size: .68rem; color: var(--muted); letter-spacing: .05em;
+  }
+  .purpose-body { padding: 24px 84px 26px 24px; flex: 1; }
+  .purpose-body h3 { font-size: 1.28rem; font-weight: 800; transition: color .3s; }
+  .purpose-card:hover .purpose-body h3 { color: var(--cyan); }
+  .purpose-body p { margin-top: 10px; font-size: .88rem; color: var(--muted); line-height: 1.75; }
+  .purpose-arrow {
+    position: absolute; right: 20px; bottom: 20px;
+    width: 44px; height: 44px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: rgba(150, 205, 228, .1); border: 1px solid var(--line);
+    color: var(--cyan); font-size: 1.05rem;
+    backdrop-filter: blur(6px);
+    transition: background .35s, transform .35s var(--ease-out), box-shadow .35s, color .35s;
+  }
+  .purpose-card:hover .purpose-arrow { background: linear-gradient(135deg, var(--cyan-deep), var(--teal)); color: #04222E; transform: translate(4px, -4px); box-shadow: 0 8px 22px rgba(14, 156, 196, .45); }
+
+  /* ================= 三入口：擴展互動 ================= */
+  .gateways {
+    background:
+      linear-gradient(rgba(59, 199, 238, .035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59, 199, 238, .035) 1px, transparent 1px),
+      var(--bg-1);
+    background-size: 44px 44px, 44px 44px, auto;
+  }
+  .gateway-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; }
+  .gateway {
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: space-between; gap: 44px;
+    min-height: 300px; padding: 32px 30px;
+    border-radius: var(--r-lg); background: var(--glass);
+    border: 1px solid var(--line-soft);
+    text-decoration: none; color: inherit;
+    transition: background .35s, border-color .35s, transform .35s var(--ease-out);
+  }
+  .gateway::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--cyan), var(--teal));
+    transform: scaleX(0); transform-origin: left; transition: transform .45s var(--ease-out);
+  }
+  .gateway:hover, .gateway:focus-visible { background: rgba(59, 199, 238, .07); border-color: rgba(59, 199, 238, .35); }
+  .gateway:hover::before, .gateway:focus-visible::before { transform: scaleX(1); }
+  .gateway-no {
+    display: block; font-size: 3.4rem; font-weight: 900; line-height: 1;
+    color: transparent; -webkit-text-stroke: 1px rgba(150, 205, 228, .3);
+    transition: .35s;
+  }
+  .gateway:hover .gateway-no { -webkit-text-stroke-color: rgba(59, 199, 238, .75); text-shadow: 0 0 30px rgba(59, 199, 238, .25); }
+  .gateway-no small { display: block; margin-top: 10px; font-size: .78rem; font-weight: 700; letter-spacing: .2em; color: var(--cyan); -webkit-text-stroke: 0; }
+  .gateway h3 { font-size: 1.3rem; font-weight: 800; }
+  .gateway p { margin-top: 10px; font-size: .88rem; color: var(--muted); }
+  .gateway-more { display: inline-flex; align-items: center; gap: 8px; font-size: .9rem; font-weight: 700; color: var(--cyan); }
+  .gateway-more .arrow { transition: transform .3s var(--ease-out); }
+  .gateway:hover .gateway-more .arrow { transform: translateX(6px); }
+  @media (hover: hover) and (pointer: fine) and (min-width: 960px) {
+    .gateway-grid { transition: grid-template-columns .45s var(--ease-out); }
+    .gateway-grid:has(.gateway:nth-child(1):hover), .gateway-grid:has(.gateway:nth-child(1):focus-visible) { grid-template-columns: 1.45fr .775fr .775fr; }
+    .gateway-grid:has(.gateway:nth-child(2):hover), .gateway-grid:has(.gateway:nth-child(2):focus-visible) { grid-template-columns: .775fr 1.45fr .775fr; }
+    .gateway-grid:has(.gateway:nth-child(3):hover), .gateway-grid:has(.gateway:nth-child(3):focus-visible) { grid-template-columns: .775fr .775fr 1.45fr; }
+  }
+
+  /* ================= 精選實績 ================= */
+  .projects { background: linear-gradient(160deg, rgba(14, 156, 196, .06), transparent 40%), var(--bg-0); }
+  .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .project-card {
+    overflow: hidden; border-radius: var(--r-lg);
+    background: var(--panel); border: 1px solid var(--line-soft);
+    text-decoration: none; color: inherit;
+    transition: transform .4s var(--ease-out), border-color .4s, box-shadow .4s;
+  }
+  .project-card:hover { transform: translateY(-7px); border-color: rgba(220, 180, 92, .4); box-shadow: 0 22px 54px rgba(2, 10, 16, .6); }
+  .project-media {
+    position: relative; height: 210px; overflow: hidden;
+    background:
+      repeating-linear-gradient(135deg, rgba(150, 205, 228, .05) 0 12px, transparent 12px 24px),
+      linear-gradient(150deg, #10242F, #081219);
+    display: grid; place-items: center; text-align: center;
+  }
+  .project-media::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(105deg, transparent 42%, rgba(150, 205, 228, .09) 50%, transparent 58%);
+    transform: translateX(-100%);
+    transition: transform .9s var(--ease-out);
+  }
+  .project-card:hover .project-media::after { transform: translateX(100%); }
+  .project-media b { display: block; font-size: .92rem; color: var(--text); font-weight: 700; }
+  .project-media span { display: block; margin-top: 8px; font-size: .72rem; color: var(--muted); max-width: 240px; }
+  .project-body { padding: 22px 24px 26px; }
+  .project-type { font-size: .74rem; font-weight: 700; letter-spacing: .12em; color: var(--gold); }
+  .project-body h3 { margin-top: 10px; font-size: 1.14rem; font-weight: 800; }
+  .project-body p { margin-top: 10px; font-size: .86rem; color: var(--muted); }
+
+  /* ================= 合作夥伴 ================= */
+  .partners { background: radial-gradient(ellipse 50% 60% at 12% 50%, rgba(51, 216, 195, .06), transparent 60%), var(--bg-1); }
+  .partner-rows { display: grid; gap: 16px; }
+  .partner-row {
+    display: flex; align-items: center; gap: 24px;
+    padding: 28px 32px; border-radius: var(--r-md);
+    background: var(--glass); border: 1px solid var(--line-soft);
+    transition: border-color .3s, transform .3s var(--ease-out), box-shadow .3s;
+  }
+  .partner-row:hover { border-color: rgba(59, 199, 238, .35); transform: translateX(8px); box-shadow: var(--shadow-2); }
+  .partner-logo {
+    flex: 0 0 92px; height: 56px; border-radius: 10px;
+    background: rgba(150, 205, 228, .08); border: 1px dashed var(--line);
+    display: grid; place-items: center;
+    color: var(--muted); font-size: .7rem; letter-spacing: .08em;
+  }
+  .partner-row p { color: var(--muted); font-size: .92rem; }
+
+  /* ================= 響應式 ================= */
+  @media (max-width: 1100px) {
+    .purpose-grid, .project-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 960px) {
+    .hero { min-height: auto; }
+    .hero-inner { padding: 150px 24px 110px; }
+    .hero-panel { width: 100%; max-width: 620px; padding: 32px 28px; }
+    .company-grid { grid-template-columns: 1fr; gap: 40px; }
+    .gateway-grid { grid-template-columns: 1fr; }
+    .gateway { min-height: 0; gap: 26px; }
+  }
+  @media (max-width: 719px) {
+    .hero-inner { padding: 130px 20px 90px; }
+    .hero-panel { padding: 26px 22px; }
+    .hero h1 { font-size: 2rem; }
+    .filter-row { grid-template-columns: 1fr; }
+    .filter-row .btn { width: 100%; }
+    .purpose-grid, .project-grid, .fact-grid { grid-template-columns: 1fr; }
+    .media-label { left: 20px; right: 20px; max-width: none; }
+    .motion-strip .wrap { flex-direction: column; align-items: flex-start; gap: 4px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-frame.f1, .hero-frame.f2 { display: none; }
+    .hero-frame.f3 { opacity: 1; animation: none; }
+    .aurora, .current path, .dust i, .kicker .live::after { animation: none !important; }
+    .dust, .current { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= Header ================= -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="./home.html" aria-label="JP PUMP 首頁">
+      <span class="brand-chip"><img src="../../../imports/jp-pump-logo-source.png" alt="JP PUMP"></span>
+    </a>
+    <nav class="desktop-nav" aria-label="主要導覽">
+      <details class="nav-item" data-nav>
+        <summary class="nav-summary">產品總覽 <span class="nav-caret" aria-hidden="true">▾</span></summary>
+        <div class="nav-menu">
+          <a href="./overview.html?purpose=wastewater">污水處理泵 <span class="pending-note">用途捷徑範例</span></a>
+          <a href="./overview.html?purpose=boosting">立式加壓泵 <span class="pending-note">用途捷徑範例</span></a>
+          <a href="./overview.html">正式用途待技術覆核 <span class="pending-note">最多 8 項</span></a>
+          <a class="all-link" href="./overview.html">全部產品 <span class="menu-arrow" aria-hidden="true">→</span></a>
+        </div>
+      </details>
+      <a class="nav-link" href="#">服務與實績</a>
+      <details class="nav-item" data-nav>
+        <summary class="nav-summary">關於傑平 <span class="nav-caret" aria-hidden="true">▾</span></summary>
+        <div class="nav-menu">
+          <a href="#">公司資訊</a>
+          <a href="#">合作夥伴</a>
+        </div>
+      </details>
+      <a class="nav-link" href="#">聯絡我們</a>
+    </nav>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav">選單</button>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="手機主要導覽">
+    <a href="./home.html">首頁</a>
+    <details>
+      <summary>產品總覽 <span aria-hidden="true">▾</span></summary>
+      <div class="mobile-sub">
+        <a href="./overview.html?purpose=wastewater">污水處理泵</a>
+        <a href="./overview.html?purpose=boosting">立式加壓泵</a>
+        <a href="./overview.html">正式用途待技術覆核</a>
+        <a href="./overview.html">全部產品</a>
+      </div>
+    </details>
+    <a href="#">服務與實績</a>
+    <details>
+      <summary>關於傑平 <span aria-hidden="true">▾</span></summary>
+      <div class="mobile-sub">
+        <a href="#">公司資訊</a>
+        <a href="#">合作夥伴</a>
+      </div>
+    </details>
+    <a href="#">聯絡我們</a>
+  </nav>
+</header>
+
+<!-- ================= Hero ================= -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-media" aria-hidden="true">
+    <img class="hero-frame f1" src="../../../imports/company-sign-ai-enhanced.png" alt="">
+    <img class="hero-frame f2" src="../../../imports/field-engineers-reference-01.png" alt="">
+    <img class="hero-frame f3" src="../../../imports/field-engineer-reference-02.png" alt="">
+  </div>
+  <div class="hero-veil" aria-hidden="true"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="aurora a1" aria-hidden="true"></div>
+  <div class="aurora a2" aria-hidden="true"></div>
+  <svg class="current" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M-40,120 C240,60 420,170 720,120 C1020,70 1200,160 1480,100" stroke="rgba(59,199,238,.35)" stroke-width="2.5"/>
+    <path class="c2" d="M-40,150 C260,100 460,190 760,145 C1060,100 1240,180 1480,135" stroke="rgba(51,216,195,.3)" stroke-width="2"/>
+  </svg>
+  <div class="dust" aria-hidden="true">
+    <i style="left:12%;animation-delay:0s"></i><i style="left:24%;animation-delay:2.2s"></i>
+    <i style="left:38%;animation-delay:4.4s"></i><i style="left:55%;animation-delay:1.1s"></i>
+    <i style="left:68%;animation-delay:3.3s"></i><i style="left:82%;animation-delay:5.5s"></i>
+    <i style="left:92%;animation-delay:2.8s"></i>
+  </div>
+  <p class="media-label">首頁氣氛／情境示意參考 · 非建案實績或工程成果證據</p>
+
+  <div class="hero-inner">
+    <div class="hero-panel">
+      <p class="kicker"><span class="live" aria-hidden="true"></span>可靠歷史 · 工程能力 · 快速回應</p>
+      <h1 id="hero-title"><span class="shine">以扎實經驗，<br>守護每一套泵浦系統</span></h1>
+      <p class="hero-copy">從設備選擇到工程服務，以清楚且可核實的資訊協助客戶找到合適方向。</p>
+      <span class="copy-status">方向文案 · 正式上線前須依核准公司事實完成覆核</span><br>
+      <a class="text-link hero-about" href="#company"><span>認識我們</span><span class="arrow" aria-hidden="true">→</span></a>
+
+      <form class="quick-filter" action="./overview.html" method="get" id="quick-filter">
+        <h2>依品牌與用途找到產品系列</h2>
+        <div class="filter-row">
+          <div class="control">
+            <label for="qf-brand">品牌</label>
+            <select id="qf-brand" name="brand">
+              <option value="" selected>全部</option>
+              <option value="jp">JP PUMP</option>
+              <option disabled>合作品牌清單待核准</option>
+            </select>
+          </div>
+          <div class="control">
+            <label for="qf-purpose">用途</label>
+            <select id="qf-purpose" name="purpose">
+              <option value="" selected>全部</option>
+              <option value="wastewater">污水處理</option>
+              <option value="building-water">建築給排水</option>
+              <option value="hvac">空調循環</option>
+              <option value="boosting">加壓供水</option>
+              <option value="industrial">工業製程</option>
+              <option value="replacement">維修與汰換</option>
+            </select>
+          </div>
+          <button class="btn" type="submit">搜尋產品<span aria-hidden="true">→</span></button>
+        </div>
+        <p class="filter-note">品牌與用途皆為單選並預設「全部」；未另選也可直接前往產品總覽，已選條件會保留在網址與畫面。</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 動態說明 ================= -->
+<div class="motion-strip">
+  <div class="wrap">
+    <b>≤ 5 秒／靜態降級</b>
+    <span>照片序列只播放一次、總長不超過 5 秒，最後停在靜態主視覺；偏好減少動態、手機省數據或媒體失敗時直接顯示最後一張，文案、篩選與「認識我們」完全不變。</span>
+  </div>
+</div>
+
+<!-- ================= 公司摘要 ================= -->
+<section class="section company" id="company" aria-labelledby="company-title">
+  <svg class="pipe-flow" viewBox="0 0 1440 560" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M-60,420 C220,340 380,500 640,430 C900,360 1080,480 1500,380" stroke="rgba(59,199,238,.16)" stroke-width="34"/>
+    <path d="M-60,420 C220,340 380,500 640,430 C900,360 1080,480 1500,380" stroke="rgba(120,220,245,.4)" stroke-width="3"/>
+  </svg>
+  <div class="wrap company-grid">
+    <div class="company-copy rv">
+      <p class="eyebrow">About JP PUMP</p>
+      <h2 id="company-title">用可核實的經驗，<br>建立長期工程信任</h2>
+      <p>首頁只提供精簡公司摘要；正式公司名稱、沿革、服務年資與證明資料須經 JP PUMP 核准，完整內容連往公司資訊頁。</p>
+      <a class="text-link" style="margin-top:20px" href="#"><span>認識 JP PUMP</span><span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+    <div class="fact-grid" aria-label="公司信任摘要待核准">
+      <div class="fact rv rv-d1"><b>歷史與背景</b><span>正式年份與沿革待核准</span></div>
+      <div class="fact rv rv-d2"><b>工程能力</b><span>可公開的服務事實待核准</span></div>
+      <div class="fact rv rv-d3"><b>服務範圍</b><span>正式區域與能力待核准</span></div>
+      <div class="fact rv rv-d4"><b>回應方式</b><span>正式聯絡流程待核准</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 用途導向產品區 ================= -->
+<section class="section purpose" aria-labelledby="purpose-title">
+  <div class="wrap">
+    <div class="section-head rv">
+      <p class="eyebrow">Product Uses</p>
+      <h2 id="purpose-title">依產品用途找到合適系列</h2>
+      <p>用途名稱、排序與圖片須依正式受控分類核准。點擊整張卡片前往產品總覽，品牌維持「全部」，並套用該用途條件。</p>
+    </div>
+    <div class="purpose-grid">
+      <a class="purpose-card rv rv-d1" href="./overview.html?purpose=wastewater" aria-label="以全部品牌及污水處理用途前往產品總覽">
+        <div class="purpose-media"><div class="purpose-visual pv-1"></div><span class="purpose-pending">正式用途圖片待核准</span></div>
+        <div class="purpose-body"><h3>污水處理</h3><p>瀏覽用於污水處理情境的已發布產品系列。抵達產品總覽後，可再依品牌與泵浦類型縮小範圍。</p></div>
+        <span class="purpose-arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="purpose-card rv rv-d2" href="./overview.html?purpose=building-water" aria-label="以全部品牌及建築給排水用途前往產品總覽">
+        <div class="purpose-media"><div class="purpose-visual pv-2"></div><span class="purpose-pending">正式用途圖片待核准</span></div>
+        <div class="purpose-body"><h3>建築給排水</h3><p>查看此用途下已發布的產品系列與關鍵資訊。正式用途名稱與對應系列仍須完成技術覆核。</p></div>
+        <span class="purpose-arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="purpose-card rv rv-d3" href="./overview.html?purpose=hvac" aria-label="以全部品牌及空調循環用途前往產品總覽">
+        <div class="purpose-media"><div class="purpose-visual pv-3"></div><span class="purpose-pending">正式用途圖片待核准</span></div>
+        <div class="purpose-body"><h3>空調循環</h3><p>從空調與循環使用情境進入相關產品系列。網站只呈現已核准分類、系列關係與技術資料。</p></div>
+        <span class="purpose-arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="purpose-card rv rv-d4" href="./overview.html?purpose=boosting" aria-label="以全部品牌及加壓供水用途前往產品總覽">
+        <div class="purpose-media"><div class="purpose-visual pv-4"></div><span class="purpose-pending">正式用途圖片待核准</span></div>
+        <div class="purpose-body"><h3>加壓供水</h3><p>依加壓供水情境瀏覽可能相關的已發布系列。實際適用性仍須依設備與現場條件確認。</p></div>
+        <span class="purpose-arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="purpose-card rv rv-d5" href="./overview.html?purpose=industrial" aria-label="以全部品牌及工業製程用途前往產品總覽">
+        <div class="purpose-media"><div class="purpose-visual pv-5"></div><span class="purpose-pending">正式用途圖片待核准</span></div>
+        <div class="purpose-body"><h3>工業製程</h3><p>集中查看工業使用情境下的核准產品資訊。產品總覽會保留用途條件並提供後續篩選。</p></div>
+        <span class="purpose-arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="purpose-card rv rv-d6" href="./overview.html?purpose=replacement" aria-label="以全部品牌及維修汰換用途前往產品總覽">
+        <div class="purpose-media"><div class="purpose-visual pv-6"></div><span class="purpose-pending">正式用途圖片待核准</span></div>
+        <div class="purpose-body"><h3>維修與汰換</h3><p>從既有設備維修或汰換需求尋找相關系列脈絡。若型號資料不足，可由產品頁前往聯絡確認。</p></div>
+        <span class="purpose-arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 三入口 ================= -->
+<section class="section gateways" aria-labelledby="gateway-title">
+  <div class="wrap">
+    <div class="section-head rv">
+      <p class="eyebrow">Products &amp; Services</p>
+      <h2 id="gateway-title">從產品探索到工程支援，選擇下一步</h2>
+      <p>此區負責說明網站的三條主要路徑，不重複 Hero 篩選器。</p>
+    </div>
+    <div class="gateway-grid rv rv-d1">
+      <a class="gateway" href="./overview.html">
+        <div>
+          <span class="gateway-no">01<small>產品探索</small></span>
+          <h3>依品牌與用途瀏覽產品</h3>
+          <p>查看已發布系列、關鍵數據與完整型號規格。</p>
+        </div>
+        <span class="gateway-more">前往產品總覽 <span class="arrow" aria-hidden="true">→</span></span>
+      </a>
+      <a class="gateway" href="#">
+        <div>
+          <span class="gateway-no">02<small>工程服務</small></span>
+          <h3>了解服務與建案實績</h3>
+          <p>從核准服務能力與真實建案證據確認合作方向。</p>
+        </div>
+        <span class="gateway-more">查看服務與實績 <span class="arrow" aria-hidden="true">→</span></span>
+      </a>
+      <a class="gateway" href="#">
+        <div>
+          <span class="gateway-no">03<small>技術聯絡</small></span>
+          <h3>帶著需求直接聯絡</h3>
+          <p>需要選型、維修或現場協助時，使用正式聯絡方式。</p>
+        </div>
+        <span class="gateway-more">聯絡 JP PUMP <span class="arrow" aria-hidden="true">→</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 精選建案 ================= -->
+<section class="section projects" aria-labelledby="projects-title">
+  <div class="wrap">
+    <div class="section-head rv">
+      <p class="eyebrow">Featured Work</p>
+      <h2 id="projects-title">精選建案實績</h2>
+      <a class="text-link more-link" href="#"><span>瀏覽全部服務與實績</span><span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+    <div class="project-grid">
+      <a class="project-card rv rv-d1" href="#">
+        <div class="project-media"><div><b>實績照片待核准</b><span>僅使用來源、權利與真實性已確認的媒體</span></div></div>
+        <div class="project-body"><span class="project-type">空調系統維保 · 類型示意</span><h3>正式建案名稱待核准</h3><p>工作範圍、解決內容與成果只呈現 JP PUMP 已核准事實。</p></div>
+      </a>
+      <a class="project-card rv rv-d2" href="#">
+        <div class="project-media"><div><b>實績照片待核准</b><span>不得以 AI 情境圖替代</span></div></div>
+        <div class="project-body"><span class="project-type">高樓建築 · 類型示意</span><h3>正式建案名稱待核准</h3><p>核准後呈現案型、工作範圍、成果與相關產品。</p></div>
+      </a>
+      <a class="project-card rv rv-d3" href="#">
+        <div class="project-media"><div><b>實績照片待核准</b><span>敏感資訊需先完成檢查</span></div></div>
+        <div class="project-body"><span class="project-type">交通設施 · 類型示意</span><h3>正式建案名稱待核准</h3><p>未通過公開權利或安全檢查的內容不會顯示。</p></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 合作夥伴 ================= -->
+<section class="section partners" aria-labelledby="partners-title">
+  <div class="wrap">
+    <div class="section-head rv">
+      <p class="eyebrow">Partners</p>
+      <h2 id="partners-title">合作品牌與夥伴</h2>
+      <a class="text-link more-link" href="#"><span>查看合作夥伴</span><span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+    <div class="partner-rows">
+      <div class="partner-row rv rv-d1"><span class="partner-logo">LOGO 待核准</span><p>已核准合作品牌 Logo／關係說明待提供；未核准前不顯示品牌名稱與連結。</p></div>
+      <div class="partner-row rv rv-d2"><span class="partner-logo">LOGO 待核准</span><p>每一合作夥伴於核准後以獨立區塊呈現品牌介紹與官方網站入口。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Footer ================= -->
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <section class="footer-brand" aria-label="公司資訊">
+      <a class="brand" href="./home.html" aria-label="JP PUMP 首頁">
+        <span class="brand-chip"><img src="../../../imports/jp-pump-logo-source.png" alt="JP PUMP"></span>
+      </a>
+      <p>提供泵浦選型、供應與相關技術服務；正式公司介紹核准後於此呈現。<br><span style="font-size:.8rem">正式公司名稱待核准</span></p>
+    </section>
+    <nav aria-label="頁尾主導覽">
+      <h2 class="footer-title">主導覽</h2>
+      <div class="footer-links">
+        <a href="./home.html">首頁</a>
+        <a href="./overview.html">產品總覽</a>
+        <a href="#">服務與實績</a>
+        <a href="#">公司資訊</a>
+        <a href="#">合作夥伴</a>
+        <a href="#">聯絡我們</a>
+      </div>
+    </nav>
+    <section aria-label="聯絡資訊">
+      <h2 class="footer-title">聯絡資訊</h2>
+      <div class="footer-contact">
+        <span><b>地址</b>正式地址待核准</span>
+        <span><b>電話</b>正式電話待核准</span>
+        <span><b>Email</b>正式 Email 待核准</span>
+        <span><b>LINE</b>官方帳號待核准</span>
+      </div>
+    </section>
+  </div>
+  <div class="wrap footer-fine">
+    <span>JP PUMP · 概念稿僅供視覺評審，非公開內容</span>
+    <span>Direction A · Midnight Current</span>
+  </div>
+</footer>
+
+<a class="mock-badge" href="../index.html"><b>A-1</b> 首頁 · 返回概念稿索引</a>
+
+<script src="./shared.js"></script>
+<script>
+  /* 快速篩選：未限制的維度不帶入網址（比照 EXPERIENCE.md 正規化規則） */
+  document.getElementById("quick-filter").addEventListener("submit", function (e) {
+    Array.prototype.forEach.call(this.elements, function (el) {
+      if (el.tagName === "SELECT" && el.value === "") el.disabled = true;
+    });
+  });
+</script>
+</body>
+</html>

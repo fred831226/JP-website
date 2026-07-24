@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JP PUMP｜產品總覽 — Direction B「紙上黃銅」概念稿</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./shared.css">
+<style>
+  /* ================= 精簡技術 Hero ================= */
+  .page-hero {
+    position: relative; overflow: hidden;
+    padding: 80px 0 64px;
+    background: var(--paper-2);
+    border-bottom: 1px solid var(--line);
+  }
+  .page-hero::before {
+    content: ""; position: absolute; right: -100px; top: -160px; width: 420px; height: 420px;
+    border-radius: 50%; border: 1px solid rgba(168, 128, 44, .35);
+    box-shadow: 0 0 0 50px rgba(168, 128, 44, .05), 0 0 0 110px rgba(168, 128, 44, .03);
+    pointer-events: none;
+  }
+  .crumb { font-size: .82rem; color: var(--muted); letter-spacing: .06em; }
+  .crumb a { color: var(--teal); text-decoration: none; }
+  .page-hero h1 { margin-top: 18px; font-size: clamp(2.2rem, 4.2vw, 3.1rem); font-weight: 900; }
+  .page-hero h1 em { font-style: normal; color: var(--brass-deep); }
+  .page-hero .lede { margin-top: 16px; max-width: 600px; color: var(--muted); }
+  .page-hero .assure { margin-top: 16px; display: inline-flex; align-items: center; gap: 9px; font-size: .8rem; color: var(--muted); }
+  .page-hero .assure::before { content: ""; width: 6px; height: 6px; background: var(--brass); transform: rotate(45deg); }
+
+  /* ================= 目錄版面 ================= */
+  .catalog { padding: 56px 0 100px; }
+  .catalog-grid { display: grid; grid-template-columns: 292px minmax(0, 1fr); gap: 36px; align-items: start; }
+
+  /* ================= 篩選欄 ================= */
+  .rail {
+    position: sticky; top: 96px;
+    border-radius: var(--r-md);
+    background: var(--card);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-2);
+    overflow: hidden;
+  }
+  .rail-head {
+    padding: 20px 22px 16px;
+    border-bottom: 1px solid var(--line-soft);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .rail-head h2 { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; }
+  .rail-head .sq { width: 9px; height: 9px; background: var(--brass); transform: rotate(45deg); }
+  .rail-group { padding: 20px 22px; border-bottom: 1px solid var(--line-soft); }
+  .rail-group:last-child { border-bottom: 0; }
+  .rail-label { display: block; margin-bottom: 12px; font-size: .76rem; font-weight: 700; letter-spacing: .16em; color: var(--brass-deep); text-transform: uppercase; }
+  .search-wrap { position: relative; }
+  .search-wrap input {
+    width: 100%; min-height: 48px; padding: 0 40px 0 14px;
+    border: 1px solid var(--line); border-radius: 4px;
+    background: var(--paper); color: var(--ink); font-size: .92rem;
+    transition: border-color .25s, box-shadow .25s;
+  }
+  .search-wrap input:focus-visible { outline-offset: 1px; box-shadow: 0 0 0 3px rgba(168, 128, 44, .18); }
+  .search-wrap .icon { position: absolute; right: 13px; top: 50%; transform: translateY(-50%); color: var(--brass); pointer-events: none; }
+
+  .segmented {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4px;
+    padding: 4px; border-radius: 6px;
+    background: var(--paper-2); border: 1px solid var(--line-soft);
+  }
+  .segmented button {
+    min-height: 44px; border: 0; border-radius: 4px;
+    background: transparent; color: var(--muted); font-weight: 700; font-size: .88rem;
+    cursor: pointer; transition: color .25s, background .3s, box-shadow .3s;
+  }
+  .segmented button:hover { color: var(--ink); }
+  .segmented button[aria-pressed="true"] {
+    background: var(--ink); color: var(--paper);
+    box-shadow: 0 6px 16px rgba(28, 36, 46, .25);
+  }
+  .seg-note { margin-top: 10px; font-size: .72rem; color: var(--muted); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    min-height: 40px; padding: 8px 15px;
+    border: 1px solid var(--line); border-radius: 999px;
+    background: var(--card); color: var(--muted);
+    font-size: .85rem; font-weight: 500; cursor: pointer;
+    transition: color .25s, border-color .25s, background .3s, transform .2s var(--ease-out), box-shadow .2s;
+  }
+  .chip:hover { color: var(--ink); border-color: var(--brass); transform: translateY(-2px); box-shadow: var(--shadow-2); }
+  .chip[aria-pressed="true"] {
+    background: rgba(168, 128, 44, .12);
+    border-color: var(--brass); color: var(--brass-deep); font-weight: 700;
+  }
+  .chip[aria-pressed="true"]::before { content: "✓ "; color: var(--teal); }
+
+  .active-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag-removable {
+    display: inline-flex; align-items: center; gap: 8px;
+    min-height: 36px; padding: 6px 8px 6px 13px;
+    border: 1px solid rgba(168, 128, 44, .5); border-radius: 6px;
+    background: rgba(168, 128, 44, .08); color: var(--brass-deep);
+    font-size: .8rem; font-weight: 600; cursor: pointer;
+    transition: background .25s, transform .2s;
+  }
+  .tag-removable:hover { background: rgba(168, 128, 44, .16); transform: translateY(-1px); }
+  .tag-removable .x {
+    display: grid; place-items: center; width: 20px; height: 20px; border-radius: 4px;
+    background: var(--brass); color: #fff; font-size: .8rem;
+  }
+  .tags-empty { font-size: .8rem; color: var(--muted); }
+  .clear-all {
+    margin-top: 12px; padding: 0; border: 0; background: none;
+    color: var(--teal); font-size: .84rem; font-weight: 700; cursor: pointer;
+    text-decoration: underline; text-underline-offset: 4px;
+    min-height: 44px; display: inline-flex; align-items: center;
+  }
+  .clear-all:hover { color: var(--brass-deep); }
+  .clear-all[hidden] { display: none; }
+
+  /* ================= 結果區 ================= */
+  .results-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 28px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+  .results-head h2 { font-size: clamp(1.6rem, 2.8vw, 2.1rem); }
+  .results-meta { margin-top: 8px; font-size: .88rem; color: var(--muted); }
+  .results-meta b { color: var(--brass-deep); font-variant-numeric: tabular-nums; }
+
+  .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .card {
+    position: relative; display: flex; flex-direction: column; overflow: hidden;
+    border-radius: var(--r-md);
+    background: var(--card);
+    border: 1px solid var(--line);
+    text-decoration: none; color: inherit;
+    transition: transform .4s var(--ease-out), box-shadow .4s, border-color .4s;
+  }
+  .card::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; z-index: 2;
+    background: linear-gradient(90deg, var(--brass), var(--teal));
+    transform: scaleX(0); transform-origin: left; transition: transform .5s var(--ease-out);
+  }
+  .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-1); border-color: rgba(168, 128, 44, .5); }
+  .card:hover::before { transform: scaleX(1); }
+  .card:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+  .card-media {
+    position: relative; height: 238px; overflow: hidden;
+    display: grid; place-items: center;
+    background: linear-gradient(160deg, #F4EFE2, #E9E2D0);
+  }
+  .card-media img { max-height: 92%; object-fit: contain; transition: transform .55s var(--ease-out); filter: drop-shadow(0 16px 20px rgba(28, 36, 46, .22)); }
+  .card:hover .card-media img { transform: scale(1.05) translateY(-4px); }
+  .card-media .silhouette {
+    width: 84px; height: 128px; border-radius: 44% 44% 16% 16%;
+    background: linear-gradient(150deg, rgba(168, 128, 44, .3), rgba(168, 128, 44, .1));
+    position: relative; transition: transform .55s var(--ease-out);
+  }
+  .silhouette::after { content: ""; position: absolute; left: 18%; right: 18%; bottom: -16px; height: 22px; border-radius: 4px; background: rgba(168, 128, 44, .18); }
+  .card:hover .silhouette { transform: scale(1.06); }
+  .media-flag {
+    position: absolute; left: 14px; bottom: 12px;
+    padding: 5px 10px; border-radius: 5px;
+    background: rgba(250, 246, 238, .9);
+    color: var(--ink-2); font-size: .68rem; letter-spacing: .05em;
+  }
+  .card-body { display: flex; flex: 1; flex-direction: column; padding: 22px 24px 24px; }
+  .card-tag {
+    align-self: flex-start; padding: 4px 10px; border-radius: 4px;
+    background: rgba(17, 105, 107, .09); color: var(--teal);
+    font-size: .72rem; font-weight: 700; letter-spacing: .08em;
+  }
+  .card h3 { margin-top: 14px; font-size: 1.36rem; font-weight: 700; transition: color .3s; }
+  .card:hover h3 { color: var(--brass-deep); }
+  .card .desc { margin-top: 8px; font-size: .88rem; color: var(--muted); }
+  .card-foot {
+    margin-top: auto; padding-top: 18px;
+    display: flex; align-items: end; justify-content: space-between; gap: 16px;
+  }
+  .spec-lines { display: grid; gap: 4px; font-size: .78rem; color: var(--muted); }
+  .spec-lines b { color: var(--ink); font-weight: 600; margin-right: 6px; }
+  .spec-lines .missing { color: var(--brass-deep); }
+  .more-cue { display: inline-flex; align-items: center; gap: 7px; color: var(--teal); font-size: .88rem; font-weight: 700; white-space: nowrap; }
+  .more-cue .arrow { transition: transform .3s var(--ease-out); }
+  .card:hover .more-cue .arrow { transform: translateX(5px); }
+  .card[hidden] { display: none; }
+
+  /* ================= 空結果 ================= */
+  .empty {
+    margin-top: 8px; padding: 60px 40px; text-align: center;
+    border-radius: var(--r-md);
+    background: var(--card); border: 1px dashed var(--brass);
+  }
+  .empty[hidden] { display: none; }
+  .empty .ring {
+    width: 74px; height: 74px; margin: 0 auto 22px; border-radius: 50%;
+    border: 1px solid var(--brass); display: grid; place-items: center;
+    color: var(--brass-deep); font-size: 1.6rem;
+  }
+  .empty h2 { font-size: 1.35rem; }
+  .empty p { margin: 12px auto 28px; max-width: 420px; color: var(--muted); font-size: .9rem; }
+  .empty .actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  @media (max-width: 1080px) { .catalog-grid { grid-template-columns: 250px minmax(0, 1fr); } .cards { grid-template-columns: 1fr; } }
+  @media (max-width: 860px) {
+    .catalog-grid { grid-template-columns: 1fr; }
+    .rail { position: static; }
+    .page-hero { padding: 60px 0 52px; }
+  }
+  @media (max-width: 719px) {
+    .catalog { padding: 40px 0 72px; }
+    .card-media { height: 208px; }
+    .results-head { display: block; }
+    .empty { padding: 44px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="./home.html" aria-label="JP PUMP 首頁">
+      <img src="../../../imports/jp-pump-logo-source.png" alt="JP PUMP">
+    </a>
+    <nav class="desktop-nav" aria-label="主要導覽">
+      <details class="nav-item" data-nav>
+        <summary class="nav-summary is-active" style="color:var(--brass-deep)">產品總覽 <span class="nav-caret" aria-hidden="true">▾</span></summary>
+        <div class="nav-menu">
+          <a href="./overview.html?purpose=wastewater">污水處理泵 <span class="pending-note">用途捷徑範例</span></a>
+          <a href="./overview.html?purpose=boosting">立式加壓泵 <span class="pending-note">用途捷徑範例</span></a>
+          <a href="./overview.html">正式用途待技術覆核 <span class="pending-note">最多 8 項</span></a>
+          <a class="all-link" href="./overview.html">全部產品 <span class="menu-arrow" aria-hidden="true">→</span></a>
+        </div>
+      </details>
+      <a class="nav-link" href="#">服務與實績</a>
+      <details class="nav-item" data-nav>
+        <summary class="nav-summary">關於傑平 <span class="nav-caret" aria-hidden="true">▾</span></summary>
+        <div class="nav-menu">
+          <a href="#">公司資訊</a>
+          <a href="#">合作夥伴</a>
+        </div>
+      </details>
+      <a class="nav-link" href="#">聯絡我們</a>
+    </nav>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav">選單</button>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="手機主要導覽">
+    <a href="./home.html">首頁</a>
+    <details open>
+      <summary>產品總覽 <span aria-hidden="true">▾</span></summary>
+      <div class="mobile-sub">
+        <a href="./overview.html?purpose=wastewater">污水處理泵</a>
+        <a href="./overview.html?purpose=boosting">立式加壓泵</a>
+        <a href="./overview.html">正式用途待技術覆核</a>
+        <a href="./overview.html">全部產品</a>
+      </div>
+    </details>
+    <a href="#">服務與實績</a>
+    <details>
+      <summary>關於傑平 <span aria-hidden="true">▾</span></summary>
+      <div class="mobile-sub">
+        <a href="#">公司資訊</a>
+        <a href="#">合作夥伴</a>
+      </div>
+    </details>
+    <a href="#">聯絡我們</a>
+  </nav>
+</header>
+
+<!-- ================= 精簡 Hero ================= -->
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="wrap">
+    <p class="crumb"><a href="./home.html">首頁</a> ／ 產品總覽</p>
+    <h1 id="page-title">產品<em>總覽</em></h1>
+    <p class="lede">依品牌、泵浦類型與用途探索已發布的產品系列，查看經覆核的關鍵資料與型號規格。</p>
+    <span class="assure">網站協助建立產品脈絡；實際選型與適用性仍請聯絡 JP PUMP 確認。</span>
+  </div>
+</section>
+
+<!-- ================= 目錄 ================= -->
+<section class="catalog">
+  <div class="wrap catalog-grid">
+
+    <!-- 篩選欄 -->
+    <aside class="rail rv" aria-label="產品篩選側欄">
+      <div class="rail-head"><h2>篩選與搜尋</h2><span class="sq" aria-hidden="true"></span></div>
+
+      <div class="rail-group">
+        <label class="rail-label" for="catalog-search">系列或型號搜尋</label>
+        <div class="search-wrap">
+          <input id="catalog-search" type="search" placeholder="輸入系列或型號" autocomplete="off">
+          <span class="icon" aria-hidden="true">⌕</span>
+        </div>
+      </div>
+
+      <div class="rail-group">
+        <span class="rail-label" id="brand-label">品牌 · 單選</span>
+        <div class="segmented" role="group" aria-labelledby="brand-label">
+          <button type="button" data-brand="" aria-pressed="true">全部</button>
+          <button type="button" data-brand="jp" aria-pressed="false">JP PUMP</button>
+        </div>
+        <p class="seg-note">合作品牌清單待核准後加入分段選項。</p>
+      </div>
+
+      <div class="rail-group">
+        <span class="rail-label" id="type-label">泵浦類型 · 複選（OR）</span>
+        <div class="chips" role="group" aria-labelledby="type-label">
+          <button type="button" class="chip" data-group="types" data-value="submersible" aria-pressed="false">潛水排污泵</button>
+          <button type="button" class="chip" data-group="types" data-value="vertical" aria-pressed="false">立式多級泵</button>
+          <button type="button" class="chip" data-group="types" data-value="endsuction" aria-pressed="false">端吸離心泵</button>
+          <button type="button" class="chip" data-group="types" data-value="booster" aria-pressed="false">加壓泵組</button>
+        </div>
+        <p class="seg-note">示意選項 · 正式受控分類待技術覆核。</p>
+      </div>
+
+      <div class="rail-group">
+        <span class="rail-label" id="purpose-label">用途 · 複選（AND）</span>
+        <div class="chips" role="group" aria-labelledby="purpose-label">
+          <button type="button" class="chip" data-group="purposes" data-value="wastewater" aria-pressed="false">污水處理</button>
+          <button type="button" class="chip" data-group="purposes" data-value="building-water" aria-pressed="false">建築給排水</button>
+          <button type="button" class="chip" data-group="purposes" data-value="hvac" aria-pressed="false">空調循環</button>
+          <button type="button" class="chip" data-group="purposes" data-value="boosting" aria-pressed="false">加壓供水</button>
+          <button type="button" class="chip" data-group="purposes" data-value="industrial" aria-pressed="false">工業製程</button>
+          <button type="button" class="chip" data-group="purposes" data-value="replacement" aria-pressed="false">維修與汰換</button>
+        </div>
+      </div>
+
+      <div class="rail-group">
+        <span class="rail-label">套用中條件</span>
+        <div class="active-tags" id="active-tags" aria-live="polite"></div>
+        <button class="clear-all" id="clear-all" type="button" hidden>重設全部條件</button>
+      </div>
+    </aside>
+
+    <!-- 結果區 -->
+    <section aria-labelledby="result-title">
+      <div class="results-head rv">
+        <div>
+          <h2 id="result-title">全部產品系列</h2>
+          <p class="results-meta" id="result-count" aria-live="polite">結果：共 <b>4</b> 個產品系列</p>
+        </div>
+      </div>
+
+      <div class="cards" id="cards">
+        <a class="card rv rv-d1" href="./series.html" data-brand="jp" data-types="submersible" data-purposes="wastewater" data-name="SB 系列" aria-label="看更多：SB 系列，規格資料待覆核">
+          <div class="card-media">
+            <img src="../../../imports/jp-cv-series-product.png" alt="SB 系列產品照片（示意，權利覆核中）" loading="lazy">
+            <span class="media-flag">示意圖 · 權利覆核中</span>
+          </div>
+          <div class="card-body">
+            <span class="card-tag">用途待正式映射</span>
+            <h3>SB 系列</h3>
+            <p class="desc">系列介紹將使用 JP PUMP 核准內容；此處不以參考品牌文案代填。</p>
+            <div class="card-foot">
+              <div class="spec-lines">
+                <span><b>揚程範圍（m）</b><span class="missing">未提供</span></span>
+                <span><b>揚水量範圍（L/min）</b><span class="missing">未提供</span></span>
+              </div>
+              <span class="more-cue">看更多 <span class="arrow" aria-hidden="true">→</span></span>
+            </div>
+          </div>
+        </a>
+
+        <a class="card rv rv-d2" href="./series.html" data-brand="jp" data-types="submersible" data-purposes="wastewater building-water" data-name="SBI 系列" aria-label="看更多：SBI 系列，規格資料待覆核">
+          <div class="card-media">
+            <div class="silhouette" aria-hidden="true"></div>
+            <span class="media-flag">正式產品圖片待權利覆核</span>
+          </div>
+          <div class="card-body">
+            <span class="card-tag">用途待正式映射</span>
+            <h3>SBI 系列</h3>
+            <p class="desc">整張卡片是唯一入口；鍵盤、觸控與滑鼠前往同一系列頁。</p>
+            <div class="card-foot">
+              <div class="spec-lines">
+                <span><b>揚程範圍（m）</b><span class="missing">未提供</span></span>
+                <span><b>揚水量範圍（L/min）</b><span class="missing">未提供</span></span>
+              </div>
+              <span class="more-cue">看更多 <span class="arrow" aria-hidden="true">→</span></span>
+            </div>
+          </div>
+        </a>
+
+        <a class="card rv rv-d3" href="./series.html" data-brand="jp" data-types="submersible endsuction" data-purposes="wastewater industrial" data-name="SBN 系列" aria-label="看更多：SBN 系列，規格資料待覆核">
+          <div class="card-media">
+            <div class="silhouette" aria-hidden="true"></div>
+            <span class="media-flag">正式產品圖片待權利覆核</span>
+          </div>
+          <div class="card-body">
+            <span class="card-tag">用途待正式映射</span>
+            <h3>SBN 系列</h3>
+            <p class="desc">產品名稱、介紹與技術數值須完成覆核後才可公開。</p>
+            <div class="card-foot">
+              <div class="spec-lines">
+                <span><b>揚程範圍（m）</b><span class="missing">未提供</span></span>
+                <span><b>揚水量範圍（L/min）</b><span class="missing">未提供</span></span>
+              </div>
+              <span class="more-cue">看更多 <span class="arrow" aria-hidden="true">→</span></span>
+            </div>
+          </div>
+        </a>
+
+        <a class="card rv rv-d4" href="./series.html" data-brand="jp" data-types="vertical booster" data-purposes="boosting building-water hvac" data-name="VBSG 系列" aria-label="看更多：VBSG 系列，跨類型系列，規格資料待覆核">
+          <div class="card-media">
+            <img src="../../../imports/jp-cv-series-product.png" alt="VBSG 系列產品照片（示意，跨類型關聯待資料覆核）" loading="lazy">
+            <span class="media-flag">示意圖 · 跨類型關聯待覆核</span>
+          </div>
+          <div class="card-body">
+            <span class="card-tag">跨類型系列</span>
+            <h3>VBSG 系列</h3>
+            <p class="desc">同一系列只建立一個正式頁面，不因泵浦類型複製內容。</p>
+            <div class="card-foot">
+              <div class="spec-lines">
+                <span><b>揚程範圍（m）</b><span class="missing">未提供</span></span>
+                <span><b>揚水量範圍（L/min）</b><span class="missing">未提供</span></span>
+              </div>
+              <span class="more-cue">看更多 <span class="arrow" aria-hidden="true">→</span></span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- 空結果狀態 -->
+      <div class="empty" id="empty" hidden>
+        <div class="ring" aria-hidden="true">⌕</div>
+        <h2>沒有符合目前條件的產品。</h2>
+        <p>可調整左側分類與篩選、個別移除條件、重設全部條件，或直接聯絡 JP PUMP 確認需求。</p>
+        <div class="actions">
+          <button class="btn" type="button" id="empty-reset"><span>重設全部條件</span></button>
+          <a class="btn-ghost" href="#">前往聯絡頁</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+
+<!-- ================= Footer ================= -->
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <section class="footer-brand" aria-label="公司資訊">
+      <a class="brand" href="./home.html" aria-label="JP PUMP 首頁">
+        <img src="../../../imports/jp-pump-logo-source.png" alt="JP PUMP">
+      </a>
+      <p>提供泵浦選型、供應與相關技術服務；正式公司介紹核准後於此呈現。<br><span style="font-size:.8rem">正式公司名稱待核准</span></p>
+    </section>
+    <nav aria-label="頁尾主導覽">
+      <h2 class="footer-title">主導覽</h2>
+      <div class="footer-links">
+        <a href="./home.html">首頁</a>
+        <a href="./overview.html">產品總覽</a>
+        <a href="#">服務與實績</a>
+        <a href="#">公司資訊</a>
+        <a href="#">合作夥伴</a>
+        <a href="#">聯絡我們</a>
+      </div>
+    </nav>
+    <section aria-label="聯絡資訊">
+      <h2 class="footer-title">聯絡資訊</h2>
+      <div class="footer-contact">
+        <span><b>地址</b>正式地址待核准</span>
+        <span><b>電話</b>正式電話待核准</span>
+        <span><b>Email</b>正式 Email 待核准</span>
+        <span><b>LINE</b>官方帳號待核准</span>
+      </div>
+    </section>
+  </div>
+  <div class="wrap footer-fine">
+    <span>JP PUMP · 概念稿僅供視覺評審，非公開內容</span>
+    <span>Direction B · Paper &amp; Brass</span>
+  </div>
+</footer>
+
+<a class="mock-badge" href="../index.html"><b>B-2</b> 產品總覽 · 返回概念稿索引</a>
+
+<script src="./shared.js"></script>
+<script>
+(function () {
+  "use strict";
+  /* 篩選演示：品牌單選互斥、類型 OR、用途 AND、跨維度 AND、搜尋 AND；
+     即時篩選、可移除條件標籤、重設、網址可還原（replaceState）。 */
+  var LABELS = {
+    brand: { "": "全部", jp: "JP PUMP" },
+    types: { submersible: "潛水排污泵", vertical: "立式多級泵", endsuction: "端吸離心泵", booster: "加壓泵組" },
+    purposes: { wastewater: "污水處理", "building-water": "建築給排水", hvac: "空調循環", boosting: "加壓供水", industrial: "工業製程", replacement: "維修與汰換" }
+  };
+  var state = { brand: "", types: [], purposes: [], q: "" };
+
+  var cards = Array.prototype.slice.call(document.querySelectorAll("#cards .card"));
+  var tagBox = document.getElementById("active-tags");
+  var clearBtn = document.getElementById("clear-all");
+  var countEl = document.getElementById("result-count");
+  var emptyEl = document.getElementById("empty");
+  var searchEl = document.getElementById("catalog-search");
+
+  (function initFromURL() {
+    var p = new URLSearchParams(location.search);
+    var b = p.get("brand");
+    if (b && LABELS.brand[b] && b.indexOf(",") === -1) state.brand = b;
+    (p.get("type") || "").split(",").forEach(function (v) { if (LABELS.types[v] && state.types.indexOf(v) === -1) state.types.push(v); });
+    (p.get("purpose") || "").split(",").forEach(function (v) { if (LABELS.purposes[v] && state.purposes.indexOf(v) === -1) state.purposes.push(v); });
+    state.q = (p.get("q") || "").trim();
+    searchEl.value = state.q;
+  })();
+
+  function syncControls() {
+    document.querySelectorAll(".segmented button").forEach(function (btn) {
+      btn.setAttribute("aria-pressed", btn.dataset.brand === state.brand ? "true" : "false");
+    });
+    document.querySelectorAll(".chip").forEach(function (chip) {
+      var on = state[chip.dataset.group].indexOf(chip.dataset.value) !== -1;
+      chip.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+  }
+
+  function syncURL() {
+    var p = new URLSearchParams();
+    if (state.brand) p.set("brand", state.brand);
+    if (state.types.length) p.set("type", state.types.join(","));
+    if (state.purposes.length) p.set("purpose", state.purposes.join(","));
+    if (state.q) p.set("q", state.q);
+    var qs = p.toString();
+    history.replaceState(null, "", location.pathname + (qs ? "?" + qs : ""));
+  }
+
+  function renderTags() {
+    tagBox.innerHTML = "";
+    var tags = [];
+    if (state.brand) tags.push({ group: "brand", value: state.brand, label: "品牌：" + LABELS.brand[state.brand] });
+    state.types.forEach(function (v) { tags.push({ group: "types", value: v, label: LABELS.types[v] }); });
+    state.purposes.forEach(function (v) { tags.push({ group: "purposes", value: v, label: LABELS.purposes[v] }); });
+    if (state.q) tags.push({ group: "q", value: state.q, label: "搜尋：「" + state.q + "」" });
+
+    if (!tags.length) {
+      tagBox.innerHTML = '<span class="tags-empty">尚未套用條件 — 顯示全部已發布系列。</span>';
+    } else {
+      tags.forEach(function (t) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "tag-removable";
+        b.setAttribute("aria-label", "移除條件：" + t.label);
+        b.innerHTML = "<span></span><span class='x' aria-hidden='true'>×</span>";
+        b.firstChild.textContent = t.label;
+        b.addEventListener("click", function () {
+          if (t.group === "brand") state.brand = "";
+          else if (t.group === "q") { state.q = ""; searchEl.value = ""; }
+          else state[t.group] = state[t.group].filter(function (v) { return v !== t.value; });
+          apply();
+        });
+        tagBox.appendChild(b);
+      });
+    }
+    clearBtn.hidden = tags.length === 0;
+  }
+
+  function apply() {
+    var q = state.q.toLowerCase();
+    var shown = 0;
+    cards.forEach(function (card) {
+      var okBrand = !state.brand || card.dataset.brand === state.brand;
+      var cardTypes = card.dataset.types.split(" ");
+      var okType = !state.types.length || state.types.some(function (t) { return cardTypes.indexOf(t) !== -1; });
+      var cardPurposes = card.dataset.purposes.split(" ");
+      var okPurpose = state.purposes.every(function (p) { return cardPurposes.indexOf(p) !== -1; });
+      var okQ = !q || card.dataset.name.toLowerCase().indexOf(q) !== -1;
+      var show = okBrand && okType && okPurpose && okQ;
+      card.hidden = !show;
+      if (show) shown++;
+    });
+    countEl.innerHTML = "結果：共 <b>" + shown + "</b> 個產品系列";
+    emptyEl.hidden = shown !== 0;
+    document.getElementById("cards").hidden = shown === 0;
+    syncControls(); renderTags(); syncURL();
+  }
+
+  document.querySelectorAll(".segmented button").forEach(function (btn) {
+    btn.addEventListener("click", function () { state.brand = btn.dataset.brand; apply(); });
+  });
+  document.querySelectorAll(".chip").forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      var list = state[chip.dataset.group];
+      var i = list.indexOf(chip.dataset.value);
+      if (i === -1) list.push(chip.dataset.value); else list.splice(i, 1);
+      apply();
+    });
+  });
+  searchEl.addEventListener("input", function () { state.q = this.value.trim(); apply(); });
+  function resetAll() {
+    state.brand = ""; state.types = []; state.purposes = []; state.q = "";
+    searchEl.value = ""; apply();
+  }
+  clearBtn.addEventListener("click", resetAll);
+  document.getElementById("empty-reset").addEventListener("click", resetAll);
+
+  apply();
+})();
+</script>
+</body>
+</html>

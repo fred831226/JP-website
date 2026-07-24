@@ -1,0 +1,40 @@
+{
+  "companyName": "傑平有限公司",
+  "brandName": "JP PUMP",
+  "nav": {
+    "products": {
+      "label": "產品總覽",
+      "href": "/zh-tw/products",
+      "purposes": [
+        { "id": "water-supply", "label": "給水", "href": "/zh-tw/purposes/water-supply" },
+        { "id": "drainage", "label": "排水", "href": "/zh-tw/purposes/drainage" },
+        { "id": "circulation", "label": "循環", "href": "/zh-tw/purposes/circulation" },
+        { "id": "pressure-boosting", "label": "加壓", "href": "/zh-tw/purposes/pressure-boosting" },
+        { "id": "sewage", "label": "污水", "href": "/zh-tw/purposes/sewage" },
+        { "id": "industrial", "label": "工業用", "href": "/zh-tw/purposes/industrial" },
+        { "id": "fire-fighting", "label": "消防", "href": "/zh-tw/purposes/fire-fighting" },
+        { "id": "agricultural", "label": "農業用", "href": "/zh-tw/purposes/agricultural" }
+      ]
+    },
+    "services": {
+      "label": "服務與實績",
+      "href": "/zh-tw/services"
+    },
+    "about": {
+      "label": "關於傑平",
+      "children": [
+        { "id": "company", "label": "公司資訊", "href": "/zh-tw/company" },
+        { "id": "partners", "label": "合作夥伴", "href": "/zh-tw/partners" }
+      ]
+    },
+    "contact": {
+      "label": "聯絡我們",
+      "href": "/zh-tw/contact"
+    }
+  },
+  "contactInfo": {
+    "phone": "+886-2-1234-5678",
+    "email": "info@jp-pump.com.tw",
+    "address": "台北市中山區..."
+  }
+}

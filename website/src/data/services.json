@@ -1,0 +1,15 @@
+{
+  "hero": {
+    "title": "服務與實績",
+    "capabilities": [
+      { "id": "estimating", "label": "估價" },
+      { "id": "selection", "label": "選型" },
+      { "id": "supply", "label": "供應" },
+      { "id": "installation", "label": "安裝" },
+      { "id": "maintenance", "label": "維修" },
+      { "id": "consulting", "label": "顧問" }
+    ],
+    "summary": "從估價、選型、供應到安裝維修與顧問服務，傑平有限公司提供完整的泵浦技術支援。"
+  },
+  "projects": []
+}

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JP PUMP｜視覺方向概念稿索引 — 2026-07-23</title>
+<style>
+  :root {
+    --ink: #10161C; --muted: #8A97A1; --line: rgba(255,255,255,.1);
+    --cyan: #3BC7EE; --brass: #C9A24B;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ink); color: #EAF1F5;
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height: 1.7; min-height: 100vh;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 72px 28px 56px; }
+  header { text-align: center; margin-bottom: 56px; }
+  .eyebrow { font-size: .78rem; letter-spacing: .28em; color: var(--muted); text-transform: uppercase; }
+  h1 { margin: 14px 0 12px; font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight: 800; }
+  header p { color: var(--muted); max-width: 640px; margin: 0 auto; font-size: .94rem; }
+  .note {
+    margin: 22px auto 0; max-width: 680px; padding: 14px 18px;
+    border: 1px dashed var(--line); border-radius: 10px;
+    color: var(--muted); font-size: .8rem;
+  }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  .direction {
+    border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
+    background: rgba(255,255,255,.03);
+  }
+  .direction .banner { padding: 30px 30px 24px; border-bottom: 1px solid var(--line); }
+  .direction .tag { font-size: .72rem; letter-spacing: .2em; font-weight: 800; }
+  .direction h2 { margin: 10px 0 8px; font-size: 1.5rem; font-weight: 800; }
+  .direction .desc { color: var(--muted); font-size: .87rem; }
+  .direction ul { list-style: none; margin: 0; padding: 12px 18px 20px; }
+  .direction li + li { margin-top: 8px; }
+  .direction a {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 15px 18px; border-radius: 10px; border: 1px solid transparent;
+    color: #EAF1F5;
+    text-decoration: none; font-weight: 700; font-size: .95rem;
+    transition: border-color .25s, background .25s, transform .25s;
+  }
+  .direction a:hover { background: rgba(255,255,255,.05); transform: translateX(4px); }
+  .direction a small { font-weight: 400; color: var(--muted); font-size: .76rem; }
+  .dir-a .tag, .dir-a a:hover .arrow { color: var(--cyan); }
+  .dir-a a:hover { border-color: rgba(59, 199, 238, .4); }
+  .dir-b .tag, .dir-b a:hover .arrow { color: var(--brass); }
+  .dir-b a:hover { border-color: rgba(201, 162, 75, .45); }
+  .swatches { display: flex; gap: 8px; margin-top: 16px; }
+  .swatches i { width: 26px; height: 26px; border-radius: 8px; border: 1px solid rgba(255,255,255,.15); }
+  footer { margin-top: 44px; text-align: center; color: rgba(138,151,161,.7); font-size: .78rem; }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } .wrap { padding: 48px 20px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">JP PUMP · Design Exploration · 2026-07-23</span>
+    <h1>視覺方向概念稿索引</h1>
+    <p>兩種設計方向 × 三個核心頁面（首頁、產品總覽、系列詳細頁）。每頁該有的功能、篩選邏輯與資訊架構完全比照已核准 UX spines，僅視覺語言不同。</p>
+    <p class="note">快速體驗：首頁 Hero 快速篩選會帶條件跳轉至產品總覽；產品總覽的搜尋、品牌分段、類型／用途 chips、條件標籤與空結果狀態皆可實際操作；系列頁點擊產品大圖可開啟放大層（Esc 關閉）。</p>
+  </header>
+
+  <div class="grid">
+    <section class="direction dir-a">
+      <div class="banner">
+        <span class="tag">DIRECTION A</span>
+        <h2>深夜流量 Midnight Current</h2>
+        <p class="desc">深淵墨藍 × 青藍水光 × 一線金。玻璃擬態面板、極光漸層、流動水線、輝光 hover——沉浸式現代工程感。</p>
+        <div class="swatches" aria-hidden="true">
+          <i style="background:#050B10"></i><i style="background:#0E1D28"></i><i style="background:#3BC7EE"></i><i style="background:#33D8C3"></i><i style="background:#DCB45C"></i>
+        </div>
+      </div>
+      <ul>
+        <li><a href="./a-midnight-current/home.html">A-1 · 首頁 <small>輪播 Hero · 水線流光 · 用途卡 · 三入口</small><span class="arrow">→</span></a></li>
+        <li><a href="./a-midnight-current/overview.html">A-2 · 產品總覽 <small>可操作篩選 · 深色產品卡</small><span class="arrow">→</span></a></li>
+        <li><a href="./a-midnight-current/series.html">A-3 · 系列詳細頁 <small>攝影棚大圖 · 輝光數據 · 規格表</small><span class="arrow">→</span></a></li>
+      </ul>
+    </section>
+
+    <section class="direction dir-b">
+      <div class="banner">
+        <span class="tag">DIRECTION B</span>
+        <h2>紙上黃銅 Paper &amp; Brass</h2>
+        <p class="desc">暖紙 × 墨黑 × 黃銅 × 深青。襯線大標、髮絲線、紙紋顆粒、編輯式編排——典藏工程誌的沉穩氣質。</p>
+        <div class="swatches" aria-hidden="true">
+          <i style="background:#FAF6EE"></i><i style="background:#1C242E"></i><i style="background:#A8802C"></i><i style="background:#11696B"></i><i style="background:#F3ECDD"></i>
+        </div>
+      </div>
+      <ul>
+        <li><a href="./b-paper-brass/home.html">B-1 · 首頁 <small>編輯式 Hero · 旋轉徽章 · 跑馬燈</small><span class="arrow">→</span></a></li>
+        <li><a href="./b-paper-brass/overview.html">B-2 · 產品總覽 <small>可操作篩選 · 紙感產品卡</small><span class="arrow">→</span></a></li>
+        <li><a href="./b-paper-brass/series.html">B-3 · 系列詳細頁 <small>黃銅角線 · 襯線數據 · 墨表頭</small><span class="arrow">→</span></a></li>
+      </ul>
+    </section>
+  </div>
+
+  <footer>概念稿僅供視覺評審 · 文案與「待核准」標示比照核准 mockup 的內容完整性規則 · 非公開內容</footer>
+</div>
+</body>
+</html>
