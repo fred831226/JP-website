@@ -25,19 +25,22 @@ Treat planning artifacts as read-only during implementation or validation unless
 
 ## Repository boundaries
 
-- The repository root is the sole Git repository.
-- `website/` is the deployable application and the intended Vercel Root Directory.
+- The repository root is the sole Git repository and the deployable Next.js application (Vercel Root Directory = `.` / repository root).
 - `_bmad-output/planning-artifacts/` contains product, architecture, UX, and delivery contracts.
+- `docs/` holds project-knowledge summaries (current-state architecture review, folder-structure notes, operations entrypoints). It does not override finalized planning artifacts.
+- Governed page/taxonomy copy lives in `content/`; catalog technical files and Excel intake live in `data/`; feature UI lives under `src/features/`.
 - Do not create a nested Git repository or commit generated build output, credentials, local environment files, or private source media.
 - Preserve unrelated working-tree changes. Never discard or rewrite another agent's work without explicit approval.
 
+### Architecture conflict note (2026-07-24)
+
+Architecture Spine **AD-12** and related PRD/Epic text still say the clean app lives under `/website` with Vercel Root Directory `website`. The project owner has overridden that physical layout: the app is at repository root. See `docs/folder-structure-review.md`. Do not reintroduce a `website/` application wrapper unless planning artifacts are formally reconciled.
+
 ## Current transition state
 
-`website/` is still a Vinext/Vite/Cloudflare/Drizzle starter with an approved visual prototype. It is legacy transition code, not the target architecture.
+The repository root is a clean Next.js App Router application (post Epic 1 scaffold replacement; formerly under `website/`). Do not reintroduce Vinext, Vite, Cloudflare/Wrangler, Drizzle, a database, or starter authentication features.
 
-Epic 1, Story 1 replaces that runtime with a clean official Next.js App Router application in the same `website/` directory. Preserve approved visual and interaction behavior as reference, but do not extend or reintroduce Vinext, Vite, Cloudflare/Wrangler, Drizzle, a database, or starter authentication features.
-
-Until that migration is completed, distinguish planned architecture gaps from new regressions in every review.
+Remaining gaps versus Architecture Spine are tracked in `docs/architecture-current-state.md` and `docs/folder-structure-review.md`. Distinguish those documented gaps from new regressions in every review.
 
 ## Locked V1 boundaries
 
@@ -69,13 +72,13 @@ Do not claim a check passed when it was skipped, unavailable, or failed. Do not 
 
 Run from the repository root:
 
-```powershell
-npm --prefix website run lint
-npm --prefix website run build
-npm --prefix website test
+```bash
+npm run lint
+npm run build
+npm test
 ```
 
-The current `test` script builds and then checks rendered HTML from the old starter. Its two skeleton assertions are stale after the approved prototype replacement and are known to fail. This is baseline debt, not permission to ignore new failures. Replace or update these tests as part of the clean scaffold migration, then update this section to the final package-manager and verification commands.
+Also useful: `npm run validate`, `npm run import-catalog`, `npm run check`.
 
 ## Validation and review mode
 
