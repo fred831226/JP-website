@@ -1,2 +1,17 @@
 @import "tailwindcss";
 @import "../styles/tokens.css" layer(base);
+
+@media (width >= 720px) {
+  .gateway-grid:has(.gateway:nth-child(1):hover),
+  .gateway-grid:has(.gateway:nth-child(1):focus-visible) {
+    grid-template-columns: 1.42fr 0.79fr 0.79fr;
+  }
+  .gateway-grid:has(.gateway:nth-child(2):hover),
+  .gateway-grid:has(.gateway:nth-child(2):focus-visible) {
+    grid-template-columns: 0.79fr 1.42fr 0.79fr;
+  }
+  .gateway-grid:has(.gateway:nth-child(3):hover),
+  .gateway-grid:has(.gateway:nth-child(3):focus-visible) {
+    grid-template-columns: 0.79fr 0.79fr 1.42fr;
+  }
+}

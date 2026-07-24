@@ -49,7 +49,10 @@ export default function HeroCarousel({ images, fallbackImage }: HeroCarouselProp
       ) : (
         <div className="h-full w-full bg-[var(--color-primary)]" />
       )}
-      <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-primary)]/80 to-[var(--color-primary)]/40" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-primary)]/96 via-[var(--color-primary)]/83 to-[var(--color-primary)]/33" />
+      <div className="absolute bottom-4 right-4 z-20 max-w-[360px] rounded-[4px] bg-[var(--color-primary)]/88 px-2.5 py-1.5 text-xs text-[var(--color-contact-text-muted)] shadow-[0_8px_22px_rgba(11,42,61,0.2)]">
+        首頁氣氛／情境示意參考 · 非建案實績或工程成果證據
+      </div>
     </div>
   );
 }

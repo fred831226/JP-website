@@ -101,10 +101,10 @@ export default function Header() {
       <div className="mx-auto flex h-16 max-w-[var(--content-max)] items-center justify-between px-[var(--page-gutter-desktop)] max-md:px-[var(--page-gutter-mobile)]">
         <Link
           href="/zh-tw"
-          className="flex min-h-[44px] items-center text-lg font-[800] text-[var(--color-primary)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2"
+          className="flex min-h-[44px] items-center focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2"
           aria-label="回首頁"
         >
-          {navData.companyName}
+          <img src="/media/jp-pump-logo.png" alt="JP PUMP" className="h-12 w-auto" />
         </Link>
 
         {/* Desktop nav */}

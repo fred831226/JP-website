@@ -22,10 +22,7 @@ export default function Footer() {
       <div className="mx-auto flex max-w-[var(--content-max)] flex-col gap-8 px-[var(--page-gutter-desktop)] py-10 max-md:px-[var(--page-gutter-mobile)] max-md:gap-6 md:flex-row md:justify-between">
         {/* Company identity */}
         <div className="flex flex-col gap-2">
-          <span className="text-base font-[700]">{navData.companyName}</span>
-          <span className="text-sm text-[var(--color-contact-text-muted)]">
-            {navData.brandName}
-          </span>
+          <img src="/media/jp-pump-logo.png" alt="JP PUMP" className="h-14 w-auto brightness-0 invert" />
         </div>
 
         {/* Navigation */}
