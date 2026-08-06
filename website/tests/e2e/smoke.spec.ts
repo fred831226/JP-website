@@ -5,7 +5,7 @@ const BASE = "http://localhost:3000/zh-tw";
 test.describe("Public smoke tests", () => {
   test("Home page loads with correct title", async ({ page }) => {
     await page.goto(BASE);
-    await expect(page.locator("h1")).toContainText("傑平");
+    await expect(page.locator("h1")).toContainText("以扎實經驗，守護每一套泵浦系統");
   });
 
   test("Header navigation shows all items", async ({ page }) => {
@@ -58,6 +58,25 @@ test.describe("Public smoke tests", () => {
   test("Pump type filtering via URL works", async ({ page }) => {
     await page.goto(`${BASE}/products?type=submersible-well-pump`);
     await expect(page.locator("h1")).toContainText("產品總覽");
+  });
+
+  test("Brand and Purpose remain filters without standalone pages", async ({ page, request }) => {
+    await page.goto(`${BASE}/products`);
+    await expect(page.getByRole("group", { name: "品牌" })).toBeVisible();
+    await expect(page.getByRole("group", { name: "用途" })).toBeVisible();
+
+    const brandPage = await page.goto(`${BASE}/brands/jp-pump`);
+    expect(brandPage?.status()).toBe(404);
+
+    const purposePage = await page.goto(`${BASE}/purposes/${encodeURIComponent("大樓揚水")}`);
+    expect(purposePage?.status()).toBe(404);
+
+    const sitemap = await request.get("http://localhost:3000/sitemap.xml");
+    expect(sitemap.ok()).toBeTruthy();
+    const sitemapBody = await sitemap.text();
+    expect(sitemapBody).not.toContain("/brands/");
+    expect(sitemapBody).not.toContain("/purposes/");
+    expect(sitemapBody).toContain("/series/");
   });
 
   test("Not found returns 404 page", async ({ page }) => {

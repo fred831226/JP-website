@@ -124,8 +124,8 @@ export function getSeriesList(): Series[] {
   return catalog.seriesList;
 }
 
-export function getSeries(id: string): Series | undefined {
-  return catalog.seriesList.find((s) => s.id === id);
+export function getSeries(idOrSlug: string): Series | undefined {
+  return catalog.seriesList.find((s) => s.id === idOrSlug || s.slug === idOrSlug);
 }
 
 export function getSeriesByBrand(brandId: string): Series[] {

@@ -36,7 +36,7 @@ Implementation uses a clean Next.js App Router application under `/website`, wit
 
 Product technical data is fully regenerated through a repeatable validated Excel intake. Stable IDs, slugs, taxonomy mappings, approved display copy, and image references remain manually governed outside the generated technical file and cannot be overwritten by the importer.
 
-V1 scope precedence: Brand, Pump Type, and Purpose landing pages remain; Services & projects owns complete in-place Project evidence; individual Project detail routes, Latest Information, analytics, attribution, consent, and RUM are outside V1. The later Source Reconciliation section records the full cross-document resolution.
+V1 scope precedence: Pump Type landing pages remain; Brand and Purpose are governed Series metadata and Product overview filters without standalone public pages. Services & projects owns complete in-place Project evidence; individual Project detail routes, Latest Information, analytics, attribution, consent, and RUM are outside V1. The later Source Reconciliation section records the full cross-document resolution.
 
 `DESIGN.md` is the visual identity reference. Public-facing terminology uses **用途**; the governed data model and maintenance interface use **應用情境**. Both refer to the same controlled classification.
 
@@ -47,11 +47,11 @@ V1 scope precedence: Brand, Pump Type, and Purpose landing pages remain; Service
 | Surface | Reached from | Purpose | Journeys |
 |---|---|---|---|
 | Home | Logo, root URL, search | Establish trust, show positioning, explore products by Purpose, route to products/services/company/contact, and preview approved projects and partners; Project teasers lead to Services & projects or an in-page Project anchor | UJ-1, UJ-2 |
-| Product overview | Header product menu, Home Hero filter, category pages | Orient through a short catalog Hero, then filter and compare published series | UJ-1, UJ-3 |
+| Product overview | Header product menu, Home Hero filter, Pump Type pages | Orient through a short catalog Hero, then filter and compare published series | UJ-1, UJ-3 |
 | Brand index/detail | Product overview, crawlable links | Explain an approved brand and show related series | UJ-1, UJ-3 |
 | Pump-type index/detail | Product overview, crawlable links | Explain a governed pump type and show related series | UJ-1 |
 | Use-case index/detail | Header use shortcut, search, product overview | Explain an important use and show related series | UJ-1 |
-| Series detail | Product card, category page, search | Review image, key ranges, introduction, models, uses, and contact path | UJ-1, UJ-3 |
+| Series detail | Product card, Pump Type page, Product overview filters, search | Review image, key ranges, introduction, models, uses, and contact path | UJ-1, UJ-3 |
 | Image enlargement | Series product image | Inspect approved product media without losing page context | UJ-1, UJ-3 |
 | Services & projects | Header direct link, Home Project teaser | Explain approved service capabilities and present the complete V1 Project evidence in place | UJ-2 |
 | Company information | About menu | Verify legal/company facts and history | UJ-2 |
@@ -108,7 +108,7 @@ Behavioral rules below use the visual definitions in `DESIGN.md.Components`.
 | Home gateway block | Home | Provides three whole-block links to Product overview, Services & projects, and Contact. Wide pointer layouts keep them equal at rest; hover or keyboard focus expands the active block and contracts its siblings, and leaving the group restores equal widths. The transition reveals no new content and never becomes the only route cue. Touch and narrow layouts stay fixed and stacked. The block never duplicates or mutates the Hero filter state. |
 | Home content teaser | Home | Featured projects and partners reuse their destination components. A Project teaser routes to Services & projects or its stable in-page Project anchor, never to an individual detail route. Each teaser has one destination and never exposes unapproved evidence. |
 | Catalog sidebar | Product overview | One always-visible filter rail contains series/model Search, an exclusive segmented Brand group, multi-select Pump type chips, multi-select Purpose chips, removable active-condition tags, and one clear-all action. Every selection filters immediately without a separate apply step. Multiple Pump type selections use OR; multiple Purpose selections narrow to Series carrying every selected Purpose. Brand, type, Purpose, and search dimensions combine with AND. Multiple or invalid Brand query values reset Brand to `全部`; repeated Type/Purpose values deduplicate; invalid values are discarded without selecting another category or clearing valid unrelated conditions. Every change updates restorable URL state, exposes programmatic selected state, and keeps pointer, touch, and keyboard behavior equivalent. |
-| Product card | Product overview and category pages | Entire card is one link to the unique series page. `看更多` is a text-only visual cue inside that link, never a nested action. Key data is summarized in one or two compact lines at the lower-left. Pointer, touch, and keyboard produce the same destination. Accessible name includes series and relevant category context. |
+| Product card | Product overview and Pump Type pages | Entire card is one link to the unique series page. `看更多` is a text-only visual cue inside that link, never a nested action. Key data is summarized in one or two compact lines at the lower-left. Pointer, touch, and keyboard produce the same destination. Accessible name includes series and relevant category context. |
 | Result summary | Product overview | Announces result count and filter changes. Shows `重設全部條件` whenever any filter is active. |
 | Product image | Series detail | Click, touch, or keyboard opens one modal enlargement. Modal traps focus; clear close button and `Escape` close it; closing returns focus to the image trigger. |
 | Key data block | Series detail | Exactly four values: min/max head in m and min/max flow in L/min. Missing approved data reads `未提供`. |
@@ -120,7 +120,7 @@ Behavioral rules below use the visual definitions in `DESIGN.md.Components`.
 | Partner block | Partners | One partner per vertical block. `拜訪網站` appears only for a confirmed official URL and indicates an external destination. |
 | Project evidence block | Services & projects | Render one semantic in-place evidence section using only approved facts and rights-cleared real media. It is not a whole-block link. Scope, outcome, and related products are omitted individually when absent; optional related-Series or Contact links are separate and explicitly labelled. |
 | Footer | All public surfaces | Uses three content groups: company Logo/identity, primary navigation, and approved contact information. Narrow layouts stack in that order. It does not introduce a second IA; missing or unapproved facts and legal links are omitted. Footer navigation remains keyboard reachable with 44px targets. |
-| Empty/error panel | Public lists and category pages | Explains what happened, preserves recoverable state, and exposes one primary recovery plus an optional Contact path. It never substitutes generic success content for an error. |
+| Empty/error panel | Public lists and Pump Type pages | Explains what happened, preserves recoverable state, and exposes one primary recovery plus an optional Contact path. It never substitutes generic success content for an error. |
 | Release evidence | Maintainer workflow | Git/CI/Vercel must expose the source commit, affected pages, validation outcome, Preview URL, approval state, Production result, and rollback target. Preview approval applies to that commit; Production may rebuild with Production environment values. These are operational evidence requirements, not a custom visual component. |
 
 ## State Patterns
@@ -240,7 +240,7 @@ Failure: an unapproved partner or project is absent rather than padded with plac
 
 ### UJ-3 — 黃建國 locates an existing model for maintenance
 
-1. 黃建國, a building maintenance supervisor holding an equipment nameplate, reaches a relevant Series page from search or a Brand page.
+1. 黃建國, a building maintenance supervisor holding an equipment nameplate, reaches a relevant Series page from search or a Product overview Brand filter.
 2. He uses the model table's browser find or table navigation to locate the model.
 3. He checks the row's approved values and the public last-updated date.
 4. **Climax:** he opens the direct Contact page and can quote the exact model to JP PUMP; the page does not add a route back to Product pages.
@@ -271,7 +271,7 @@ Failure: a critical validation or release step fails → the prior public versio
 
 ## Source Reconciliation
 
-The PRD/addendum, this UX spine, and the Lean Architecture now agree with `reconcile-prd-late-ux-overrides.md`, `reconcile-architecture-lean-2026-07-22.md`, and the Architecture `SOURCE-RECONCILIATION-LEAN-2026-07-22.md`. Latest Information/News is absent from all V1 IA and publishing; individual Project detail pages are deferred and Services & projects owns complete Project evidence; Brand, Pump Type, and Purpose landing pages remain V1; analytics, attribution, consent and RUM are deferred. `/zh-tw/`, approved visual mockups, filter behavior, Contact rules, and Git → Preview → approval → Production remain. Implementation uses clean Next.js App Router + Tailwind; mockups remain references and the UX spines win on conflict.
+The PRD/addendum, this UX spine, and the Lean Architecture now agree with `reconcile-prd-late-ux-overrides.md`, `reconcile-architecture-lean-2026-07-22.md`, and the Architecture `SOURCE-RECONCILIATION-LEAN-2026-07-22.md`. Latest Information/News is absent from all V1 IA and publishing; individual Project detail pages are deferred and Services & projects owns complete Project evidence; Pump Type landing pages remain V1 while Brand and Purpose remain filters/metadata without standalone pages; analytics, attribution, consent and RUM are deferred. `/zh-tw/`, approved visual mockups, filter behavior, Contact rules, and Git → Preview → approval → Production remain. Implementation uses clean Next.js App Router + Tailwind; mockups remain references and the UX spines win on conflict.
 
 ## Mockup Coverage
 
@@ -280,7 +280,7 @@ The PRD/addendum, this UX spine, and the Lean Architecture now agree with `recon
 - Approved mockup: [Series detail](mockups/key-screen-product-series-detail-responsive-01.html) — ordered Series content, dense model table, image-dialog reference state, and responsive actions.
 - Approved mockup: [Services & projects](mockups/key-screen-services-projects-responsive-01.html) — service-capability Hero, verified-project integrity boundary, responsive in-place evidence list, Contact CTA, and global Footer. Project sections do not imply individual detail routes.
 - Approved mockup: [Contact](mockups/key-screen-contact-responsive-01.html) — deep-dark direct Contact Hero, service summary, approved-field omission rule, phone/Email/address/conditional LINE, approved FAQ structure, conditional map, three-group Footer, and no return-to-product action.
-- Spine-only by explicit closure: Brand/Pump Type/Purpose category pages, Company, Partners, and not-found. Category layouts reuse the catalog/content patterns; Project detail and News are deferred/absent rather than unmocked V1 surfaces. The five approved mockups require no redraw; implementation only reviews Home/Services Project-link semantics. The V1 maintainer journey uses existing Git, validation, and Vercel interfaces and therefore has no custom JP PUMP key-screen mock. Full rationale is recorded in `key-screen-coverage.md`.
+- Spine-only by explicit closure: Pump Type category pages, Company, Partners, and not-found. Brand and Purpose use the Product overview filter experience without separate key screens. Pump Type layouts reuse the catalog/content patterns; Project detail and News are deferred/absent rather than unmocked V1 surfaces. The five approved mockups require no redraw; implementation only reviews Home/Services Project-link semantics. The V1 maintainer journey uses existing Git, validation, and Vercel interfaces and therefore has no custom JP PUMP key-screen mock. Full rationale is recorded in `key-screen-coverage.md`.
 
 The approved mockups instantiate the key compositions and responsive behavior defined by the two spines.
 

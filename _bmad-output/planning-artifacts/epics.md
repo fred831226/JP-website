@@ -37,7 +37,7 @@ FR7: Professional buyers can filter Series by one Brand, multiple Pump Types, mu
 
 FR8: Professional buyers can see current filter conditions and result counts, remove individual conditions, clear all conditions, recover from an empty result, and restore the same valid state after reload or sharing.
 
-FR9: Professional buyers and search engines can reach approved Brand, Pump Type, and important Purpose landing pages that contain unique explanatory copy and relevant Series rather than thin generated filter results.
+FR9: Professional buyers and search engines can reach approved Pump Type landing pages that contain unique explanatory copy and relevant Series; Brand and Purpose remain Product Overview filters and Series metadata without standalone pages.
 
 FR10: Each Series has exactly one canonical detail page containing an ordered image, four-field key-data block, approved introduction, complete Model table, non-interactive Purpose tags, and clearly separated Contact and return actions.
 
@@ -51,7 +51,7 @@ FR14: Public Series and Model data is technically reviewed and internally tracea
 
 FR15: Professional buyers can use approved phone and Email actions and view approved address information on one direct Contact page; optional LINE, hours, FAQ, and map content appears only when approved, and no contact form or source attribution is used.
 
-FR16: Company, Partners, Services & Projects, Brand, Purpose, and Series surfaces provide keyboard-accessible contextual links to Contact without requiring a return to Home or obscuring content.
+FR16: Company, Partners, Services & Projects, Pump Type, and Series surfaces provide keyboard-accessible contextual links to Contact without requiring a return to Home or obscuring content.
 
 FR18: A designated maintainer can manage all V1 content, taxonomy, catalog, redirects, and public-media references through one version-controlled authority, with no CMS, admin login, management API, database write path, or authoritative JSX duplication.
 
@@ -69,13 +69,13 @@ FR25: The initial catalog can be processed and published in reviewed batches, as
 
 FR26: Content, media, and routes support a future independently reviewed English edition while V1 generates only Traditional Chinese content under `/zh-tw/` and never creates empty or machine-translated `/en/` pages.
 
-FR27: Every indexable Company, Partner, Brand, Pump Type, Purpose, Series, and Services & Projects page is reachable through ordinary crawlable links from Home or an approved classification page.
+FR27: Every indexable Company, Partner, Pump Type, Series, and Services & Projects page is reachable through ordinary crawlable links from Home, Product Overview, or an approved Pump Type page.
 
 FR28: Every indexable page has one stable, shareable, locale-prefixed URL; renamed or removed content receives a nearest-relevant permanent redirect when available, never a blanket Home redirect.
 
 FR29: Every indexable page has a content-accurate, language-appropriate, distinct page title, primary heading, and summary rather than mass-produced name substitutions.
 
-FR30: Filter URL state can be shared and restored but arbitrary combinations remain outside the sitemap and search index; only approved original Brand, Pump Type, and Purpose pages are indexable.
+FR30: Filter URL state can be shared and restored but arbitrary combinations remain outside the sitemap and search index; only approved original Pump Type pages are indexable taxonomy pages, while Brand and Purpose never generate standalone pages.
 
 FR31: The system produces a sitemap from the same promoted content state, containing only published canonical indexable routes and updating atomically with Production.
 
@@ -179,7 +179,7 @@ UX-DR16: Implement Product cards as borderless white top-image whole-card links 
 
 UX-DR17: Give Product cards restrained lift/shadow hover feedback and a 3 px Action Blue focus outline with 2 px surface offset; do not add nested buttons, hard image frames, category color strips, or a three-column grid.
 
-UX-DR18: Implement Brand, Pump Type, and Purpose pages with one crawlable approved introduction followed by the shared Product Overview card/result language; empty categories retain their introduction and offer Product Overview and Contact.
+UX-DR18: Implement Pump Type pages with one crawlable approved introduction followed by the shared Product Overview card/result language; empty Pump Types retain their introduction and offer Product Overview and Contact. Brand and Purpose stay in Product Overview filters without standalone page templates.
 
 UX-DR19: Preserve the Series reading order: suitability-confirmation note, approved product image, exactly four key-data fields, approved introduction, complete Model table, non-interactive Purpose tags, and page actions.
 
@@ -236,7 +236,7 @@ FR4: Epic 1 - Visitors can review approved service capabilities and Project evid
 FR6: Epic 2 - Visitors can browse all published Series on Product Overview.
 FR7: Epic 2 - Visitors can combine governed Brand, Pump Type, Purpose, and search conditions.
 FR8: Epic 2 - Visitors can inspect, remove, reset, share, and recover filter state and empty results.
-FR9: Epic 2 - Visitors can browse substantive Brand, Pump Type, and Purpose landing pages.
+FR9: Epic 2 - Visitors can browse substantive Pump Type landing pages while using Brand and Purpose as Product Overview filters.
 FR10: Epic 2 - Visitors can use one canonical, complete detail page per Series.
 FR11: Epic 2 - Visitors can inspect all approved Model specifications accessibly.
 FR12: Epic 2 - Visitors can read approved Series copy and identify governed Purposes.
@@ -255,7 +255,7 @@ FR26: Epic 4 - V1 publishes only Traditional Chinese while preserving an explici
 FR27: Epic 4 - Search engines and visitors can reach every indexable page through ordinary links.
 FR28: Epic 4 - Visitors can rely on stable locale-prefixed URLs and relevant redirect behavior.
 FR29: Epic 4 - Search results and browser surfaces receive distinct accurate titles and summaries.
-FR30: Epic 4 - Shareable filter state remains outside the index while substantive taxonomy pages remain discoverable.
+FR30: Epic 4 - Shareable Brand/Purpose/filter state remains outside the index while substantive Pump Type pages remain discoverable.
 FR31: Epic 4 - Search engines receive an atomic Production-derived canonical sitemap.
 FR32: Epic 4 - Search engines receive accurate Organization and Breadcrumb structured data.
 FR33: Epic 4 - Visitors recover safely from invalid, retired, or removed URLs.
@@ -272,7 +272,7 @@ Visitors can understand who JP PUMP is, verify approved company, partner, servic
 
 ### Epic 2: Find and Verify a Product Series
 
-Professional buyers can begin from Home, Product Overview, or a substantive taxonomy page; combine and share filters; open one canonical Series page; inspect reviewed key ranges and every approved Model; and proceed to Contact with precise product context.
+Professional buyers can begin from Home, Product Overview, or a substantive Pump Type page; combine and share filters; open one canonical Series page; inspect reviewed key ranges and every approved Model; and proceed to Contact with precise product context.
 
 **FRs covered:** FR2, FR6, FR7, FR8, FR9, FR10, FR11, FR12, FR13, FR14
 
@@ -523,7 +523,7 @@ So that I can call or email JP PUMP without submitting tracked personal data.
 
 ## Epic 2: Find and Verify a Product Series
 
-Professional buyers can begin from Home, Product Overview, or a substantive taxonomy page; combine and share filters; open one canonical Series page; inspect reviewed key ranges and every approved Model; and proceed to Contact with precise product context.
+Professional buyers can begin from Home, Product Overview, or a substantive Pump Type page; combine and share filters; open one canonical Series page; inspect reviewed key ranges and every approved Model; and proceed to Contact with precise product context.
 
 ### Story 2.1: Publish a Governed Catalog Foundation
 
@@ -552,15 +552,20 @@ So that every product route and value I use is trustworthy.
 
 **Given** approved catalog records
 **When** Next.js builds public routes
-**Then** Brand, Pump Type, Purpose, and Series pages are statically generated under `/zh-tw/`
+**Then** Pump Type and Series pages are statically generated under `/zh-tw/`
 **And** route components receive explicit typed page-ready data from small server-only loaders rather than raw Excel or internal review records.
+
+**Given** approved Brand and Purpose records
+**When** public routes and the sitemap are generated
+**Then** those records remain available to Product Overview filters and Series content
+**And** no Brand, Purpose, Product Name, or Model standalone page is generated.
 
 **Given** catalog content is requested publicly
 **When** a page renders
 **Then** source evidence, reviewer identity, internal disposition, and unpublished records are absent from client output
 **And** the public page includes only approved last-updated information where required.
 
-### Story 2.2: Browse Product Overview and Taxonomy Pages
+### Story 2.2: Browse Product Overview and Pump Type Pages
 
 As a professional buyer,
 I want to compare published Series and browse meaningful classifications,
@@ -585,15 +590,20 @@ So that I can identify relevant products from a clear catalog entry point.
 **Then** the grid uses two columns only while both cards remain comfortably readable and otherwise switches to one column
 **And** cards use a borderless white surface, restrained shadow, modest hover lift, and visible 3 px focus outline without nested actions or hard image frames.
 
-**Given** an approved Brand, Pump Type, or important Purpose
+**Given** an approved Pump Type
 **When** its landing page opens
 **Then** it contains unique crawlable approved explanatory copy and the related published Series using the shared card language
 **And** it is not merely an auto-generated filter result.
 
-**Given** an approved taxonomy page has no published Series
+**Given** an approved Pump Type page has no published Series
 **When** it renders
 **Then** the approved introduction remains and a factual empty state offers Product Overview and Contact
 **And** no cards, values, or claims are manufactured.
+
+**Given** approved Brand or Purpose values
+**When** a visitor uses them
+**Then** they update Product Overview filter state and relevant Series results
+**And** they do not navigate to or generate standalone Brand or Purpose pages.
 
 ### Story 2.3: Filter and Share Product Results
 
@@ -651,7 +661,7 @@ So that I can understand its approved capabilities without conflicting duplicate
 **Acceptance Criteria:**
 
 **Given** a published Series
-**When** its canonical page opens from any Brand, Pump Type, Purpose, filter, or search path
+**When** its canonical page opens from Product Overview Brand/Purpose filters, a Pump Type page, or search
 **Then** every path resolves to the same locale-specific Series route
 **And** the page is not duplicated by classification or entry route.
 
@@ -1077,9 +1087,9 @@ So that I can reach relevant trusted content directly.
 
 **Acceptance Criteria:**
 
-**Given** a published Company, Partner, Services & Projects, Brand, Pump Type, Purpose, or Series page
+**Given** a published Company, Partner, Services & Projects, Pump Type, or Series page
 **When** a crawler or visitor explores the site
-**Then** the page is reachable through an ordinary anchor from Home or an approved classification page
+**Then** the page is reachable through an ordinary anchor from Home, Product Overview, or an approved Pump Type page
 **And** primary content and the crawl path are present in statically generated HTML.
 
 **Given** an indexable public page
@@ -1097,10 +1107,10 @@ So that I can reach relevant trusted content directly.
 **Then** its state restores for the visitor but it remains outside the sitemap and is not treated as a separate information-architecture or indexable content page
 **And** the clean Product Overview is canonical without requiring a query-specific server-rendered `noindex` response.
 
-**Given** Brand, Pump Type, and important Purpose content
+**Given** Pump Type content and governed Brand/Purpose filter data
 **When** indexability is determined
-**Then** only approved pages with original explanatory content are indexable
-**And** no combinatorial query-link grid or thin auto-generated taxonomy page is created.
+**Then** only approved Pump Type pages with original explanatory content are indexable taxonomy pages
+**And** no Brand page, Purpose page, combinatorial query-link grid, or thin auto-generated taxonomy page is created.
 
 ### Story 4.3: Generate Production Sitemap and Crawl Controls
 

@@ -55,7 +55,7 @@ Route components use small typed server-only loaders that validate repository fi
 These user-confirmed decisions supersede the older PRD/UX statements until those source documents are reconciled:
 
 - Remove Latest Information/News from V1, including its routes, content model and home-page surface.
-- Retain standalone Brand, Pump Type and Purpose landing pages in V1.
+- Retain standalone Pump Type landing pages in V1. Brand and Purpose remain governed Series metadata and Product overview filters, but do not have standalone public routes.
 - Keep approved Project summaries and evidence on Services & Projects, but defer individual Project detail pages.
 - Retain the `/zh-tw/` locale prefix and redirect the root route to it.
 - Defer GA4, contact attribution, cookie consent, RUM and third-party uptime monitoring.
@@ -79,7 +79,7 @@ These user-confirmed decisions supersede the older PRD/UX statements until those
 
 - **Binds:** retained V1 public content and catalog capabilities, UJ-4, UJ-5, NFR-10..NFR-12
 - **Prevents:** JSX, spreadsheets, local folders, Preview deployments, or external drives becoming competing public sources of truth
-- **Rule:** One reviewed Git commit owns each Production release. Structured repository files own taxonomy, Brand/Pump Type/Purpose landing pages, approximately 10 Series pages, approximately 603 Model rows, projects shown inside Services & Projects, partners, corporate/contact facts, redirects and Hero content. Page components may not embed a second authoritative copy. Raw Excel, source documents and original media are evidence inputs, not runtime authorities. Latest Information/News and individual Project detail pages are absent from V1.
+- **Rule:** One reviewed Git commit owns each Production release. Structured repository files own Brand/Pump Type/Purpose taxonomy data, Pump Type landing pages, approximately 10 canonical Series pages, approximately 603 Model rows, projects shown inside Services & Projects, partners, corporate/contact facts, redirects and Hero content. Brand and Purpose have no standalone public routes. Page components may not embed a second authoritative copy. Raw Excel, source documents and original media are evidence inputs, not runtime authorities. Latest Information/News and individual Project detail pages are absent from V1.
 
 ### AD-4 — [ADOPTED] Publication is an immutable atomic deployment
 
@@ -115,7 +115,7 @@ These user-confirmed decisions supersede the older PRD/UX statements until those
 
 - **Binds:** FR-2, FR-6..FR-9, FR-27..FR-31, UJ-1, NFR-2
 - **Prevents:** home and catalog filters disagreeing, share/reload loss, incompatible OR/AND rules, and unbounded crawl spaces
-- **Rule:** Parse `brand`, `type`, `purpose` and optional `q` through one shared schema. Brand accepts zero or one valid value; if an external URL supplies multiple or invalid Brand values, discard the Brand constraint and normalize the UI to `全部` rather than choosing arbitrarily. Repeated Pump Type and Purpose values are normalized and deduplicated. Pump Type selections use OR; Purpose selections use AND; dimensions combine with AND. The URL restores filters, results and counts. The statically generated Server Page must not read `searchParams`; a small Client Component under `Suspense` reads and updates query state while receiving validated Series-level metadata, not full Model specifications. Sorting is absent. Home/Header shortcuts and catalog interactions may intentionally link to query URLs, but no combinatorial query-link grid is generated; query variants stay out of the sitemap, use the clean Product overview as canonical, and are not treated as separate indexable pages.
+- **Rule:** Parse `brand`, `type`, `purpose` and optional `q` through one shared schema. Brand accepts zero or one valid value; if an external URL supplies multiple or invalid Brand values, discard the Brand constraint and normalize the UI to `全部` rather than choosing arbitrarily. Repeated Pump Type and Purpose values are normalized and deduplicated. Pump Type selections use OR; Purpose selections use AND; dimensions combine with AND. The URL restores filters, results and counts. Brand and Purpose exist only as governed metadata and Product overview filter state; neither generates a standalone public page. The statically generated Server Page must not read `searchParams`; a small Client Component under `Suspense` reads and updates query state while receiving validated Series-level metadata, not full Model specifications. Sorting is absent. Home/Header shortcuts and catalog interactions may intentionally link to query URLs, but no combinatorial query-link grid is generated; query variants stay out of the sitemap, use the clean Product overview as canonical, and are not treated as separate indexable pages.
 
 ### AD-10 — [ADOPTED] The promoted release owns all public SEO state
 
@@ -171,7 +171,7 @@ These user-confirmed decisions supersede the older PRD/UX statements until those
 | --- | --- |
 | Modules and files | Feature/module directories use `kebab-case`; React components and domain types use `PascalCase`; functions and variables use `camelCase`; route files follow Next.js conventions. |
 | Editorial content | Company, Service, taxonomy and Project summaries use schema-validated JSON; long prose may use non-executable Markdown only when useful. Latest Information/News and individual Project articles are not V1 content types. |
-| Governed data | Catalog, taxonomy landing pages, partners, company/contact, redirects and media metadata use JSON validated by Zod before build. Executable TypeScript is not a content authority. Raw Excel/CSV is intake, not public runtime data. |
+| Governed data | Catalog, Brand/Pump Type/Purpose taxonomy data, Pump Type landing pages, partners, company/contact, redirects and media metadata use JSON validated by Zod before build. Executable TypeScript is not a content authority. Raw Excel/CSV is intake, not public runtime data. |
 | Excel catalog intake | The repeatable importer fully replaces `catalog.generated.json` with Excel-owned technical Series/Model fields and reports sheet/row/field errors. It never writes stable IDs, slugs, taxonomy mappings, approved display copy or image references; those live in `catalog-content.json`. Validation joins both files by stable Series/Model keys and fails on duplicate, missing or orphaned records. |
 | Entity IDs | Stable string ID; never regenerated solely from a mutable label or slug. Relationships store IDs only. |
 | Locale and slugs | BCP 47 lowercase route key (`zh-tw`); one slug per locale; retired slugs require redirect or explicit 404 treatment. |
@@ -226,7 +226,7 @@ JP-Website/
       styles/                # semantic tokens and Tailwind entry styles
     content/
       pages/                 # company, service/project and contact copy
-      taxonomy/              # Brand, Pump Type and Purpose landing-page copy
+      taxonomy/              # Pump Type landing-page copy plus Brand/Purpose filter metadata
     data/
       catalog.generated.json # importer-owned technical Series/Model fields
       catalog-content.json   # manual stable IDs, slugs, taxonomy, copy and image refs
