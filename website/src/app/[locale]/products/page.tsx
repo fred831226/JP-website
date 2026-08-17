@@ -80,10 +80,14 @@ function ProductGridContent({ filters }: { filters: FilterParams }) {
   if (filters.purposes.length > 0) {
     filtered = filtered.filter((s) => filters.purposes.every((pid) => s.purposeIds.includes(pid)));
   }
-  /* ---- 搜尋 ---- */
+  /* ---- 搜尋（系列名稱、ID 或型號名稱） ---- */
   if (filters.q) {
     const lower = filters.q.toLowerCase();
-    filtered = filtered.filter((s) => s.name.toLowerCase().includes(lower) || s.id.toLowerCase().includes(lower));
+    filtered = filtered.filter((s) =>
+      s.name.toLowerCase().includes(lower) ||
+      s.id.toLowerCase().includes(lower) ||
+      s.models.some((m) => m.name.toLowerCase().includes(lower))
+    );
   }
 
   const noSeries = filtered.length === 0;

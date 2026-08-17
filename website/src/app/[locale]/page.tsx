@@ -2,7 +2,7 @@ import Link from "next/link";
 import HeroCarousel from "@/components/HeroCarousel";
 import HeroQuickFilter from "@/components/HeroQuickFilter";
 import RevealSection from "@/components/RevealSection";
-import { getBrands, getPumpTypes } from "@/lib/content/load-catalog";
+import { getBrands, getPurposes } from "@/lib/content/load-catalog";
 import contentRaw from "@/data/catalog-content.json";
 import homeData from "@/data/home.json";
 
@@ -11,7 +11,7 @@ const content = contentRaw as { homepagePumpTypes: { name: string; seriesId: str
 export default function HomePage() {
   const { hero, companySummary, gateways, projects, partners } = homeData;
   const brands = getBrands();
-  const pumpTypes = getPumpTypes();
+  const purposes = getPurposes();
 
   return (
     <>
@@ -81,10 +81,10 @@ export default function HomePage() {
             </Link>
 
             <div className="mt-7 rounded-[8px] bg-white p-4 shadow-[0_12px_32px_rgba(11,42,61,0.12)]">
-              <p className="mb-3 text-sm font-[700] text-[var(--color-primary)]">依品牌與泵浦類型找到產品系列</p>
+              <p className="mb-3 text-sm font-[700] text-[var(--color-primary)]">依品牌與用途找到產品系列</p>
               <HeroQuickFilter
                 brands={brands.map((b) => ({ id: b.id, name: b.name }))}
-                pumpTypes={pumpTypes.map((t) => ({ id: t.id, name: t.name }))}
+                purposes={purposes.map((p) => ({ id: p.id, name: p.name }))}
               />
             </div>
           </div>

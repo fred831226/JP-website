@@ -1,68 +1,145 @@
 {
   "homepagePumpTypes": [
-    { "name": "沉水式揚水泵", "seriesId": "hs", "slug": "hs", "silhouette": "/media/hs-silhouette.png" },
-    { "name": "臥式泵", "seriesId": "gp", "slug": "gp", "silhouette": "/media/gp-silhouette.png" },
-    { "name": "污水泵", "seriesId": "cv", "slug": "cv", "silhouette": "/media/cv-silhouette.png" },
-    { "name": "陸上式自吸式泵", "seriesId": "y", "slug": "y-series", "silhouette": "/media/y-series-silhouette.png" },
-    { "name": "電子穩壓加壓泵", "seriesId": "jq", "slug": "jq", "silhouette": "/media/jq-silhouette.png" },
-    { "name": "立式揚水泵", "seriesId": "sb-sbi-sbn", "slug": "sb-sbi-sbn", "silhouette": "/media/sb-sbi-sbn-silhouette.png" }
+    { "name": "沉水式揚水泵", "seriesId": "jp-pump-hs", "slug": "hs", "silhouette": "/media/hs-silhouette.png" },
+    { "name": "臥式泵", "seriesId": "jp-pump-gp", "slug": "gp", "silhouette": "/media/gp-silhouette.png" },
+    { "name": "污水泵", "seriesId": "jp-pump-cv", "slug": "cv", "silhouette": "/media/cv-silhouette.png" },
+    { "name": "陸上式自吸式泵", "seriesId": "jp-pump-y", "slug": "y-series", "silhouette": "/media/y-series-silhouette.png" },
+    { "name": "電子穩壓加壓泵", "seriesId": "jp-pump-jq", "slug": "jq", "silhouette": "/media/jq-silhouette.png" },
+    { "name": "立式揚水泵", "seriesId": "jp-pump-sb-sbi-sbn", "slug": "sb-sbi-sbn", "silhouette": "/media/sb-sbi-sbn-silhouette.png" }
   ],
   "series": [
     {
-      "id": "hs",
+      "id": "jp-pump-hs",
       "image": "/media/hs-product-1.jfif",
       "slug": "hs",
       "shortDescription": "HS 系列全不鏽鋼沉水式揚水泵，專為大樓揚水設計，榮獲多國專利認證。採用活動式推力軸承與多面結合式結構，具備高效能與耐用特性。",
       "introduction": "HS 系列全不鏽鋼沉水式揚水泵，專為大樓揚水應用設計。產品榮獲台灣、美國等多國專利認證，包含活動式推力軸承與多面結合式結構等創新技術。採用不鏽鋼材質，具備優異的耐蝕性與使用壽命，適用於大樓給水增壓及相關揚水需求。"
     },
     {
-      "id": "gp",
+      "id": "jp-pump-gp",
       "slug": "gp",
       "image": "/media/gp-product-1.png",
       "shortDescription": "GP 系列陸上式同軸渦卷泵浦，採用機械軸封設計，效率高、水量大、體積小。適用於高樓給水、工業用水、空調循環及農業灌溉。",
       "introduction": "GP 系列陸上式同軸渦卷泵浦，採用機械軸封設計，保證不漏水、不損軸心，大幅延長泵浦使用壽命。效率高、水量大、揚水性能佳，體積小且安裝簡便，維護操作成本低。適用於高樓給水、工業用水、空調循環、工地用水及農業灌溉等多種場景。"
     },
     {
-      "id": "cv",
+      "id": "jp-pump-cv",
       "slug": "cv",
       "image": "/media/cv-product-1.png",
       "shortDescription": "CV 系列沉水式污水泵，通過粒徑 35-50mm，配備馬達過熱保護器與美規 UL 認證電纜線。SUS304 馬達本體，IP68 防水等級。",
       "introduction": "CV 系列沉水式污水泵，適用於污水排放應用。液體溫度 0~40°C，pH 值 6~9，通過粒徑 35-50mm。全機型標準配備馬達過熱保護器，採用美規 UL 認證電纜線及水切處理杜絕水氣。SUS304 馬達本體，IP68 沉水式高效能馬達，可選配浮球開關。"
     },
     {
-      "id": "sn",
+      "id": "jp-pump-sn",
       "slug": "sn",
       "image": "/media/sn-product-1.png",
       "shortDescription": "SN 系列沉水式污水泵，通過粒徑 6mm，配備過熱保護器與 UL 認證電纜線。SUS304 機體，IP68 防水，適合污水排放。",
       "introduction": "SN 系列沉水式污水泵，適用於污水排放與廢水處理。液體溫度 0~40°C，pH 值 6~9，通過粒徑 6mm。全機型配備馬達過熱保護器，採用美規 UL 認證電纜線及水切處理。SUS304 馬達本體，IP68 防水等級，可選配浮球開關。"
     },
     {
-      "id": "tp",
+      "id": "jp-pump-tp",
       "slug": "tp",
       "image": "/media/tp-product-1.png",
       "shortDescription": "TP 系列沉水式污水泵，配備過熱保護器與自動復歸器，採用抗磨耗樹脂葉輪與雙機械軸封。適合工程及工業污水排放。",
       "introduction": "TP 系列沉水式污水泵，專為工程及工業污水排放設計。全機型標準配備馬達過熱保護器及自動復歸器，採用美規 UL 認證電纜線。抗磨耗樹脂（TBU）製成懸吊式葉輪，攪拌棒設計可避免空氣產生及淤沙沉積。雙機械軸封配置於獨立油室，提供可靠防護。"
     },
     {
-      "id": "jq",
+      "id": "jp-pump-jq",
       "slug": "jq",
       "image": "/media/jq-product-1.png",
       "shortDescription": "JQ 系列電子穩壓加壓泵，整合馬達、泵浦、壓力桶與電子控制器於一體，實現恆壓自動供水。體積小、運轉安靜，適合家庭加壓。",
       "introduction": "JQ 系列電子穩壓加壓泵為結合馬達、泵浦、壓力桶、壓力開關、流量感應開關及電子控制器於一體的整合式流控恆壓自動供水系統。電子控制器能根據壓力及流量變化適時起動或關閉泵浦，提供穩定供水。體積小、出水量大、運轉安靜，多段式離心式葉輪設計效率高，適用於家庭給水加壓及水塔供水。"
     },
     {
-      "id": "y",
+      "id": "jp-pump-y",
       "slug": "y-series",
       "image": "/media/y-series-product-1.png",
       "shortDescription": "Y 系列陸上式自吸式泵，自吸能力高、揚水時間短。半開放式葉輪適用於含固體雜質的液體輸送，採用機械軸封設計。",
       "introduction": "Y 系列陸上式自吸式泵，本體特殊構造具備高自吸能力，揚水時間短。葉輪採用半開放式設計，適用於泥水、污水及固體混入之藥液輸送。不必加裝底閥，最初加水即可自行排氣揚水，減少灌水麻煩。採用機械軸封保證不漏水，延長泵浦使用壽命。"
     },
     {
-      "id": "sb-sbi-sbn",
+      "id": "jp-pump-sb-sbi-sbn",
       "slug": "sb-sbi-sbn",
       "image": "/media/sb-sbi-sbn-product-1.jfif",
       "shortDescription": "SB/SBI/SBN 系列立式多段不鏽鋼管道泵浦，適用於加壓供水、工業清洗、消防及空調循環。SB/SBI 用於無腐蝕性液體，SBN 適用於弱酸性及工業製程。",
       "introduction": "SB/SBI/SBN 系列立式多段不鏽鋼管道泵浦，用途廣泛涵蓋大樓、旅館及集合住宅加壓供水，工業清洗、洗車、消防、加工與冷卻系統，鍋爐、加熱、熱交換、冷凍及空調循環，以及農田灌溉與水處理。SB、SBI 適用於無腐蝕性冷熱水；SBN 適用於弱酸性及工業製程液體，選型須依液體條件確認。"
+    },
+    {
+      "id": "grundfos-2cm",
+      "slug": "grundfos-2cm",
+      "image": null,
+      "shortDescription": "2CM 雙台變頻恆壓加壓系統，採用兩台 CM 系列泵浦交互備援，提供穩定恆壓供水。適用於大樓揚水及工業系統。",
+      "introduction": "2CM 雙台變頻恆壓加壓系統，整合兩台 CM 系列泵浦與變頻控制，採交互備援設計，提供穩定恆壓供水。適用於大樓揚水、工業系統及一般工業用水。"
+    },
+    {
+      "id": "grundfos-2cr-i-n-booster",
+      "slug": "grundfos-2cr-i-n-booster",
+      "image": null,
+      "shortDescription": "2CR(I,N) Booster 直立式雙台變頻恆壓加壓系統，採用 CR/CRI/CRN 系列泵浦，提供大水量恆壓供水。適用於大樓揚水及工業系統。",
+      "introduction": "2CR(I,N) Booster 直立式雙台變頻恆壓加壓系統，整合兩台 CR/CRI/CRN 系列泵浦與變頻控制系統。採直立式設計節省安裝空間，提供備援恆壓供水。適用於大樓揚水、工業系統及一般工業用水。"
+    },
+    {
+      "id": "grundfos-cm-cme",
+      "slug": "grundfos-cm-cme",
+      "image": null,
+      "shortDescription": "CM／CME 系列臥式多段端吸離心泵，採用多段葉輪設計，提供高揚程性能。適用於工業加壓、供水系統及空調循環。",
+      "introduction": "CM／CME 系列臥式多段端吸離心泵為 Grundfos 經典多段泵系列。CM 為標準馬達版本，CME 為整合變頻馬達版本。採用不鏽鋼材質，適用於工業系統、水處理、冷凍及空調、大樓揚水等應用。"
+    },
+    {
+      "id": "grundfos-cr-cri-crn",
+      "slug": "grundfos-cr-cri-crn",
+      "image": null,
+      "shortDescription": "CR／CRI／CRN 系列立式多段離心泵，Grundfos 代表性產品。採用不鏽鋼多段設計，適用於加壓供水、工業系統及空調循環。",
+      "introduction": "CR／CRI／CRN 系列為 Grundfos 代表性立式多段離心泵產品。CR 用於無腐蝕性液體、CRI 用於弱腐蝕性液體、CRN 用於腐蝕性液體。採用不鏽鋼多段葉輪設計，提供高效能與可靠性，適用於大樓揚水、工業系統、冷凍及空調、農業灌溉用水等廣泛應用。"
+    },
+    {
+      "id": "grundfos-dwk-dpk",
+      "slug": "grundfos-dwk-dpk",
+      "image": null,
+      "shortDescription": "DWK／DPK 系列沉水式脫水／排水泵，適用於工地排水、礦山排水及臨時排水應用。具備高可靠性與耐用特性。",
+      "introduction": "DWK／DPK 系列為 Grundfos 沉水式脫水及排水泵。DWK 適用於含少量固體顆粒的排水應用；DPK 適用於污水與廢水排放。採用不鏽鋼與鑄鐵材質，具備高可靠耐用特性，適用於污水、工業系統等排水場景。"
+    },
+    {
+      "id": "grundfos-sp-a-sp",
+      "slug": "grundfos-sp-a-sp",
+      "image": null,
+      "shortDescription": "SP A／SP 系列深井沉水式多段泵，適用於深井取水、地下水供給與農業灌溉。不鏽鋼設計，具備高揚程與耐蝕特性。",
+      "introduction": "SP A／SP 系列為 Grundfos 深井沉水式多段泵。SP A 採用不鏽鋼 AISI 304 材質，SP 採用不鏽鋼 AISI 316 材質。適用於深井取水、地下水供給、農業灌溉及工業系統等深水應用。多段葉輪設計提供高揚程性能。"
+    },
+    {
+      "id": "grundfos-sc-hc",
+      "slug": "grundfos-sc-hc",
+      "image": null,
+      "shortDescription": "SC／HC 系列沉水式污物廢水泵，適用於污水、污物及廢水排放。具備大通過粒徑設計與耐磨耗特性。",
+      "introduction": "SC／HC 系列為 Grundfos 沉水式污物廢水泵。SC 適用於污水與污物排放，HC 適用於含較大固體顆粒的廢水。採用耐磨耗設計，具備大通過粒徑能力，適用於污水、工業系統等排水場景。"
+    },
+    {
+      "id": "grundfos-magna3",
+      "slug": "grundfos-magna3",
+      "image": null,
+      "shortDescription": "MAGNA3 系列智慧型循環泵，整合變頻控制與 AUTOADAPT 功能，根據系統需求自動調節，達到最佳節能效果。",
+      "introduction": "MAGNA3 系列為 Grundfos 智慧型循環泵，整合先進變頻控制技術與 AUTOADAPT 自動調適功能。內建流量與溫度感測，可根據系統需求自動調節運轉，達到最佳節能效果。適用於冷凍及空調、工業系統等循環應用。"
+    },
+    {
+      "id": "grundfos-hydro-mpc",
+      "slug": "grundfos-hydro-mpc",
+      "image": null,
+      "shortDescription": "Hydro MPC 多泵變頻恆壓加壓系統，整合多台 CR 系列泵浦與 MPC 控制器，提供大水量恆壓供水。",
+      "introduction": "Hydro MPC 系列為 Grundfos 多泵變頻恆壓加壓系統。整合多台 CR 系列泵浦與先進 MPC 控制系統，提供大水量恆壓供水方案。適用於大樓揚水、工業系統、農業灌溉用水等大水量供水應用。"
+    },
+    {
+      "id": "grundfos-cl-lf",
+      "slug": "grundfos-cl-lf",
+      "image": null,
+      "shortDescription": "CL／LF 系列單段端吸離心泵，採用標準化設計，適用於工業給水、空調循環及一般輸送。",
+      "introduction": "CL／LF 系列為 Grundfos 單段端吸離心泵。採用標準化設計與後拉式結構，便於維護。適用於工業系統、冷凍及空調、一般工業用水等輸送應用。"
+    },
+    {
+      "id": "grundfos-nb-nbg-nk-nkg-nbe-nbge-nke-nkge",
+      "slug": "grundfos-nb-nbg-nk-nkg-nbe-nbge-nke-nkge",
+      "image": null,
+      "shortDescription": "NB／NBG／NK／NKG／NBE／NBGE／NKE／NKGE 系列單段端吸離心泵，提供標準與變頻版本，適用於工業給水與空調循環。",
+      "introduction": "NB／NBG／NK／NKG／NBE／NBGE／NKE／NKGE 系列為 Grundfos 單段端吸離心泵家族。NB/NBG/NK/NKG 為標準馬達版本，NBE/NBGE/NKE/NKGE 為整合變頻馬達版本。採用標準化設計，適用於工業系統、冷凍及空調、一般工業用水等應用。"
     }
   ]
 }

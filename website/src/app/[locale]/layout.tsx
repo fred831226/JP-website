@@ -42,10 +42,11 @@ export default function LocaleLayout({
               name: "傑平有限公司",
               alternateName: "JP PUMP",
               url: "https://www.jp-pump.com.tw",
-              telephone: "+886-2-1234-5678",
+              telephone: "+886-2-2649-6338",
               contactPoint: {
                 "@type": "ContactPoint",
-                telephone: "+886-2-1234-5678",
+                telephone: "+886-2-2649-6338",
+                email: "jie.ping@msa.hinet.net",
                 contactType: "sales",
               },
             }),

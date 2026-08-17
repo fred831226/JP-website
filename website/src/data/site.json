@@ -11,7 +11,17 @@
         { "id": "sewage-pump", "label": "污水泵", "href": "/zh-tw/products?type=sewage-pump" },
         { "id": "self-priming-pump", "label": "陸上式自吸式泵", "href": "/zh-tw/products?type=self-priming-pump" },
         { "id": "pressure-boosting-pump", "label": "電子穩壓加壓泵", "href": "/zh-tw/products?type=pressure-boosting-pump" },
-        { "id": "vertical-multistage-pump", "label": "立式揚水泵", "href": "/zh-tw/products?type=vertical-multistage-pump" }
+        { "id": "vertical-multistage-pump", "label": "立式揚水泵", "href": "/zh-tw/products?type=vertical-multistage-pump" },
+        { "id": "dual-booster-hv-system", "label": "雙台變頻恆壓加壓系統", "href": "/zh-tw/products?type=dual-booster-hv-system" },
+        { "id": "vertical-dual-booster-system", "label": "直立式雙台變頻恆壓加壓系統", "href": "/zh-tw/products?type=vertical-dual-booster-system" },
+        { "id": "horizontal-multistage-end-suction", "label": "臥式多段端吸離心泵", "href": "/zh-tw/products?type=horizontal-multistage-end-suction" },
+        { "id": "vertical-multistage-centrifugal", "label": "立式多段離心泵", "href": "/zh-tw/products?type=vertical-multistage-centrifugal" },
+        { "id": "submersible-dewatering-pump", "label": "沉水式脫水／排水泵", "href": "/zh-tw/products?type=submersible-dewatering-pump" },
+        { "id": "deep-well-submersible-pump", "label": "深井沉水式多段泵", "href": "/zh-tw/products?type=deep-well-submersible-pump" },
+        { "id": "submersible-sewage-pump", "label": "沉水式污物廢水泵", "href": "/zh-tw/products?type=submersible-sewage-pump" },
+        { "id": "intelligent-circulator-pump", "label": "智慧型循環泵", "href": "/zh-tw/products?type=intelligent-circulator-pump" },
+        { "id": "multi-pump-booster-system", "label": "多泵變頻恆壓加壓系統", "href": "/zh-tw/products?type=multi-pump-booster-system" },
+        { "id": "single-stage-end-suction", "label": "單段端吸離心泵", "href": "/zh-tw/products?type=single-stage-end-suction" }
       ]
     },
     "services": {
@@ -31,8 +41,8 @@
     }
   },
   "contactInfo": {
-    "phone": "+886-2-1234-5678",
-    "email": "info@jp-pump.com.tw",
-    "address": "台北市中山區..."
+    "phone": "02-2649-6338",
+    "email": "jie.ping@msa.hinet.net",
+    "address": "221 新北市汐止區水源路二段90號1樓"
   }
 }

@@ -48,6 +48,17 @@ test.describe("Public smoke tests", () => {
   test("Company page loads", async ({ page }) => {
     await page.goto(`${BASE}/company`);
     await expect(page.locator("h1")).toContainText("公司資訊");
+    await expect(page.getByText("台北大巨蛋")).toBeVisible();
+    await expect(page.getByText("3,000+").first()).toBeVisible();
+    await expect(page.getByText("15,000+")).toBeVisible();
+    await expect(page.getByText("總經理願景")).toBeVisible();
+  });
+
+  test("Partners page shows Grundfos", async ({ page }) => {
+    await page.goto(`${BASE}/partners`);
+    await expect(page.locator("h1")).toContainText("合作夥伴");
+    await expect(page.getByText("Grundfos 葛蘭富")).toBeVisible();
+    await expect(page.getByText("台灣葛蘭富公司總監 陳幼翎")).toBeVisible();
   });
 
   test("Services page loads with capability tags", async ({ page }) => {
@@ -67,6 +78,9 @@ test.describe("Public smoke tests", () => {
 
     const brandPage = await page.goto(`${BASE}/brands/jp-pump`);
     expect(brandPage?.status()).toBe(404);
+
+    const grundfosBrandPage = await page.goto(`${BASE}/brands/grundfos`);
+    expect(grundfosBrandPage?.status()).toBe(404);
 
     const purposePage = await page.goto(`${BASE}/purposes/${encodeURIComponent("大樓揚水")}`);
     expect(purposePage?.status()).toBe(404);

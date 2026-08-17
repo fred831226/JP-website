@@ -1,12 +1,64 @@
 {
   "name": "傑平有限公司",
   "brand": "JP PUMP",
-  "foundedYear": null,
-  "intro": "傑平有限公司專注於泵浦領域，以技術實證與完整服務鏈協助國內外建案與工業客戶。",
-  "facts": [],
-  "contact": {
-    "phone": null,
-    "email": null,
-    "address": null
-  }
+  "foundedYear": 1998,
+  "intro": "傑平有限公司（JP PUMP）創立於1998年，深耕泵浦領域已近28年，從小型設備到大型系統工程皆能完整支持。以技術實證與完整服務鏈，協助國內外建案與工業客戶穩定運行。",
+  "sections": [
+    {
+      "id": "services",
+      "heading": "服務範圍與強項",
+      "type": "paragraphs",
+      "paragraphs": [
+        "服務項目涵蓋中小型至大型泵浦系統的選型、估價、安裝與維修，從需求評估到設備導入與後續服務，每個環節皆可追溯。",
+        "以扎實的工程經驗與快速回應，協助客戶在設備生命周期的每一階段做出正確決定，降低營運與維護風險。"
+      ]
+    },
+    {
+      "id": "stats",
+      "heading": "完成實績",
+      "type": "stats",
+      "stats": [
+        { "value": "3,000+", "label": "完成案件" },
+        { "value": "3,000+", "label": "服務客戶" },
+        { "value": "15,000+", "label": "維修案件" }
+      ]
+    },
+    {
+      "id": "milestones",
+      "heading": "里程碑建案",
+      "type": "milestones",
+      "milestones": [
+        "台北大巨蛋",
+        "台北101",
+        "台北世貿一館",
+        "台北國際會議中心",
+        "美國在台協會（AIT）",
+        "台中捷運G03",
+        "桃園國際機場第一、第二航廈",
+        "桃園國際機場第三航廈（新建中）"
+      ]
+    },
+    {
+      "id": "contact",
+      "heading": "公司資訊",
+      "type": "contact",
+      "contactRows": [
+        { "label": "公司名稱（英文）", "value": "JIEPING CO., LTD", "type": "text" },
+        { "label": "地址", "value": "221 新北市汐止區白雲里水源路二段90號1樓\n1 F., No. 90, Sec. 2, Shuiyuan Rd., Xizhi Dist., New Taipei City 22162, Taiwan (R.O.C.)", "type": "address" },
+        { "label": "電話", "value": "02-2649-6338", "type": "phone", "href": "tel:+886226496338" },
+        { "label": "傳真", "value": "02-2649-6341", "type": "text" },
+        { "label": "Email", "value": "jie.ping@msa.hinet.net", "type": "email", "href": "mailto:jie.ping@msa.hinet.net" },
+        { "label": "Email", "value": "jiepingpump@gmail.com", "type": "email", "href": "mailto:jiepingpump@gmail.com" }
+      ]
+    },
+    {
+      "id": "vision",
+      "heading": "總經理願景",
+      "type": "vision",
+      "author": null,
+      "paragraphs": [
+        "我們以扎實的工程與服務精神，解決每一套泵浦系統的難題，讓客戶節能省心、安心營運。持續精進技術、守住品質，與團隊和客戶一同穩健成長。"
+      ]
+    }
+  ]
 }

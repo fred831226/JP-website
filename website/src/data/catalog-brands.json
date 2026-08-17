@@ -4,5 +4,11 @@
     "name": "傑平有限公司 JP PUMP",
     "slug": "jp-pump",
     "description": "傑平自有品牌，專注於泵浦領域的技術與服務。"
+  },
+  {
+    "id": "grundfos",
+    "name": "Grundfos 葛蘭富",
+    "slug": "grundfos",
+    "description": "Grundfos 為全球泵浦領導品牌，JP PUMP 提供台灣市場在地化技術支援與選型服務。"
   }
 ]

@@ -1,1 +1,52 @@
-[]
+[
+  {
+    "id": "grundfos",
+    "name": "Grundfos 葛蘭富",
+    "logo": "/media/Grundfos.avif",
+    "website": "https://www.grundfos.com/tw",
+    "summary": "葛蘭富為全球泵浦領導品牌，與傑平有限公司（JP PUMP）合作，提供台灣市場在地化的技術支援與選型服務。",
+    "sections": [
+      {
+        "id": "history",
+        "heading": "夥伴沿革與業務",
+        "type": "paragraphs",
+        "paragraphs": [
+          "葛蘭富於1989年在台灣設立泵浦生產工廠，1991年成立台灣葛蘭富銷售公司，是第一家在台設廠生產泵浦的外商公司；目前員工約277人，2024年在台生產泵浦超過18萬台。",
+          "葛蘭富提供大樓供水、工業製程、半導體超純水、空調泵浦與智慧型水處理等全方位解決方案，協助客戶提升效率、節能減碳、共創永續未來。"
+        ]
+      },
+      {
+        "id": "sustainability",
+        "heading": "強項與永續承諾",
+        "type": "paragraphs",
+        "paragraphs": [
+          "葛蘭富以「尊重、保護並促進水的流動」為品牌承諾，長期投入淨零碳排與水資源永續。",
+          "其建築採用自然通風、日照與隔熱設計，並設置太陽能光電板與雨水回收系統，降低能源消耗與碳排放。"
+        ]
+      },
+      {
+        "id": "contact",
+        "heading": "公司資訊",
+        "type": "contact",
+        "contactRows": [
+          { "label": "總公司", "value": "台中市西區民權路219號3樓（葛蘭富泵浦股份有限公司）", "type": "address" },
+          { "label": "台北辦公室", "value": "台北市大同區南京西路57號9樓之9", "type": "address" },
+          { "label": "高雄辦公室", "value": "高雄市前金區中正四路9樓-1,909室", "type": "address" },
+          { "label": "苗栗生產工廠", "value": "苗栗縣銅鑼鄉銅鑼工業區民有路14號", "type": "address" },
+          { "label": "電話", "value": "+886-4-2305 0868", "type": "phone" },
+          { "label": "官方網站", "value": "https://www.grundfos.com/tw", "type": "url" }
+        ]
+      },
+      {
+        "id": "vision",
+        "heading": "總監願景",
+        "type": "vision",
+        "author": "台灣葛蘭富公司總監 陳幼翎",
+        "paragraphs": [
+          "團隊以豐富經驗與創新精神，運用專業泵浦知識為客戶量身打造水處理解決方案，目標是提升水資源使用效率、降低能源消耗並確保環境永續。",
+          "葛蘭富將持續以智慧化與數位化的全方位泵浦解決方案，推動水處理技術的革新與進步。"
+        ]
+      }
+    ]
+  }
+]

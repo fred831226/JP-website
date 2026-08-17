@@ -10,6 +10,7 @@ import overviewRaw from "@/data/catalog-overview.json";
 
 type GeneratedSeries = {
   id: string;
+  brandId: string;
   name: string;
   productName: string;
   pumpType: string;
@@ -28,11 +29,14 @@ type ContentSeries = {
 
 type OverviewSeries = {
   id: string;
+  brandId: string;
   purposeTags: string[];
   headMin: string | null;
   headMax: string | null;
   flowMin: string | null;
   flowMax: string | null;
+  modelCount: number | null;
+  published: string | null;
 };
 
 const generated = generatedRaw as { series: GeneratedSeries[] };
@@ -40,6 +44,7 @@ const content = contentRaw as { series: ContentSeries[] };
 const overview = overviewRaw as { series: OverviewSeries[] };
 
 const PUMP_TYPE_ID_MAP: Record<string, string> = {
+  // JP PUMP
   "沉水式揚水泵": "submersible-well-pump",
   "臥式泵": "horizontal-pump",
   "污水泵": "sewage-pump",
@@ -47,6 +52,24 @@ const PUMP_TYPE_ID_MAP: Record<string, string> = {
   "陸上式自吸式泵": "self-priming-pump",
   "電子穩壓加壓泵": "pressure-boosting-pump",
   "立式揚水泵": "vertical-multistage-pump",
+  // Grundfos 葛蘭富
+  "雙台變頻恆壓加壓系統": "dual-booster-hv-system",
+  "直立式雙台變頻恆壓加壓系統": "vertical-dual-booster-system",
+  "臥式多段端吸離心泵": "horizontal-multistage-end-suction",
+  "立式多段離心泵": "vertical-multistage-centrifugal",
+  "沉水式脫水／排水泵": "submersible-dewatering-pump",
+  "沉水式脫水/排水泵": "submersible-dewatering-pump",
+  "深井沉水式多段泵": "deep-well-submersible-pump",
+  "沉水式污物廢水泵": "submersible-sewage-pump",
+  "智慧型循環泵": "intelligent-circulator-pump",
+  "多泵變頻恆壓加壓系統": "multi-pump-booster-system",
+  "單段端吸離心泵": "single-stage-end-suction",
+};
+
+// Map purpose tags from overview to governed purpose IDs
+const PURPOSE_TAG_TO_ID: Record<string, string> = {
+  "船舶": "船舶-礦山排水",
+  "礦山排水": "船舶-礦山排水",
 };
 
 const contentMap = new Map<string, ContentSeries>();
@@ -64,17 +87,21 @@ const seriesList: Series[] = generated.series.map((gs) => {
   const o = overviewMap.get(gs.id);
   const ptId = PUMP_TYPE_ID_MAP[gs.pumpType];
   /* 用途標籤以網頁_產品總覽 sheet 為權威來源；無覆蓋時 fallback 到 generated */
-  const purposeTags = o?.purposeTags ?? gs.purposeTags;
+  const purposeTags = o?.purposeTags?.length ? o.purposeTags : gs.purposeTags;
+  const purposeIds = purposeTags
+    .map((t) => PURPOSE_TAG_TO_ID[t] ?? t.replace(/\s+/g, "-").replace(/[\/]/g, "-"))
+    .filter((id, i, arr) => arr.indexOf(id) === i); // deduplicate
+
   return {
     id: gs.id,
-    brandId: "jp-pump",
+    brandId: gs.brandId,
     name: gs.name,
     slug: c?.slug ?? gs.id,
     description: c?.shortDescription ?? gs.productName,
     introduction: c?.introduction ?? "",
     image: c?.image ?? null,
     pumpTypeIds: ptId ? [ptId] : [],
-    purposeIds: purposeTags.map((t) => t.replace(/\s+/g, "-").replace(/[\/]/g, "-")),
+    purposeIds,
     purposeTags,
     headMin: o?.headMin ?? null,
     headMax: o?.headMax ?? null,
@@ -100,10 +127,6 @@ export function getBrands(): Brand[] {
   return catalog.brands;
 }
 
-export function getBrand(id: string): Brand | undefined {
-  return catalog.brands.find((b) => b.id === id);
-}
-
 export function getPumpTypes(): PumpType[] {
   return catalog.pumpTypes;
 }
@@ -116,10 +139,6 @@ export function getPurposes(): Purpose[] {
   return catalog.purposes;
 }
 
-export function getPurpose(id: string): Purpose | undefined {
-  return catalog.purposes.find((p) => p.id === id);
-}
-
 export function getSeriesList(): Series[] {
   return catalog.seriesList;
 }
@@ -128,14 +147,6 @@ export function getSeries(idOrSlug: string): Series | undefined {
   return catalog.seriesList.find((s) => s.id === idOrSlug || s.slug === idOrSlug);
 }
 
-export function getSeriesByBrand(brandId: string): Series[] {
-  return catalog.seriesList.filter((s) => s.brandId === brandId);
-}
-
 export function getSeriesByPumpType(typeId: string): Series[] {
   return catalog.seriesList.filter((s) => s.pumpTypeIds.includes(typeId));
-}
-
-export function getSeriesByPurpose(purposeId: string): Series[] {
-  return catalog.seriesList.filter((s) => s.purposeIds.includes(purposeId));
 }

@@ -37,6 +37,7 @@ if (errors.length > 0) {
 
 const gen = JSON.parse(readFileSync(genPath, "utf-8"));
 const content = JSON.parse(readFileSync(contentPath, "utf-8"));
+const brands = JSON.parse(readFileSync(brandsPath, "utf-8"));
 
 // 2. Check stable ID uniqueness
 const genIds = gen.series.map((s) => s.id);
@@ -54,7 +55,7 @@ for (const gs of gen.series) {
 
 for (const cs of content.series) {
   const g = gen.series.find((s) => s.id === cs.id);
-  if (!g) err("catalog.generated.json", cs.id, "id", `Orphaned content entry "${cs.name}" - no matching generated series`);
+  if (!g) err("catalog.generated.json", cs.id, "id", `Orphaned content entry "${cs.id}" - no matching generated series`);
 }
 
 // 4. Model count consistency
@@ -67,6 +68,9 @@ for (const gs of gen.series) {
 // 5. Check required fields
 for (const gs of gen.series) {
   if (!gs.name) err("catalog.generated.json", gs.id, "name", "Missing series name");
+  if (!gs.brandId) err("catalog.generated.json", gs.id, "brandId", "Missing brandId");
+  const brand = brands.find((b) => b.id === gs.brandId);
+  if (!brand) warn("catalog.generated.json", gs.id, "brandId", `Unknown brandId: ${gs.brandId}`);
   for (const m of gs.models) {
     if (!m.id) err("catalog.generated.json", gs.id, "model.id", `Model "${m.name}" has no ID`);
     if (!m.name) err("catalog.generated.json", gs.id, "model.name", `Model id "${m.id}" has no name`);
@@ -97,7 +101,7 @@ if (content.homepagePumpTypes) {
   }
 }
 
-// 7. Check for null/zero technical values
+// 7. Check for null/empty technical values
 for (const gs of gen.series) {
   for (const m of gs.models) {
     for (const [key, val] of Object.entries(m.specs)) {
@@ -108,7 +112,46 @@ for (const gs of gen.series) {
   }
 }
 
-// 8. Build check reminder (can't actually run build from here)
+// 8. Slug uniqueness
+const contentSlugs = content.series.map((s) => s.slug);
+const dupSlugs = contentSlugs.filter((slug, i) => contentSlugs.indexOf(slug) !== i);
+if (dupSlugs.length) err("catalog-content.json", "series", "slug", `Duplicate slugs: ${dupSlugs.join(", ")}`);
+
+// 9. Approved operational facts guard (company / partners / contact / site)
+const companyPath = resolve(ROOT, "src", "data", "company.json");
+const contactPath = resolve(ROOT, "src", "data", "contact.json");
+const sitePath = resolve(ROOT, "src", "data", "site.json");
+const partnersPath = resolve(ROOT, "src", "data", "partners.json");
+for (const [label, p] of [["company", companyPath], ["contact", contactPath], ["site", sitePath], ["partners", partnersPath]]) {
+  if (!existsSync(p)) err("N/A", label, "file", `Missing file: ${p}`);
+}
+
+if (errors.length === 0) {
+  const company = JSON.parse(readFileSync(companyPath, "utf-8"));
+  const contact = JSON.parse(readFileSync(contactPath, "utf-8"));
+  const site = JSON.parse(readFileSync(sitePath, "utf-8"));
+  const partners = JSON.parse(readFileSync(partnersPath, "utf-8"));
+
+  const placeholderRe = /待核准|待確認|待提供|1234-5678|\.\.\.|…/;
+  for (const [file, obj] of [["company.json", company], ["contact.json", contact], ["site.json", site], ["partners.json", partners]]) {
+    const s = JSON.stringify(obj);
+    const hit = s.match(placeholderRe) ? s.match(placeholderRe)[0] : null;
+    if (hit) err(file, "N/A", "content", `Placeholder/unapproved token found: "${hit}"`);
+  }
+
+  if (contactInfoPhone(contact) !== "02-2649-6338") err("contact.json", "info", "phone", "Phone does not match approved value");
+  if (contactInfoEmail(contact) !== "jie.ping@msa.hinet.net") err("contact.json", "info", "email", "Primary email does not match approved value");
+  if (!/新北市汐止區水源路二段90號/.test(contactInfoAddress(contact))) err("contact.json", "info", "address", "Address does not match approved value");
+  if (site.contactInfo.phone !== contact.info.phone) err("site.json", "contactInfo", "phone", "Mismatch with contact.json");
+  if (site.contactInfo.email !== contact.info.email) err("site.json", "contactInfo", "email", "Mismatch with contact.json");
+  if (partners.length === 0) err("partners.json", "partners", "content", "No approved partner records");
+}
+
+function contactInfoPhone(obj) { return obj.info ? obj.info.phone : null; }
+function contactInfoEmail(obj) { return obj.info ? obj.info.email : null; }
+function contactInfoAddress(obj) { return obj.info ? obj.info.address : null; }
+
+// 10. Build check reminder
 warn("N/A", "N/A", "build", "Run 'npm run build' to verify production build");
 
 function printReport() {

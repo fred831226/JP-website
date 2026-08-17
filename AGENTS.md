@@ -23,6 +23,17 @@ Finalized PRD, architecture, reconciliation, UX, and epic documents are authorit
 
 Treat planning artifacts as read-only during implementation or validation unless the task explicitly asks to change requirements or planning.
 
+## Approved operational facts
+
+The following repository files are the single authoritative store for approved company, partner, and contact facts. They are already approved and usable; new sessions must read them instead of asking the owner to re-supply this data:
+
+- `website/src/data/company.json` — company story, stats, milestones, English name (JIEPING CO., LTD), bilingual address, phone, fax, both emails, and the approved GM vision draft
+- `website/src/data/partners.json` — Grundfos 葛蘭富 partner profile (history, locations, phone, official-site link, MD vision)
+- `website/src/data/contact.json` — Contact page phone / email / address
+- `website/src/data/site.json` — nav plus `contactInfo` (mirrored subset used by Header/Footer and JSON-LD)
+
+Approved values (do not re-invent): phone `02-2649-6338` (tel:+886226496338), fax `02-2649-6341`, emails `jie.ping@msa.hinet.net` / `jiepingpump@gmail.com`, address 新北市汐止區水源路二段90號1樓. `layout.tsx` JSON-LD mirrors these. Any replacement requires owner approval.
+
 ## Repository boundaries
 
 - The repository root is the sole Git repository.

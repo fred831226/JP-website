@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getSeriesList, getSeries, getBrand, getPumpTypes } from "@/lib/content/load-catalog";
+import { getSeriesList, getSeries, getBrands, getPumpTypes } from "@/lib/content/load-catalog";
 import SeriesActions from "./SeriesActions";
 import RevealSection from "@/components/RevealSection";
 
@@ -20,7 +20,7 @@ export default async function SeriesPage({ params }: { params: Promise<{ slug: s
   const { slug } = await params;
   const series = getSeries(slug);
   if (!series) notFound();
-  const brand = getBrand(series.brandId);
+  const brand = getBrands().find((b) => b.id === series.brandId);
 
   return (
     <div className="series-sect">
@@ -91,9 +91,9 @@ export default async function SeriesPage({ params }: { params: Promise<{ slug: s
                   {series.models.map((m, i) => (
                     <tr key={m.id} className={`border-b border-[var(--color-border)] transition-colors duration-200 ${i % 2 === 0 ? "bg-white" : "bg-[var(--color-background)]"}`}>
                       <td className="sticky left-0 bg-inherit px-4 py-2.5 font-[650] text-[var(--color-text)]">{m.name}</td>
-                      <td className="px-4 py-2.5 text-[var(--color-text)]">{m.specs?.head ?? <span className="italic text-[var(--color-identity-detail)]">未提供</span>}</td>
-                      <td className="px-4 py-2.5 text-[var(--color-text)]">{m.specs?.flow ?? <span className="italic text-[var(--color-identity-detail)]">未提供</span>}</td>
-                      <td className="px-4 py-2.5 text-[var(--color-text)]">{m.specs?.power ?? <span className="italic text-[var(--color-identity-detail)]">未提供</span>}</td>
+                      <td className="px-4 py-2.5 text-[var(--color-text)]">{specValue(m.specs, "max_head_m", "rated_head_m", "total_head_m")}</td>
+                      <td className="px-4 py-2.5 text-[var(--color-text)]">{specValue(m.specs, "max_flow_lmin", "rated_flow_lmin")}</td>
+                      <td className="px-4 py-2.5 text-[var(--color-text)]">{powerValue(m.specs)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -152,4 +152,20 @@ function KeyData({ label, value, unit }: { label: string; value: string | null; 
       </p>
     </div>
   );
+}
+
+function specValue(specs: Record<string, string>, ...keys: string[]): React.ReactNode {
+  for (const k of keys) {
+    const v = specs[k];
+    if (v != null && v !== "" && v !== "null") return v;
+  }
+  return <span className="italic text-[var(--color-identity-detail)]">未提供</span>;
+}
+
+function powerValue(specs: Record<string, string>): React.ReactNode {
+  const kw = specs["power_kw"];
+  const hp = specs["horsepower_hp"];
+  if (kw != null && kw !== "" && kw !== "null") return kw;
+  if (hp != null && hp !== "" && hp !== "null") return `${hp} HP`;
+  return <span className="italic text-[var(--color-identity-detail)]">未提供</span>;
 }
