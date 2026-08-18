@@ -32,6 +32,28 @@ test.describe("Public smoke tests", () => {
     await expect(rows).toHaveCount(12);
   });
 
+  test("Series page presents the shared hero, introduction, and specifications in order", async ({ page }) => {
+    await page.goto(`${BASE}/series/hs`);
+
+    const heroTitle = page.getByRole("heading", { level: 1, name: "HS" });
+    const introductionTitle = page.getByRole("heading", { level: 2, name: "產品介紹" });
+    const specificationsTitle = page.getByRole("heading", { level: 2, name: "產品規格" });
+
+    await expect(heroTitle).toBeVisible();
+    await expect(heroTitle).toHaveCSS("color", "rgb(255, 255, 255)");
+    await expect(page.getByText("傑平有限公司 JP PUMP／沉水式揚水泵／HS", { exact: true })).toBeVisible();
+    await expect(introductionTitle).toBeVisible();
+    await expect(page.getByRole("img", { name: "HS 產品圖" })).toBeVisible();
+    await expect(specificationsTitle).toBeVisible();
+    await expect(page.getByText("最小揚程", { exact: true })).toHaveCount(0);
+
+    const readingOrder = await page.locator("h1, h2").evaluateAll((headings) =>
+      headings.map((heading) => heading.textContent?.trim()).filter(Boolean),
+    );
+    expect(readingOrder.indexOf("HS")).toBeLessThan(readingOrder.indexOf("產品介紹"));
+    expect(readingOrder.indexOf("產品介紹")).toBeLessThan(readingOrder.indexOf("產品規格"));
+  });
+
   test("SB/SBI/SBN 491-row extreme fixture", async ({ page }) => {
     await page.goto(`${BASE}/series/sb-sbi-sbn`);
     const table = page.locator("table");
