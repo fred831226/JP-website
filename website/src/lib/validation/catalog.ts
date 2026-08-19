@@ -34,6 +34,7 @@ export const SeriesSchema = z.object({
   description: z.string(),
   introduction: z.string(),
   image: z.string().nullable(),
+  images: z.array(z.string()),
   pumpTypeIds: z.array(z.string()),
   purposeIds: z.array(z.string()),
   purposeTags: z.array(z.string()),

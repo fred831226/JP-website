@@ -58,12 +58,12 @@ export default async function SeriesPage({ params }: { params: Promise<{ slug: s
         <RevealSection>
           <section aria-labelledby="series-introduction-title" className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:items-center lg:gap-14">
             <div>
-              {series.image ? (
+              {series.images.length > 0 ? (
                 <div className="relative overflow-hidden rounded-[var(--product-card-radius)] bg-white shadow-[var(--product-card-shadow)]">
                   <div className="pointer-events-none absolute left-3 top-3 z-10 rounded-[6px] bg-white/85 px-2 py-1 text-[11px] text-[var(--color-text-muted)]">
                     點擊圖片放大檢視
                   </div>
-                  <SeriesActions image={series.image} name={series.name} />
+                  <SeriesActions images={series.images} name={series.name} />
                 </div>
               ) : (
                 <div className="flex aspect-[4/3] w-full items-center justify-center rounded-[var(--product-card-radius)] bg-[var(--color-surface-subtle)] text-sm text-[var(--color-text-muted)]">
@@ -85,7 +85,7 @@ export default async function SeriesPage({ params }: { params: Promise<{ slug: s
                 {series.description || "未提供"}
               </p>
               {series.introduction && series.introduction !== series.description && (
-                <p className="mt-3 leading-[var(--font-body-line-height)] text-[var(--color-text-muted)]">
+                <p className="mt-3 whitespace-pre-line leading-[var(--font-body-line-height)] text-[var(--color-text-muted)]">
                   {series.introduction}
                 </p>
               )}

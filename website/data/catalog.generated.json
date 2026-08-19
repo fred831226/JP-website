@@ -1,11 +1,338 @@
 {
-  "generatedAt": "2026-08-06T09:08:05.732Z",
-  "source": "泵浦產品規格資料庫_JP.updated5_含網頁分頁_新增葛蘭富逐型號_性能值覆核更新版.xlsx",
+  "generatedAt": "2026-08-19T04:03:25.308Z",
+  "source": "source-catalog.xlsx",
   "series": [
+    {
+      "id": "jp-pump-vbsg",
+      "brandId": "jp-pump",
+      "name": "VBSG",
+      "sourceSeriesName": "VBSG",
+      "productName": "微電腦變頻變速恆壓泵浦機組",
+      "pumpType": "臥式泵",
+      "purposeTags": [
+        "公寓或大樓頂樓加壓",
+        "免水塔地面直接供水",
+        "美容、美髮、SPA 或相關行業之恆壓淋浴設備供水"
+      ],
+      "modelCount": 33,
+      "models": [
+        {
+          "id": "傑平|VBSG|2VBSG-7-25",
+          "name": "2VBSG-7-25",
+          "specs": {
+            "horsepower_hp": "1",
+            "inlet_inch": "1",
+            "outlet_inch": "1-1/2",
+            "total_head_m": "40"
+          }
+        },
+        {
+          "id": "傑平|VBSG|2VBSG-11-25",
+          "name": "2VBSG-11-25",
+          "specs": {
+            "horsepower_hp": "1.5",
+            "inlet_inch": "1",
+            "outlet_inch": "1-1/2",
+            "total_head_m": "65"
+          }
+        },
+        {
+          "id": "傑平|VBSG|2VBSG-11-32",
+          "name": "2VBSG-11-32",
+          "specs": {
+            "horsepower_hp": "1.5",
+            "inlet_inch": "1-1/4",
+            "outlet_inch": "1-1/2",
+            "total_head_m": "26"
+          }
+        },
+        {
+          "id": "傑平|VBSG|2VBSG-15-32",
+          "name": "2VBSG-15-32",
+          "specs": {
+            "horsepower_hp": "2",
+            "inlet_inch": "1-1/4",
+            "outlet_inch": "2",
+            "total_head_m": "40"
+          }
+        },
+        {
+          "id": "傑平|VBSG|2VBSG-20-40",
+          "name": "2VBSG-20-40",
+          "specs": {
+            "horsepower_hp": "2.5",
+            "inlet_inch": "1-1/4",
+            "outlet_inch": "2",
+            "total_head_m": "53"
+          }
+        },
+        {
+          "id": "傑平|VBSG|2VBSG-15-40",
+          "name": "2VBSG-15-40",
+          "specs": {
+            "horsepower_hp": "2",
+            "inlet_inch": "1-1/2",
+            "outlet_inch": "2",
+            "total_head_m": "26"
+          }
+        },
+        {
+          "id": "傑平|VBSG|2VBSG-22-40",
+          "name": "2VBSG-22-40",
+          "specs": {
+            "horsepower_hp": "3",
+            "inlet_inch": "1-1/2",
+            "outlet_inch": "2-1/2",
+            "total_head_m": "42"
+          }
+        },
+        {
+          "id": "傑平|VBSG|2VBSG-25-40",
+          "name": "2VBSG-25-40",
+          "specs": {
+            "horsepower_hp": "3.5",
+            "inlet_inch": "1-1/2",
+            "outlet_inch": "2-1/2",
+            "total_head_m": "53"
+          }
+        },
+        {
+          "id": "傑平|VBSG|2VBSG-22-50",
+          "name": "2VBSG-22-50",
+          "specs": {
+            "horsepower_hp": "3",
+            "inlet_inch": "1-1/2",
+            "outlet_inch": "3",
+            "total_head_m": "28"
+          }
+        },
+        {
+          "id": "傑平|VBSG|2VBSG-25-50",
+          "name": "2VBSG-25-50",
+          "specs": {
+            "horsepower_hp": "3.5",
+            "inlet_inch": "1-1/2",
+            "outlet_inch": "3",
+            "total_head_m": "43"
+          }
+        },
+        {
+          "id": "傑平|VBSG|2VBSG-37-40",
+          "name": "2VBSG-37-40",
+          "specs": {
+            "horsepower_hp": "5",
+            "inlet_inch": "1-1/2",
+            "outlet_inch": "3",
+            "total_head_m": "55"
+          }
+        },
+        {
+          "id": "傑平|VBSG|KH0230IC",
+          "name": "KH0230IC",
+          "specs": {
+            "power_kw": "0.75",
+            "rated_head_m": "25",
+            "rated_flow_lmin": "40",
+            "power_source": "單相/三相 200-230V；三相 380-440V"
+          }
+        },
+        {
+          "id": "傑平|VBSG|KH0240IC",
+          "name": "KH0240IC",
+          "specs": {
+            "power_kw": "0.95",
+            "rated_head_m": "35",
+            "rated_flow_lmin": "40"
+          }
+        },
+        {
+          "id": "傑平|VBSG|KH0250IC",
+          "name": "KH0250IC",
+          "specs": {
+            "power_kw": "1.15",
+            "rated_head_m": "45",
+            "rated_flow_lmin": "40"
+          }
+        },
+        {
+          "id": "傑平|VBSG|KH0260IC",
+          "name": "KH0260IC",
+          "specs": {
+            "power_kw": "1.35",
+            "rated_head_m": "55",
+            "rated_flow_lmin": "40"
+          }
+        },
+        {
+          "id": "傑平|VBSG|KH0420IC",
+          "name": "KH0420IC",
+          "specs": {
+            "power_kw": "0.95",
+            "rated_head_m": "15",
+            "rated_flow_lmin": "100"
+          }
+        },
+        {
+          "id": "傑平|VBSG|KH0430IC",
+          "name": "KH0430IC",
+          "specs": {
+            "power_kw": "1.35",
+            "rated_head_m": "25",
+            "rated_flow_lmin": "100"
+          }
+        },
+        {
+          "id": "傑平|VBSG|KH0440IC",
+          "name": "KH0440IC",
+          "specs": {
+            "power_kw": "1.75",
+            "rated_head_m": "35",
+            "rated_flow_lmin": "100"
+          }
+        },
+        {
+          "id": "傑平|VBSG|KH0450IC",
+          "name": "KH0450IC",
+          "specs": {
+            "power_kw": "2.15",
+            "rated_head_m": "45",
+            "rated_flow_lmin": "100"
+          }
+        },
+        {
+          "id": "傑平|VBSG|KH0460IC",
+          "name": "KH0460IC",
+          "specs": {
+            "power_kw": "2.55",
+            "rated_head_m": "55",
+            "rated_flow_lmin": "100"
+          }
+        },
+        {
+          "id": "傑平|VBSG|KH0830IC",
+          "name": "KH0830IC",
+          "specs": {
+            "power_kw": "1.85",
+            "rated_head_m": "30",
+            "rated_flow_lmin": "140"
+          }
+        },
+        {
+          "id": "傑平|VBSG|KH0840IC",
+          "name": "KH0840IC",
+          "specs": {
+            "power_kw": "2.65",
+            "rated_head_m": "40",
+            "rated_flow_lmin": "140"
+          }
+        },
+        {
+          "id": "傑平|VBSG|KH0850IC",
+          "name": "KH0850IC",
+          "specs": {
+            "power_kw": "3.5",
+            "rated_head_m": "50",
+            "rated_flow_lmin": "140"
+          }
+        },
+        {
+          "id": "傑平|VBSG|KH0860IC",
+          "name": "KH0860IC",
+          "specs": {
+            "power_kw": "4",
+            "rated_head_m": "55",
+            "rated_flow_lmin": "140"
+          }
+        },
+        {
+          "id": "傑平|VBSG|KH1230IC",
+          "name": "KH1230IC",
+          "specs": {
+            "power_kw": "2.6",
+            "rated_head_m": "30",
+            "rated_flow_lmin": "200"
+          }
+        },
+        {
+          "id": "傑平|VBSG|KH1240IC",
+          "name": "KH1240IC",
+          "specs": {
+            "power_kw": "3.85",
+            "rated_head_m": "40",
+            "rated_flow_lmin": "200"
+          }
+        },
+        {
+          "id": "傑平|VBSG|KH1250IC",
+          "name": "KH1250IC",
+          "specs": {
+            "power_kw": "4.5",
+            "rated_head_m": "50",
+            "rated_flow_lmin": "200"
+          }
+        },
+        {
+          "id": "傑平|VBSG|KH1260IC",
+          "name": "KH1260IC",
+          "specs": {
+            "power_kw": "5.5",
+            "rated_head_m": "60",
+            "rated_flow_lmin": "200"
+          }
+        },
+        {
+          "id": "傑平|VBSG|VBSG-4-25",
+          "name": "VBSG-4-25",
+          "specs": {
+            "horsepower_hp": "0.5",
+            "rated_head_m": "15",
+            "rated_flow_lmin": "45",
+            "power_source": "單相110/220V；三相220/380V"
+          }
+        },
+        {
+          "id": "傑平|VBSG|VBSG-4-25H",
+          "name": "VBSG-4-25H",
+          "specs": {
+            "horsepower_hp": "0.5",
+            "rated_head_m": "20",
+            "rated_flow_lmin": "40"
+          }
+        },
+        {
+          "id": "傑平|VBSG|VBSG-7-25",
+          "name": "VBSG-7-25",
+          "specs": {
+            "horsepower_hp": "1",
+            "rated_head_m": "20",
+            "rated_flow_lmin": "65"
+          }
+        },
+        {
+          "id": "傑平|VBSG|VBSG-7-25H",
+          "name": "VBSG-7-25H",
+          "specs": {
+            "horsepower_hp": "1",
+            "rated_head_m": "30",
+            "rated_flow_lmin": "50"
+          }
+        },
+        {
+          "id": "傑平|VBSG|VBSG-7-40N",
+          "name": "VBSG-7-40N",
+          "specs": {
+            "horsepower_hp": "1",
+            "rated_head_m": "20",
+            "rated_flow_lmin": "100"
+          }
+        }
+      ]
+    },
     {
       "id": "jp-pump-hs",
       "brandId": "jp-pump",
       "name": "HS",
+      "sourceSeriesName": "HS",
       "productName": "沉水式揚水泵",
       "pumpType": "沉水式揚水泵",
       "purposeTags": [
@@ -136,11 +463,318 @@
       ]
     },
     {
+      "id": "jp-pump-kh-vbsg",
+      "brandId": "jp-pump",
+      "name": "KH-VBSG",
+      "sourceSeriesName": "KH-VBSG",
+      "productName": "變頻恆壓泵浦",
+      "pumpType": "臥式泵",
+      "purposeTags": [],
+      "modelCount": 11,
+      "models": [
+        {
+          "id": "傑平|KH-VBSG|KH0230IC-M",
+          "name": "KH0230IC-M",
+          "specs": {
+            "horsepower_hp": "2",
+            "power_kw": "0.75",
+            "rated_head_m": "25",
+            "rated_flow_lmin": "80",
+            "power_source": "單相/三相 200-230V；三相 380-440V"
+          }
+        },
+        {
+          "id": "傑平|KH-VBSG|KH0240IC-M",
+          "name": "KH0240IC-M",
+          "specs": {
+            "horsepower_hp": "2",
+            "power_kw": "0.95",
+            "rated_head_m": "35",
+            "rated_flow_lmin": "80"
+          }
+        },
+        {
+          "id": "傑平|KH-VBSG|KH0250IC-M",
+          "name": "KH0250IC-M",
+          "specs": {
+            "horsepower_hp": "2",
+            "power_kw": "1.15",
+            "rated_head_m": "45",
+            "rated_flow_lmin": "80"
+          }
+        },
+        {
+          "id": "傑平|KH-VBSG|KH0260IC-M",
+          "name": "KH0260IC-M",
+          "specs": {
+            "horsepower_hp": "4",
+            "power_kw": "1.35",
+            "rated_head_m": "55",
+            "rated_flow_lmin": "80"
+          }
+        },
+        {
+          "id": "傑平|KH-VBSG|KH0420IC-M",
+          "name": "KH0420IC-M",
+          "specs": {
+            "horsepower_hp": "2",
+            "power_kw": "0.95",
+            "rated_head_m": "15",
+            "rated_flow_lmin": "200"
+          }
+        },
+        {
+          "id": "傑平|KH-VBSG|KH0430IC-M",
+          "name": "KH0430IC-M",
+          "specs": {
+            "horsepower_hp": "4",
+            "power_kw": "1.35",
+            "rated_head_m": "25",
+            "rated_flow_lmin": "200"
+          }
+        },
+        {
+          "id": "傑平|KH-VBSG|KH0440IC-M",
+          "name": "KH0440IC-M",
+          "specs": {
+            "horsepower_hp": "4",
+            "power_kw": "1.75",
+            "rated_head_m": "35",
+            "rated_flow_lmin": "200"
+          }
+        },
+        {
+          "id": "傑平|KH-VBSG|KH0830IC-M",
+          "name": "KH0830IC-M",
+          "specs": {
+            "horsepower_hp": "4",
+            "power_kw": "1.85",
+            "rated_head_m": "30",
+            "rated_flow_lmin": "280"
+          }
+        },
+        {
+          "id": "傑平|KH-VBSG|KH0840IC-M",
+          "name": "KH0840IC-M",
+          "specs": {
+            "horsepower_hp": "6",
+            "power_kw": "2.65",
+            "rated_head_m": "40",
+            "rated_flow_lmin": "280"
+          }
+        },
+        {
+          "id": "傑平|KH-VBSG|KH1230IC-M",
+          "name": "KH1230IC-M",
+          "specs": {
+            "horsepower_hp": "6",
+            "power_kw": "2.6",
+            "rated_head_m": "30",
+            "rated_flow_lmin": "400"
+          }
+        },
+        {
+          "id": "傑平|KH-VBSG|KH1240IC-M",
+          "name": "KH1240IC-M",
+          "specs": {
+            "horsepower_hp": "10",
+            "power_kw": "3.85",
+            "rated_head_m": "40",
+            "rated_flow_lmin": "400"
+          }
+        }
+      ]
+    },
+    {
+      "id": "jp-pump-2vbsg",
+      "brandId": "jp-pump",
+      "name": "2VBSG",
+      "sourceSeriesName": "2VBSG",
+      "productName": "大水量變頻恆壓泵浦",
+      "pumpType": "臥式泵",
+      "purposeTags": [],
+      "modelCount": 17,
+      "models": [
+        {
+          "id": "傑平|2VBSG|2VBSG0230",
+          "name": "2VBSG0230",
+          "specs": {
+            "horsepower_hp": "2",
+            "power_kw": "0.75",
+            "rated_head_m": "25",
+            "rated_flow_lmin": "80",
+            "power_source": "單相/三相 200-230V；三相 380-440V"
+          }
+        },
+        {
+          "id": "傑平|2VBSG|2VBSG0240",
+          "name": "2VBSG0240",
+          "specs": {
+            "horsepower_hp": "2",
+            "power_kw": "0.95",
+            "rated_head_m": "35",
+            "rated_flow_lmin": "80"
+          }
+        },
+        {
+          "id": "傑平|2VBSG|2VBSG0250",
+          "name": "2VBSG0250",
+          "specs": {
+            "horsepower_hp": "2",
+            "power_kw": "1.15",
+            "rated_head_m": "45",
+            "rated_flow_lmin": "80"
+          }
+        },
+        {
+          "id": "傑平|2VBSG|2VBSG0260",
+          "name": "2VBSG0260",
+          "specs": {
+            "horsepower_hp": "4",
+            "power_kw": "1.35",
+            "rated_head_m": "55",
+            "rated_flow_lmin": "80"
+          }
+        },
+        {
+          "id": "傑平|2VBSG|2VBSG0420",
+          "name": "2VBSG0420",
+          "specs": {
+            "horsepower_hp": "2",
+            "power_kw": "0.95",
+            "rated_head_m": "15",
+            "rated_flow_lmin": "200"
+          }
+        },
+        {
+          "id": "傑平|2VBSG|2VBSG0430",
+          "name": "2VBSG0430",
+          "specs": {
+            "horsepower_hp": "4",
+            "power_kw": "1.35",
+            "rated_head_m": "25",
+            "rated_flow_lmin": "200"
+          }
+        },
+        {
+          "id": "傑平|2VBSG|2VBSG0440",
+          "name": "2VBSG0440",
+          "specs": {
+            "horsepower_hp": "4",
+            "power_kw": "1.75",
+            "rated_head_m": "35",
+            "rated_flow_lmin": "200"
+          }
+        },
+        {
+          "id": "傑平|2VBSG|2VBSG0450",
+          "name": "2VBSG0450",
+          "specs": {
+            "horsepower_hp": "6",
+            "power_kw": "2.15",
+            "rated_head_m": "45",
+            "rated_flow_lmin": "200"
+          }
+        },
+        {
+          "id": "傑平|2VBSG|2VBSG0460",
+          "name": "2VBSG0460",
+          "specs": {
+            "horsepower_hp": "6",
+            "power_kw": "2.55",
+            "rated_head_m": "55",
+            "rated_flow_lmin": "200"
+          }
+        },
+        {
+          "id": "傑平|2VBSG|2VBSG0830",
+          "name": "2VBSG0830",
+          "specs": {
+            "horsepower_hp": "4",
+            "power_kw": "1.85",
+            "rated_head_m": "30",
+            "rated_flow_lmin": "280"
+          }
+        },
+        {
+          "id": "傑平|2VBSG|2VBSG0840",
+          "name": "2VBSG0840",
+          "specs": {
+            "horsepower_hp": "6",
+            "power_kw": "2.65",
+            "rated_head_m": "40",
+            "rated_flow_lmin": "280"
+          }
+        },
+        {
+          "id": "傑平|2VBSG|2VBSG0850",
+          "name": "2VBSG0850",
+          "specs": {
+            "horsepower_hp": "10",
+            "power_kw": "3.5",
+            "rated_head_m": "50",
+            "rated_flow_lmin": "280"
+          }
+        },
+        {
+          "id": "傑平|2VBSG|2VBSG0860",
+          "name": "2VBSG0860",
+          "specs": {
+            "horsepower_hp": "10",
+            "power_kw": "4",
+            "rated_head_m": "55",
+            "rated_flow_lmin": "280"
+          }
+        },
+        {
+          "id": "傑平|2VBSG|2VBSG1230",
+          "name": "2VBSG1230",
+          "specs": {
+            "horsepower_hp": "6",
+            "power_kw": "2.6",
+            "rated_head_m": "30",
+            "rated_flow_lmin": "400"
+          }
+        },
+        {
+          "id": "傑平|2VBSG|2VBSG1240",
+          "name": "2VBSG1240",
+          "specs": {
+            "horsepower_hp": "10",
+            "power_kw": "3.85",
+            "rated_head_m": "40",
+            "rated_flow_lmin": "400"
+          }
+        },
+        {
+          "id": "傑平|2VBSG|2VBSG1250",
+          "name": "2VBSG1250",
+          "specs": {
+            "horsepower_hp": "15",
+            "power_kw": "4.5",
+            "rated_head_m": "50",
+            "rated_flow_lmin": "400"
+          }
+        },
+        {
+          "id": "傑平|2VBSG|2VBSG1260",
+          "name": "2VBSG1260",
+          "specs": {
+            "horsepower_hp": "15",
+            "power_kw": "5.5",
+            "rated_head_m": "60",
+            "rated_flow_lmin": "400"
+          }
+        }
+      ]
+    },
+    {
       "id": "jp-pump-jq",
       "brandId": "jp-pump",
       "name": "JQ",
+      "sourceSeriesName": "JQ",
       "productName": "電子穩壓加壓泵",
-      "pumpType": "電子穩壓加壓泵",
+      "pumpType": "臥式泵",
       "purposeTags": [],
       "modelCount": 3,
       "models": [
@@ -180,8 +814,9 @@
       "id": "jp-pump-cv",
       "brandId": "jp-pump",
       "name": "CV",
+      "sourceSeriesName": "CV",
       "productName": "污水泵",
-      "pumpType": "污水泵",
+      "pumpType": "沉水式污水泵",
       "purposeTags": [
         "污水"
       ],
@@ -254,8 +889,9 @@
       "id": "jp-pump-sn",
       "brandId": "jp-pump",
       "name": "SN",
+      "sourceSeriesName": "SN",
       "productName": "污水泵",
-      "pumpType": "污水泵",
+      "pumpType": "沉水式污水泵",
       "purposeTags": [
         "污水"
       ],
@@ -358,8 +994,9 @@
       "id": "jp-pump-tp",
       "brandId": "jp-pump",
       "name": "TP",
+      "sourceSeriesName": "TP",
       "productName": "污水泵",
-      "pumpType": "污水泵",
+      "pumpType": "沉水式污水泵",
       "purposeTags": [
         "污水"
       ],
@@ -437,6 +1074,7 @@
       "id": "jp-pump-gp",
       "brandId": "jp-pump",
       "name": "GP",
+      "sourceSeriesName": "GP",
       "productName": "同軸渦卷泵浦",
       "pumpType": "臥式泵",
       "purposeTags": [
@@ -461,8 +1099,9 @@
       "id": "jp-pump-y",
       "brandId": "jp-pump",
       "name": "Y系列",
+      "sourceSeriesName": "Y系列",
       "productName": "自吸式泵",
-      "pumpType": "陸上式自吸式泵",
+      "pumpType": "臥式泵",
       "purposeTags": [
         "化工液體",
         "工業系統",
@@ -591,8 +1230,9 @@
       "id": "jp-pump-sb-sbi-sbn",
       "brandId": "jp-pump",
       "name": "SB/SBI/SBN",
+      "sourceSeriesName": "SB/SBI/SBN",
       "productName": "立式多段不銹鋼管道泵浦",
-      "pumpType": "立式揚水泵",
+      "pumpType": "立式楊水泵",
       "purposeTags": [
         "冷凍及空調",
         "大樓揚水",
@@ -4930,8 +5570,9 @@
       "id": "grundfos-2cm",
       "brandId": "grundfos",
       "name": "2CM",
+      "sourceSeriesName": "2CM",
       "productName": "2CM Booster 雙台變頻恆壓加壓泵浦",
-      "pumpType": "雙台變頻恆壓加壓系統",
+      "pumpType": "臥式泵",
       "purposeTags": [
         "大樓揚水",
         "工業系統",
@@ -5110,8 +5751,9 @@
       "id": "grundfos-2cr-i-n-booster",
       "brandId": "grundfos",
       "name": "2CR(I,N) Booster",
+      "sourceSeriesName": "2CR(I,N) Booster",
       "productName": "CR／CRI／CRN Booster 雙台變頻恆壓泵浦",
-      "pumpType": "直立式雙台變頻恆壓加壓系統",
+      "pumpType": "立式楊水泵",
       "purposeTags": [
         "大樓揚水",
         "工業系統",
@@ -5595,11 +6237,12 @@
       ]
     },
     {
-      "id": "grundfos-cm-cme",
+      "id": "grundfos-cm",
       "brandId": "grundfos",
-      "name": "CM／CME",
+      "name": "CM",
+      "sourceSeriesName": "CM／CME",
       "productName": "CM、CME 臥式多段離心泵",
-      "pumpType": "臥式多段端吸離心泵",
+      "pumpType": "臥式泵",
       "purposeTags": [
         "工業系統",
         "水處理",
@@ -5989,11 +6632,28 @@
       ]
     },
     {
+      "id": "grundfos-cme",
+      "brandId": "grundfos",
+      "name": "CME",
+      "sourceSeriesName": "CM／CME",
+      "productName": "CM、CME 臥式多段離心泵",
+      "pumpType": "臥式泵",
+      "purposeTags": [
+        "工業系統",
+        "水處理",
+        "冷凍及空調",
+        "大樓揚水"
+      ],
+      "modelCount": 0,
+      "models": []
+    },
+    {
       "id": "grundfos-cr-cri-crn",
       "brandId": "grundfos",
       "name": "CR／CRI／CRN",
+      "sourceSeriesName": "CR／CRI／CRN",
       "productName": "CR、CRI、CRN 立式多段離心泵",
-      "pumpType": "立式多段離心泵",
+      "pumpType": "立式楊水泵",
       "purposeTags": [
         "大樓揚水",
         "工業系統",
@@ -9877,16 +10537,17 @@
       ]
     },
     {
-      "id": "grundfos-dwk-dpk",
+      "id": "grundfos-dwk",
       "brandId": "grundfos",
-      "name": "DWK／DPK",
+      "name": "DWK",
+      "sourceSeriesName": "DWK／DPK",
       "productName": "DWK 脫水泵與 DPK 排水泵",
-      "pumpType": "沉水式脫水／排水泵",
+      "pumpType": "沉水式揚水泵",
       "purposeTags": [
         "污水",
         "工業系統"
       ],
-      "modelCount": 166,
+      "modelCount": 138,
       "models": [
         {
           "id": "葛蘭富|DWK／DPK|DWK.O.6.50.075.6.0D",
@@ -10853,7 +11514,22 @@
           "specs": {
             "power_source": "60 Hz；3×220–240 V 或 3×380–415 V，依機型"
           }
-        },
+        }
+      ]
+    },
+    {
+      "id": "grundfos-dpk",
+      "brandId": "grundfos",
+      "name": "DPK",
+      "sourceSeriesName": "DWK／DPK",
+      "productName": "DWK 脫水泵與 DPK 排水泵",
+      "pumpType": "沉水式揚水泵",
+      "purposeTags": [
+        "污水",
+        "工業系統"
+      ],
+      "modelCount": 28,
+      "models": [
         {
           "id": "葛蘭富|DWK／DPK|DPK.10.50.075.6.0D",
           "name": "DPK.10.50.075.6.0D",
@@ -11056,8 +11732,9 @@
       "id": "grundfos-sp-a-sp",
       "brandId": "grundfos",
       "name": "SP A／SP",
+      "sourceSeriesName": "SP A／SP",
       "productName": "SP A、SP 深井沉水泵",
-      "pumpType": "深井沉水式多段泵",
+      "pumpType": "沉水式揚水泵",
       "purposeTags": [
         "大樓揚水",
         "農業灌溉用水",
@@ -12934,16 +13611,17 @@
       ]
     },
     {
-      "id": "grundfos-sc-hc",
+      "id": "grundfos-sc",
       "brandId": "grundfos",
-      "name": "SC／HC 污物廢水泵",
+      "name": "SC",
+      "sourceSeriesName": "SC／HC 污物廢水泵",
       "productName": "葛蘭富污物廢水泵浦",
-      "pumpType": "沉水式污物廢水泵",
+      "pumpType": "沉水式污水泵",
       "purposeTags": [
         "污水",
         "工業系統"
       ],
-      "modelCount": 90,
+      "modelCount": 60,
       "models": [
         {
           "id": "葛蘭富|SC／HC 污物廢水泵|80SCC41.5",
@@ -13364,7 +14042,22 @@
           "specs": {
             "power_source": "60 Hz；依機型；大型系列列有 380–480 V"
           }
-        },
+        }
+      ]
+    },
+    {
+      "id": "grundfos-hc",
+      "brandId": "grundfos",
+      "name": "HC",
+      "sourceSeriesName": "SC／HC 污物廢水泵",
+      "productName": "葛蘭富污物廢水泵浦",
+      "pumpType": "沉水式污水泵",
+      "purposeTags": [
+        "污水",
+        "工業系統"
+      ],
+      "modelCount": 11,
+      "models": [
         {
           "id": "葛蘭富|SC／HC 污物廢水泵|50HCC21.5",
           "name": "50HCC21.5",
@@ -13441,7 +14134,22 @@
           "specs": {
             "power_source": "60 Hz；依機型；大型系列列有 380–480 V"
           }
-        },
+        }
+      ]
+    },
+    {
+      "id": "grundfos-hs-ss",
+      "brandId": "grundfos",
+      "name": "HS／SS",
+      "sourceSeriesName": "SC／HC 污物廢水泵",
+      "productName": "葛蘭富污物廢水泵浦",
+      "pumpType": "沉水式污水泵",
+      "purposeTags": [
+        "污水",
+        "工業系統"
+      ],
+      "modelCount": 19,
+      "models": [
         {
           "id": "葛蘭富|SC／HC 污物廢水泵|50HSV20.4",
           "name": "50HSV20.4",
@@ -13581,8 +14289,9 @@
       "id": "grundfos-magna3",
       "brandId": "grundfos",
       "name": "MAGNA3",
+      "sourceSeriesName": "MAGNA3",
       "productName": "MAGNA3 智慧型高效率循環泵",
-      "pumpType": "智慧型循環泵",
+      "pumpType": "臥式泵",
       "purposeTags": [
         "冷凍及空調",
         "工業系統"
@@ -13798,8 +14507,9 @@
       "id": "grundfos-hydro-mpc",
       "brandId": "grundfos",
       "name": "Hydro MPC",
+      "sourceSeriesName": "Hydro MPC",
       "productName": "Hydro MPC 多功能加壓系統",
-      "pumpType": "多泵變頻恆壓加壓系統",
+      "pumpType": "立式楊水泵",
       "purposeTags": [
         "大樓揚水",
         "工業系統",
@@ -13838,17 +14548,18 @@
       ]
     },
     {
-      "id": "grundfos-cl-lf",
+      "id": "grundfos-cl",
       "brandId": "grundfos",
-      "name": "CL／LF",
+      "name": "CL",
+      "sourceSeriesName": "CL／LF",
       "productName": "CL、LF 長軸聯結端吸泵",
-      "pumpType": "單段端吸離心泵",
+      "pumpType": "臥式泵",
       "purposeTags": [
         "工業系統",
         "冷凍及空調",
         "一般工業用水"
       ],
-      "modelCount": 2,
+      "modelCount": 1,
       "models": [
         {
           "id": "葛蘭富|CL／LF|CL",
@@ -13856,7 +14567,23 @@
           "specs": {
             "power_source": "LF：50 Hz；CL 型錄頁未明示；依馬達配置"
           }
-        },
+        }
+      ]
+    },
+    {
+      "id": "grundfos-lf",
+      "brandId": "grundfos",
+      "name": "LF",
+      "sourceSeriesName": "CL／LF",
+      "productName": "CL、LF 長軸聯結端吸泵",
+      "pumpType": "臥式泵",
+      "purposeTags": [
+        "工業系統",
+        "冷凍及空調",
+        "一般工業用水"
+      ],
+      "modelCount": 1,
+      "models": [
         {
           "id": "葛蘭富|CL／LF|LF",
           "name": "LF",
@@ -13867,17 +14594,41 @@
       ]
     },
     {
-      "id": "grundfos-nb-nbg-nk-nkg-nbe-nbge-nke-nkge",
+      "id": "grundfos-nb-nbe-nk-nke",
       "brandId": "grundfos",
-      "name": "NB／NBG／NK／NKG／NBE／NBGE／NKE／NKGE",
+      "name": "NB／NBE／NK／NKE",
+      "sourceSeriesName": "NB／NBG／NK／NKG／NBE／NBGE／NKE／NKGE",
       "productName": "客製化單段端吸泵系列",
-      "pumpType": "單段端吸離心泵",
+      "pumpType": "臥式泵",
       "purposeTags": [
         "工業系統",
         "冷凍及空調",
         "一般工業用水"
       ],
-      "modelCount": 4,
+      "modelCount": 1,
+      "models": [
+        {
+          "id": "葛蘭富|NB／NBG／NK／NKG／NBE／NBGE／NKE／NKGE|NK 32-125",
+          "name": "NK 32-125",
+          "specs": {
+            "power_source": "50／60 Hz；依馬達配置"
+          }
+        }
+      ]
+    },
+    {
+      "id": "grundfos-nbg-nbge-nkg-nkge",
+      "brandId": "grundfos",
+      "name": "NBG／NBGE／NKG／NKGE",
+      "sourceSeriesName": "NB／NBG／NK／NKG／NBE／NBGE／NKE／NKGE",
+      "productName": "客製化單段端吸泵系列",
+      "pumpType": "臥式泵",
+      "purposeTags": [
+        "工業系統",
+        "冷凍及空調",
+        "一般工業用水"
+      ],
+      "modelCount": 3,
       "models": [
         {
           "id": "葛蘭富|NB／NBG／NK／NKG／NBE／NBGE／NKE／NKGE|NBG 125-80-200",
@@ -13889,13 +14640,6 @@
         {
           "id": "葛蘭富|NB／NBG／NK／NKG／NBE／NBGE／NKE／NKGE|NBG 125-80-200/196",
           "name": "NBG 125-80-200/196",
-          "specs": {
-            "power_source": "50／60 Hz；依馬達配置"
-          }
-        },
-        {
-          "id": "葛蘭富|NB／NBG／NK／NKG／NBE／NBGE／NKE／NKGE|NK 32-125",
-          "name": "NK 32-125",
           "specs": {
             "power_source": "50／60 Hz；依馬達配置"
           }

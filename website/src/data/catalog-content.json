@@ -1,145 +1,230 @@
 {
   "homepagePumpTypes": [
-    { "name": "沉水式揚水泵", "seriesId": "jp-pump-hs", "slug": "hs", "silhouette": "/media/hs-silhouette.png" },
-    { "name": "臥式泵", "seriesId": "jp-pump-gp", "slug": "gp", "silhouette": "/media/gp-silhouette.png" },
-    { "name": "污水泵", "seriesId": "jp-pump-cv", "slug": "cv", "silhouette": "/media/cv-silhouette.png" },
-    { "name": "陸上式自吸式泵", "seriesId": "jp-pump-y", "slug": "y-series", "silhouette": "/media/y-series-silhouette.png" },
-    { "name": "電子穩壓加壓泵", "seriesId": "jp-pump-jq", "slug": "jq", "silhouette": "/media/jq-silhouette.png" },
-    { "name": "立式揚水泵", "seriesId": "jp-pump-sb-sbi-sbn", "slug": "sb-sbi-sbn", "silhouette": "/media/sb-sbi-sbn-silhouette.png" }
+    {
+      "name": "臥式泵",
+      "seriesId": "jp-pump-gp",
+      "slug": "gp",
+      "silhouette": "/media/gp-silhouette.png"
+    },
+    {
+      "name": "沉水式揚水泵",
+      "seriesId": "jp-pump-hs",
+      "slug": "hs",
+      "silhouette": "/media/hs-silhouette.png"
+    },
+    {
+      "name": "沉水式污水泵",
+      "seriesId": "jp-pump-cv",
+      "slug": "cv",
+      "silhouette": "/media/cv-silhouette.png"
+    },
+    {
+      "name": "立式楊水泵",
+      "seriesId": "jp-pump-sb-sbi-sbn",
+      "slug": "sb-sbi-sbn",
+      "silhouette": "/media/sb-sbi-sbn-silhouette.png"
+    }
   ],
   "series": [
     {
       "id": "jp-pump-hs",
       "image": "/media/hs-product-1.jfif",
       "slug": "hs",
-      "shortDescription": "HS 系列全不鏽鋼沉水式揚水泵，專為大樓揚水設計，榮獲多國專利認證。採用活動式推力軸承與多面結合式結構，具備高效能與耐用特性。",
-      "introduction": "HS 系列全不鏽鋼沉水式揚水泵，專為大樓揚水應用設計。產品榮獲台灣、美國等多國專利認證，包含活動式推力軸承與多面結合式結構等創新技術。採用不鏽鋼材質，具備優異的耐蝕性與使用壽命，適用於大樓給水增壓及相關揚水需求。"
+      "shortDescription": "HS 系列沉水式揚水泵，直立式設計、不佔空間，適用於安裝在大樓地下室蓄水槽（下水池）。",
+      "introduction": "直立式設計、不佔空間，適用於安裝在大樓地下室蓄水槽（下水池）。\n\nSTU型沉水泵的接液部分零件採用不銹鋼SUS304材質，用水潔淨安心，多段式泵葉輪設計，揚程高、範圍廣泛。\n\n吸水側在泵浦端的底部，讓蓄水槽有效水位降到最低，不浪費蓄水槽容積，並使水槽的死水減到最少，水質經常保持新鮮。\n\n密閉式馬達、內部水封式，冷卻效果佳，增加馬達效率。"
+    },
+    {
+      "id": "jp-pump-2vbsg",
+      "image": "/media/2vbsg-product-1.png",
+      "images": [
+        "/media/2vbsg-product-1.png",
+        "/media/2vbsg-product-2.png"
+      ],
+      "slug": "2vbsg",
+      "shortDescription": "2VBSG 變頻恆壓泵浦，微電腦變頻恆壓控制，啟動與停機平穩，水壓穩定，無水錘現象。",
+      "introduction": "產品特色：\n◎ 微電腦變頻恆壓控制，啟動與停機平穩，水壓穩定，無水錘現象。\n◎ 智慧型交互並列啟動系統設計，每台泵浦皆配備智慧型變頻控制器，每台變頻器都能設定為控制主機。當主機故障時，輔助機會自動接替控制，維持正常運轉。\n◎ 省電高效率空運轉控制，當用水量減少時自動交互運轉，用水量增加時自動並列運轉，有效降低馬達耗電量並延長系統使用壽命。\n◎ 雙重馬達過載與泵浦無水運轉保護功能。"
+    },
+    {
+      "id": "jp-pump-kh-vbsg",
+      "image": "/media/kh-vbsg-product-1.png",
+      "slug": "kh-vbsg",
+      "shortDescription": "KH-VBSG 變頻恆壓泵浦，微電腦變頻恆壓控制，水壓穩定，水量不會忽大忽小。超靜音設計，具備馬達過載與泵浦無水運轉雙重保護功能。",
+      "introduction": "產品特色：\n◎ 微電腦變頻恆壓控制，水壓穩定，水量不會忽大忽小。\n◎ 超靜音設計，變頻無段控制，馬達啟動與停機平穩，無水鎚現象。\n◎ 省電高效率運轉控制，當泵浦用水量減少時能有效降低馬達耗電量。\n◎ 馬達過載與泵浦無水運轉雙重保護功能，使用壽命長。"
+    },
+    {
+      "id": "jp-pump-vbsg",
+      "image": "/media/vbsg-product-1.png",
+      "slug": "vbsg",
+      "shortDescription": "VBSG 變頻恆壓泵浦，微電腦變頻恆壓控制，水壓穩定，超靜音設計，具備智慧型馬達過載與泵浦無水運轉雙重保護功能，適用於頂樓加壓、直接供水及恆壓淋浴供水。",
+      "introduction": "產品特色：\n◎ 微電腦變頻恆壓控制，水壓穩定，水量不會忽大忽小。\n◎ 超靜音設計，變頻無段控制，馬達啟動與停機平穩，無水鎚現象。\n◎ 省電高效率運轉控制，當泵浦用水量減少時能有效降低馬達耗電量。\n◎ 智慧型馬達過載與泵浦無水運轉雙重保護功能，使用壽命長。"
     },
     {
       "id": "jp-pump-gp",
       "slug": "gp",
       "image": "/media/gp-product-1.png",
-      "shortDescription": "GP 系列陸上式同軸渦卷泵浦，採用機械軸封設計，效率高、水量大、體積小。適用於高樓給水、工業用水、空調循環及農業灌溉。",
-      "introduction": "GP 系列陸上式同軸渦卷泵浦，採用機械軸封設計，保證不漏水、不損軸心，大幅延長泵浦使用壽命。效率高、水量大、揚水性能佳，體積小且安裝簡便，維護操作成本低。適用於高樓給水、工業用水、空調循環、工地用水及農業灌溉等多種場景。"
+      "shortDescription": "GP 系列陸上式同軸渦卷泵浦，採用機械軸封，不漏水、不損軸心，泵浦使用壽命長。",
+      "introduction": "產品特色：\n(1) 採用機械軸封，不漏水，不損軸心，泵浦使用壽命長。\n(2) 效率高，水量大，揚水性能佳。\n(3) 體積小，安裝簡便，維護操作成本低。"
     },
     {
       "id": "jp-pump-cv",
       "slug": "cv",
       "image": "/media/cv-product-1.png",
-      "shortDescription": "CV 系列沉水式污水泵，通過粒徑 35-50mm，配備馬達過熱保護器與美規 UL 認證電纜線。SUS304 馬達本體，IP68 防水等級。",
-      "introduction": "CV 系列沉水式污水泵，適用於污水排放應用。液體溫度 0~40°C，pH 值 6~9，通過粒徑 35-50mm。全機型標準配備馬達過熱保護器，採用美規 UL 認證電纜線及水切處理杜絕水氣。SUS304 馬達本體，IP68 沉水式高效能馬達，可選配浮球開關。"
+      "shortDescription": "CV 系列沉水式污水泵，液體溫度 0~40℃，通過粒徑 35-50mm，全機型標準配備馬達過熱保護器。",
+      "introduction": "產品特色：\n❖ 液體溫度：0~40℃\n❖ Ph值：6~9\n❖ 通過粒徑35-50mm\n❖ 全機型標準配備馬達過熱保護器\n❖ 美規UL認證電纜線，水切處理杜絕水氣\n❖ SUS304馬達本體\n❖ IP68沉水式高效能馬達"
     },
     {
       "id": "jp-pump-sn",
       "slug": "sn",
       "image": "/media/sn-product-1.png",
-      "shortDescription": "SN 系列沉水式污水泵，通過粒徑 6mm，配備過熱保護器與 UL 認證電纜線。SUS304 機體，IP68 防水，適合污水排放。",
-      "introduction": "SN 系列沉水式污水泵，適用於污水排放與廢水處理。液體溫度 0~40°C，pH 值 6~9，通過粒徑 6mm。全機型配備馬達過熱保護器，採用美規 UL 認證電纜線及水切處理。SUS304 馬達本體，IP68 防水等級，可選配浮球開關。"
+      "shortDescription": "SN 系列沉水式污水泵，液體溫度 0~40℃，通過粒徑 6mm，全機型標準配備馬達過熱保護器。",
+      "introduction": "產品特色：\n❖ 液體溫度：0~40℃\n❖ Ph 值：6~9\n❖ 通過粒徑 6mm\n❖ 全機型標準配備馬達過熱保護器\n❖ 美規 UL 認證電纜線，水切處理杜絕水氣\n❖ SUS304 馬達本體\n❖ IP68 沉水式高效能馬達"
     },
     {
       "id": "jp-pump-tp",
       "slug": "tp",
       "image": "/media/tp-product-1.png",
-      "shortDescription": "TP 系列沉水式污水泵，配備過熱保護器與自動復歸器，採用抗磨耗樹脂葉輪與雙機械軸封。適合工程及工業污水排放。",
-      "introduction": "TP 系列沉水式污水泵，專為工程及工業污水排放設計。全機型標準配備馬達過熱保護器及自動復歸器，採用美規 UL 認證電纜線。抗磨耗樹脂（TBU）製成懸吊式葉輪，攪拌棒設計可避免空氣產生及淤沙沉積。雙機械軸封配置於獨立油室，提供可靠防護。"
+      "shortDescription": "TP 系列沉水式污水泵，全機型標準配備馬達過熱保護器及自動復歸器，採用抗磨耗樹脂葉輪。",
+      "introduction": "產品特色：\n❖ 全機型標準配備馬達過熱保護器及自動復歸器\n❖ 美規 UL 認證電纜線，水切處理杜絕水氣\n❖ 抗磨耗樹脂（TBU）製成懸吊式葉輪，適合工程及工業使用\n❖ 攪拌棒設計，可避免空氣產生及淤沙沉積\n❖ 雙機械軸封配置於獨立油室\n❖ TP 型使用浮球為 ATP 型；使用連桿式浮球為 GTP 型"
     },
     {
       "id": "jp-pump-jq",
       "slug": "jq",
       "image": "/media/jq-product-1.png",
-      "shortDescription": "JQ 系列電子穩壓加壓泵，整合馬達、泵浦、壓力桶與電子控制器於一體，實現恆壓自動供水。體積小、運轉安靜，適合家庭加壓。",
-      "introduction": "JQ 系列電子穩壓加壓泵為結合馬達、泵浦、壓力桶、壓力開關、流量感應開關及電子控制器於一體的整合式流控恆壓自動供水系統。電子控制器能根據壓力及流量變化適時起動或關閉泵浦，提供穩定供水。體積小、出水量大、運轉安靜，多段式離心式葉輪設計效率高，適用於家庭給水加壓及水塔供水。"
+      "shortDescription": "JQ 電子穩壓加壓泵，結合馬達、泵浦、壓力桶與電子控制器於一體的整合式流控恆壓自動供水系統，適用於家庭給水加壓及水塔供水。",
+      "introduction": "JQ 系列泵浦為結合馬達、泵浦、壓力桶、壓力開關、流量感應開關及電子控制器為一體的整合式流控恆壓自動供水系統，電子控制器能根據壓力及流量變化適時起動或關閉泵浦，提供穩定的供水，適用於家庭給水加壓及水塔供水。\n\n產品特色：\n§ 體積小、出水量大、運轉安靜\n§ 多段式離心式葉輪設計，效率高\n§ 高強度金屬（電著／白鐵）或塑鋼泵浦\n§ 可調壓力開關設計，適合不同安裝場所\n§ 可拆式獨立不銹鋼隔膜式充氣蓄壓桶\n§ 馬達及泵浦雙重溫度控制無水斷電保護\n§ 無接點電子／電腦控制電路設計\n\n專利號碼：\nD100139、D131928、M241506、M364131、M415233、M427460、M433474"
     },
     {
       "id": "jp-pump-y",
       "slug": "y-series",
       "image": "/media/y-series-product-1.png",
-      "shortDescription": "Y 系列陸上式自吸式泵，自吸能力高、揚水時間短。半開放式葉輪適用於含固體雜質的液體輸送，採用機械軸封設計。",
-      "introduction": "Y 系列陸上式自吸式泵，本體特殊構造具備高自吸能力，揚水時間短。葉輪採用半開放式設計，適用於泥水、污水及固體混入之藥液輸送。不必加裝底閥，最初加水即可自行排氣揚水，減少灌水麻煩。採用機械軸封保證不漏水，延長泵浦使用壽命。"
+      "shortDescription": "Y 系列陸上式自吸式泵，自吸能力高、揚水時間短，葉輪採用半開放式設計。",
+      "introduction": "產品特色：\n◎ 本體特殊構造，自吸能力高、揚水時間短。\n◎ 葉輪採用半開放式，適用於泥水、污水固體混入之藥液輸送。\n◎ 不必加裝底閥，最初加水即可自行排氣揚水，減少灌水之麻煩。\n◎ 採用機械軸封，保證不漏水，不損軸心，免入棉紗之麻煩，延長抽水機壽命。"
     },
     {
       "id": "jp-pump-sb-sbi-sbn",
       "slug": "sb-sbi-sbn",
       "image": "/media/sb-sbi-sbn-product-1.jfif",
-      "shortDescription": "SB/SBI/SBN 系列立式多段不鏽鋼管道泵浦，適用於加壓供水、工業清洗、消防及空調循環。SB/SBI 用於無腐蝕性液體，SBN 適用於弱酸性及工業製程。",
-      "introduction": "SB/SBI/SBN 系列立式多段不鏽鋼管道泵浦，用途廣泛涵蓋大樓、旅館及集合住宅加壓供水，工業清洗、洗車、消防、加工與冷卻系統，鍋爐、加熱、熱交換、冷凍及空調循環，以及農田灌溉與水處理。SB、SBI 適用於無腐蝕性冷熱水；SBN 適用於弱酸性及工業製程液體，選型須依液體條件確認。"
+      "shortDescription": "SB/SBI/SBN 系列立式多段離心泵浦，採用 IN-LINE 直立式多段設計，葉輪、外桶及壓力室使用不銹鋼材質。",
+      "introduction": "SB 系列為直立式多段泵浦，採用 IN-LINE（出入口位於同一水平線上）設計，標準配置為法蘭式，便於管路中安裝使用。葉輪、外桶及壓力室使用不銹鋼材質，泵軸與電機軸採鋼性直接聯結，並配置匣式機械軸封，機種齊全，可依不同使用場所選用、配置。\n\nSB、SBI、SBN 三種系列可分別適用於輸送不同場合或特性的液體，適用範圍廣，分別說明如下：\n\nSB、SBI\n適用無腐蝕性的液體。\n適用於冷水或熱水輸送、循環用水、加壓給水等場合。\n\nSBN\n適用弱酸性的液體。\n適用工業製程液體。\n\n選用前請先告知本公司擬使用的液體條件，如密度、凝固點、黏性、壓力、溫度及是否有防爆需求等，以利作為評估泵浦適用性之重要參考因素。"
     },
     {
       "id": "grundfos-2cm",
       "slug": "grundfos-2cm",
-      "image": null,
-      "shortDescription": "2CM 雙台變頻恆壓加壓系統，採用兩台 CM 系列泵浦交互備援，提供穩定恆壓供水。適用於大樓揚水及工業系統。",
-      "introduction": "2CM 雙台變頻恆壓加壓系統，整合兩台 CM 系列泵浦與變頻控制，採交互備援設計，提供穩定恆壓供水。適用於大樓揚水、工業系統及一般工業用水。"
+      "image": "/media/grundfos-2cm-product-1.png",
+      "shortDescription": "2CM Booster 雙台變頻恆壓泵浦，恆壓交替並列 恆定壓力交替並列變頻供水，依據水量調整泵浦數量及變頻供水。",
+      "introduction": "❯ 恆壓交替並列 恆定壓力交替並列變頻供水，依據水量調整泵浦數量及變頻供水\n\n❯ 靜音 使用雙台變頻主副作交替並列及 PI 控制泵浦，無段變頻變速及軟啟動軟停止，無傳統加壓機頻繁啟停所造成異音\n\n❯ 防水鎚 變頻軟啟停，無傳統加壓機啟停造成水鎚效應確保管路及泵浦安全\n\n❯ 無水保護 無水自動保護參數設定，亦可外接浮球感知保護，以確保泵浦不因乾轉損壞(軟硬體雙保護)\n\n❯ 過載保護 可依馬達額定設定保護參數，確保馬達安全\n\n❯ 異常交替 單台運轉跳脫，自動啟動另一台確保供水無慮\n\n❯ 檢修方便 控制架構簡潔，檢修容易及方便"
     },
     {
       "id": "grundfos-2cr-i-n-booster",
       "slug": "grundfos-2cr-i-n-booster",
-      "image": null,
-      "shortDescription": "2CR(I,N) Booster 直立式雙台變頻恆壓加壓系統，採用 CR/CRI/CRN 系列泵浦，提供大水量恆壓供水。適用於大樓揚水及工業系統。",
-      "introduction": "2CR(I,N) Booster 直立式雙台變頻恆壓加壓系統，整合兩台 CR/CRI/CRN 系列泵浦與變頻控制系統。採直立式設計節省安裝空間，提供備援恆壓供水。適用於大樓揚水、工業系統及一般工業用水。"
+      "image": "/media/grundfos-2cr-i-n-booster-product-1.png",
+      "shortDescription": "CR／CRI／CRN Booster 雙台變頻恆壓泵浦，The Grundfos CM and CME pumps are non-selfpriming, horizontal, multistage, end-suction centrifugal pumps.",
+      "introduction": "The Grundfos CM and CME pumps are non-selfpriming,\nhorizontal, multistage, end-suction centrifugal\npumps. The pumps are of the close-coupled type.\nCM pumps are fitted with mains-operated motors\nwhereas the motor for CME pumps has an integrated\nfrequency converter. Both CM and CME pumps have\nmechanical shaft seals.\nThe CM and CME pumps are available in these three\nmaterial versions:\n• Cast iron (EN-GJL-200)*\n• Stainless steel (EN 1.4301/AISI 304)\n• Stainless steel (EN 1.4401/AISI 316)."
     },
     {
-      "id": "grundfos-cm-cme",
-      "slug": "grundfos-cm-cme",
-      "image": null,
-      "shortDescription": "CM／CME 系列臥式多段端吸離心泵，採用多段葉輪設計，提供高揚程性能。適用於工業加壓、供水系統及空調循環。",
-      "introduction": "CM／CME 系列臥式多段端吸離心泵為 Grundfos 經典多段泵系列。CM 為標準馬達版本，CME 為整合變頻馬達版本。採用不鏽鋼材質，適用於工業系統、水處理、冷凍及空調、大樓揚水等應用。"
+      "id": "grundfos-cm",
+      "image": "/media/cm-product-1.png",
+      "slug": "cm",
+      "shortDescription": "臥式多段離心泵浦",
+      "introduction": "The Grundfos CM and CME pumps are non-selfpriming,\nhorizontal, multistage, end-suction centrifugal\npumps. The pumps are of the close-coupled type.\nCM pumps are fitted with mains-operated motors\nwhereas the motor for CME pumps has an integrated\nfrequency converter. Both CM and CME pumps have\nmechanical shaft seals.\nThe CM and CME pumps are available in these three\nmaterial versions:\n• Cast iron (EN-GJL-200)*\n• Stainless steel (EN 1.4301/AISI 304)\n• Stainless steel (EN 1.4401/AISI 316).\n* The impeller, chamber and filling plugs are made of stainless steel\n(EN 1.4301/AISI 304).\nThe pump shaft is made of stainless steel (EN 1.4057/AISI 431)."
+    },
+    {
+      "id": "grundfos-cme",
+      "image": "/media/cme-product-1.png",
+      "slug": "cme",
+      "shortDescription": "變頻臥式多段離心泵浦",
+      "introduction": "The Grundfos CM and CME pumps are non-selfpriming,\nhorizontal, multistage, end-suction centrifugal\npumps. The pumps are of the close-coupled type.\nCM pumps are fitted with mains-operated motors\nwhereas the motor for CME pumps has an integrated\nfrequency converter. Both CM and CME pumps have\nmechanical shaft seals.\nThe CM and CME pumps are available in these three\nmaterial versions:\n• Cast iron (EN-GJL-200)*\n• Stainless steel (EN 1.4301/AISI 304)\n• Stainless steel (EN 1.4401/AISI 316).\n* The impeller, chamber and filling plugs are made of stainless steel\n(EN 1.4301/AISI 304).\nThe pump shaft is made of stainless steel (EN 1.4057/AISI 431)."
     },
     {
       "id": "grundfos-cr-cri-crn",
       "slug": "grundfos-cr-cri-crn",
-      "image": null,
-      "shortDescription": "CR／CRI／CRN 系列立式多段離心泵，Grundfos 代表性產品。採用不鏽鋼多段設計，適用於加壓供水、工業系統及空調循環。",
-      "introduction": "CR／CRI／CRN 系列為 Grundfos 代表性立式多段離心泵產品。CR 用於無腐蝕性液體、CRI 用於弱腐蝕性液體、CRN 用於腐蝕性液體。採用不鏽鋼多段葉輪設計，提供高效能與可靠性，適用於大樓揚水、工業系統、冷凍及空調、農業灌溉用水等廣泛應用。"
+      "image": "/media/grundfos-cr-cri-crn-product-1.png",
+      "shortDescription": "CR／CRI／CRN 直立式多段離心泵浦，CR, CRI and CRN pumps are vertical multistage, centrifugal pumps.",
+      "introduction": "CR, CRI and CRN pumps are vertical multistage,\ncentrifugal pumps. The in-line design of the pumps\nenables installation in a horizontal one-pipe system\nwhere the inlet and outlet ports are in the same\nhorizontal level and have the same pipe dimensions.\nThis design provides a more compact pump design.\nCR pumps are available in various sizes and various\nnumbers of stages to deliver the flow and pressure\nrequired.\nCR pumps are designed for a variety of applications\nranging from the pumping of potable water to the\npumping of chemicals. The pumps are therefore\nsuitable for a wide diversity of pumping systems where\nthe performance and material of the pump meet\nspecific demands.\nA CR pump consists of two main components: the\nmotor and the pump unit.\nThe motor is a Grundfos or Siemens motor designed to\nEN standards.\nThe pump unit consists of optimised hydraulics,\nvarious types of connections, a sleeve, a pump head\nand various other parts."
     },
     {
-      "id": "grundfos-dwk-dpk",
-      "slug": "grundfos-dwk-dpk",
-      "image": null,
-      "shortDescription": "DWK／DPK 系列沉水式脫水／排水泵，適用於工地排水、礦山排水及臨時排水應用。具備高可靠性與耐用特性。",
-      "introduction": "DWK／DPK 系列為 Grundfos 沉水式脫水及排水泵。DWK 適用於含少量固體顆粒的排水應用；DPK 適用於污水與廢水排放。採用不鏽鋼與鑄鐵材質，具備高可靠耐用特性，適用於污水、工業系統等排水場景。"
+      "id": "grundfos-dwk",
+      "image": "/media/dwk-product-1.png",
+      "slug": "dwk",
+      "shortDescription": "DWK and DPK pumps",
+      "introduction": "The pumps are designed with semi-open or enclosed\nimpeller for pumping water in a wide range of building\nand industrial applications.\nThe pumps are made of resistant materials, such as\ncast iron and high-chrome stainless steel. These\nmaterials ensure proper operation.\nThe pumps are fitted with 2-pole motors from 0.75 kW\nup to 90.0 kW.\nThe free passage in the pumps is 10-20 mm.\nThe pumps are available for two installation types:\n• submerged installation, free-standing (DWK and\nDPK)\n• submerged installation on auto-coupling system\n(only DPK).\nThe pumps are ideal for the pumping of the liquids\nlisted in section Applications."
+    },
+    {
+      "id": "grundfos-dpk",
+      "image": "/media/dpk-product-1.png",
+      "slug": "dpk",
+      "shortDescription": "DWK and DPK pumps",
+      "introduction": "The pumps are designed with semi-open or enclosed\nimpeller for pumping water in a wide range of building\nand industrial applications.\nThe pumps are made of resistant materials, such as\ncast iron and high-chrome stainless steel. These\nmaterials ensure proper operation.\nThe pumps are fitted with 2-pole motors from 0.75 kW\nup to 90.0 kW.\nThe free passage in the pumps is 10-20 mm.\nThe pumps are available for two installation types:\n• submerged installation, free-standing (DWK and\nDPK)\n• submerged installation on auto-coupling system\n(only DPK).\nThe pumps are ideal for the pumping of the liquids\nlisted in section Applications."
     },
     {
       "id": "grundfos-sp-a-sp",
       "slug": "grundfos-sp-a-sp",
-      "image": null,
-      "shortDescription": "SP A／SP 系列深井沉水式多段泵，適用於深井取水、地下水供給與農業灌溉。不鏽鋼設計，具備高揚程與耐蝕特性。",
-      "introduction": "SP A／SP 系列為 Grundfos 深井沉水式多段泵。SP A 採用不鏽鋼 AISI 304 材質，SP 採用不鏽鋼 AISI 316 材質。適用於深井取水、地下水供給、農業灌溉及工業系統等深水應用。多段葉輪設計提供高揚程性能。"
+      "image": "/media/grundfos-sp-a-sp-product-1.png",
+      "shortDescription": "SP A／SP 潛水泵、馬達與配件，Grundfos offers energy-efficient submersible pumps ranging from 1 to 330 m3/h.",
+      "introduction": "A wide pump range\nGrundfos offers energy-efficient submersible pumps\nranging from 1 to 330 m3/h. The pump range consists of\nmany pump sizes, and each pump size is available with\nan optional number of stages to match any duty point.\nHigh pump efficiency\nOften pump efficiency is a neglected factor compared to\nthe price. However, the observant user will notice that\nprice variations are without importance to water supply\neconomics compared to the importance of pump and\nmotor efficiencies.\n\nTo ensure the right wear resistance and reduce risk of\ncorrosion, the pump ranges are available with different\nsteel variants.\n• SP: EN 1.4301: Clean water, for example drinking\nwater.\n• SP N: EN 1.4401: Slightly aggressive water, for\nexample brackish water.\n• SP R: EN 1.4539: Highly aggressive water, for\nexample seawater."
     },
     {
-      "id": "grundfos-sc-hc",
-      "slug": "grundfos-sc-hc",
-      "image": null,
-      "shortDescription": "SC／HC 系列沉水式污物廢水泵，適用於污水、污物及廢水排放。具備大通過粒徑設計與耐磨耗特性。",
-      "introduction": "SC／HC 系列為 Grundfos 沉水式污物廢水泵。SC 適用於污水與污物排放，HC 適用於含較大固體顆粒的廢水。採用耐磨耗設計，具備大通過粒徑能力，適用於污水、工業系統等排水場景。"
+      "id": "grundfos-sc",
+      "image": "/media/sc-product-1.png",
+      "slug": "sc",
+      "shortDescription": "污物廢水泵浦 SC",
+      "introduction": "污水／廢水泵浦系列。"
+    },
+    {
+      "id": "grundfos-hc",
+      "image": "/media/hc-product-1.png",
+      "slug": "hc",
+      "shortDescription": "污物廢水泵浦 HC",
+      "introduction": "污水／廢水泵浦系列。"
+    },
+    {
+      "id": "grundfos-hs-ss",
+      "image": "/media/hs-ss-product-1.png",
+      "slug": "hs-ss",
+      "shortDescription": "污物廢水泵浦 HS／SS",
+      "introduction": "污水／廢水泵浦系列。"
     },
     {
       "id": "grundfos-magna3",
       "slug": "grundfos-magna3",
-      "image": null,
-      "shortDescription": "MAGNA3 系列智慧型循環泵，整合變頻控制與 AUTOADAPT 功能，根據系統需求自動調節，達到最佳節能效果。",
-      "introduction": "MAGNA3 系列為 Grundfos 智慧型循環泵，整合先進變頻控制技術與 AUTOADAPT 自動調適功能。內建流量與溫度感測，可根據系統需求自動調節運轉，達到最佳節能效果。適用於冷凍及空調、工業系統等循環應用。"
+      "image": "/media/grundfos-magna3-product-1.png",
+      "shortDescription": "MAGNA3，MAGNA3系列包含150種不同的鑄鐵或不鏽鋼單頭泵和雙頭泵，性能範圍涵蓋廣泛，徹底滿足各種應用上的需求。",
+      "introduction": "MAGNA3系列包含150種不同的鑄鐵或不鏽鋼單頭泵和雙頭泵，性能範圍涵蓋廣泛，徹底滿足各種應用上的需求。我們可提供最高揚程達18米，最大流量每小時70立方米，可以滿足大部份HVAC空調區域製冷的需求。\n\n結合自動化大樓管理 選配CIM通訊模式後，MAGNA3可透過各種常用的標準通訊協定連接大樓管理系統（BMS）。\n\nBTU表 MAGNA3內建BTU表可以用來監測系統熱能的輸送和分配情況，避免因水力不平衡而浪費熱能。依據工作點不同，BTU表精確度約在+/-1%到+/-10%。有了內建BTU，就可省去額外安裝熱能表的費用。\n\n免加裝平衡閥 新的 FLOWLIMIT 功能與 FLOWADAPT 控制模式可以讓您為泵浦設定在最大泵送流量值。MAGNA3可以持續監測泵送流量，使其不超過設定值，這個功能可以讓系統免除安裝平衡閥的需求，從而提高系統的整體效率。\n\n泵浦的無線通訊 MAGNA3內建無線通訊科技，可使兩台MAGNA3泵浦間建立無線通訊連結。建立連結後，泵浦間可以設定為串聯工作模式、泵浦切換運轉模式、或互為並列模式。"
     },
     {
       "id": "grundfos-hydro-mpc",
       "slug": "grundfos-hydro-mpc",
-      "image": null,
-      "shortDescription": "Hydro MPC 多泵變頻恆壓加壓系統，整合多台 CR 系列泵浦與 MPC 控制器，提供大水量恆壓供水。",
-      "introduction": "Hydro MPC 系列為 Grundfos 多泵變頻恆壓加壓系統。整合多台 CR 系列泵浦與先進 MPC 控制系統，提供大水量恆壓供水方案。適用於大樓揚水、工業系統、農業灌溉用水等大水量供水應用。"
+      "image": "/media/grundfos-hydro-mpc-product-1.png",
+      "shortDescription": "Hydro MPC 多功能加壓系統，葛蘭富 Hydro MPC 加壓系統的基本構件為世界聞名的葛蘭富 CR 系列多段離心式泵浦。",
+      "introduction": "葛蘭富 Hydro MPC 加壓系統的基本構件為世界聞名的葛蘭富 CR 系列多段離心式泵浦。40 年前，葛蘭富首創開發這種形式的泵浦，而最新一代的 CR 系列泵浦仍然維持著世界領先的地位。CR 系列泵浦出眾的可靠性和效率為這套加壓系統提供了最佳的基礎。\n\n搭配葛蘭富智慧型 CRE 泵浦的 Hydro MPC 加壓系統，將提供更高的效率，進一步縮減能源成本。CRE 泵浦系列配備了葛蘭富自製的變頻控制馬達，這樣的搭配可達到全方位的控制、最佳化的輸出彈性，以及在任何時段都是無與倫比的效能表現。\n\n全方位的解決方案 所有組件的組合皆以品質和效率為出發點。葛蘭富 Hydro MPC 加壓系統的設計是以耐用為目標：堅固、精巧，同時所有組件在維修時輕易可及。\n\n葛蘭富 Hydro MPC 加壓系統可以隨時應付額外的壓力需求。各型號皆可依客戶所要的特定容量和控制需求而設計。"
     },
     {
-      "id": "grundfos-cl-lf",
-      "slug": "grundfos-cl-lf",
-      "image": null,
-      "shortDescription": "CL／LF 系列單段端吸離心泵，採用標準化設計，適用於工業給水、空調循環及一般輸送。",
-      "introduction": "CL／LF 系列為 Grundfos 單段端吸離心泵。採用標準化設計與後拉式結構，便於維護。適用於工業系統、冷凍及空調、一般工業用水等輸送應用。"
+      "id": "grundfos-cl",
+      "image": "/media/cl-product-1.png",
+      "slug": "cl",
+      "shortDescription": "CL End Suction",
+      "introduction": "The Grundfos LF and CL pumps utilize a double volute design that offers a distinct advantage over single volute designs. The double volute design incorporates two cutwaters located at 180°, which divide the flow into two geometrically similar regions of the volute.\n\nThis design ensures that the resultant hydraulic radial loads are equal and opposed and thereby nullified. As a result, the net radial force is maintained at a very low level throughout the operating range of the pump, and shaft deflection is kept to a minimum. Pump operation thus remains stable throughout the entire performance curve with minimum shaft deflection, and prolongs seal, bearing, and shaft life."
     },
     {
-      "id": "grundfos-nb-nbg-nk-nkg-nbe-nbge-nke-nkge",
-      "slug": "grundfos-nb-nbg-nk-nkg-nbe-nbge-nke-nkge",
-      "image": null,
-      "shortDescription": "NB／NBG／NK／NKG／NBE／NBGE／NKE／NKGE 系列單段端吸離心泵，提供標準與變頻版本，適用於工業給水與空調循環。",
-      "introduction": "NB／NBG／NK／NKG／NBE／NBGE／NKE／NKGE 系列為 Grundfos 單段端吸離心泵家族。NB/NBG/NK/NKG 為標準馬達版本，NBE/NBGE/NKE/NKGE 為整合變頻馬達版本。採用標準化設計，適用於工業系統、冷凍及空調、一般工業用水等應用。"
+      "id": "grundfos-lf",
+      "image": "/media/lf-product-1.png",
+      "slug": "lf",
+      "shortDescription": "LF End Suction",
+      "introduction": "The Grundfos LF and CL pumps utilize a double volute design that offers a distinct advantage over single volute designs. The double volute design incorporates two cutwaters located at 180°, which divide the flow into two geometrically similar regions of the volute.\n\nThis design ensures that the resultant hydraulic radial loads are equal and opposed and thereby nullified. As a result, the net radial force is maintained at a very low level throughout the operating range of the pump, and shaft deflection is kept to a minimum. Pump operation thus remains stable throughout the entire performance curve with minimum shaft deflection, and prolongs seal, bearing, and shaft life."
+    },
+    {
+      "id": "grundfos-nb-nbe-nk-nke",
+      "image": "/media/nb-nbe-nk-nke-product-1.png",
+      "slug": "nb-nbe-nk-nke",
+      "shortDescription": "客製化端吸泵",
+      "introduction": "We offer a wide range of custom-built variants of the\nNB, NBG, NK, NKG type range for a variety of\ndemanding industrial applications.\nWith these single-stage end-suction pumps, based on\nthe well-known NB/NK type range, we meet the\ncustomers’ needs for pumps capable of handling\n• high-temperature liquids\n• crystallising liquids\n• high-viscosity liquids such as paints and varnishes\n• aggressive liquids\n• volatile liquids\n• flammable liquids.\nNB, NBG, NK, NKG custom-built pumps can be\nadapted to special installation requirements."
+    },
+    {
+      "id": "grundfos-nbg-nbge-nkg-nkge",
+      "image": "/media/nbg-nbge-nkg-nkge-product-1.png",
+      "slug": "nbg-nbge-nkg-nkge",
+      "shortDescription": "客製化端吸泵",
+      "introduction": null
     }
   ]
 }

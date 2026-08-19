@@ -1,7 +1,8 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useMemo } from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { catalogHref, type CatalogFilterState } from "@/lib/catalog-query";
 
 interface FilterOption {
   id: string;
@@ -12,43 +13,27 @@ interface CatalogFilterProps {
   brands: FilterOption[];
   pumpTypes: FilterOption[];
   purposes: FilterOption[];
+  state: CatalogFilterState;
 }
 
-export default function CatalogFilter({ brands, pumpTypes, purposes }: CatalogFilterProps) {
+export default function CatalogFilter({ brands, pumpTypes, purposes, state }: CatalogFilterProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const [searchValue, setSearchValue] = useState(state.q);
+  const currentBrand = state.brand ?? "";
+  const currentTypes = state.types;
+  const currentPurposes = state.purposes;
+  const currentQ = state.q;
 
-  const currentBrand = searchParams.get("brand") || "";
-  const currentTypes = useMemo(() => searchParams.getAll("type"), [searchParams]);
-  const currentPurposes = useMemo(() => searchParams.getAll("purpose"), [searchParams]);
-  const currentQ = searchParams.get("q") || "";
+  const buildHref = (params: Partial<CatalogFilterState>) => catalogHref({ ...state, ...params });
 
-  const buildHref = useCallback(
-    (params: Record<string, string | string[] | null>) => {
-      const next = new URLSearchParams(searchParams.toString());
-      for (const [k, v] of Object.entries(params)) {
-        next.delete(k);
-        if (v === null) continue;
-        if (Array.isArray(v)) {
-          v.forEach((x) => next.append(k, x));
-        } else {
-          next.set(k, v);
-        }
-      }
-      const qs = next.toString();
-      return `/zh-tw/products${qs ? `?${qs}` : ""}`;
-    },
-    [searchParams],
-  );
-
-  const setParam = (k: string, v: string | null) => {
-    router.push(buildHref({ [k]: v }));
+  const setBrand = (brand: string | null) => {
+    router.push(buildHref({ brand }));
   };
 
   const toggleArray = (k: string, v: string) => {
-    const current = searchParams.getAll(k);
+    const current = k === "type" ? currentTypes : currentPurposes;
     const next = current.includes(v) ? current.filter((x) => x !== v) : [...current, v];
-    router.push(buildHref({ [k]: next.length > 0 ? next : null }));
+    router.push(buildHref(k === "type" ? { types: next } : { purposes: next }));
   };
 
   const clearAll = () => router.push("/zh-tw/products");
@@ -66,13 +51,14 @@ export default function CatalogFilter({ brands, pumpTypes, purposes }: CatalogFi
           <input
             id="catalog-search"
             type="text"
-            defaultValue={currentQ}
+            value={searchValue}
+            onChange={(event) => setSearchValue(event.target.value)}
             placeholder="系列名稱或型號..."
             className="mt-1 block w-full rounded-[var(--radius-md)] bg-white px-3 py-2 text-sm shadow-[0_3px_10px_rgba(11,42,61,0.10)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]"
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                const v = (e.target as HTMLInputElement).value;
-                setParam("q", v || null);
+                const v = searchValue.trim();
+                router.push(buildHref({ q: v }));
               }
             }}
           />
@@ -87,7 +73,7 @@ export default function CatalogFilter({ brands, pumpTypes, purposes }: CatalogFi
               className={`flex min-h-[44px] w-full items-center rounded-[var(--radius-md)] px-3 text-sm text-left focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] ${
                 !currentBrand ? "bg-[var(--color-action)] text-[var(--color-on-action)]" : "bg-[var(--color-surface-subtle)] text-[var(--color-text)] hover:bg-[var(--color-border)]"
               }`}
-              onClick={() => setParam("brand", null)}
+              onClick={() => setBrand(null)}
             >
               全部
             </button>
@@ -98,7 +84,7 @@ export default function CatalogFilter({ brands, pumpTypes, purposes }: CatalogFi
                 className={`flex min-h-[44px] w-full items-center rounded-[var(--radius-md)] px-3 text-sm text-left focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] ${
                   currentBrand === b.id ? "bg-[var(--color-action)] text-[var(--color-on-action)]" : "bg-[var(--color-surface-subtle)] text-[var(--color-text)] hover:bg-[var(--color-border)]"
                 }`}
-                onClick={() => setParam("brand", currentBrand === b.id ? null : b.id)}
+                onClick={() => setBrand(currentBrand === b.id ? null : b.id)}
               >
                 {b.name}
               </button>
@@ -157,7 +143,7 @@ export default function CatalogFilter({ brands, pumpTypes, purposes }: CatalogFi
               {currentBrand && (
                 <span className="inline-flex items-center gap-1 rounded-[var(--radius-xs)] bg-[var(--color-action)] px-2 py-1 text-xs text-[var(--color-on-action)]">
                   {brands.find((b) => b.id === currentBrand)?.name || currentBrand}
-                  <button type="button" onClick={() => setParam("brand", null)} className="ml-1 text-[var(--color-on-action)]/70 hover:text-[var(--color-on-action)]" aria-label="移除品牌條件">✕</button>
+                  <button type="button" onClick={() => setBrand(null)} className="ml-1 text-[var(--color-on-action)]/70 hover:text-[var(--color-on-action)]" aria-label="移除品牌條件">✕</button>
                 </span>
               )}
               {currentTypes.map((tid) => (

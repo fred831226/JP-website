@@ -23,6 +23,7 @@ type ContentSeries = {
   id: string;
   slug: string;
   image?: string;
+  images?: string[];
   shortDescription: string;
   introduction: string;
 };
@@ -43,28 +44,20 @@ const generated = generatedRaw as { series: GeneratedSeries[] };
 const content = contentRaw as { series: ContentSeries[] };
 const overview = overviewRaw as { series: OverviewSeries[] };
 
-const PUMP_TYPE_ID_MAP: Record<string, string> = {
-  // JP PUMP
-  "沉水式揚水泵": "submersible-well-pump",
+const PUMP_TYPE_ID_MAP = {
   "臥式泵": "horizontal-pump",
-  "污水泵": "sewage-pump",
-  "汙水泵": "sewage-pump",
-  "陸上式自吸式泵": "self-priming-pump",
-  "電子穩壓加壓泵": "pressure-boosting-pump",
-  "立式揚水泵": "vertical-multistage-pump",
-  // Grundfos 葛蘭富
-  "雙台變頻恆壓加壓系統": "dual-booster-hv-system",
-  "直立式雙台變頻恆壓加壓系統": "vertical-dual-booster-system",
-  "臥式多段端吸離心泵": "horizontal-multistage-end-suction",
-  "立式多段離心泵": "vertical-multistage-centrifugal",
-  "沉水式脫水／排水泵": "submersible-dewatering-pump",
-  "沉水式脫水/排水泵": "submersible-dewatering-pump",
-  "深井沉水式多段泵": "deep-well-submersible-pump",
-  "沉水式污物廢水泵": "submersible-sewage-pump",
-  "智慧型循環泵": "intelligent-circulator-pump",
-  "多泵變頻恆壓加壓系統": "multi-pump-booster-system",
-  "單段端吸離心泵": "single-stage-end-suction",
-};
+  "沉水式揚水泵": "submersible-well-pump",
+  "沉水式污水泵": "sewage-pump",
+  "立式楊水泵": "vertical-multistage-pump",
+} as const;
+
+function pumpTypeIdFor(seriesId: string, pumpType: string): string {
+  const id = PUMP_TYPE_ID_MAP[pumpType as keyof typeof PUMP_TYPE_ID_MAP];
+  if (!id) {
+    throw new Error(`catalog.generated.json: series "${seriesId}" has unknown pumpType "${pumpType}"`);
+  }
+  return id;
+}
 
 // Map purpose tags from overview to governed purpose IDs
 const PURPOSE_TAG_TO_ID: Record<string, string> = {
@@ -85,7 +78,7 @@ for (const o of overview.series) {
 const seriesList: Series[] = generated.series.map((gs) => {
   const c = contentMap.get(gs.id);
   const o = overviewMap.get(gs.id);
-  const ptId = PUMP_TYPE_ID_MAP[gs.pumpType];
+  const ptId = pumpTypeIdFor(gs.id, gs.pumpType);
   /* 用途標籤以網頁_產品總覽 sheet 為權威來源；無覆蓋時 fallback 到 generated */
   const purposeTags = o?.purposeTags?.length ? o.purposeTags : gs.purposeTags;
   const purposeIds = purposeTags
@@ -100,7 +93,8 @@ const seriesList: Series[] = generated.series.map((gs) => {
     description: c?.shortDescription ?? gs.productName,
     introduction: c?.introduction ?? "",
     image: c?.image ?? null,
-    pumpTypeIds: ptId ? [ptId] : [],
+    images: c?.images?.length ? c.images : (c?.image ? [c.image] : []),
+    pumpTypeIds: [ptId],
     purposeIds,
     purposeTags,
     headMin: o?.headMin ?? null,
