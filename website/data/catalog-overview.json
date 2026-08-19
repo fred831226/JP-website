@@ -6,7 +6,9 @@
       "purposeTags": [
         "公寓或大樓頂樓加壓",
         "免水塔地面直接供水",
-        "美容、美髮、SPA 或相關行業之恆壓淋浴設備供水"
+        "美容",
+        "美髮",
+        "SPA 或相關行業之恆壓淋浴設備供水"
       ],
       "headMin": "15",
       "headMax": "65",
@@ -181,7 +183,7 @@
       "published": null
     },
     {
-      "id": "grundfos-cm",
+      "id": "grundfos-cm-cme",
       "brandId": "grundfos",
       "purposeTags": [
         "工業系統",
@@ -190,26 +192,10 @@
         "大樓揚水"
       ],
       "headMin": null,
-      "headMax": null,
+      "headMax": "130",
       "flowMin": null,
-      "flowMax": null,
+      "flowMax": "600",
       "modelCount": 54,
-      "published": "是"
-    },
-    {
-      "id": "grundfos-cme",
-      "brandId": "grundfos",
-      "purposeTags": [
-        "工業系統",
-        "水處理",
-        "冷凍及空調",
-        "大樓揚水"
-      ],
-      "headMin": null,
-      "headMax": null,
-      "flowMin": null,
-      "flowMax": null,
-      "modelCount": 0,
       "published": "是"
     },
     {
@@ -229,31 +215,17 @@
       "published": "是"
     },
     {
-      "id": "grundfos-dwk",
+      "id": "grundfos-dwk-dpk",
       "brandId": "grundfos",
       "purposeTags": [
         "污水",
         "工業系統"
       ],
-      "headMin": null,
-      "headMax": null,
+      "headMin": "5",
+      "headMax": "95",
       "flowMin": null,
-      "flowMax": null,
-      "modelCount": 138,
-      "published": "是"
-    },
-    {
-      "id": "grundfos-dpk",
-      "brandId": "grundfos",
-      "purposeTags": [
-        "污水",
-        "工業系統"
-      ],
-      "headMin": null,
-      "headMax": null,
-      "flowMin": null,
-      "flowMax": null,
-      "modelCount": 28,
+      "flowMax": "6000",
+      "modelCount": 166,
       "published": "是"
     },
     {
@@ -272,45 +244,17 @@
       "published": "是"
     },
     {
-      "id": "grundfos-sc",
+      "id": "grundfos-sc-hc",
       "brandId": "grundfos",
       "purposeTags": [
         "污水",
         "工業系統"
       ],
       "headMin": null,
-      "headMax": null,
+      "headMax": "50",
       "flowMin": null,
-      "flowMax": null,
-      "modelCount": 60,
-      "published": "是"
-    },
-    {
-      "id": "grundfos-hc",
-      "brandId": "grundfos",
-      "purposeTags": [
-        "污水",
-        "工業系統"
-      ],
-      "headMin": null,
-      "headMax": null,
-      "flowMin": null,
-      "flowMax": null,
-      "modelCount": 11,
-      "published": "是"
-    },
-    {
-      "id": "grundfos-hs-ss",
-      "brandId": "grundfos",
-      "purposeTags": [
-        "污水",
-        "工業系統"
-      ],
-      "headMin": null,
-      "headMax": null,
-      "flowMin": null,
-      "flowMax": null,
-      "modelCount": 19,
+      "flowMax": "18000",
+      "modelCount": 90,
       "published": "是"
     },
     {
@@ -343,7 +287,7 @@
       "published": "是"
     },
     {
-      "id": "grundfos-cl",
+      "id": "grundfos-cl-lf",
       "brandId": "grundfos",
       "purposeTags": [
         "工業系統",
@@ -351,55 +295,25 @@
         "一般工業用水"
       ],
       "headMin": null,
-      "headMax": null,
+      "headMax": "250",
       "flowMin": null,
-      "flowMax": null,
-      "modelCount": 1,
+      "flowMax": "40000",
+      "modelCount": 2,
       "published": "是"
     },
     {
-      "id": "grundfos-lf",
+      "id": "grundfos-nb-nbg-nk-nkg-nbe-nbge-nke-nkge",
       "brandId": "grundfos",
       "purposeTags": [
         "工業系統",
         "冷凍及空調",
         "一般工業用水"
       ],
-      "headMin": null,
-      "headMax": null,
-      "flowMin": null,
-      "flowMax": null,
-      "modelCount": 1,
-      "published": "是"
-    },
-    {
-      "id": "grundfos-nb-nbe-nk-nke",
-      "brandId": "grundfos",
-      "purposeTags": [
-        "工業系統",
-        "冷凍及空調",
-        "一般工業用水"
-      ],
-      "headMin": null,
-      "headMax": null,
-      "flowMin": null,
-      "flowMax": null,
-      "modelCount": 1,
-      "published": null
-    },
-    {
-      "id": "grundfos-nbg-nbge-nkg-nkge",
-      "brandId": "grundfos",
-      "purposeTags": [
-        "工業系統",
-        "冷凍及空調",
-        "一般工業用水"
-      ],
-      "headMin": null,
-      "headMax": null,
-      "flowMin": null,
-      "flowMax": null,
-      "modelCount": 3,
+      "headMin": "2",
+      "headMax": "200",
+      "flowMin": "66.7",
+      "flowMax": "25000",
+      "modelCount": 4,
       "published": null
     }
   ]

@@ -58,10 +58,9 @@ test.describe("Public smoke tests", () => {
     const context = await browser.newContext({ javaScriptEnabled: false });
     const page = await context.newPage();
     await page.goto(`${BASE}/products`);
-    await expect(page.locator('a[href^="/zh-tw/series/"]')).toHaveCount(28);
+    await expect(page.locator('a[href^="/zh-tw/series/"]')).toHaveCount(22);
     await expect(page.locator('a[href="/zh-tw/series/vbsg"]')).toBeAttached();
-    await expect(page.locator('a[href="/zh-tw/series/nb-nbe-nk-nke"]')).toBeAttached();
-    await expect(page.locator('a[href="/zh-tw/series/nbg-nbge-nkg-nkge"]')).toBeAttached();
+    await expect(page.locator('a[href="/zh-tw/series/grundfos-nb-nbg-nk-nkg-nbe-nbge-nke-nkge"]')).toBeAttached();
     await context.close();
   });
 
@@ -79,7 +78,7 @@ test.describe("Public smoke tests", () => {
     await expect(page).toHaveURL(`${BASE}/products?type=horizontal-pump`);
     await expect(page.getByRole("button", { name: "移除品牌條件" })).toHaveCount(0);
     await expect(page.locator('a[href="/zh-tw/series/vbsg"]')).toBeVisible();
-    await expect(page.locator('a[href="/zh-tw/series/cm"]')).toBeVisible();
+    await expect(page.locator('a[href="/zh-tw/series/grundfos-cm-cme"]')).toBeVisible();
   });
 
   test("產品搜尋輸入會隨上一頁與下一頁同步", async ({ page }) => {
@@ -127,9 +126,7 @@ test.describe("Public smoke tests", () => {
 
     await page.getByRole("group", { name: "品牌" }).getByRole("button", { name: "Grundfos 葛蘭富" }).click();
     await expect(page).toHaveURL(`${BASE}/products?brand=grundfos&type=sewage-pump`);
-    await expect(page.locator('a[href="/zh-tw/series/sc"]')).toBeVisible();
-    await expect(page.locator('a[href="/zh-tw/series/hc"]')).toBeVisible();
-    await expect(page.locator('a[href="/zh-tw/series/hs-ss"]')).toBeVisible();
+    await expect(page.locator('a[href="/zh-tw/series/grundfos-sc-hc"]')).toBeVisible();
     await expect(page.locator('a[href="/zh-tw/series/cv"]')).toBeHidden();
     await expect(page.getByRole("button", { name: "移除泵浦類型條件" }).locator(".."))
       .toContainText("沉水式污水泵");
@@ -145,6 +142,18 @@ test.describe("Public smoke tests", () => {
     await expect(table).toBeVisible();
     const rows = table.locator("tbody tr");
     await expect(rows).toHaveCount(12);
+  });
+
+  test("Grundfos 合併系列以子系列規格表呈現", async ({ page }) => {
+    await page.goto(`${BASE}/series/grundfos-cm-cme`);
+    await expect(page.getByRole("heading", { name: "CM 規格表" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "CME 規格表" })).toBeVisible();
+    await expect(page.getByText("規格資料未提供", { exact: true })).toBeVisible();
+
+    await page.goto(`${BASE}/series/grundfos-sc-hc`);
+    for (const name of ["SC 規格表", "HC 規格表", "HS／SS 規格表"]) {
+      await expect(page.getByRole("heading", { name })).toBeVisible();
+    }
   });
 
   test("Series page presents the shared hero, introduction, and specifications in order", async ({ page }) => {

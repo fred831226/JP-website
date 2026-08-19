@@ -82,9 +82,11 @@ if (JSON.stringify(publicPumpTypes) !== JSON.stringify(approvedPumpTypes)) {
 const sourceWorkbook = xlsx.read(readFileSync(sourceCatalogPath), { type: "buffer" });
 const sourceSheet = sourceWorkbook.Sheets["完整產品規格表"];
 const sourceOverviewSheet = sourceWorkbook.Sheets["網頁_產品總覽"];
+const sourceFilterTagsSheet = sourceWorkbook.Sheets["網站篩選標籤"];
 const brandIdByName = new Map([["傑平", "jp-pump"], ["葛蘭富", "grundfos"]]);
 const excelSeries = new Map();
 const excelOverview = new Map();
+const excelFilterOverview = new Map();
 const text = (value) => String(value ?? "").trim();
 
 if (!sourceSheet) {
@@ -147,8 +149,42 @@ if (!sourceOverviewSheet) {
       if (excelOverview.has(key)) err("source-catalog.xlsx", `${seriesName}@overview-row${sourceRow}`, "產品系列", "Duplicate overview series");
       excelOverview.set(key, {
         purpose: text(row[column["用途標籤"] ?? column["用途"]]),
+        purposeTags: text(row[column["用途標籤"] ?? column["用途"]]).split(/[,，、/]/).map((value) => value.trim()).filter(Boolean),
+        headMin: column["揚程最小值_m"] !== undefined ? text(row[column["揚程最小值_m"]]) || null : null,
+        headMax: column["揚程最大值_m"] !== undefined ? text(row[column["揚程最大值_m"]]) || null : null,
+        flowMin: column["水量最小值_Lmin"] !== undefined ? text(row[column["水量最小值_Lmin"]]) || null : null,
+        flowMax: column["水量最大值_Lmin"] !== undefined ? text(row[column["水量最大值_Lmin"]]) || null : null,
+        modelCount: column["型號數量"] !== undefined && row[column["型號數量"]] != null ? Number(row[column["型號數量"]]) : null,
         published: text(row[column["首頁代表"] ?? column["是否發布"]]),
       });
+    }
+  }
+}
+
+if (!sourceFilterTagsSheet) {
+  err("source-catalog.xlsx", "網站篩選標籤", "sheet", "Required filter tags sheet is missing");
+} else {
+  const filterRows = xlsx.utils.sheet_to_json(sourceFilterTagsSheet, { defval: null, header: 1 });
+  const headers = filterRows[2] ?? [];
+  const column = Object.fromEntries(headers.map((value, index) => [text(value), index]));
+  for (const required of ["品牌", "產品系列", "揚程最小值", "揚程最大值", "水量最小值", "水量最大值"]) {
+    if (column[required] === undefined) err("source-catalog.xlsx", "網站篩選標籤", required, "Missing required column");
+  }
+  if (["品牌", "產品系列", "揚程最小值", "揚程最大值", "水量最小值", "水量最大值"].every((name) => column[name] !== undefined)) {
+    for (const row of filterRows.slice(3)) {
+      const brandId = brandIdByName.get(text(row[column["品牌"]]));
+      const seriesName = text(row[column["產品系列"]]);
+      if (!brandId || !seriesName) continue;
+      const key = `${brandId}|${seriesName}`;
+      const aggregate = excelFilterOverview.get(key) ?? { headMin: null, headMax: null, flowMin: null, flowMax: null };
+      for (const [field, columnName, mode] of [["headMin", "揚程最小值", "min"], ["headMax", "揚程最大值", "max"], ["flowMin", "水量最小值", "min"], ["flowMax", "水量最大值", "max"]]) {
+        const raw = row[column[columnName]];
+        if (raw == null || text(raw) === "" || text(raw) === "未提供") continue;
+        const value = Number(raw);
+        if (!Number.isFinite(value)) continue;
+        aggregate[field] = aggregate[field] == null ? value : (mode === "min" ? Math.min(aggregate[field], value) : Math.max(aggregate[field], value));
+      }
+      excelFilterOverview.set(key, aggregate);
     }
   }
 }
@@ -187,6 +223,30 @@ for (const [key, excel] of excelSeries) {
 }
 for (const [key, generatedGroup] of generatedByKey) {
   if (!excelSeries.has(key)) err("source-catalog.xlsx", generatedGroup.map((series) => series.id).join(","), "series", "Generated series is missing from Excel");
+}
+
+for (const generated of overview.series) {
+  const excelKey = `${generated.brandId}|${generated.id === "jp-pump-y" ? "Y系列" : gen.series.find((series) => series.id === generated.id)?.sourceSeriesName}`;
+  const excel = excelOverview.get(excelKey);
+  const filter = excelFilterOverview.get(excelKey);
+  const governed = overviewGovernance.series.find((entry) => entry.id === generated.id);
+  if (!excel) {
+    err("catalog-overview.json", generated.id, "series", "Generated overview is missing from Excel");
+    continue;
+  }
+  const expected = {
+    headMin: filter?.headMin != null ? String(filter.headMin) : excel.headMin,
+    headMax: filter?.headMax != null ? String(filter.headMax) : excel.headMax,
+    flowMin: filter?.flowMin != null ? String(filter.flowMin) : excel.flowMin,
+    flowMax: filter?.flowMax != null ? String(filter.flowMax) : excel.flowMax,
+  };
+  for (const [field, value] of Object.entries(expected)) {
+    if (generated[field] !== value) err("catalog-overview.json", generated.id, field, `Value "${generated[field]}" does not match Excel aggregation "${value}"`);
+  }
+  if (generated.modelCount !== excel.modelCount) err("catalog-overview.json", generated.id, "modelCount", `Value "${generated.modelCount}" does not match Excel "${excel.modelCount}"`);
+  if (JSON.stringify(generated.purposeTags) !== JSON.stringify(excel.purposeTags)) err("catalog-overview.json", generated.id, "purposeTags", "Value does not match Excel");
+  const expectedPublished = excel.published || governed?.published || "";
+  if ((generated.published ?? "") !== expectedPublished) err("catalog-overview.json", generated.id, "published", "Value does not match the Excel or governed fallback value");
 }
 
 if (!Array.isArray(overviewGovernance.series)) {

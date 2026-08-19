@@ -62,50 +62,6 @@ function cleanSeriesId(key, brandId) {
   return id || `${brandId}-series`;
 }
 
-// Some governed public pages intentionally split a combined Excel source series.
-// Every source model must match exactly one public variant; empty variants are
-// allowed when approved content exists before model rows are available (CME).
-const PUBLIC_SERIES_SPLITS = {
-  "grundfos-cm-cme": [
-    { id: "grundfos-cm", name: "CM", matches: /^CM(?:\s|$)/ },
-    { id: "grundfos-cme", name: "CME", matches: /^CME(?:\s|$)/ },
-  ],
-  "grundfos-dwk-dpk": [
-    { id: "grundfos-dwk", name: "DWK", matches: /^DWK(?:\.|\s|$)/ },
-    { id: "grundfos-dpk", name: "DPK", matches: /^DPK(?:\.|\s|$)/ },
-  ],
-  "grundfos-sc-hc": [
-    { id: "grundfos-sc", name: "SC", matches: /^\d+SC/ },
-    { id: "grundfos-hc", name: "HC", matches: /^\d+HC/ },
-    { id: "grundfos-hs-ss", name: "HS／SS", matches: /^\d+(?:HS|SS)/ },
-  ],
-  "grundfos-cl-lf": [
-    { id: "grundfos-cl", name: "CL", matches: /^CL$/ },
-    { id: "grundfos-lf", name: "LF", matches: /^LF$/ },
-  ],
-  "grundfos-nb-nbg-nk-nkg-nbe-nbge-nke-nkge": [
-    { id: "grundfos-nb-nbe-nk-nke", name: "NB／NBE／NK／NKE", matches: /^(?:NB|NBE|NK|NKE)(?:\s|$)/ },
-    { id: "grundfos-nbg-nbge-nkg-nkge", name: "NBG／NBGE／NKG／NKGE", matches: /^(?:NBG|NBGE|NKG|NKGE)(?:\s|$)/ },
-  ],
-};
-
-function publicSeriesVariants(sourceId, sourceSeries) {
-  const splits = PUBLIC_SERIES_SPLITS[sourceId];
-  if (!splits) {
-    return [{ id: sourceId, name: sourceSeries.seriesName, models: sourceSeries.models }];
-  }
-
-  const variants = splits.map((split) => ({ ...split, models: [] }));
-  for (const model of sourceSeries.models) {
-    const matches = variants.filter((variant) => variant.matches.test(model.name));
-    if (matches.length !== 1) {
-      throw new Error(`Series "${sourceSeries.seriesName}" model "${model.name}" must match exactly one public series split; matched ${matches.length}`);
-    }
-    matches[0].models.push(model);
-  }
-  return variants;
-}
-
 async function run() {
   const xlsx = await import("xlsx");
   const src = resolve(ROOT, "data", "source-catalog.xlsx");
@@ -342,9 +298,8 @@ async function run() {
     const sourceId = cleanSeriesId(key, s.brandId);
     const ov = overviewMap.get(key);
     const filterOverview = filterOverviewMap.get(key);
-    for (const variant of publicSeriesVariants(sourceId, s)) {
-      const governed = governanceMap.get(variant.id);
-      if (governed) usedGovernanceIds.add(variant.id);
+    const governed = governanceMap.get(sourceId);
+    if (governed) usedGovernanceIds.add(sourceId);
       const purposeTags = ov?.purposeTags?.length
         ? ov.purposeTags
         : governed?.purposeTags?.length
@@ -352,15 +307,15 @@ async function run() {
           : [...s.purposeTags].sort();
 
       generatedSeries.push({
-        id: variant.id,
+        id: sourceId,
         brandId: s.brandId,
-        name: variant.name,
+        name: s.seriesName,
         sourceSeriesName: s.seriesName,
         productName: s.productName,
         pumpType: s.pumpType,
         purposeTags,
-        modelCount: variant.models.length,
-        models: variant.models.map((m) => ({
+        modelCount: s.models.length,
+        models: s.models.map((m) => ({
           id: m.id,
           name: m.name,
           specs: m.specs,
@@ -368,26 +323,25 @@ async function run() {
       });
 
       overviewSeries.push({
-        id: variant.id,
+        id: sourceId,
         brandId: s.brandId,
         purposeTags,
         headMin: filterOverview?.headMin ?? ov?.headMin ?? null,
         headMax: filterOverview?.headMax ?? ov?.headMax ?? null,
         flowMin: filterOverview?.flowMin ?? ov?.flowMin ?? null,
         flowMax: filterOverview?.flowMax ?? ov?.flowMax ?? null,
-        modelCount: variant.models.length,
+        modelCount: s.models.length,
         published: ov?.published ?? governed?.published ?? null,
       });
 
-      variant.models.forEach((m) => {
+      s.models.forEach((m) => {
         allModels.push({
-          seriesId: variant.id,
+          seriesId: sourceId,
           modelName: m.name,
           source: m.source,
           reviewNote: m.reviewNote,
         });
       });
-    }
   }
 
   const orphanedGovernance = [...governanceMap.keys()].filter((id) => !usedGovernanceIds.has(id));

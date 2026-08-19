@@ -122,18 +122,15 @@
       "introduction": "The Grundfos CM and CME pumps are non-selfpriming,\nhorizontal, multistage, end-suction centrifugal\npumps. The pumps are of the close-coupled type.\nCM pumps are fitted with mains-operated motors\nwhereas the motor for CME pumps has an integrated\nfrequency converter. Both CM and CME pumps have\nmechanical shaft seals.\nThe CM and CME pumps are available in these three\nmaterial versions:\n• Cast iron (EN-GJL-200)*\n• Stainless steel (EN 1.4301/AISI 304)\n• Stainless steel (EN 1.4401/AISI 316)."
     },
     {
-      "id": "grundfos-cm",
+      "id": "grundfos-cm-cme",
       "image": "/media/cm-product-1.png",
-      "slug": "cm",
-      "shortDescription": "臥式多段離心泵浦",
-      "introduction": "The Grundfos CM and CME pumps are non-selfpriming,\nhorizontal, multistage, end-suction centrifugal\npumps. The pumps are of the close-coupled type.\nCM pumps are fitted with mains-operated motors\nwhereas the motor for CME pumps has an integrated\nfrequency converter. Both CM and CME pumps have\nmechanical shaft seals.\nThe CM and CME pumps are available in these three\nmaterial versions:\n• Cast iron (EN-GJL-200)*\n• Stainless steel (EN 1.4301/AISI 304)\n• Stainless steel (EN 1.4401/AISI 316).\n* The impeller, chamber and filling plugs are made of stainless steel\n(EN 1.4301/AISI 304).\nThe pump shaft is made of stainless steel (EN 1.4057/AISI 431)."
-    },
-    {
-      "id": "grundfos-cme",
-      "image": "/media/cme-product-1.png",
-      "slug": "cme",
-      "shortDescription": "變頻臥式多段離心泵浦",
-      "introduction": "The Grundfos CM and CME pumps are non-selfpriming,\nhorizontal, multistage, end-suction centrifugal\npumps. The pumps are of the close-coupled type.\nCM pumps are fitted with mains-operated motors\nwhereas the motor for CME pumps has an integrated\nfrequency converter. Both CM and CME pumps have\nmechanical shaft seals.\nThe CM and CME pumps are available in these three\nmaterial versions:\n• Cast iron (EN-GJL-200)*\n• Stainless steel (EN 1.4301/AISI 304)\n• Stainless steel (EN 1.4401/AISI 316).\n* The impeller, chamber and filling plugs are made of stainless steel\n(EN 1.4301/AISI 304).\nThe pump shaft is made of stainless steel (EN 1.4057/AISI 431)."
+      "images": [
+        "/media/cm-product-1.png",
+        "/media/cme-product-1.png"
+      ],
+      "slug": "grundfos-cm-cme",
+      "shortDescription": "CM／CME 系列臥式多段端吸離心泵，採用多段葉輪設計，提供高揚程性能。適用於工業加壓、供水系統及空調循環。",
+      "introduction": "CM／CME 系列臥式多段端吸離心泵為 Grundfos 經典多段泵系列。CM 為標準馬達版本，CME 為整合變頻馬達版本。採用不鏽鋼材質，適用於工業系統、水處理、冷凍及空調、大樓揚水等應用。"
     },
     {
       "id": "grundfos-cr-cri-crn",
@@ -143,18 +140,15 @@
       "introduction": "CR, CRI and CRN pumps are vertical multistage,\ncentrifugal pumps. The in-line design of the pumps\nenables installation in a horizontal one-pipe system\nwhere the inlet and outlet ports are in the same\nhorizontal level and have the same pipe dimensions.\nThis design provides a more compact pump design.\nCR pumps are available in various sizes and various\nnumbers of stages to deliver the flow and pressure\nrequired.\nCR pumps are designed for a variety of applications\nranging from the pumping of potable water to the\npumping of chemicals. The pumps are therefore\nsuitable for a wide diversity of pumping systems where\nthe performance and material of the pump meet\nspecific demands.\nA CR pump consists of two main components: the\nmotor and the pump unit.\nThe motor is a Grundfos or Siemens motor designed to\nEN standards.\nThe pump unit consists of optimised hydraulics,\nvarious types of connections, a sleeve, a pump head\nand various other parts."
     },
     {
-      "id": "grundfos-dwk",
+      "id": "grundfos-dwk-dpk",
       "image": "/media/dwk-product-1.png",
-      "slug": "dwk",
-      "shortDescription": "DWK and DPK pumps",
-      "introduction": "The pumps are designed with semi-open or enclosed\nimpeller for pumping water in a wide range of building\nand industrial applications.\nThe pumps are made of resistant materials, such as\ncast iron and high-chrome stainless steel. These\nmaterials ensure proper operation.\nThe pumps are fitted with 2-pole motors from 0.75 kW\nup to 90.0 kW.\nThe free passage in the pumps is 10-20 mm.\nThe pumps are available for two installation types:\n• submerged installation, free-standing (DWK and\nDPK)\n• submerged installation on auto-coupling system\n(only DPK).\nThe pumps are ideal for the pumping of the liquids\nlisted in section Applications."
-    },
-    {
-      "id": "grundfos-dpk",
-      "image": "/media/dpk-product-1.png",
-      "slug": "dpk",
-      "shortDescription": "DWK and DPK pumps",
-      "introduction": "The pumps are designed with semi-open or enclosed\nimpeller for pumping water in a wide range of building\nand industrial applications.\nThe pumps are made of resistant materials, such as\ncast iron and high-chrome stainless steel. These\nmaterials ensure proper operation.\nThe pumps are fitted with 2-pole motors from 0.75 kW\nup to 90.0 kW.\nThe free passage in the pumps is 10-20 mm.\nThe pumps are available for two installation types:\n• submerged installation, free-standing (DWK and\nDPK)\n• submerged installation on auto-coupling system\n(only DPK).\nThe pumps are ideal for the pumping of the liquids\nlisted in section Applications."
+      "images": [
+        "/media/dwk-product-1.png",
+        "/media/dpk-product-1.png"
+      ],
+      "slug": "grundfos-dwk-dpk",
+      "shortDescription": "DWK／DPK 系列沉水式脫水／排水泵，適用於工地排水、礦山排水及臨時排水應用。具備高可靠性與耐用特性。",
+      "introduction": "DWK／DPK 系列為 Grundfos 沉水式脫水及排水泵。DWK 適用於含少量固體顆粒的排水應用；DPK 適用於污水與廢水排放。採用不鏽鋼與鑄鐵材質，具備高可靠耐用特性，適用於污水、工業系統等排水場景。"
     },
     {
       "id": "grundfos-sp-a-sp",
@@ -164,25 +158,16 @@
       "introduction": "A wide pump range\nGrundfos offers energy-efficient submersible pumps\nranging from 1 to 330 m3/h. The pump range consists of\nmany pump sizes, and each pump size is available with\nan optional number of stages to match any duty point.\nHigh pump efficiency\nOften pump efficiency is a neglected factor compared to\nthe price. However, the observant user will notice that\nprice variations are without importance to water supply\neconomics compared to the importance of pump and\nmotor efficiencies.\n\nTo ensure the right wear resistance and reduce risk of\ncorrosion, the pump ranges are available with different\nsteel variants.\n• SP: EN 1.4301: Clean water, for example drinking\nwater.\n• SP N: EN 1.4401: Slightly aggressive water, for\nexample brackish water.\n• SP R: EN 1.4539: Highly aggressive water, for\nexample seawater."
     },
     {
-      "id": "grundfos-sc",
+      "id": "grundfos-sc-hc",
       "image": "/media/sc-product-1.png",
-      "slug": "sc",
-      "shortDescription": "污物廢水泵浦 SC",
-      "introduction": "污水／廢水泵浦系列。"
-    },
-    {
-      "id": "grundfos-hc",
-      "image": "/media/hc-product-1.png",
-      "slug": "hc",
-      "shortDescription": "污物廢水泵浦 HC",
-      "introduction": "污水／廢水泵浦系列。"
-    },
-    {
-      "id": "grundfos-hs-ss",
-      "image": "/media/hs-ss-product-1.png",
-      "slug": "hs-ss",
-      "shortDescription": "污物廢水泵浦 HS／SS",
-      "introduction": "污水／廢水泵浦系列。"
+      "images": [
+        "/media/sc-product-1.png",
+        "/media/hc-product-1.png",
+        "/media/hs-ss-product-1.png"
+      ],
+      "slug": "grundfos-sc-hc",
+      "shortDescription": "SC／HC 污物廢水泵系列，適用於污水、污物及廢水排放。具備大通過粒徑設計與耐磨耗特性。",
+      "introduction": "SC／HC 污物廢水泵系列為 Grundfos 沉水式污物廢水泵。SC 適用於污水與污物排放，HC 適用於含較大固體顆粒的廢水。採用耐磨耗設計，具備大通過粒徑能力，適用於污水、工業系統等排水場景。"
     },
     {
       "id": "grundfos-magna3",
@@ -199,32 +184,26 @@
       "introduction": "葛蘭富 Hydro MPC 加壓系統的基本構件為世界聞名的葛蘭富 CR 系列多段離心式泵浦。40 年前，葛蘭富首創開發這種形式的泵浦，而最新一代的 CR 系列泵浦仍然維持著世界領先的地位。CR 系列泵浦出眾的可靠性和效率為這套加壓系統提供了最佳的基礎。\n\n搭配葛蘭富智慧型 CRE 泵浦的 Hydro MPC 加壓系統，將提供更高的效率，進一步縮減能源成本。CRE 泵浦系列配備了葛蘭富自製的變頻控制馬達，這樣的搭配可達到全方位的控制、最佳化的輸出彈性，以及在任何時段都是無與倫比的效能表現。\n\n全方位的解決方案 所有組件的組合皆以品質和效率為出發點。葛蘭富 Hydro MPC 加壓系統的設計是以耐用為目標：堅固、精巧，同時所有組件在維修時輕易可及。\n\n葛蘭富 Hydro MPC 加壓系統可以隨時應付額外的壓力需求。各型號皆可依客戶所要的特定容量和控制需求而設計。"
     },
     {
-      "id": "grundfos-cl",
+      "id": "grundfos-cl-lf",
       "image": "/media/cl-product-1.png",
-      "slug": "cl",
-      "shortDescription": "CL End Suction",
-      "introduction": "The Grundfos LF and CL pumps utilize a double volute design that offers a distinct advantage over single volute designs. The double volute design incorporates two cutwaters located at 180°, which divide the flow into two geometrically similar regions of the volute.\n\nThis design ensures that the resultant hydraulic radial loads are equal and opposed and thereby nullified. As a result, the net radial force is maintained at a very low level throughout the operating range of the pump, and shaft deflection is kept to a minimum. Pump operation thus remains stable throughout the entire performance curve with minimum shaft deflection, and prolongs seal, bearing, and shaft life."
+      "images": [
+        "/media/cl-product-1.png",
+        "/media/lf-product-1.png"
+      ],
+      "slug": "grundfos-cl-lf",
+      "shortDescription": "CL／LF 系列單段端吸離心泵，採用標準化設計，適用於工業給水、空調循環及一般輸送。",
+      "introduction": "CL／LF 系列為 Grundfos 單段端吸離心泵。採用標準化設計與後拉式結構，便於維護。適用於工業系統、冷凍及空調、一般工業用水等輸送應用。"
     },
     {
-      "id": "grundfos-lf",
-      "image": "/media/lf-product-1.png",
-      "slug": "lf",
-      "shortDescription": "LF End Suction",
-      "introduction": "The Grundfos LF and CL pumps utilize a double volute design that offers a distinct advantage over single volute designs. The double volute design incorporates two cutwaters located at 180°, which divide the flow into two geometrically similar regions of the volute.\n\nThis design ensures that the resultant hydraulic radial loads are equal and opposed and thereby nullified. As a result, the net radial force is maintained at a very low level throughout the operating range of the pump, and shaft deflection is kept to a minimum. Pump operation thus remains stable throughout the entire performance curve with minimum shaft deflection, and prolongs seal, bearing, and shaft life."
-    },
-    {
-      "id": "grundfos-nb-nbe-nk-nke",
+      "id": "grundfos-nb-nbg-nk-nkg-nbe-nbge-nke-nkge",
       "image": "/media/nb-nbe-nk-nke-product-1.png",
-      "slug": "nb-nbe-nk-nke",
-      "shortDescription": "客製化端吸泵",
-      "introduction": "We offer a wide range of custom-built variants of the\nNB, NBG, NK, NKG type range for a variety of\ndemanding industrial applications.\nWith these single-stage end-suction pumps, based on\nthe well-known NB/NK type range, we meet the\ncustomers’ needs for pumps capable of handling\n• high-temperature liquids\n• crystallising liquids\n• high-viscosity liquids such as paints and varnishes\n• aggressive liquids\n• volatile liquids\n• flammable liquids.\nNB, NBG, NK, NKG custom-built pumps can be\nadapted to special installation requirements."
-    },
-    {
-      "id": "grundfos-nbg-nbge-nkg-nkge",
-      "image": "/media/nbg-nbge-nkg-nkge-product-1.png",
-      "slug": "nbg-nbge-nkg-nkge",
-      "shortDescription": "客製化端吸泵",
-      "introduction": null
+      "images": [
+        "/media/nb-nbe-nk-nke-product-1.png",
+        "/media/nbg-nbge-nkg-nkge-product-1.png"
+      ],
+      "slug": "grundfos-nb-nbg-nk-nkg-nbe-nbge-nke-nkge",
+      "shortDescription": "NB／NBG／NK／NKG／NBE／NBGE／NKE／NKGE 系列單段端吸離心泵，提供標準與變頻版本，適用於工業給水與空調循環。",
+      "introduction": "NB／NBG／NK／NKG／NBE／NBGE／NKE／NKGE 系列為 Grundfos 單段端吸離心泵家族。NB/NBG/NK/NKG 為標準馬達版本，NBE/NBGE/NKE/NKGE 為整合變頻馬達版本。採用標準化設計，適用於工業系統、冷凍及空調、一般工業用水等應用。"
     }
   ]
 }

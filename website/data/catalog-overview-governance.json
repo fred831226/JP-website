@@ -1,23 +1,6 @@
 {
   "series": [
     {
-      "id": "jp-pump-vbsg",
-      "purposeTags": [
-        "公寓或大樓頂樓加壓",
-        "免水塔地面直接供水",
-        "美容、美髮、SPA 或相關行業之恆壓淋浴設備供水"
-      ],
-      "published": "是"
-    },
-    {
-      "id": "jp-pump-kh-vbsg",
-      "published": "是"
-    },
-    {
-      "id": "jp-pump-2vbsg",
-      "published": "是"
-    },
-    {
       "id": "jp-pump-sn",
       "published": "是"
     },

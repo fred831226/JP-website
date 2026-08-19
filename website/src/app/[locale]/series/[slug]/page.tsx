@@ -105,9 +105,18 @@ export default async function SeriesPage({ params }: { params: Promise<{ slug: s
                 產品規格
               </h2>
             </div>
-            <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] shadow-[0_2px_14px_rgba(11,42,61,.06)]">
-            <div className="overflow-x-auto">
-              <table className="model-table w-full min-w-[400px] border-collapse text-sm">
+            <div className="space-y-8">
+              {specificationGroups(series.id, series.models).map((group) => (
+                <section key={group.name} aria-labelledby={`specification-group-${group.name}`}>
+                  <h3 id={`specification-group-${group.name}`} className="mb-3 text-[var(--font-heading-sm-size)] font-[var(--font-heading-sm-weight)] text-[var(--color-primary)]">
+                    {group.name} 規格表
+                  </h3>
+                  {group.models.length === 0 ? (
+                    <p className="rounded-[var(--radius-lg)] border border-dashed border-[var(--color-border)] bg-[var(--color-surface-subtle)] px-4 py-5 text-sm text-[var(--color-text-muted)]">規格資料未提供</p>
+                  ) : (
+                    <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] shadow-[0_2px_14px_rgba(11,42,61,.06)]">
+                    <div className="overflow-x-auto">
+                      <table className="model-table w-full min-w-[400px] border-collapse text-sm">
                 <thead>
                   <tr className="border-b border-[var(--color-border)] bg-[var(--color-surface-subtle)]">
                     <th className="sticky left-0 bg-[var(--color-surface-subtle)] px-4 py-3 text-left font-[650] text-[var(--color-text)]">型號</th>
@@ -117,7 +126,7 @@ export default async function SeriesPage({ params }: { params: Promise<{ slug: s
                   </tr>
                 </thead>
                 <tbody>
-                  {series.models.map((m, i) => (
+                  {group.models.map((m, i) => (
                     <tr key={m.id} className={`border-b border-[var(--color-border)] transition-colors duration-200 ${i % 2 === 0 ? "bg-white" : "bg-[var(--color-background)]"}`}>
                       <td className="sticky left-0 bg-inherit px-4 py-2.5 font-[650] text-[var(--color-text)]">{m.name}</td>
                       <td className="px-4 py-2.5 text-[var(--color-text)]">{specValue(m.specs, "max_head_m", "rated_head_m", "total_head_m")}</td>
@@ -126,8 +135,12 @@ export default async function SeriesPage({ params }: { params: Promise<{ slug: s
                     </tr>
                   ))}
                 </tbody>
-              </table>
-            </div>
+                      </table>
+                    </div>
+                    </div>
+                  )}
+                </section>
+              ))}
             </div>
           </section>
         </RevealSection>
@@ -187,4 +200,33 @@ function powerValue(specs: Record<string, string>): React.ReactNode {
   if (kw != null && kw !== "" && kw !== "null") return kw;
   if (hp != null && hp !== "" && hp !== "null") return `${hp} HP`;
   return <span className="italic text-[var(--color-identity-detail)]">未提供</span>;
+}
+
+function specificationGroups<T extends { name: string }>(seriesId: string, models: T[]): { name: string; models: T[] }[] {
+  const groupDefinitions: Record<string, { name: string; matches: (name: string) => boolean }[]> = {
+    "grundfos-cm-cme": [
+      { name: "CM", matches: (name) => /^CM(?:\s|$)/.test(name) },
+      { name: "CME", matches: (name) => /^CME(?:\s|$)/.test(name) },
+    ],
+    "grundfos-dwk-dpk": [
+      { name: "DWK", matches: (name) => /^DWK(?:\.|\s|$)/.test(name) },
+      { name: "DPK", matches: (name) => /^DPK(?:\.|\s|$)/.test(name) },
+    ],
+    "grundfos-sc-hc": [
+      { name: "SC", matches: (name) => /^\d*SC[CEV]/.test(name) },
+      { name: "HC", matches: (name) => /^\d*HCC/.test(name) },
+      { name: "HS／SS", matches: (name) => /^\d*(?:HSV|SSV|SSC)/.test(name) },
+    ],
+    "grundfos-cl-lf": [
+      { name: "CL", matches: (name) => /^CL(?:\s|$)/.test(name) },
+      { name: "LF", matches: (name) => /^LF(?:\s|$)/.test(name) },
+    ],
+    "grundfos-nb-nbg-nk-nkg-nbe-nbge-nke-nkge": [
+      { name: "NB／NBE／NK／NKE", matches: (name) => /^(?:NB|NBE|NK|NKE)(?:\s|$)/.test(name) },
+      { name: "NBG／NBGE／NKG／NKGE", matches: (name) => /^(?:NBG|NBGE|NKG|NKGE)(?:\s|$)/.test(name) },
+    ],
+  };
+  const definitions = groupDefinitions[seriesId];
+  if (!definitions) return [{ name: "型號", models }];
+  return definitions.map((group) => ({ ...group, models: models.filter((model) => group.matches(model.name)) }));
 }

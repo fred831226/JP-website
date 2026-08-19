@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T04:03:25.308Z",
+  "generatedAt": "2026-08-19T06:11:27.330Z",
   "source": "source-catalog.xlsx",
   "series": [
     {
@@ -12,7 +12,9 @@
       "purposeTags": [
         "公寓或大樓頂樓加壓",
         "免水塔地面直接供水",
-        "美容、美髮、SPA 或相關行業之恆壓淋浴設備供水"
+        "美容",
+        "美髮",
+        "SPA 或相關行業之恆壓淋浴設備供水"
       ],
       "modelCount": 33,
       "models": [
@@ -6237,9 +6239,9 @@
       ]
     },
     {
-      "id": "grundfos-cm",
+      "id": "grundfos-cm-cme",
       "brandId": "grundfos",
-      "name": "CM",
+      "name": "CM／CME",
       "sourceSeriesName": "CM／CME",
       "productName": "CM、CME 臥式多段離心泵",
       "pumpType": "臥式泵",
@@ -6630,22 +6632,6 @@
           }
         }
       ]
-    },
-    {
-      "id": "grundfos-cme",
-      "brandId": "grundfos",
-      "name": "CME",
-      "sourceSeriesName": "CM／CME",
-      "productName": "CM、CME 臥式多段離心泵",
-      "pumpType": "臥式泵",
-      "purposeTags": [
-        "工業系統",
-        "水處理",
-        "冷凍及空調",
-        "大樓揚水"
-      ],
-      "modelCount": 0,
-      "models": []
     },
     {
       "id": "grundfos-cr-cri-crn",
@@ -10537,9 +10523,9 @@
       ]
     },
     {
-      "id": "grundfos-dwk",
+      "id": "grundfos-dwk-dpk",
       "brandId": "grundfos",
-      "name": "DWK",
+      "name": "DWK／DPK",
       "sourceSeriesName": "DWK／DPK",
       "productName": "DWK 脫水泵與 DPK 排水泵",
       "pumpType": "沉水式揚水泵",
@@ -10547,7 +10533,7 @@
         "污水",
         "工業系統"
       ],
-      "modelCount": 138,
+      "modelCount": 166,
       "models": [
         {
           "id": "葛蘭富|DWK／DPK|DWK.O.6.50.075.6.0D",
@@ -11514,22 +11500,7 @@
           "specs": {
             "power_source": "60 Hz；3×220–240 V 或 3×380–415 V，依機型"
           }
-        }
-      ]
-    },
-    {
-      "id": "grundfos-dpk",
-      "brandId": "grundfos",
-      "name": "DPK",
-      "sourceSeriesName": "DWK／DPK",
-      "productName": "DWK 脫水泵與 DPK 排水泵",
-      "pumpType": "沉水式揚水泵",
-      "purposeTags": [
-        "污水",
-        "工業系統"
-      ],
-      "modelCount": 28,
-      "models": [
+        },
         {
           "id": "葛蘭富|DWK／DPK|DPK.10.50.075.6.0D",
           "name": "DPK.10.50.075.6.0D",
@@ -13611,9 +13582,9 @@
       ]
     },
     {
-      "id": "grundfos-sc",
+      "id": "grundfos-sc-hc",
       "brandId": "grundfos",
-      "name": "SC",
+      "name": "SC／HC 污物廢水泵",
       "sourceSeriesName": "SC／HC 污物廢水泵",
       "productName": "葛蘭富污物廢水泵浦",
       "pumpType": "沉水式污水泵",
@@ -13621,7 +13592,7 @@
         "污水",
         "工業系統"
       ],
-      "modelCount": 60,
+      "modelCount": 90,
       "models": [
         {
           "id": "葛蘭富|SC／HC 污物廢水泵|80SCC41.5",
@@ -14042,22 +14013,7 @@
           "specs": {
             "power_source": "60 Hz；依機型；大型系列列有 380–480 V"
           }
-        }
-      ]
-    },
-    {
-      "id": "grundfos-hc",
-      "brandId": "grundfos",
-      "name": "HC",
-      "sourceSeriesName": "SC／HC 污物廢水泵",
-      "productName": "葛蘭富污物廢水泵浦",
-      "pumpType": "沉水式污水泵",
-      "purposeTags": [
-        "污水",
-        "工業系統"
-      ],
-      "modelCount": 11,
-      "models": [
+        },
         {
           "id": "葛蘭富|SC／HC 污物廢水泵|50HCC21.5",
           "name": "50HCC21.5",
@@ -14134,22 +14090,7 @@
           "specs": {
             "power_source": "60 Hz；依機型；大型系列列有 380–480 V"
           }
-        }
-      ]
-    },
-    {
-      "id": "grundfos-hs-ss",
-      "brandId": "grundfos",
-      "name": "HS／SS",
-      "sourceSeriesName": "SC／HC 污物廢水泵",
-      "productName": "葛蘭富污物廢水泵浦",
-      "pumpType": "沉水式污水泵",
-      "purposeTags": [
-        "污水",
-        "工業系統"
-      ],
-      "modelCount": 19,
-      "models": [
+        },
         {
           "id": "葛蘭富|SC／HC 污物廢水泵|50HSV20.4",
           "name": "50HSV20.4",
@@ -14548,9 +14489,9 @@
       ]
     },
     {
-      "id": "grundfos-cl",
+      "id": "grundfos-cl-lf",
       "brandId": "grundfos",
-      "name": "CL",
+      "name": "CL／LF",
       "sourceSeriesName": "CL／LF",
       "productName": "CL、LF 長軸聯結端吸泵",
       "pumpType": "臥式泵",
@@ -14559,7 +14500,7 @@
         "冷凍及空調",
         "一般工業用水"
       ],
-      "modelCount": 1,
+      "modelCount": 2,
       "models": [
         {
           "id": "葛蘭富|CL／LF|CL",
@@ -14567,23 +14508,7 @@
           "specs": {
             "power_source": "LF：50 Hz；CL 型錄頁未明示；依馬達配置"
           }
-        }
-      ]
-    },
-    {
-      "id": "grundfos-lf",
-      "brandId": "grundfos",
-      "name": "LF",
-      "sourceSeriesName": "CL／LF",
-      "productName": "CL、LF 長軸聯結端吸泵",
-      "pumpType": "臥式泵",
-      "purposeTags": [
-        "工業系統",
-        "冷凍及空調",
-        "一般工業用水"
-      ],
-      "modelCount": 1,
-      "models": [
+        },
         {
           "id": "葛蘭富|CL／LF|LF",
           "name": "LF",
@@ -14594,9 +14519,9 @@
       ]
     },
     {
-      "id": "grundfos-nb-nbe-nk-nke",
+      "id": "grundfos-nb-nbg-nk-nkg-nbe-nbge-nke-nkge",
       "brandId": "grundfos",
-      "name": "NB／NBE／NK／NKE",
+      "name": "NB／NBG／NK／NKG／NBE／NBGE／NKE／NKGE",
       "sourceSeriesName": "NB／NBG／NK／NKG／NBE／NBGE／NKE／NKGE",
       "productName": "客製化單段端吸泵系列",
       "pumpType": "臥式泵",
@@ -14605,30 +14530,7 @@
         "冷凍及空調",
         "一般工業用水"
       ],
-      "modelCount": 1,
-      "models": [
-        {
-          "id": "葛蘭富|NB／NBG／NK／NKG／NBE／NBGE／NKE／NKGE|NK 32-125",
-          "name": "NK 32-125",
-          "specs": {
-            "power_source": "50／60 Hz；依馬達配置"
-          }
-        }
-      ]
-    },
-    {
-      "id": "grundfos-nbg-nbge-nkg-nkge",
-      "brandId": "grundfos",
-      "name": "NBG／NBGE／NKG／NKGE",
-      "sourceSeriesName": "NB／NBG／NK／NKG／NBE／NBGE／NKE／NKGE",
-      "productName": "客製化單段端吸泵系列",
-      "pumpType": "臥式泵",
-      "purposeTags": [
-        "工業系統",
-        "冷凍及空調",
-        "一般工業用水"
-      ],
-      "modelCount": 3,
+      "modelCount": 4,
       "models": [
         {
           "id": "葛蘭富|NB／NBG／NK／NKG／NBE／NBGE／NKE／NKGE|NBG 125-80-200",
@@ -14640,6 +14542,13 @@
         {
           "id": "葛蘭富|NB／NBG／NK／NKG／NBE／NBGE／NKE／NKGE|NBG 125-80-200/196",
           "name": "NBG 125-80-200/196",
+          "specs": {
+            "power_source": "50／60 Hz；依馬達配置"
+          }
+        },
+        {
+          "id": "葛蘭富|NB／NBG／NK／NKG／NBE／NBGE／NKE／NKGE|NK 32-125",
+          "name": "NK 32-125",
           "specs": {
             "power_source": "50／60 Hz；依馬達配置"
           }
