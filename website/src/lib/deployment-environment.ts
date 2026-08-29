@@ -17,6 +17,15 @@ export function classifyDeploymentEnvironment(value = process.env.VERCEL_ENV): D
   return { kind: "development", isProduction: false, isIndexable: false, label: "開發環境" };
 }
 
+export function getIndexingHeaders(value = process.env.VERCEL_ENV) {
+  if (classifyDeploymentEnvironment(value).isIndexable) return [];
+  return [{ key: "X-Robots-Tag", value: "noindex, nofollow" }];
+}
+
+export function shouldShowPreviewBanner(environment: DeploymentEnvironment) {
+  return !environment.isProduction && environment.label !== null;
+}
+
 export function getRobotsPolicy(value = process.env.VERCEL_ENV) {
   if (!classifyDeploymentEnvironment(value).isIndexable) {
     return { rules: { userAgent: "*", disallow: "/" } };

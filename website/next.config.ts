@@ -1,18 +1,18 @@
 import type { NextConfig } from "next";
 import governedRedirects from "./data/redirects.json";
-
-const isProduction = process.env.VERCEL_ENV === "production";
+import { getIndexingHeaders } from "./src/lib/deployment-environment";
 
 const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/*": ["./catalog-current.json", "./releases/**/*"],
   },
   async headers() {
-    if (isProduction) return [];
+    const headers = getIndexingHeaders();
+    if (headers.length === 0) return [];
     return [
       {
         source: "/:path*",
-        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+        headers,
       },
     ];
   },

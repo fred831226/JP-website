@@ -1,7 +1,7 @@
-import type { DeploymentEnvironment } from "@/lib/deployment-environment";
+import { shouldShowPreviewBanner, type DeploymentEnvironment } from "@/lib/deployment-environment";
 
 export default function PreviewBanner({ environment }: { environment: DeploymentEnvironment }) {
-  if (environment.isProduction || !environment.label) return null;
+  if (!shouldShowPreviewBanner(environment)) return null;
 
   return (
     <div

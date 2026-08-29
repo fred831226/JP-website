@@ -3,7 +3,9 @@ import test from "node:test";
 
 import {
   classifyDeploymentEnvironment,
+  getIndexingHeaders,
   getRobotsPolicy,
+  shouldShowPreviewBanner,
 } from "../../src/lib/deployment-environment.ts";
 
 test("only an explicit Vercel production environment is indexable", () => {
@@ -46,4 +48,23 @@ test("omitted environment reads the ambient Vercel environment", () => {
     if (previous === undefined) delete process.env.VERCEL_ENV;
     else process.env.VERCEL_ENV = previous;
   }
+});
+
+test("Production emits no X-Robots-Tag while Preview and Development fail closed", () => {
+  assert.deepEqual(getIndexingHeaders("production"), []);
+  assert.deepEqual(getIndexingHeaders("preview"), [
+    { key: "X-Robots-Tag", value: "noindex, nofollow" },
+  ]);
+  assert.deepEqual(getIndexingHeaders("development"), [
+    { key: "X-Robots-Tag", value: "noindex, nofollow" },
+  ]);
+  assert.deepEqual(getIndexingHeaders("staging"), [
+    { key: "X-Robots-Tag", value: "noindex, nofollow" },
+  ]);
+});
+
+test("only non-Production environments show the Preview banner", () => {
+  assert.equal(shouldShowPreviewBanner(classifyDeploymentEnvironment("production")), false);
+  assert.equal(shouldShowPreviewBanner(classifyDeploymentEnvironment("preview")), true);
+  assert.equal(shouldShowPreviewBanner(classifyDeploymentEnvironment("development")), true);
 });
