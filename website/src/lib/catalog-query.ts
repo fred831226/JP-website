@@ -30,9 +30,8 @@ export function normalizeCatalogQuery(
 ): CatalogFilterState {
   const brandAllowed = new Set(options.brandIds);
   const rawBrands = searchParams.getAll("brand").filter(Boolean);
-  const brands = allowedUnique(rawBrands, brandAllowed);
-  const brand = rawBrands.every((value) => brandAllowed.has(value)) && brands.length === 1
-    ? brands[0]
+  const brand = rawBrands.length === 1 && brandAllowed.has(rawBrands[0])
+    ? rawBrands[0]
     : null;
 
   const types = allowedUnique(searchParams.getAll("type").filter(Boolean), new Set(options.typeIds));

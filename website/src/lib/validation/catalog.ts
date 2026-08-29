@@ -1,9 +1,24 @@
 import { z } from "zod";
 
-const UnitEnum = z.enum(["m", "L/min", "hp", "kW", "bar", "kg"]);
+export const UnitEnum = z.enum(["m", "L/min", "hp", "kW", "bar", "kg"]);
 type Unit = z.infer<typeof UnitEnum>;
 
 const TechnicalDecimal = z.string().regex(/^\d+(\.\d+)?$/, "Must be a decimal string").nullable();
+const TechnicalText = z.string().min(1).nullable();
+
+const ModelSpecsSchema = z.object({
+  horsepower_hp: TechnicalDecimal.optional(),
+  power_kw: TechnicalDecimal.optional(),
+  inlet_inch: TechnicalText.optional(),
+  outlet_inch: TechnicalText.optional(),
+  rated_head_m: TechnicalDecimal.optional(),
+  max_head_m: TechnicalDecimal.optional(),
+  total_head_m: TechnicalDecimal.optional(),
+  rated_flow_lmin: TechnicalDecimal.optional(),
+  max_flow_lmin: TechnicalDecimal.optional(),
+  power_source: TechnicalText.optional(),
+  weight_kg: TechnicalDecimal.optional(),
+}).strict();
 
 export const BrandSchema = z.object({
   id: z.string().min(1),
@@ -35,18 +50,18 @@ export const SeriesSchema = z.object({
   introduction: z.string(),
   image: z.string().nullable(),
   images: z.array(z.string()),
-  pumpTypeIds: z.array(z.string()),
+  pumpTypeId: z.string().min(1),
   purposeIds: z.array(z.string()),
   purposeTags: z.array(z.string()),
   headMin: TechnicalDecimal,
   headMax: TechnicalDecimal,
   flowMin: TechnicalDecimal,
   flowMax: TechnicalDecimal,
+  lastUpdatedDate: z.iso.date(),
   models: z.array(z.object({
     id: z.string().min(1),
     name: z.string().min(1),
-    pumpType: z.string(),
-    specs: z.record(z.string(), z.string()),
+    specs: ModelSpecsSchema,
   })),
 });
 

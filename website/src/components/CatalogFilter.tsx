@@ -1,8 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { catalogHref, type CatalogFilterState } from "@/lib/catalog-query";
+import { useEffect, useRef } from "react";
+import type { CatalogFilterState } from "@/lib/catalog-query";
 
 interface FilterOption {
   id: string;
@@ -14,29 +13,78 @@ interface CatalogFilterProps {
   pumpTypes: FilterOption[];
   purposes: FilterOption[];
   state: CatalogFilterState;
+  onChange: (update: (previous: CatalogFilterState) => CatalogFilterState) => void;
 }
 
-export default function CatalogFilter({ brands, pumpTypes, purposes, state }: CatalogFilterProps) {
-  const router = useRouter();
-  const [searchValue, setSearchValue] = useState(state.q);
+export default function CatalogFilter({ brands, pumpTypes, purposes, state, onChange }: CatalogFilterProps) {
+  const lastStateQuery = useRef(state.q);
+  const searchValue = useRef(state.q);
+  const searchRef = useRef<HTMLInputElement>(null);
+  const hydratedSearchValue = useRef(false);
+
+  // A user can type before React hydrates this Client Component. Reconcile the
+  // browser-owned value once so the URL and filtered result do not lose it.
+  useEffect(() => {
+    if (hydratedSearchValue.current) return;
+    hydratedSearchValue.current = true;
+    const value = searchRef.current?.value ?? state.q;
+    if (value !== state.q) {
+      searchValue.current = value;
+      lastStateQuery.current = value;
+      onChange((previous) => ({ ...previous, q: value.trim() }));
+    }
+  }, [onChange, state.q]);
+
+  useEffect(() => {
+    if (state.q !== lastStateQuery.current) {
+      lastStateQuery.current = state.q;
+      if (document.activeElement !== searchRef.current) {
+        searchValue.current = state.q;
+        if (searchRef.current) searchRef.current.value = state.q;
+      }
+    }
+  }, [state.q]);
+
+  useEffect(() => {
+    const syncSearchFromHistory = () => {
+      const query = new URLSearchParams(window.location.search).getAll("q").map((value) => value.trim()).find(Boolean) ?? "";
+      lastStateQuery.current = query;
+      searchValue.current = query;
+      if (searchRef.current) searchRef.current.value = query;
+    };
+    window.addEventListener("popstate", syncSearchFromHistory);
+    return () => window.removeEventListener("popstate", syncSearchFromHistory);
+  }, []);
+
+  const change = (patch: Partial<CatalogFilterState>) => {
+    onChange((previous) => ({ ...previous, q: searchValue.current.trim(), ...patch }));
+  };
+
   const currentBrand = state.brand ?? "";
   const currentTypes = state.types;
   const currentPurposes = state.purposes;
   const currentQ = state.q;
 
-  const buildHref = (params: Partial<CatalogFilterState>) => catalogHref({ ...state, ...params });
+  const updateSearch = (value: string) => {
+    searchValue.current = value;
+    change({ q: value.trim() });
+  };
 
   const setBrand = (brand: string | null) => {
-    router.push(buildHref({ brand }));
+    change({ brand });
   };
 
   const toggleArray = (k: string, v: string) => {
-    const current = k === "type" ? currentTypes : currentPurposes;
-    const next = current.includes(v) ? current.filter((x) => x !== v) : [...current, v];
-    router.push(buildHref(k === "type" ? { types: next } : { purposes: next }));
+    onChange((previous) => {
+      const current = k === "type" ? previous.types : previous.purposes;
+      const next = current.includes(v) ? current.filter((x) => x !== v) : [...current, v];
+      return k === "type"
+        ? { ...previous, q: searchValue.current.trim(), types: next }
+        : { ...previous, q: searchValue.current.trim(), purposes: next };
+    });
   };
 
-  const clearAll = () => router.push("/zh-tw/products");
+  const clearAll = () => change({ brand: null, types: [], purposes: [], q: "" });
 
   const hasFilters = currentBrand || currentTypes.length > 0 || currentPurposes.length > 0 || currentQ;
 
@@ -50,17 +98,12 @@ export default function CatalogFilter({ brands, pumpTypes, purposes, state }: Ca
           </label>
           <input
             id="catalog-search"
+            ref={searchRef}
             type="text"
-            value={searchValue}
-            onChange={(event) => setSearchValue(event.target.value)}
+            defaultValue={state.q}
+            onChange={(event) => updateSearch(event.currentTarget.value)}
             placeholder="系列名稱或型號..."
-            className="mt-1 block w-full rounded-[var(--radius-md)] bg-white px-3 py-2 text-sm shadow-[0_3px_10px_rgba(11,42,61,0.10)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]"
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                const v = searchValue.trim();
-                router.push(buildHref({ q: v }));
-              }
-            }}
+            className="mt-1 block min-h-[44px] w-full rounded-[var(--radius-md)] bg-white px-3 py-2 text-sm shadow-[0_3px_10px_rgba(11,42,61,0.10)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]"
           />
         </div>
 
@@ -74,6 +117,7 @@ export default function CatalogFilter({ brands, pumpTypes, purposes, state }: Ca
                 !currentBrand ? "bg-[var(--color-action)] text-[var(--color-on-action)]" : "bg-[var(--color-surface-subtle)] text-[var(--color-text)] hover:bg-[var(--color-border)]"
               }`}
               onClick={() => setBrand(null)}
+              aria-pressed={!currentBrand}
             >
               全部
             </button>
@@ -85,6 +129,7 @@ export default function CatalogFilter({ brands, pumpTypes, purposes, state }: Ca
                   currentBrand === b.id ? "bg-[var(--color-action)] text-[var(--color-on-action)]" : "bg-[var(--color-surface-subtle)] text-[var(--color-text)] hover:bg-[var(--color-border)]"
                 }`}
                 onClick={() => setBrand(currentBrand === b.id ? null : b.id)}
+                aria-pressed={currentBrand === b.id}
               >
                 {b.name}
               </button>
@@ -106,6 +151,7 @@ export default function CatalogFilter({ brands, pumpTypes, purposes, state }: Ca
                     active ? "bg-[var(--color-action)] text-[var(--color-on-action)]" : "bg-[var(--color-surface-subtle)] text-[var(--color-primary)] hover:bg-[var(--color-border)]"
                   }`}
                   onClick={() => toggleArray("type", t.id)}
+                  aria-pressed={active}
                 >
                   {t.name}
                 </button>
@@ -128,6 +174,7 @@ export default function CatalogFilter({ brands, pumpTypes, purposes, state }: Ca
                     active ? "bg-[var(--color-action)] text-[var(--color-on-action)]" : "bg-[var(--color-surface-subtle)] text-[var(--color-primary)] hover:bg-[var(--color-border)]"
                   }`}
                   onClick={() => toggleArray("purpose", p.id)}
+                  aria-pressed={active}
                 >
                   {p.name}
                 </button>
@@ -143,22 +190,22 @@ export default function CatalogFilter({ brands, pumpTypes, purposes, state }: Ca
               {currentBrand && (
                 <span className="inline-flex items-center gap-1 rounded-[var(--radius-xs)] bg-[var(--color-action)] px-2 py-1 text-xs text-[var(--color-on-action)]">
                   {brands.find((b) => b.id === currentBrand)?.name || currentBrand}
-                  <button type="button" onClick={() => setBrand(null)} className="ml-1 text-[var(--color-on-action)]/70 hover:text-[var(--color-on-action)]" aria-label="移除品牌條件">✕</button>
+                  <button type="button" onClick={() => setBrand(null)} className="ml-1 inline-flex min-h-[44px] min-w-[44px] items-center justify-center text-[var(--color-on-action)]/70 hover:text-[var(--color-on-action)]" aria-label="移除品牌條件">✕</button>
                 </span>
               )}
               {currentTypes.map((tid) => (
                 <span key={tid} className="inline-flex items-center gap-1 rounded-[var(--radius-xs)] bg-[var(--color-surface-subtle)] px-2 py-1 text-xs text-[var(--color-primary)]">
                   {pumpTypes.find((t) => t.id === tid)?.name || tid}
-                  <button type="button" onClick={() => toggleArray("type", tid)} className="ml-1 hover:text-[var(--color-action)]" aria-label="移除泵浦類型條件">✕</button>
+                  <button type="button" onClick={() => toggleArray("type", tid)} className="ml-1 inline-flex min-h-[44px] min-w-[44px] items-center justify-center hover:text-[var(--color-action)]" aria-label="移除泵浦類型條件">✕</button>
                 </span>
               ))}
               {currentPurposes.map((pid) => (
                 <span key={pid} className="inline-flex items-center gap-1 rounded-[var(--radius-xs)] bg-[var(--color-surface-subtle)] px-2 py-1 text-xs text-[var(--color-primary)]">
                   {purposes.find((p) => p.id === pid)?.name || pid}
-                  <button type="button" onClick={() => toggleArray("purpose", pid)} className="ml-1 hover:text-[var(--color-action)]" aria-label="移除用途條件">✕</button>
+                  <button type="button" onClick={() => toggleArray("purpose", pid)} className="ml-1 inline-flex min-h-[44px] min-w-[44px] items-center justify-center hover:text-[var(--color-action)]" aria-label="移除用途條件">✕</button>
                 </span>
               ))}
-              <button type="button" onClick={clearAll} className="text-xs text-[var(--color-action)] hover:underline focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]">
+              <button type="button" onClick={clearAll} className="inline-flex min-h-[44px] items-center text-xs text-[var(--color-action)] hover:underline focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]">
                 重設全部條件
               </button>
             </div>

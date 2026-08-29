@@ -4,11 +4,13 @@ stepsCompleted:
   - step-02-design-epics
   - step-03-create-stories
   - step-04-final-validation
+updated: 2026-08-27
 inputDocuments:
   - _bmad-output/planning-artifacts/prds/prd-JP-Website-2026-07-20/prd.md
   - _bmad-output/planning-artifacts/prds/prd-JP-Website-2026-07-20/addendum.md
   - _bmad-output/planning-artifacts/architecture/architecture-JP-Website-2026-07-21/ARCHITECTURE-SPINE.md
   - _bmad-output/planning-artifacts/architecture/architecture-JP-Website-2026-07-21/SOURCE-RECONCILIATION-LEAN-2026-07-22.md
+  - _bmad-output/planning-artifacts/architecture/architecture-JP-Website-2026-07-21/SOURCE-RECONCILIATION-EPIC2-2026-08-21.md
   - _bmad-output/planning-artifacts/ux-designs/ux-JP-website-2026-07-21/DESIGN.md
   - _bmad-output/planning-artifacts/ux-designs/ux-JP-website-2026-07-21/EXPERIENCE.md
 ---
@@ -45,7 +47,7 @@ FR11: Professional buyers can inspect every approved Model and its aligned speci
 
 FR12: Professional buyers can read approved Series copy and governed, non-interactive Purpose tags; V1 does not add an extra performance section or PDF/technical-document download surface.
 
-FR13: Cross-type Series such as VBSG remain one canonical Series page, are discoverable from every approved Pump Type, and show Model-level Pump Type only when supported by governed source data.
+FR13: Every V1 Series belongs to exactly one approved Pump Type and retains one canonical Series page; VBSG belongs only to `臥式泵`, and no Series multi-type or Model-level Pump Type model is introduced.
 
 FR14: Public Series and Model data is technically reviewed and internally traceable to source, reviewer, and review date; public pages show the last-updated date and direct buyers to confirm final suitability with JP PUMP.
 
@@ -59,7 +61,7 @@ FR20: A designated maintainer can create, update, preview, publish, remove, and 
 
 FR21: A designated maintainer can publish only approved, optimized media derivatives with useful filenames and required alt, source, rights, and approval metadata while originals remain in an independently backed-up private archive.
 
-FR22: A designated maintainer can govern Brands, Pump Types, Purposes, approximately 10 Series, approximately 603 Model rows, and product media through one versioned structured source with stable identity and source traceability.
+FR22: A designated maintainer can govern Brands, Pump Types, Purposes, exactly 22 combined canonical Series, approximately 603 Model rows, and product media through one versioned structured source with stable identity and source traceability.
 
 FR23: A designated maintainer can review data differences, automated checks, affected pages, and a commit-bound Vercel Preview before an atomic Production promotion, and can restore a prior known-good deployment.
 
@@ -125,6 +127,8 @@ NFR13: The public site presents a complete, modern, restrained, technically cred
 - Store Company, Services/Projects, taxonomy, Partners, Contact, redirects, catalog, and media metadata as schema-validated JSON; allow non-executable Markdown only for explicitly long editorial prose, with no MDX requirement.
 - Keep loaders small, typed, server-only, and direct; do not prebuild provider-neutral repositories, adapters, or CMS ports until a real second provider or runtime-write path is approved.
 - Split catalog governance between importer-owned `catalog.generated.json` technical Series/Model fields and manually governed `catalog-content.json` stable IDs, slugs, taxonomy mappings, approved copy, and image references.
+- Treat the approved V1 public baseline as exactly 22 combined canonical Series and one Product Overview card per canonical Series; every source Model must belong to exactly one canonical group, and the superseded 28-card split must not return.
+- Assign exactly one approved Pump Type to every V1 Series. VBSG belongs only to `臥式泵`; do not add Series multi-type or Model-level Pump Type data.
 - Provide a repeatable validated Excel intake that fully regenerates only importer-owned data, reports file/sheet/row/field failures, leaves the current generated catalog unchanged on failure, and never overwrites manually governed fields.
 - Join generated and manual catalog sources by stable Series/Model keys and fail validation on duplicate, missing, or orphaned records; the initial Pump Type mapping uses source Excel main-sheet column G but still requires JP PUMP technical review.
 - Use stable string IDs independent of display names and slugs; relationships store IDs, locales own mutable slugs, retired slugs require redirect/404 treatment, boundary timestamps use ISO 8601 UTC, and date-only content uses `YYYY-MM-DD`.
@@ -240,7 +244,7 @@ FR9: Epic 2 - Visitors can browse substantive Pump Type landing pages while usin
 FR10: Epic 2 - Visitors can use one canonical, complete detail page per Series.
 FR11: Epic 2 - Visitors can inspect all approved Model specifications accessibly.
 FR12: Epic 2 - Visitors can read approved Series copy and identify governed Purposes.
-FR13: Epic 2 - Visitors can find one cross-type Series from every approved Pump Type.
+FR13: Epic 2 - Visitors can rely on exactly one approved Pump Type and one canonical route for every Series.
 FR14: Epic 2 - Visitors can trust reviewed technical data and understand the suitability-confirmation boundary.
 FR15: Epic 1 - Visitors can use approved direct Contact information without a form or attribution.
 FR16: Epic 1 - Visitors can reach Contact contextually from public trust surfaces; Epic 2 reuses the same contract on catalog surfaces.
@@ -531,14 +535,19 @@ As a professional buyer,
 I want the catalog to expose only approved, consistently classified product data,
 So that every product route and value I use is trustworthy.
 
-**Requirements:** FR6, FR9, FR10, FR13, FR14; NFR11, NFR12; UX-DR18, UX-DR19, UX-DR21, UX-DR23, UX-DR32.
+**Requirements:** FR6, FR9, FR10, FR13, FR14, FR24; NFR11, NFR12; UX-DR18, UX-DR19, UX-DR21, UX-DR23, UX-DR32.
 
 **Acceptance Criteria:**
 
 **Given** approved Brand, Pump Type, Purpose, Series, Model, and media records
 **When** catalog data is loaded for a build
-**Then** Zod schemas validate stable IDs, locale slugs, relationships, reviewed publication state, explicit units, and nullable technical values
-**And** invalid or unpublished records are excluded from public page data.
+**Then** Zod schemas validate stable IDs, locale slugs, exactly one Pump Type per Series, reviewed publication state, explicit units, and nullable technical values
+**And** valid records with an unpublished state are excluded from public page data.
+
+**Given** any catalog record fails schema, identity, relationship, unit, numeric, or canonical-group validation
+**When** the build loader or generation process evaluates the candidate catalog
+**Then** processing fails closed before public routes, sitemap entries, generated catalog output, or published page data are produced, and the error identifies the actionable source file plus record, field, row, or equivalent source location and violated rule
+**And** no invalid record is silently skipped and no partial generated or published output is produced.
 
 **Given** a display name or locale slug changes
 **When** relationships are resolved
@@ -683,7 +692,7 @@ So that I can understand its approved capabilities without conflicting duplicate
 **Given** a visitor reviews technical content
 **When** they reach the suitability note and last-updated information
 **Then** the page clearly states that final selection, purchase, and suitability require JP PUMP confirmation
-**And** internal reviewer names and evidence documents remain private.
+**And** the approved 2026-08-21 baseline shows public last-updated date `2026-08-21`, while reviewer `Fred`, review date `2026-08-21`, and evidence documents remain private.
 
 **Given** V1 scope
 **When** the Series page is inspected
@@ -714,10 +723,10 @@ So that I can locate an exact Model and discuss it accurately with JP PUMP.
 **Then** only its clearly labelled bounded container scrolls horizontally, a visible scroll cue is provided, and the first Model column is preserved when feasible
 **And** the page itself never scrolls horizontally.
 
-**Given** a cross-type Series such as VBSG
-**When** approved Pump Type relationships are loaded
-**Then** the Series is discoverable from every approved Pump Type while retaining one canonical page
-**And** Model-level Pump Type appears only where controlled source data supports it.
+**Given** VBSG and the approved V1 Pump Type relationships
+**When** catalog classification is loaded
+**Then** VBSG belongs only to `臥式泵` while retaining one canonical page
+**And** no Series multi-type or Model-level Pump Type data is created.
 
 **Given** an unreviewed Model or value
 **When** public output is generated
@@ -799,6 +808,102 @@ So that I can reach a relevant catalog state without first learning the full tax
 **Then** labels stay visible, controls and cards stack full-width with effective 44 px targets, and no information or function is lost
 **And** the Hero media remains secondary to readable copy, filtering, and links.
 
+### Story 2.8: Remediate Epic 2 Catalog Review Findings
+
+As a professional buyer and designated maintainer,
+I want the approved 22-Series catalog, filtering, specifications, media interaction, and validation behavior to conform to the reconciled requirements,
+So that buyers receive complete and trustworthy product information and releases fail instead of silently losing or mislabelling data.
+
+**Requirements:** FR6-FR14, FR16, FR21, FR24; NFR2, NFR3, NFR10, NFR11; UX-DR14-UX-DR24, UX-DR31, UX-DR33, UX-DR35-UX-DR37.
+
+**Acceptance Criteria:**
+
+**Given** the approved combined-Series governance
+**When** Product Overview, Pump Type pages, Series routes, and sitemap entries are generated
+**Then** exactly 22 canonical Series and 22 corresponding Product Overview cards are published
+**And** the superseded 28-card split and split Series routes do not exist.
+
+**Given** all source Models and the approved canonical-Series grouping
+**When** import and reconciliation run
+**Then** every source Model belongs to exactly one canonical Series group
+**And** unassigned, multiply assigned, or unknown Series records report their source location and block publication rather than being silently lost.
+
+**Given** the V1 Series classification contract
+**When** Pump Type relationships are loaded
+**Then** every Series belongs to exactly one approved Pump Type and VBSG belongs only to `臥式泵`
+**And** no Series multi-type or Model-level Pump Type model is created.
+
+**Given** the approved `2CR(I,N) Booster` content
+**When** its Product Overview card and canonical Series page render
+**Then** the short description is exactly `2CR(I,N) Booster 雙台變頻恆壓泵浦，採恆定壓力交替並列變頻供水，依據水量調整泵浦數量及變頻供水。`
+**And** the introduction preserves these approved statements without invented claims:
+
+- `恆壓交替並列` — `恆定壓力交替並列變頻供水，依據水量調整泵浦數量及變頻供水`
+- `靜音` — `使用雙台變頻主副作交替並列及 PI 控制泵浦，無段變頻變速及軟啟動軟停止，無傳統加壓機頻繁啟停所造成噪音`
+- `防水鎚` — `變頻軟啟停，無傳統加壓機啟停造成水鎚效應確保管路及泵浦安全`
+- `無水保護` — `無水自動保護參數設定，亦可外接浮球感知保護，以確保泵浦不因乾轉損壞（軟硬體雙保護）`
+- `過載保護` — `可依馬達額定設定保護參數，確保馬達安全`
+- `異常交替` — `單台運轉跳脫，自動啟動另一台確保供水無慮`
+- `檢修方便` — `控制架構簡潔，檢修容易及方便`
+- `提供運轉及異常監視接點`
+- `節省能源`
+- `容易選型、安裝及試車`
+
+**Given** the approved technical review baseline
+**When** public and internal catalog data are produced
+**Then** public Series pages show last-updated date `2026-08-21`
+**And** reviewer `Fred` and review date `2026-08-21` remain only in internal governance data and never enter client output.
+
+**Given** any canonical Series page
+**When** its main content renders at any supported width
+**Then** the reading order is suitability-confirmation note, image, four-field key-data block, approved introduction, Model table, non-interactive Purpose tags, and actions
+**And** the four key-data values are minimum/maximum head in `m` and minimum/maximum flow in `L/min`, with missing values rendered as `未提供`.
+
+**Given** a visitor types search text or changes Brand, Pump Type, Purpose, active-condition, or clear-all controls
+**When** the value changes, including rapid consecutive changes
+**Then** filtering applies immediately and uses the latest complete state without losing any still-valid prior condition
+**And** input values, selected controls, active conditions, normalized URL, result cards, and result count agree through reload, sharing, and Browser Back.
+
+**Given** repeated or invalid query values
+**When** the shared query schema parses them
+**Then** multiple or invalid Brand values reset Brand to `全部` and omit the Brand constraint while preserving unrelated valid state
+**And** repeated Type/Purpose values deduplicate and invalid values are discarded without selecting replacements.
+
+**Given** pointer, touch, keyboard, or assistive-technology use
+**When** catalog conditions or results change
+**Then** filter controls expose programmatic selected state, visible focus, visible labels, and effective 44 by 44 CSS px targets
+**And** visible result count and polite live announcements communicate changes without moving focus or announcing every search keystroke individually.
+
+**Given** no Series matches the active conditions
+**When** the empty state renders
+**Then** it preserves active conditions and offers individual removal, `重設全部條件`, and an operable Contact path
+**And** it does not flash a blank list or clear unrelated state.
+
+**Given** Product Overview or an approved Pump Type page
+**When** shared Product cards render
+**Then** each card includes approved imagery, a classification label, Series name, short approved description, reviewed head/flow summary, and one accessible canonical-Series link
+**And** a Pump Type page with no published Series retains its approved introduction and offers Product Overview and Contact links.
+
+**Given** an approved Series image enlargement trigger
+**When** the dialog opens, fails to load, or closes
+**Then** it provides an in-dialog labelled failure state, operable close path, focus trap, Escape support, and focus return to the trigger
+**And** the trigger and close control have effective 44 by 44 CSS px targets, while a Series without approved media never opens an empty dialog.
+
+**Given** a Model table wider than its available region
+**When** it renders at a narrow viewport
+**Then** only a clearly labelled bounded table container scrolls horizontally and provides a visible scroll cue
+**And** the page does not scroll horizontally and all approved Models remain semantic server HTML.
+
+**Given** a catalog import containing an unknown Brand or Series, a non-numeric range, a unit mismatch, or invalid canonical grouping
+**When** import or validation runs
+**Then** the current generated catalog remains unchanged and the report identifies file, sheet, row, field, and violated rule
+**And** no record is silently skipped, no partial output is produced, and an HP value is never published under `功率 (kW)`; an unconfirmed corrected value remains `null` and renders as `未提供`.
+
+**Given** the public image set confirmed by the project owner on 2026-08-21
+**When** release validation evaluates that existing set
+**Then** it does not require an additional per-image approval register or block solely for missing additional source/rights/approval metadata
+**And** alt text, file existence, loadability, content relationships, and accessibility still pass, while future additions or replacements follow the normal governance rule.
+
 ## Epic 3: Govern and Release Trustworthy Content
 
 The designated maintainer can update public content, Projects, Partners, media, taxonomy, Series, and Model data through repeatable validated sources; review changes in a commit-bound Preview; obtain approval; promote atomically; and recover a prior known-good release.
@@ -868,6 +973,11 @@ So that only accurate, licensed, accessible assets appear as evidence.
 **Then** optimized derivatives ship with the deployment
 **And** object storage or a CDN is not introduced until measured need justifies a new decision.
 
+**Given** the public image set confirmed by the project owner on 2026-08-21
+**When** media validation runs
+**Then** that existing set is accepted without creating an additional per-image approval register or blocking solely for missing additional source/rights/approval metadata
+**And** alt text, file existence, loadability, content relationships, and accessibility remain required while future additions or replacements follow the normal governance rule.
+
 ### Story 3.3: Import and Reconcile the Excel Catalog
 
 As a designated website maintainer,
@@ -891,21 +1001,21 @@ So that annual technical updates can be processed without overwriting governed e
 **Given** generated and manual catalog files
 **When** reconciliation runs
 **Then** stable Series/Model keys join both sources and duplicate, missing, or orphaned keys fail validation
-**And** every source record receives one governed disposition: reviewed, pending, insufficient, or excluded.
+**And** every source Model belongs to exactly one of the 22 canonical Series groups and receives one governed disposition: reviewed, pending, insufficient, or excluded.
 
 **Given** an import contains a file, sheet, row, field, format, unit, or rule error
 **When** the importer fails
 **Then** the current generated catalog remains unchanged and the report identifies the exact source location and violated rule
-**And** no partial generated file or Preview is produced.
+**And** unknown Brand or Series values, non-numeric ranges, unit mismatches, and unassigned or multiply assigned Models cannot be silently skipped or produce a partial generated file or Preview.
 
 **Given** an import contains no effective changes
 **When** processing completes
 **Then** it reports a clear no-op with the source version
 **And** no meaningless catalog rewrite or release is created.
 
-**Given** the initial approximately 603 Models and 10 Series
+**Given** the initial approximately 603 Models and 22 combined canonical Series
 **When** processing is staged
-**Then** reviewed batches may publish independently, Models remain rows inside Series pages, and HS, SB/SBI/SBN, and VBSG risk cases are represented
+**Then** reviewed batches may publish independently, Models remain rows inside Series pages, and HS, SB/SBI/SBN, and VBSG single-type classification risk cases are represented
 **And** no permanent client-facing Excel upload interface is created.
 
 ### Story 3.4: Validate Content and Technical Release Readiness
@@ -921,7 +1031,7 @@ So that invalid facts, specifications, relationships, rights, and routes cannot 
 **Given** a candidate repository state
 **When** release validation runs
 **Then** it checks type, lint, build, content/catalog schemas, stable ID and slug uniqueness, required fields, values and units, relationships, media rights/alt/source, links, redirects, and sitemap consistency
-**And** any critical failure blocks Preview and Production.
+**And** unknown Brand or Series values, non-numeric ranges, unit mismatches, and incomplete canonical-Series grouping are critical failures that block Preview and Production, subject only to the approved 2026-08-21 existing-media governance exception.
 
 **Given** a Product or Project record
 **When** review gates run

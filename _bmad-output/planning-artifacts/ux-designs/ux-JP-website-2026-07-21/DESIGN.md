@@ -3,12 +3,13 @@ name: "JP PUMP Technical Blueprint"
 description: "A restrained industrial B2B visual system for trustworthy product discovery, evidence-led company credibility, and direct contact."
 status: final
 created: 2026-07-21
-updated: 2026-07-22
+updated: 2026-08-27
 sources:
   - ../../prds/prd-JP-Website-2026-07-20/prd.md
   - ../../prds/prd-JP-Website-2026-07-20/addendum.md
   - ../../architecture/architecture-JP-Website-2026-07-21/ARCHITECTURE-SPINE.md
   - ../../architecture/architecture-JP-Website-2026-07-21/SOURCE-RECONCILIATION-LEAN-2026-07-22.md
+  - ../../architecture/architecture-JP-Website-2026-07-21/SOURCE-RECONCILIATION-EPIC2-2026-08-21.md
   - reconcile-architecture-lean-2026-07-22.md
   - imports/company-sign-original.jpg
   - imports/company-sign-ai-enhanced.png
@@ -173,6 +174,8 @@ This is the active visual contract for the current mockups. Earlier A–E palett
 The semantic tokens in this file remain the visual authority during implementation. The clean Next.js App Router application under `/website` transcribes them to CSS custom properties and composes them with Tailwind CSS 4; no alternate token authority, component framework or headless UI library is introduced by default. Promoted HTML mockups demonstrate approved composition and behavior, but they are references rather than the application scaffold or runtime architecture.
 
 The supplied `imports/jp-pump-logo-source.png` is the identity master. It may be cleaned, cropped, and exported for the web, but its lettering and structure must not be redrawn. `imports/company-sign-original.jpg` is historical evidence; `imports/company-sign-ai-enhanced.png` is mood reference only.
+
+The public image set confirmed by the project owner on 2026-08-21 is an approved governance baseline. It must not be blocked solely because an additional per-image `source`/`rights`/`approval` metadata inventory was not created. Useful alt text, file existence, loadability, content relationships, and accessibility remain mandatory. Images added or replaced after that baseline follow the normal provenance, rights, approval, and accessibility governance rules.
 
 The retained exploration library is `.working/color-themes-brand-01.html`, `.working/design-directions-a-01.html`, and `.working/uipro-color-comparison-01.html`. These files explain discarded/alternate palette and density directions; the tokens in this spine are the active contract.
 

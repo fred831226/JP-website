@@ -2,12 +2,13 @@
 name: "JP PUMP Website Experience"
 status: final
 created: 2026-07-21
-updated: 2026-07-22
+updated: 2026-08-27
 sources:
   - ../../prds/prd-JP-Website-2026-07-20/prd.md
   - ../../prds/prd-JP-Website-2026-07-20/addendum.md
   - ../../architecture/architecture-JP-Website-2026-07-21/ARCHITECTURE-SPINE.md
   - ../../architecture/architecture-JP-Website-2026-07-21/SOURCE-RECONCILIATION-LEAN-2026-07-22.md
+  - ../../architecture/architecture-JP-Website-2026-07-21/SOURCE-RECONCILIATION-EPIC2-2026-08-21.md
   - reconcile-architecture-lean-2026-07-22.md
   - imports/competitor-navigation-about-us.png
   - imports/homepage-header-reference.png
@@ -48,9 +49,7 @@ V1 scope precedence: Pump Type landing pages remain; Brand and Purpose are gover
 |---|---|---|---|
 | Home | Logo, root URL, search | Establish trust, show positioning, explore products by Purpose, route to products/services/company/contact, and preview approved projects and partners; Project teasers lead to Services & projects or an in-page Project anchor | UJ-1, UJ-2 |
 | Product overview | Header product menu, Home Hero filter, Pump Type pages | Orient through a short catalog Hero, then filter and compare published series | UJ-1, UJ-3 |
-| Brand index/detail | Product overview, crawlable links | Explain an approved brand and show related series | UJ-1, UJ-3 |
-| Pump-type index/detail | Product overview, crawlable links | Explain a governed pump type and show related series | UJ-1 |
-| Use-case index/detail | Header use shortcut, search, product overview | Explain an important use and show related series | UJ-1 |
+| Pump Type page | Product overview, crawlable links | Provide approved original Pump Type context and show related published Series | UJ-1 |
 | Series detail | Product card, Pump Type page, Product overview filters, search | Review image, key ranges, introduction, models, uses, and contact path | UJ-1, UJ-3 |
 | Image enlargement | Series product image | Inspect approved product media without losing page context | UJ-1, UJ-3 |
 | Services & projects | Header direct link, Home Project teaser | Explain approved service capabilities and present the complete V1 Project evidence in place | UJ-2 |
@@ -61,7 +60,7 @@ V1 scope precedence: Pump Type landing pages remain; Brand and Purpose are gover
 
 Header order: `產品總覽`, `服務與實績`, `關於傑平`, `聯絡我們`. Logo returns Home. `產品總覽` opens a single-level list of all approved uses, maximum eight, followed by `全部產品`. `服務與實績` is a direct link. `關於傑平` opens `公司資訊` and `合作夥伴`; V1 has no Latest Information entry. Desktop does not require a separate Home item; mobile may include it.
 
-Brand, pump-type, and use-case pages remain crawlable through ordinary links in the Product overview and relevant content. They are not hidden inside filter-only state.
+Only approved Pump Type pages are formal public taxonomy content pages and remain crawlable through ordinary links. Brand and Purpose are Product overview filter conditions and governed Series metadata only; they generate no standalone route, canonical content page, or sitemap entry. Header Purpose shortcuts open Product overview with the corresponding filter state.
 
 ### Maintainer release workflow
 
@@ -70,13 +69,15 @@ These are workflow stages supplied by repository, CI, and Vercel tooling, not cu
 | Stage | Purpose | Journeys |
 |---|---|---|
 | Source preparation | Update schema-governed Project summaries/evidence, company/partner content, catalog JSON, redirects, and approved media metadata | UJ-4, UJ-5 |
-| Change review | Show the Git difference, affected content, stable IDs/slugs, additions, removals, duplicates, missing fields, and rights metadata | UJ-4, UJ-5 |
-| Validation report | Block content, technical, rights, link, SEO, accessibility, or build failures without changing Production | UJ-4, UJ-5 |
+| Change review | Show the Git difference, affected content, stable IDs/slugs, additions, removals, duplicates, missing fields, and applicable media-governance evidence | UJ-4, UJ-5 |
+| Validation report | Block content, technical, applicable rights, link, SEO, accessibility, or build failures without changing Production; apply the approved existing-image exception below | UJ-4, UJ-5 |
 | Vercel Preview | Review the complete public site at a non-indexable Preview URL | UJ-4, UJ-5 |
 | Approval and Production promotion | Record JP PUMP confirmation and promote one named commit/deployment atomically | UJ-4, UJ-5 |
 | Deployment rollback | Restore a named last-known-good deployment without partial content rollback | UJ-4, UJ-5 |
 
 Project summaries/evidence, partners, and catalog content share this release path. Excel/CSV is evidence input, never public runtime authority or a custom upload UI. Import fully regenerates importer-owned technical Series/Model fields, reports file/sheet/row/field failures, and never overwrites stable IDs, slugs, taxonomy mappings, approved copy, or image references. Validation joins generated and manual catalog data by stable Series/Model keys and rejects duplicate, missing, or orphaned records.
+
+**2026-08-21 existing-image governance exception:** the project owner confirmed that the public image set current on that date was licensed and approved and accepted no additional per-image approval register. Validation must not block that existing set solely because an extra `source`/`rights`/`approval` metadata inventory is absent. Alt text, file existence, loadability, content relationships, and accessibility remain mandatory. Any image added or replaced after that baseline follows the normal media-governance requirements, including applicable provenance, rights, and approval evidence.
 
 ## Voice and Tone
 
@@ -132,7 +133,7 @@ Behavioral rules below use the visual definitions in `DESIGN.md.Components`.
 | Home optional content absent | Home | Omit the entire featured-project or partner section when its source has no approved records. Purpose cards appear only for governed published purposes with approved imagery; preserve the remaining section order without empty cards or invented filler. |
 | No published projects | Services & projects | Keep the approved service-capability Hero and explanation, state that no public project records are currently available, then offer Contact. Never substitute Home atmosphere or generic stock imagery. |
 | Public route and content delivery | Category, Services & projects, Company, Partners | Primary content arrives in the statically generated HTML; do not hide it behind client-only loading skeletons. Missing governed content is handled as an empty/omitted state, and an unavailable or retired legacy route follows the explicit 404/redirect contract. Individual media failure uses its labelled fallback without fabricating facts. |
-| Category empty | Brand, pump-type, use-case | Keep the approved category introduction. State that no published series are currently available, then offer Product overview and Contact; do not hide the whole indexed page or manufacture cards. |
+| Pump Type empty | Pump Type page | Keep the approved Pump Type introduction. State that no published Series are currently available, then offer Product overview and Contact; do not hide the indexed page or manufacture cards. Brand and Purpose empty combinations use the Product overview filter-empty state instead. |
 | Filter updating | Product overview | Each Brand, Pump type, Purpose, search, removal, or clear-all action immediately evaluates the embedded Series-level metadata and replaces the current URL state without a remote request. Keep controls and current results stable during state replacement; never clear unrelated URL state or flash an empty list. |
 | Filter results | Product overview | Show count, active conditions, and matching cards. Announce count changes without moving focus. |
 | Filter empty | Product overview | `沒有符合目前條件的產品。` Provide individual chip removal, `重設全部條件`, and a direct Contact path. |
@@ -147,7 +148,7 @@ Behavioral rules below use the visual definitions in `DESIGN.md.Components`.
 | Contact FAQ absent | Contact | Omit the FAQ section and let Contact information use the available width. Never publish draft questions or invented answers. |
 | Contact map unavailable | Contact | Omit the entire map section until the address and embedding method are approved. The working mock's labelled map is a conditional layout reference, not a public fallback. |
 | Uncommitted or branch-only content | Git source | Not public. The change retains its file/commit identity and must not appear in sitemap, navigation, or Production. |
-| Content/media validation blocked | Validation report | Name every missing/invalid field, duplicate ID/slug, unresolved rights/alt issue, broken relationship, link, unit, or technical error. Preserve sources and do not create a partial Preview/Production release. |
+| Content/media validation blocked | Validation report | Name every missing/invalid field, duplicate ID/slug, applicable unresolved rights/alt issue, broken relationship, link, unit, or technical error. Do not block the 2026-08-21 existing public image set solely for an absent extra per-image `source`/`rights`/`approval` inventory; alt, existence, loadability, relationship, and accessibility failures still block. Preserve sources and do not create a partial Preview/Production release. |
 | Product intake no changes/import failed | Catalog intake | A no-change import ends as a clear no-op. Failure leaves the current generated catalog unchanged and reports the file, sheet, row, field and violated rule. Duplicate, missing or orphaned stable keys block Preview. The importer never overwrites manual IDs, slugs, taxonomy mappings, approved copy or images. |
 | Difference review | Git/validation output | Separate added, changed, removed, duplicate, missing, insufficient, and excluded records; always identify affected public pages and the source version. |
 | Preview ready | Vercel Preview | Identify commit/deployment, affected public pages, validation result, and non-indexable Preview URL. Preview must make it clear that it is not Production. |
@@ -198,8 +199,9 @@ The same navigation items, order, destinations, current-location semantics, cont
 - AI construction scenes may appear only as Home atmosphere. Project evidence uses verified real media. AI product images require specification review and cannot become evidence by visual plausibility alone.
 - Website maintainers may polish supplied case-study language but cannot invent project names, scope, outcomes, numbers, or responsibility.
 - Public product content shows only technically reviewed values and a last-updated date. Internal reviewer identities and documents stay private.
+- The public image set confirmed on 2026-08-21 is not blocked solely for lacking an additional per-image `source`/`rights`/`approval` inventory. Alt text, file existence, loadability, content relationships, and accessibility remain required; future additions or replacements use normal media governance.
 - Series pages always state that final selection, purchase, and suitability require confirmation with JP PUMP. V1 has no extra performance section and no PDF/technical-document download surface.
-- Cross-type series such as VBSG retain one canonical Series page, are reachable from every approved pump type, and show model-level pump type only where the controlled source supports it.
+- Every V1 Series belongs to exactly one approved Pump Type and retains one canonical Series page. VBSG belongs only to `臥式泵`; the experience does not require or expose Series multi-type or Model-level Pump Type data.
 - V1 is Traditional Chinese only. Do not create empty `/en/` pages or machine-translated public content. The data model and URL scheme must permit a future independent `/en/` edition.
 
 ## Inspiration & Anti-patterns
@@ -217,8 +219,8 @@ The same navigation items, order, destinations, current-location semantics, cont
 
 ### UJ-1 — 陳志豪 finds a series from an application need
 
-1. 陳志豪, a mechanical/electrical consultant on a high-rise project, lands on an important use-case page from mobile search.
-2. He reads approved context and opens the related Product overview with the use already visible as an active condition.
+1. 陳志豪, a mechanical/electrical consultant on a high-rise project, reaches Product overview from mobile search or a Purpose shortcut with the governed Purpose visible as an active filter condition.
+2. He reviews the matching published Series; Brand and Purpose remain filter state and Series metadata rather than separate public pages.
 3. He adds brand and pump-type conditions; the result count updates and the URL retains all conditions.
 4. He opens one whole-card series link.
 5. He reviews the key ranges, introduction, and model table; missing data is plainly `未提供`.
@@ -260,9 +262,9 @@ Failure: rights, facts, links, or build checks fail → Production remains uncha
 
 ### UJ-5 — 阿哲 completes the annual product update
 
-1. 阿哲, the designated maintainer, runs the repeatable Excel importer for approximately 10 Series pages; it fully regenerates importer-owned technical Series/Model fields while approximately 603 Models remain specification rows rather than individual pages.
+1. 阿哲, the designated maintainer, runs the repeatable Excel importer for exactly 22 combined canonical Series pages; it fully regenerates importer-owned technical Series/Model fields while approximately 603 Models remain specification rows rather than individual pages.
 2. The importer reports file/sheet/row/field errors and never overwrites manually governed stable IDs, slugs, taxonomy mappings, approved copy, or image references. Validation joins both sources and blocks duplicate, missing, or orphaned keys.
-3. He assigns the four governed dispositions—reviewed, pending, insufficient, or excluded—and records the offline technical reviewer and review date.
+3. He assigns the four governed dispositions—reviewed, pending, insufficient, or excluded—and records the offline technical reviewer and review date. For the 2026-08-21 approved baseline, `Fred` and review date `2026-08-21` remain internal while public Series pages show only the last-updated date `2026-08-21`.
 4. Validation stress-tests HS at approximately 12 rows and the largest combined SB/SBI/SBN Series page at approximately 491 rows.
 5. He reviews the complete public impact in Vercel Preview and obtains JP PUMP confirmation.
 6. **Climax:** he promotes the named deployment, the public catalog changes atomically, the prior usable deployment remains recoverable, and another maintainer can follow the operating document.
@@ -271,7 +273,7 @@ Failure: a critical validation or release step fails → the prior public versio
 
 ## Source Reconciliation
 
-The PRD/addendum, this UX spine, and the Lean Architecture now agree with `reconcile-prd-late-ux-overrides.md`, `reconcile-architecture-lean-2026-07-22.md`, and the Architecture `SOURCE-RECONCILIATION-LEAN-2026-07-22.md`. Latest Information/News is absent from all V1 IA and publishing; individual Project detail pages are deferred and Services & projects owns complete Project evidence; Pump Type landing pages remain V1 while Brand and Purpose remain filters/metadata without standalone pages; analytics, attribution, consent and RUM are deferred. `/zh-tw/`, approved visual mockups, filter behavior, Contact rules, and Git → Preview → approval → Production remain. Implementation uses clean Next.js App Router + Tailwind; mockups remain references and the UX spines win on conflict.
+The PRD/addendum, this UX spine, and the Lean Architecture now agree with `reconcile-prd-late-ux-overrides.md`, `reconcile-architecture-lean-2026-07-22.md`, Architecture `SOURCE-RECONCILIATION-LEAN-2026-07-22.md`, and `SOURCE-RECONCILIATION-EPIC2-2026-08-21.md`. Latest Information/News is absent from all V1 IA and publishing; individual Project detail pages are deferred and Services & projects owns complete Project evidence; Pump Type landing pages remain V1 while Brand and Purpose remain filters/metadata without standalone pages; analytics, attribution, consent and RUM are deferred. The 2026-08-21 existing-image exception prevents an absent extra per-image approval inventory from blocking the confirmed baseline while preserving alt, existence, loadability, relationship, accessibility, and future-media governance. `/zh-tw/`, approved visual mockups, filter behavior, Contact rules, and Git → Preview → approval → Production remain. Implementation uses clean Next.js App Router + Tailwind; mockups remain references and the UX spines win on conflict.
 
 ## Mockup Coverage
 

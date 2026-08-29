@@ -169,7 +169,7 @@ test.describe("Public smoke tests", () => {
     await expect(introductionTitle).toBeVisible();
     await expect(page.getByRole("img", { name: "HS 產品圖" })).toBeVisible();
     await expect(specificationsTitle).toBeVisible();
-    await expect(page.getByText("最小揚程", { exact: true })).toHaveCount(0);
+    await expect(page.getByText("最小揚程", { exact: true })).toBeVisible();
 
     const readingOrder = await page.locator("h1, h2").evaluateAll((headings) =>
       headings.map((heading) => heading.textContent?.trim()).filter(Boolean),

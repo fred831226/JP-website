@@ -118,8 +118,8 @@
       "id": "grundfos-2cr-i-n-booster",
       "slug": "grundfos-2cr-i-n-booster",
       "image": "/media/grundfos-2cr-i-n-booster-product-1.png",
-      "shortDescription": "CR／CRI／CRN Booster 雙台變頻恆壓泵浦，The Grundfos CM and CME pumps are non-selfpriming, horizontal, multistage, end-suction centrifugal pumps.",
-      "introduction": "The Grundfos CM and CME pumps are non-selfpriming,\nhorizontal, multistage, end-suction centrifugal\npumps. The pumps are of the close-coupled type.\nCM pumps are fitted with mains-operated motors\nwhereas the motor for CME pumps has an integrated\nfrequency converter. Both CM and CME pumps have\nmechanical shaft seals.\nThe CM and CME pumps are available in these three\nmaterial versions:\n• Cast iron (EN-GJL-200)*\n• Stainless steel (EN 1.4301/AISI 304)\n• Stainless steel (EN 1.4401/AISI 316)."
+      "shortDescription": "2CR(I,N) Booster 雙台變頻恆壓泵浦，採恆定壓力交替並列變頻供水，依據水量調整泵浦數量及變頻供水。",
+      "introduction": "恆壓交替並列 — 恆定壓力交替並列變頻供水，依據水量調整泵浦數量及變頻供水\n靜音 — 使用雙台變頻主副作交替並列及 PI 控制泵浦，無段變頻變速及軟啟動軟停止，無傳統加壓機頻繁啟停所造成噪音\n防水鎚 — 變頻軟啟停，無傳統加壓機啟停造成水鎚效應確保管路及泵浦安全\n無水保護 — 無水自動保護參數設定，亦可外接浮球感知保護，以確保泵浦不因乾轉損壞（軟硬體雙保護）\n過載保護 — 可依馬達額定設定保護參數，確保馬達安全\n異常交替 — 單台運轉跳脫，自動啟動另一台確保供水無慮\n檢修方便 — 控制架構簡潔，檢修容易及方便\n提供運轉及異常監視接點\n節省能源\n容易選型、安裝及試車"
     },
     {
       "id": "grundfos-cm-cme",

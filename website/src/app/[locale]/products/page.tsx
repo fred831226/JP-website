@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
-import Link from "next/link";
-import Image from "next/image";
 import { getBrands, getPumpTypes, getPurposes, getSeriesList } from "@/lib/content/load-catalog";
 import CatalogBrowser from "@/components/CatalogBrowser";
 import RevealSection from "@/components/RevealSection";
+import ProductCard from "@/components/ProductCard";
 
 export const metadata: Metadata = {
   title: "產品總覽",
   description: "傑平有限公司全系列泵浦產品，依品牌、泵浦類型、用途快速瀏覽。",
+  alternates: {
+    canonical: "/zh-tw/products",
+  },
 };
 
 export default function ProductsPage() {
@@ -16,6 +17,7 @@ export default function ProductsPage() {
   const pumpTypes = getPumpTypes();
   const purposes = getPurposes();
   const series = getSeriesList();
+  const pumpTypeNames = new Map(pumpTypes.map(({ id, name }) => [id, name]));
   const browserSeries = series.map((item) => ({
     id: item.id,
     brandId: item.brandId,
@@ -23,7 +25,7 @@ export default function ProductsPage() {
     slug: item.slug,
     description: item.description,
     image: item.image,
-    pumpTypeIds: item.pumpTypeIds,
+    pumpTypeId: item.pumpTypeId,
     purposeIds: item.purposeIds,
     headMin: item.headMin,
     headMax: item.headMax,
@@ -51,66 +53,21 @@ export default function ProductsPage() {
       </section>
 
       <section className="mx-auto max-w-[var(--content-max)] px-[var(--page-gutter-desktop)] py-8 max-md:px-[var(--page-gutter-mobile)]">
-        <div className="flex flex-col gap-6 md:flex-row">
-          <Suspense fallback={null}>
-            <CatalogBrowser
+          <CatalogBrowser
               brands={brands.map(({ id, name }) => ({ id, name }))}
               pumpTypes={pumpTypes.map(({ id, name }) => ({ id, name }))}
               purposes={purposes.map(({ id, name }) => ({ id, name }))}
-              series={browserSeries.map(({ id, brandId, name, pumpTypeIds, purposeIds, modelNames }) => ({
+              series={browserSeries.map(({ id, brandId, name, pumpTypeId, purposeIds, modelNames }) => ({
                 id,
                 brandId,
                 name,
-                pumpTypeIds,
+                pumpTypeId,
                 purposeIds,
                 modelNames,
               }))}
-            />
-          </Suspense>
-          <div className="flex-1">
-            <div id="catalog-empty-state" hidden className="rounded-[var(--product-card-radius)] border border-dashed border-[var(--color-border)] bg-white p-8 text-center shadow-[var(--product-card-shadow)]">
-              <p className="text-lg font-[700] text-[var(--color-primary)]">沒有符合目前條件的產品。</p>
-              <p className="mt-2 text-sm leading-[var(--font-body-line-height)] text-[var(--color-text-muted)]">
-                可調整側欄條件、個別移除標籤、重設全部條件，或直接聯絡我們確認需求。
-              </p>
-            </div>
-            <div className="grid gap-5 md:grid-cols-2">
-            {browserSeries.map((item) => (
-              <Link
-                key={item.id}
-                href={`/zh-tw/series/${item.slug}`}
-                data-catalog-series={item.id}
-                className="pcat-card flex flex-col overflow-hidden rounded-[var(--product-card-radius)] border border-transparent bg-white shadow-[var(--product-card-shadow)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2"
-              >
-                <div className="relative aspect-[16/9] overflow-hidden bg-[var(--color-surface-subtle)]">
-                  {item.image ? (
-                    <Image src={item.image} alt="" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
-                  ) : (
-                    <div className="flex h-full w-full items-center justify-center text-sm text-[var(--color-text-muted)]">
-                      圖片未提供
-                    </div>
-                  )}
-                </div>
-                <div className="flex flex-1 flex-col gap-2 p-5">
-                  <span className="text-[var(--font-heading-sm-size)] font-[var(--font-heading-sm-weight)] leading-[var(--font-heading-sm-line-height)] text-[var(--color-primary)]">
-                    {item.name}
-                  </span>
-                  <p className="flex-1 text-sm leading-[var(--font-body-line-height)] text-[var(--color-text-muted)]">
-                    {item.description}
-                  </p>
-                  <div className="flex items-end justify-between gap-2">
-                    <div className="text-xs text-[var(--color-text-muted)]">
-                      <span>揚程範圍（m）{item.headMin !== null && item.headMax !== null ? `${item.headMin}–${item.headMax}` : "未提供"}</span>
-                      {item.flowMin !== null && item.flowMax !== null && <span className="ml-2">揚水量範圍（L/min）{item.flowMin}–{item.flowMax}</span>}
-                    </div>
-                    <span className="pcat-arrow text-sm font-[650] text-[var(--color-text-muted)] transition-colors duration-300">看更多 →</span>
-                  </div>
-                </div>
-              </Link>
-            ))}
-            </div>
-          </div>
-        </div>
+            >
+              {series.map((item) => <ProductCard key={item.id} series={item} pumpTypeName={pumpTypeNames.get(item.pumpTypeId) ?? "未提供"} filterable />)}
+          </CatalogBrowser>
       </section>
     </>
   );

@@ -3,12 +3,13 @@
 // Reads: website/data/source-catalog.xlsx
 // Writes: website/data/catalog.generated.json, website/data/catalog-overview.json
 
-import { readFileSync, writeFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { publishCatalogCandidate } from "./catalog-candidate.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = resolve(__dirname, "..");
+const ROOT = process.env.CATALOG_ROOT ? resolve(process.env.CATALOG_ROOT) : resolve(__dirname, "..");
 
 const MAIN_SHEET = "\u5b8c\u6574\u7522\u54c1\u898f\u683c\u8868"; // 完整產品規格表
 const OVERVIEW_SHEET = "\u7db2\u9801_\u7522\u54c1\u7e3d\u89bd"; // 網頁_產品總覽
@@ -29,12 +30,24 @@ const specFields = [
   ["rated_flow_lmin", 17], ["max_flow_lmin", 19],
   ["power_source", 23], ["weight_kg", 36],
 ];
+const NUMERIC_SPEC_FIELDS = new Set(["horsepower_hp", "power_kw", "rated_head_m", "max_head_m", "total_head_m", "rated_flow_lmin", "max_flow_lmin", "weight_kg"]);
+
+// Every column the importer reads is governed here. Keeping the index beside
+// its contractual header prevents numeric data from being silently relabelled
+// when a workbook column is inserted, swapped, or renamed.
+const MAIN_HEADER_CONTRACT = new Map([
+  [0, "品牌"], [1, "產品系列"], [2, "產品名稱"], [3, "型號"], [4, "產品識別碼"], [5, "用途"], [6, "泵浦類型"],
+  [7, "馬力_HP"], [8, "功率_kW"], [9, "入口口徑_inch"], [10, "出口口徑_inch"], [12, "額定揚程_m"], [14, "最高揚程_m"], [15, "全揚程_m"],
+  [17, "額定水量_Lmin"], [19, "最大水量_Lmin"], [23, "電源"], [36, "重量_kg"], [39, "來源PDF"], [40, "資料狀態"],
+  [41, "用途標籤1"], [42, "用途標籤2"], [43, "用途標籤3"], [44, "用途標籤4"], [45, "用途標籤5"], [46, "用途標籤6"], [47, "用途標籤7"], [48, "用途標籤8"],
+]);
 
 const purposeTagCols = [41, 42, 43, 44, 45, 46, 47, 48];
 
 // normalize series names for cross-sheet matching
 const SERIES_KEY_NORMALIZE = {
   "Y\u7cfb\u5217": "Y", // Y系列 → Y
+  "\u81ea\u5438\u5f0f": "Y", // 自吸式 filter tag → Y系列 canonical group
 };
 
 function normalizeSeriesName(n) {
@@ -43,6 +56,12 @@ function normalizeSeriesName(n) {
 
 function sv(v) { return v != null ? String(v).trim() : ""; }
 function toNullIfEmpty(v) { const s = sv(v); return s === "" ? null : s; }
+function decimalOrNull(value, location, field) {
+  const normalized = toNullIfEmpty(value);
+  if (normalized === null) return null;
+  if (!/^\d+(\.\d+)?$/.test(normalized)) throw new Error(`${location} | ${field}: non-numeric range violates decimal/unit rule`);
+  return normalized;
+}
 
 // stable ID generation: brandId + series name → clean series ID
 function cleanSeriesId(key, brandId) {
@@ -78,6 +97,9 @@ async function run() {
   const data = xlsx.utils.sheet_to_json(sheet, { defval: null, header: 1 });
   if (data.length < 4) { console.error("ERROR: insufficient rows"); process.exit(1); }
   const headers = data[2];
+  for (const [index, expected] of MAIN_HEADER_CONTRACT) {
+    if (sv(headers[index]) !== expected) throw new Error(`${MAIN_SHEET}!${xlsx.utils.encode_col(index)}3: expected governed header/unit "${expected}", received "${sv(headers[index]) || "(blank)"}"`);
+  }
   const rows = data.slice(3);
 
   // ── OVERVIEW SHEET (row 0 = headers, row 1+ = data) ──
@@ -103,22 +125,29 @@ async function run() {
   const ftHeadMaxCol = ftColOf["揚程最大值"];
   const ftFlowMinCol = ftColOf["水量最小值"];
   const ftFlowMaxCol = ftColOf["水量最大值"];
-  for (const row of ftRows) {
-    const brandId = BRAND_ID_MAP[sv(row[ftBrandCol])];
+  for (const [field, column] of [["品牌", ftBrandCol], ["產品系列", ftSeriesCol], ["揚程最小值", ftHeadMinCol], ["揚程最大值", ftHeadMaxCol], ["水量最小值", ftFlowMinCol], ["水量最大值", ftFlowMaxCol]]) {
+    if (column === undefined) throw new Error(`${FILTER_TAGS_SHEET} | ${field}: required column missing`);
+  }
+  for (const [filterIndex, row] of ftRows.entries()) {
+    const brandRaw = sv(row[ftBrandCol]);
+    const brandId = BRAND_ID_MAP[brandRaw];
     const seriesName = sv(row[ftSeriesCol]);
-    if (!brandId || !seriesName) continue;
+    if (!brandRaw && !seriesName) continue;
+    if (!brandId) throw new Error(`${FILTER_TAGS_SHEET}!row ${filterIndex + 4} | 品牌: unknown brand "${brandRaw || "(blank)"}"`);
+    if (!seriesName) throw new Error(`${FILTER_TAGS_SHEET}!row ${filterIndex + 4} | 產品系列: missing Series`);
     const key = `${brandId}::${normalizeSeriesName(seriesName)}`;
-    const summary = filterOverviewMap.get(key) ?? { headMin: null, headMax: null, flowMin: null, flowMax: null };
-    for (const [field, col, mode] of [
-      ["headMin", ftHeadMinCol, "min"],
-      ["headMax", ftHeadMaxCol, "max"],
-      ["flowMin", ftFlowMinCol, "min"],
-      ["flowMax", ftFlowMaxCol, "max"],
+    const summary = filterOverviewMap.get(key) ?? { headMin: null, headMax: null, flowMin: null, flowMax: null, sourceRow: filterIndex + 4 };
+    for (const [field, columnName, col, mode] of [
+      ["headMin", "揚程最小值", ftHeadMinCol, "min"],
+      ["headMax", "揚程最大值", ftHeadMaxCol, "max"],
+      ["flowMin", "水量最小值", ftFlowMinCol, "min"],
+      ["flowMax", "水量最大值", ftFlowMaxCol, "max"],
     ]) {
       const rawValue = row[col];
       if (rawValue == null || sv(rawValue) === "") continue;
-      const value = Number(rawValue);
-      if (!Number.isFinite(value)) continue;
+        const decimal = decimalOrNull(rawValue, `source-catalog.xlsx | ${FILTER_TAGS_SHEET}!${xlsx.utils.encode_col(col)}${filterIndex + 4}`, columnName);
+      if (decimal === null) continue;
+      const value = Number(decimal);
       const current = summary[field] === null ? null : Number(summary[field]);
       if (current === null || (mode === "min" ? value < current : value > current)) {
         summary[field] = String(value);
@@ -184,8 +213,10 @@ async function run() {
 
     const specs = {};
     for (const [key, col] of specFields) {
-      const v = row[col];
-      if (v != null) specs[key] = String(v);
+      const location = `source-catalog.xlsx | ${MAIN_SHEET}!${xlsx.utils.encode_col(col)}${sourceRow}`;
+      specs[key] = NUMERIC_SPEC_FIELDS.has(key)
+        ? decimalOrNull(row[col], location, key)
+        : toNullIfEmpty(row[col]);
     }
 
     // Gather purpose tags
@@ -196,8 +227,8 @@ async function run() {
     }
 
     // Source & review status
-    const sourceRef = sv(row[38] || "");
-    const dataStatus = sv(row[37] || "");
+    const sourceRef = sv(row[39] || "");
+    const dataStatus = sv(row[40] || "");
 
     const fullKey = `${seriesName}|${modelName}`;
     if (dataStatus) {
@@ -214,6 +245,7 @@ async function run() {
         productName: sv(row[2] || ""),
         purposeTags: new Set(),
         models: [],
+        sourceRow,
       });
     }
     const entry = seriesMap.get(seriesKey);
@@ -236,7 +268,10 @@ async function run() {
 
   // ── Read overview sheet for series-level data ──
   const overviewMap = new Map();
-  if (ovColOf["\u54c1\u724c"] !== undefined && ovColOf["\u7522\u54c1\u7cfb\u5217"] !== undefined) {
+  for (const required of ["\u54c1\u724c", "\u7522\u54c1\u7cfb\u5217", "\u6cf5\u6d66\u985e\u578b"]) {
+    if (ovColOf[required] === undefined) throw new Error(`${OVERVIEW_SHEET}!row 1 | ${required}: required column missing`);
+  }
+  {
     const ovBrandCol = ovColOf["\u54c1\u724c"];
     const ovSeriesCol = ovColOf["\u7522\u54c1\u7cfb\u5217"];
     const ovTypeCol = ovColOf["\u6cf5\u6d66\u985e\u578b"];
@@ -248,13 +283,13 @@ async function run() {
     const ovModelCountCol = ovColOf["\u578b\u865f\u6578\u91cf"];
     const ovPublishedCol = ovColOf["\u9996\u9801\u4ee3\u8868"] ?? ovColOf["\u662f\u5426\u767c\u5e03"];
 
-    if (ovTypeCol === undefined) throw new Error(`${OVERVIEW_SHEET}: missing pump type column`);
-
     for (const [overviewIndex, row] of ovRows.entries()) {
       const sourceRow = overviewIndex + 2;
       const ovBrand = sv(row[ovBrandCol]);
       const ovSeries = sv(row[ovSeriesCol]);
-      if (!ovBrand || !ovSeries) continue;
+      if (!ovBrand && !ovSeries) continue;
+      if (!ovBrand) throw new Error(`${OVERVIEW_SHEET}!A${sourceRow}: missing brand`);
+      if (!ovSeries) throw new Error(`${OVERVIEW_SHEET}!B${sourceRow}: missing series`);
       const bid = BRAND_ID_MAP[ovBrand];
       if (!bid) throw new Error(`${OVERVIEW_SHEET}!A${sourceRow}: unknown brand "${ovBrand}"`);
       const ovKey = `${bid}::${normalizeSeriesName(ovSeries)}`;
@@ -278,10 +313,10 @@ async function run() {
 
       overviewMap.set(ovKey, {
         purposeTags,
-        headMin: ovHeadMinCol !== undefined ? toNullIfEmpty(row[ovHeadMinCol]) : null,
-        headMax: ovHeadMaxCol !== undefined ? toNullIfEmpty(row[ovHeadMaxCol]) : null,
-        flowMin: ovFlowMinCol !== undefined ? toNullIfEmpty(row[ovFlowMinCol]) : null,
-        flowMax: ovFlowMaxCol !== undefined ? toNullIfEmpty(row[ovFlowMaxCol]) : null,
+        headMin: ovHeadMinCol !== undefined ? decimalOrNull(row[ovHeadMinCol], `source-catalog.xlsx | ${OVERVIEW_SHEET}!${xlsx.utils.encode_col(ovHeadMinCol)}${sourceRow}`, "揚程最小值_m") : null,
+        headMax: ovHeadMaxCol !== undefined ? decimalOrNull(row[ovHeadMaxCol], `source-catalog.xlsx | ${OVERVIEW_SHEET}!${xlsx.utils.encode_col(ovHeadMaxCol)}${sourceRow}`, "揚程最大值_m") : null,
+        flowMin: ovFlowMinCol !== undefined ? decimalOrNull(row[ovFlowMinCol], `source-catalog.xlsx | ${OVERVIEW_SHEET}!${xlsx.utils.encode_col(ovFlowMinCol)}${sourceRow}`, "水量最小值_Lmin") : null,
+        flowMax: ovFlowMaxCol !== undefined ? decimalOrNull(row[ovFlowMaxCol], `source-catalog.xlsx | ${OVERVIEW_SHEET}!${xlsx.utils.encode_col(ovFlowMaxCol)}${sourceRow}`, "水量最大值_Lmin") : null,
         modelCount: ovModelCountCol !== undefined ? (row[ovModelCountCol] != null ? Number(row[ovModelCountCol]) : null) : null,
         published: ovPublishedCol !== undefined ? toNullIfEmpty(row[ovPublishedCol]) : null,
       });
@@ -294,9 +329,18 @@ async function run() {
   const allModels = [];
   const usedGovernanceIds = new Set();
 
+  for (const [key, filterOverview] of filterOverviewMap) {
+    if (!seriesMap.has(key)) {
+      throw new Error(`${FILTER_TAGS_SHEET}!row ${filterOverview.sourceRow} | 產品系列: unknown Series "${key}"`);
+    }
+  }
+
   for (const [key, s] of seriesMap) {
     const sourceId = cleanSeriesId(key, s.brandId);
     const ov = overviewMap.get(key);
+    if (!ov) {
+      throw new Error(`${MAIN_SHEET}!B${s.sourceRow}: series "${s.seriesName}" has missing unique Overview join`);
+    }
     const filterOverview = filterOverviewMap.get(key);
     const governed = governanceMap.get(sourceId);
     if (governed) usedGovernanceIds.add(sourceId);
@@ -356,26 +400,14 @@ async function run() {
     series: generatedSeries,
   };
 
-  const generatedJson = JSON.stringify(generated, null, 2);
-  for (const genOutPath of [
-    resolve(ROOT, "data", "catalog.generated.json"),
-    resolve(ROOT, "src", "data", "catalog.generated.json"),
-  ]) {
-    writeFileSync(genOutPath, generatedJson, "utf-8");
-  }
-  console.log("Wrote both catalog.generated.json copies");
-  console.log("  Series:", generatedSeries.length, "| Models:", generatedSeries.reduce((a, s) => a + s.modelCount, 0));
-
-  // ── Write catalog-overview.json ──
   const overview = { series: overviewSeries };
-  const overviewJson = JSON.stringify(overview, null, 2);
-  for (const ovOutPath of [
-    resolve(ROOT, "data", "catalog-overview.json"),
-    resolve(ROOT, "src", "data", "catalog-overview.json"),
-  ]) {
-    writeFileSync(ovOutPath, overviewJson, "utf-8");
+  const canonicalContent = JSON.parse(readFileSync(resolve(ROOT, "data", "catalog-content.json"), "utf-8"));
+  if (!Array.isArray(canonicalContent.series) || canonicalContent.series.length !== 22) {
+    throw new Error("catalog-content.json: expected exactly 22 governed canonical Series");
   }
-  console.log("Wrote both catalog-overview.json copies");
+  await publishCatalogCandidate({ generated, overview }, { releaseRoot: ROOT, expectedSeriesIds: canonicalContent.series.map(({ id }) => id), source: { file: "source-catalog.xlsx", sheet: MAIN_SHEET, row: 4 } });
+  console.log("Atomically switched the catalog release indicator");
+  console.log("  Series:", generatedSeries.length, "| Models:", generatedSeries.reduce((a, s) => a + s.modelCount, 0));
 
   // ── Series breakdown ──
   console.log("\n=== Series Breakdown ===");

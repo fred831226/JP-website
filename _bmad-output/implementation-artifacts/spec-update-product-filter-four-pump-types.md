@@ -2,12 +2,15 @@
 title: '更新產品篩選頁為四大泵浦類型'
 type: 'feature'
 created: '2026-08-18'
+updated: '2026-08-21'
 status: 'done'
 baseline_commit: 'a53d70164933883789b8594d1d6f2a55ff442c84'
 review_loop_iteration: 0
 context:
   - '{project-root}/_bmad-output/planning-artifacts/epics.md'
 ---
+
+> **2026-08-21 requirement correction:** The project owner approved 22 combined canonical Series and superseded the prior 28-card/split-page assumption. This historical implementation spec and its `done` status do not prove Epic 2 acceptance; remediation is governed by Epic 2 Story 2.8 and requires a new Code Review.
 
 <frozen-after-approval reason="human-owned intent — do not modify unless human renegotiates">
 
@@ -19,7 +22,7 @@ context:
 
 ## Boundaries & Constraints
 
-**Always:** 保留 `Opencode` 未提交變更與全部系列／型號；只採用 Excel 四類；資料、篩選、導覽及標籤一致；維持類型 OR、跨維度 AND、分享 URL 與鍵盤操作。
+**Always:** 保留 `Opencode` 未提交變更與全部系列／型號；只採用 Excel 四類；資料、篩選、導覽及標籤一致；維持類型 OR、跨維度 AND、分享 URL 與鍵盤操作；公開目錄採 22 個合併 canonical 系列與 22 張對應卡片，不建立 28 張拆分卡片或拆分系列頁。
 
 **Ask First:** 修改指定 Excel、移除產品資料、變更品牌／用途、刪除路由或處理舊類型轉址前先確認。
 
@@ -60,9 +63,11 @@ context:
 
 ## Spec Change Log
 
+- `2026-08-21` — Project-owner correction: replace the 28-card/split-page assumption with 22 combined canonical Series; classify VBSG only as `臥式泵`; defer review remediation and proof of acceptance to Epic 2 Story 2.8 without rewriting historical execution evidence.
+
 ## Design Notes
 
-沿用四個核心 ID；舊細分類 ID 不再有效，永久轉址不在本次範圍。第四類依 Excel 顯示「立式楊水泵」。
+沿用四個核心 ID；舊細分類 ID 不再有效，永久轉址不在本次範圍。第四類依 Excel 顯示「立式楊水泵」。每個 V1 Series 只屬一個正式 Pump Type；VBSG 僅屬「臥式泵」，不得為它建立多類型或 Model-level Pump Type 資料。
 
 ## Verification
 
@@ -102,7 +107,7 @@ context:
 
 **靜態可爬取與即時篩選**
 
-- Server Component 永久輸出 28 張卡片；22 個 Excel 來源系列依既有公開頁治理拆分，Client island 只切換可見性。
+- Server Component 永久輸出 22 張 canonical 系列卡片；不依既有公開頁治理拆分為 28 張卡片，Client island 只切換可見性。
   [`page.tsx:82`](../../website/src/app/%5Blocale%5D/products/page.tsx#L82)
 
 - 共用 query 正規化會過濾、去重並產生 canonical URL。

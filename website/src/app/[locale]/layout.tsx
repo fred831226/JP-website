@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import "../globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import PreviewBanner from "@/components/PreviewBanner";
+import { classifyDeploymentEnvironment } from "@/lib/deployment-environment";
 import Script from "next/script";
 
 export function generateStaticParams() {
@@ -26,9 +28,12 @@ export default function LocaleLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const environment = classifyDeploymentEnvironment();
+
   return (
     <html lang="zh-Hant-TW" dir="ltr">
       <body className="flex min-h-screen flex-col bg-[var(--color-background)] text-[var(--color-text)] font-[family-name:var(--font-family-base)] antialiased">
+        <PreviewBanner environment={environment} />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

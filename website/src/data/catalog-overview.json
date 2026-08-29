@@ -129,10 +129,10 @@
         "農業灌溉用水",
         "釀造食品"
       ],
-      "headMin": null,
-      "headMax": null,
-      "flowMin": null,
-      "flowMax": null,
+      "headMin": "5",
+      "headMax": "30",
+      "flowMin": "70",
+      "flowMax": "3600",
       "modelCount": 14,
       "published": "是"
     },
