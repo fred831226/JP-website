@@ -3,6 +3,30 @@ import { test, expect } from "@playwright/test";
 const BASE = "http://localhost:3000/zh-tw";
 
 test.describe("Public smoke tests", () => {
+  test("Home page does not expose internal implementation notes", async ({ page }) => {
+    await page.goto(BASE);
+    const publicText = await page.locator("body").innerText();
+
+    for (const internalNote of [
+      "≤ 5 秒／靜態降級",
+      "照片序列只播放一次、總長不超過 5 秒",
+      "正式年份與沿革待核准",
+      "可公開的服務事實待核准",
+      "正式區域與能力待核准",
+      "正式聯絡流程待核准",
+      "用途名稱、排序與圖片須依正式受控分類核准。點擊整張卡片後前往系列產品頁。",
+      "此區負責說明網站的三條主要路徑，不重複 Hero 篩選器。",
+      "正式實績照片待核准",
+      "來源、使用權與真實性確認後顯示",
+      "正式建案名稱待核准",
+      "工作範圍、解決內容與成果只呈現 JP PUMP 已核准事實。",
+      "核准後呈現案型、工作範圍、成果與相關產品。",
+      "未通過公開權利或安全檢查的內容不會顯示。",
+    ]) {
+      expect(publicText).not.toContain(internalNote);
+    }
+  });
+
   test("Home page loads with correct title", async ({ page }) => {
     await page.goto(BASE);
     await expect(page.locator("h1")).toContainText("以扎實經驗，守護每一套泵浦系統");

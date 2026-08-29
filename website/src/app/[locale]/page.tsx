@@ -9,7 +9,7 @@ import homeData from "@/data/home.json";
 const content = contentRaw as { homepagePumpTypes: { name: string; seriesId: string; slug: string; silhouette: string }[] };
 
 export default function HomePage() {
-  const { hero, companySummary, gateways, projects, partners } = homeData;
+  const { hero, companySummary, gateways, partners } = homeData;
   const brands = getBrands();
   const purposes = getPurposes();
 
@@ -91,12 +91,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Motion note */}
-      <aside className="grid gap-2 border-b border-[var(--color-border)] bg-white px-[var(--page-gutter-desktop)] py-4 text-sm text-[var(--color-text-muted)] max-md:px-[var(--page-gutter-mobile)] md:grid-cols-[auto_1fr] md:gap-4">
-        <strong className="text-[var(--color-primary)]">≤ 5 秒／靜態降級</strong>
-        <span>照片序列只播放一次、總長不超過 5 秒，最後停在此靜態畫面；偏好減少動態、手機省數據或媒體失敗時直接顯示最後一張，文案、篩選與「認識我們」完全不變。</span>
-      </aside>
-
       {/* ================================================================
           Company Summary — with pipe-flow decoration + fact panel
           ================================================================ */}
@@ -124,14 +118,6 @@ export default function HomePage() {
                 認識 JP PUMP
               </Link>
             </RevealSection>
-            <RevealSection delayMs={120}>
-              <div className="grid grid-cols-2 gap-3 rounded-[8px] bg-[var(--color-background)] p-6 shadow-[0_10px_28px_rgba(11,42,61,0.08)]">
-                <FactBox title="歷史與背景" text="正式年份與沿革待核准" />
-                <FactBox title="工程能力" text="可公開的服務事實待核准" />
-                <FactBox title="服務範圍" text="正式區域與能力待核准" />
-                <FactBox title="回應方式" text="正式聯絡流程待核准" />
-              </div>
-            </RevealSection>
           </div>
         </div>
       </section>
@@ -148,9 +134,6 @@ export default function HomePage() {
                 <h2 className="text-[var(--font-heading-lg-size)] font-[var(--font-heading-lg-weight)] leading-[var(--font-heading-lg-line-height)] text-[var(--color-primary)]">
                   依產品用途找到合適系列
                 </h2>
-                <p className="mt-3 text-sm leading-[var(--font-body-line-height)] text-[var(--color-text-muted)]">
-                  用途名稱、排序與圖片須依正式受控分類核准。點擊整張卡片後前往系列產品頁。
-                </p>
               </div>
             </RevealSection>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -189,9 +172,6 @@ export default function HomePage() {
             <h2 className="text-[var(--font-heading-lg-size)] font-[var(--font-heading-lg-weight)] leading-[var(--font-heading-lg-line-height)] text-[var(--color-primary)]">
               從產品探索到工程支援，選擇下一步
             </h2>
-            <p className="mt-3 text-sm leading-[var(--font-body-line-height)] text-[var(--color-text-muted)]">
-              此區負責說明網站的三條主要路徑，不重複 Hero 篩選器。
-            </p>
           </RevealSection>
           <RevealSection delayMs={100}>
             <div
@@ -222,56 +202,6 @@ export default function HomePage() {
           </RevealSection>
         </div>
       </section>
-
-      {/* ================================================================
-          Featured Projects — card grid with placeholder content
-          ================================================================ */}
-      {projects && projects.length > 0 && (
-        <section className="mx-auto max-w-[var(--content-max)] px-[var(--page-gutter-desktop)] py-14 max-md:px-[var(--page-gutter-mobile)]">
-          <RevealSection className="mb-10 flex items-end justify-between gap-6">
-            <div>
-              <p className="mb-2 text-xs font-[800] tracking-[0.08em] text-[var(--color-action)]">FEATURED WORK</p>
-              <h2 className="text-[var(--font-heading-lg-size)] font-[var(--font-heading-lg-weight)] leading-[var(--font-heading-lg-line-height)] text-[var(--color-primary)]">
-                精選建案實績
-              </h2>
-            </div>
-            <Link
-              href="/zh-tw/services"
-              className="min-h-[44px] whitespace-nowrap font-[800] text-[var(--color-action)] underline underline-offset-[5px]"
-            >
-              瀏覽全部服務與實績
-            </Link>
-          </RevealSection>
-          <div className="grid gap-6 md:grid-cols-3">
-            {projects.map((p, i) => (
-              <RevealSection key={p.id} delayMs={i * 100}>
-                <Link
-                  href="/zh-tw/services"
-                  className="project-card group flex flex-col overflow-hidden rounded-[var(--product-card-radius)] border border-[var(--color-border)] bg-white shadow-[var(--product-card-shadow)] transition-all duration-400"
-                >
-                  <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-[var(--color-surface-subtle)] text-center" style={{
-                    backgroundImage: "repeating-linear-gradient(135deg,rgba(0,109,143,.07) 0 10px,transparent 10px 20px),linear-gradient(150deg,#E8EEF1,#D8E2E7)",
-                  }}>
-                    <div className="project-shine pointer-events-none absolute inset-0 z-1" style={{
-                      background: "linear-gradient(105deg,transparent 38%,rgba(0,109,143,.09) 50%,transparent 62%)",
-                      transform: "translateX(-100%)",
-                    }} aria-hidden="true" />
-                    <div className="relative z-0">
-                      <b className="block text-sm font-[700] text-[var(--color-primary)]">正式實績照片待核准</b>
-                      <span className="mt-1 block text-[11px] text-[var(--color-text-muted)]">來源、使用權與真實性確認後顯示</span>
-                    </div>
-                  </div>
-                  <div className="flex flex-1 flex-col gap-2 p-5">
-                    <span className="text-[11px] font-[700] tracking-[.14em] text-[var(--color-identity-detail)]">{p.type}</span>
-                    <h3 className="text-[var(--font-heading-sm-size)] font-[var(--font-heading-sm-weight)] leading-[var(--font-heading-sm-line-height)] text-[var(--color-primary)]">{p.title}</h3>
-                    <p className="text-sm leading-[var(--font-body-line-height)] text-[var(--color-text-muted)]">{p.description}</p>
-                  </div>
-                </Link>
-              </RevealSection>
-            ))}
-          </div>
-        </section>
-      )}
 
       {/* ================================================================
           Partners — logo rows with hover accent
@@ -326,18 +256,6 @@ export default function HomePage() {
         </section>
       )}
     </>
-  );
-}
-
-function FactBox({ title, text }: { title: string; text: string }) {
-  return (
-    <div className="fact-tile rounded-[6px] bg-white p-4 shadow-[0_2px_12px_rgba(11,42,61,.04)] transition-all duration-300 hover:translate-y-[-3px] hover:shadow-[0_8px_26px_rgba(11,42,61,.12)]">
-      <div className="flex items-start justify-between">
-        <strong className="text-base font-[700] text-[var(--color-primary)]">{title}</strong>
-        <span className="fact-dot mt-0.5 block h-[7px] w-[7px] rounded-full bg-[var(--color-primary-muted)] opacity-25" aria-hidden="true" />
-      </div>
-      <span className="mt-1 block text-xs leading-[var(--font-body-sm-line-height)] text-[var(--color-text-muted)]">{text}</span>
-    </div>
   );
 }
 
