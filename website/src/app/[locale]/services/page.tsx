@@ -1,11 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
+import homeData from "@/data/home.json";
 import services from "@/data/services.json";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "服務與實績",
   description: "傑平有限公司的泵浦技術服務與經核准的真實建案實績。",
-};
+  pathname: "/zh-tw/services",
+});
 
 interface Project {
   id: string;
@@ -20,13 +23,19 @@ interface Project {
 
 export default function ServicesPage() {
   const projects = services.projects as Project[];
+  const heroImage = homeData.hero.images[0];
+  const stats = services.stats;
 
   return (
     <>
       {/* Service Hero */}
-      <section className="bg-[var(--color-primary)] px-[var(--page-gutter-desktop)] py-14 max-md:px-[var(--page-gutter-mobile)]">
-        <div className="mx-auto max-w-[var(--content-max)]">
-          <h1 className="text-[var(--font-heading-lg-size)] font-[var(--font-heading-lg-weight)] leading-[var(--font-heading-lg-line-height)] text-[var(--color-on-primary)]">
+      <section className="relative flex min-h-[280px] items-center overflow-hidden px-[var(--page-gutter-desktop)] py-14 max-md:min-h-[250px] max-md:px-[var(--page-gutter-mobile)]">
+        <div className="absolute inset-0" aria-hidden="true">
+          <Image src={heroImage} alt="" fill sizes="100vw" loading="eager" className="object-cover object-center" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-primary)]/95 via-[var(--color-primary)]/84 to-[var(--color-primary)]/58" />
+        </div>
+        <div className="relative z-10 mx-auto w-full max-w-[var(--content-max)]">
+          <h1 className="text-[clamp(2.5rem,5vw,4.5rem)] font-[var(--font-heading-lg-weight)] leading-[1.08] text-white">
             {services.hero.title}
           </h1>
           <div className="mt-6 flex flex-wrap gap-3">
@@ -44,6 +53,24 @@ export default function ServicesPage() {
           </p>
         </div>
       </section>
+
+      {/* Track record */}
+      {stats && (
+        <section data-services-section="stats" className="mx-auto max-w-[var(--content-max)] px-[var(--page-gutter-desktop)] pt-10 max-md:px-[var(--page-gutter-mobile)]">
+          <div className="overflow-hidden rounded-[8px] bg-[var(--color-primary)] px-6 py-8 shadow-[0_16px_36px_rgba(11,42,61,.18)] max-md:px-5">
+            <p className="text-xs font-[800] tracking-[0.12em] text-[#d8c18d]">TRACK RECORD</p>
+            <h2 className="mt-2 text-[var(--font-heading-lg-size)] font-[var(--font-heading-lg-weight)] text-[var(--color-on-primary)]">完成實績</h2>
+            <dl className="mt-6 grid gap-px overflow-hidden rounded-[6px] bg-white/20 sm:grid-cols-3">
+              {stats.map((stat) => (
+                <div key={stat.label} className="bg-[var(--color-primary)] px-5 py-6 text-center">
+                  <dt className="mt-2 text-sm text-[var(--color-contact-text-muted)]">{stat.label}</dt>
+                  <dd className="order-first text-3xl font-[800] tracking-[-.02em] text-[var(--color-on-primary)]">{stat.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+      )}
 
       {/* Projects */}
       <section className="mx-auto max-w-[var(--content-max)] px-[var(--page-gutter-desktop)] py-10 max-md:px-[var(--page-gutter-mobile)]">

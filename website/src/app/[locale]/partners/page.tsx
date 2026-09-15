@@ -1,11 +1,14 @@
-import type { Metadata } from "next";
 import partners from "@/data/partners.json";
+import Image from "next/image";
 import ContentSection, { type ContentSection as SectionShape } from "@/components/ContentSection";
+import PageBanner from "@/components/PageBanner";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "合作夥伴",
-  description: "傑平有限公司的合作品牌與夥伴關係。",
-};
+export const metadata = createPageMetadata({
+  title: "授權經銷品牌",
+  description: "JP PUMP 傑平有限公司的授權經銷品牌。",
+  pathname: "/zh-tw/partners",
+});
 
 type Partner = {
   id: string;
@@ -20,14 +23,13 @@ export default function PartnersPage() {
   const list = partners as Partner[];
 
   return (
-    <div className="mx-auto max-w-[var(--content-max)] px-[var(--page-gutter-desktop)] py-10 max-md:px-[var(--page-gutter-mobile)]">
-      <h1 className="text-[var(--font-heading-lg-size)] font-[var(--font-heading-lg-weight)] leading-[var(--font-heading-lg-line-height)] text-[var(--color-primary)]">
-        合作夥伴
-      </h1>
+    <>
+      <PageBanner title="授權經銷品牌" summary="認識 JP PUMP 的授權經銷品牌。" />
+      <div className="mx-auto max-w-[var(--content-max)] px-[var(--page-gutter-desktop)] py-10 max-md:px-[var(--page-gutter-mobile)]">
 
       {list.length === 0 ? (
         <p className="mt-4 leading-[var(--font-body-line-height)] text-[var(--color-text-muted)]">
-          尚無已核准的合作夥伴資訊。
+          尚無已核准的授權經銷品牌資訊。
         </p>
       ) : (
         <div className="mt-6 space-y-8">
@@ -38,7 +40,7 @@ export default function PartnersPage() {
             >
               <div className="flex flex-col items-center gap-4 md:flex-row md:items-start">
                 {p.logo && (
-                  <img src={p.logo} alt={`${p.name} 標誌`} className="h-16 w-16 shrink-0 object-contain" />
+                  <Image src={p.logo} alt={`${p.name} 授權經銷標誌`} width={640} height={360} className="h-auto w-full max-w-[320px] shrink-0 object-contain md:w-72" />
                 )}
                 <div className="flex flex-col items-center gap-2 md:items-start">
                   <h2 className="text-[var(--font-heading-lg-size)] font-[var(--font-heading-lg-weight)] leading-[var(--font-heading-lg-line-height)] text-[var(--color-primary)]">
@@ -69,6 +71,7 @@ export default function PartnersPage() {
           ))}
         </div>
       )}
-    </div>
+      </div>
+    </>
   );
 }

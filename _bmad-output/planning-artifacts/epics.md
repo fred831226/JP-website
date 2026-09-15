@@ -61,7 +61,7 @@ FR20: A designated maintainer can create, update, preview, publish, remove, and 
 
 FR21: A designated maintainer can publish only approved, optimized media derivatives with useful filenames and required alt, source, rights, and approval metadata while originals remain in an independently backed-up private archive.
 
-FR22: A designated maintainer can govern Brands, Pump Types, Purposes, exactly 22 combined canonical Series, approximately 603 Model rows, and product media through one versioned structured source with stable identity and source traceability.
+FR22: A designated maintainer can govern Brands, Pump Types, Purposes, exactly 22 combined canonical Series, exactly 1,777 Model rows in the approved current Catalog baseline, and product media through one versioned structured source with stable identity and source traceability.
 
 FR23: A designated maintainer can review data differences, automated checks, affected pages, and a commit-bound Vercel Preview before an atomic Production promotion, and can restore a prior known-good deployment.
 
@@ -1013,7 +1013,7 @@ So that annual technical updates can be processed without overwriting governed e
 **Then** it reports a clear no-op with the source version
 **And** no meaningless catalog rewrite or release is created.
 
-**Given** the initial approximately 603 Models and 22 combined canonical Series
+**Given** the approved current Catalog baseline of exactly 1,777 Models and 22 combined canonical Series
 **When** processing is staged
 **Then** reviewed batches may publish independently, Models remain rows inside Series pages, and HS, SB/SBI/SBN, and VBSG single-type classification risk cases are represented
 **And** no permanent client-facing Excel upload interface is created.

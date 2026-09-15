@@ -51,7 +51,7 @@ export default function DropdownMenu({ label, items }: DropdownMenuProps) {
         type="button"
         aria-expanded={open}
         aria-haspopup="true"
-        className="flex min-h-[44px] items-center gap-1 px-3 text-sm font-[650] text-[var(--color-text)] hover:text-[var(--color-action)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2"
+        className="site-nav-dropdown-trigger flex min-h-[44px] items-center gap-1 px-3 text-sm font-[650] text-[var(--color-text)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2"
         onClick={() => setOpen((v) => !v)}
         onKeyDown={(e) => {
           if (e.key === "Escape") close();
@@ -79,7 +79,10 @@ export default function DropdownMenu({ label, items }: DropdownMenuProps) {
               role="menuitem"
               href={item.href}
               className="flex min-h-[44px] items-center rounded-[var(--radius-md)] px-4 text-sm text-[var(--color-text)] hover:bg-[var(--color-surface-subtle)] hover:text-[var(--color-action)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2"
-              onClick={close}
+              onClick={() => {
+                close();
+                window.setTimeout(() => window.dispatchEvent(new Event("catalog-location-change")), 0);
+              }}
             >
               {item.label}
             </Link>

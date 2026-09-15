@@ -7,7 +7,7 @@ paradigm: 'Lean static-first Next.js App Router content site'
 scope: 'JP PUMP static-first V1 public website, governed content and product data, and Vercel production delivery'
 status: final
 created: '2026-07-21'
-updated: '2026-08-21'
+updated: '2026-09-15'
 binds: ['retained FRs after Confirmed V1 Scope Overrides', 'NFR-1..NFR-13 as reconciled', 'UJ-1..UJ-5']
 sources:
   - '../../prds/prd-JP-Website-2026-07-20/prd.md'
@@ -79,7 +79,7 @@ These user-confirmed decisions supersede the older PRD/UX statements until those
 
 - **Binds:** retained V1 public content and catalog capabilities, UJ-4, UJ-5, NFR-10..NFR-12
 - **Prevents:** JSX, spreadsheets, local folders, Preview deployments, or external drives becoming competing public sources of truth
-- **Rule:** One reviewed Git commit owns each Production release. Structured repository files own Brand/Pump Type/Purpose taxonomy data, Pump Type landing pages, exactly 22 combined canonical Series pages, approximately 603 Model rows, projects shown inside Services & Projects, partners, corporate/contact facts, redirects and Hero content. Brand and Purpose have no standalone public routes. Page components may not embed a second authoritative copy. Raw Excel, source documents and original media are evidence inputs, not runtime authorities. Latest Information/News and individual Project detail pages are absent from V1.
+- **Rule:** One reviewed Git commit owns each Production release. Structured repository files own Brand/Pump Type/Purpose taxonomy data, Pump Type landing pages, exactly 22 combined canonical Series pages, exactly 1,777 Model rows in the approved current Catalog baseline, projects shown inside Services & Projects, partners, corporate/contact facts, redirects and Hero content. Brand and Purpose have no standalone public routes. Page components may not embed a second authoritative copy. Raw Excel, source documents and original media are evidence inputs, not runtime authorities. Latest Information/News and individual Project detail pages are absent from V1.
 
 ### AD-4 — [ADOPTED] Publication is an immutable atomic deployment
 
@@ -126,8 +126,8 @@ These user-confirmed decisions supersede the older PRD/UX statements until those
 ### AD-11 — [ADOPTED] Models are rows inside exactly 22 combined canonical Series pages
 
 - **Binds:** FR-10..FR-14, FR-25, UJ-3, NFR-1..NFR-3
-- **Prevents:** 603 duplicate product pages, inaccessible virtualization, missing browser-find results and client hydration of thousands of cells
-- **Rule:** A Series has one route and contains its Model rows. Product Overview exposes one card for each of the 22 canonical Series and never recreates the superseded 28-card split. Every source Model must resolve to exactly one canonical Series group; unassigned, multiply assigned, or unknown Series keys fail validation. HS has approximately 12 rows; the combined SB/SBI/SBN Series page has approximately 491 rows and is the required extreme fixture. Render all reviewed rows as semantic, non-hydrated server HTML. Only the labelled table container may scroll horizontally. Pagination or virtualization requires a new UX and architecture decision proving that browser find, accessibility and SEO remain acceptable.
+- **Prevents:** 1,777 duplicate product pages, inaccessible virtualization, missing browser-find results and client hydration of thousands of cells
+- **Rule:** A Series has one route and contains its Model rows. Product Overview exposes one card for each of the 22 canonical Series and never recreates the superseded 28-card split. Every source Model must resolve to exactly one canonical Series group; unassigned, multiply assigned, or unknown Series keys fail validation. The approved current Catalog baseline contains exactly 1,777 Model rows; validation must exercise the largest Series in that selected release. Render all reviewed rows as semantic, non-hydrated server HTML. Only the labelled table container may scroll horizontally. Pagination or virtualization requires a new UX and architecture decision proving that browser find, accessibility and SEO remain acceptable.
 
 ### AD-12 — [ADOPTED] Vercel is the V1 production envelope
 

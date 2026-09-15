@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Image from "next/image";
 import ImageDialog from "@/components/ImageDialog";
 
 export default function SeriesActions({ images, name }: { images: string[]; name: string }) {
@@ -35,7 +36,7 @@ export default function SeriesActions({ images, name }: { images: string[]; name
             {failedImages.has(active) ? (
               <span role="status" className="p-4 text-sm text-[var(--color-text-muted)]">圖片無法載入，請稍後再試。</span>
             ) : (
-              <img src={active} alt={activeAlt} onError={() => setFailedImages((images) => new Set(images).add(active))} className="h-full w-full object-contain p-4" />
+              <Image src={active} alt={activeAlt} width={1200} height={900} onError={() => setFailedImages((images) => new Set(images).add(active))} className="h-full w-full object-contain p-4" />
             )}
           </button>
 
@@ -80,7 +81,7 @@ export default function SeriesActions({ images, name }: { images: string[]; name
                 {failedImages.has(src) ? (
                   <span className="p-1 text-center text-xs text-[var(--color-text-muted)]">無法載入</span>
                 ) : (
-                  <img src={src} alt="" onError={() => setFailedImages((images) => new Set(images).add(src))} className="h-full w-full object-contain p-1" />
+                  <Image src={src} alt="" width={128} height={128} onError={() => setFailedImages((images) => new Set(images).add(src))} className="h-full w-full object-contain p-1" />
                 )}
               </button>
             ))}

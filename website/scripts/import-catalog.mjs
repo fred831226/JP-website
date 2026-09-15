@@ -11,11 +11,16 @@ import { publishCatalogCandidate } from "./catalog-candidate.mjs";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = process.env.CATALOG_ROOT ? resolve(process.env.CATALOG_ROOT) : resolve(__dirname, "..");
 
+if (process.env.CI || process.env.VERCEL) {
+  throw new Error("Catalog import is an offline maintainer operation and is disabled in CI/Vercel. Review the workbook locally, then commit only validated outputs.");
+}
+
 const MAIN_SHEET = "\u5b8c\u6574\u7522\u54c1\u898f\u683c\u8868"; // 完整產品規格表
 const OVERVIEW_SHEET = "\u7db2\u9801_\u7522\u54c1\u7e3d\u89bd"; // 網頁_產品總覽
 const FILTER_TAGS_SHEET = "\u7db2\u7ad9\u7be9\u9078\u6a19\u7c64"; // 網站篩選標籤
 
-const APPROVED_PUMP_TYPES = new Set(["臥式泵", "沉水式揚水泵", "沉水式污水泵", "立式楊水泵"]);
+const APPROVED_PUMP_TYPES = new Set(["臥式泵", "變頻恆壓泵", "循環泵", "沉水式揚水泵", "沉水式污水泵", "立式揚水泵"]);
+const CANONICAL_SERIES_COUNT = 22;
 
 // stable brand IDs
 const BRAND_ID_MAP = {
@@ -50,6 +55,15 @@ const SERIES_KEY_NORMALIZE = {
   "\u81ea\u5438\u5f0f": "Y", // 自吸式 filter tag → Y系列 canonical group
 };
 
+// Display names may change. Keep published IDs stable so existing catalog
+// content, release data, and canonical URLs continue to resolve.
+const STABLE_SERIES_ID_BY_SOURCE_KEY = {
+  "jp-pump::VFJQ": "jp-pump-kh-vbsg",
+  "jp-pump::VFJH": "jp-pump-vbsg",
+  "jp-pump::VF變頻恆壓泵": "jp-pump-vf",
+  "jp-pump::JS/JSI/JSN": "jp-pump-sb-sbi-sbn",
+};
+
 function normalizeSeriesName(n) {
   return SERIES_KEY_NORMALIZE[n] || n;
 }
@@ -65,6 +79,7 @@ function decimalOrNull(value, location, field) {
 
 // stable ID generation: brandId + series name → clean series ID
 function cleanSeriesId(key, brandId) {
+  if (STABLE_SERIES_ID_BY_SOURCE_KEY[key]) return STABLE_SERIES_ID_BY_SOURCE_KEY[key];
   let id = key.toLowerCase();
   // replace full-width slashes and separators with dashes
   id = id.replace(/[\uff0f\u30fb\uff0c\u3001\u002f]/g, "-"); // ／・，、 /
@@ -79,6 +94,12 @@ function cleanSeriesId(key, brandId) {
   // trim leading/trailing dashes
   id = id.replace(/^-+|-+$/g, "");
   return id || `${brandId}-series`;
+}
+
+function mergeRange(current, incoming, mode) {
+  if (incoming === null) return current;
+  if (current === null) return incoming;
+  return String(mode === "min" ? Math.min(Number(current), Number(incoming)) : Math.max(Number(current), Number(incoming)));
 }
 
 async function run() {
@@ -324,8 +345,7 @@ async function run() {
   }
 
   // ── Build output series ──
-  const generatedSeries = [];
-  const overviewSeries = [];
+  const canonicalSeries = new Map();
   const allModels = [];
   const usedGovernanceIds = new Set();
 
@@ -342,51 +362,53 @@ async function run() {
       throw new Error(`${MAIN_SHEET}!B${s.sourceRow}: series "${s.seriesName}" has missing unique Overview join`);
     }
     const filterOverview = filterOverviewMap.get(key);
-    const governed = governanceMap.get(sourceId);
+    const canonicalId = sourceId;
+    const governed = governanceMap.get(canonicalId) ?? governanceMap.get(sourceId);
     if (governed) usedGovernanceIds.add(sourceId);
-      const purposeTags = ov?.purposeTags?.length
-        ? ov.purposeTags
-        : governed?.purposeTags?.length
-          ? governed.purposeTags
-          : [...s.purposeTags].sort();
-
-      generatedSeries.push({
-        id: sourceId,
-        brandId: s.brandId,
-        name: s.seriesName,
-        sourceSeriesName: s.seriesName,
-        productName: s.productName,
-        pumpType: s.pumpType,
-        purposeTags,
-        modelCount: s.models.length,
-        models: s.models.map((m) => ({
-          id: m.id,
-          name: m.name,
-          specs: m.specs,
-        })),
-      });
-
-      overviewSeries.push({
-        id: sourceId,
-        brandId: s.brandId,
-        purposeTags,
-        headMin: filterOverview?.headMin ?? ov?.headMin ?? null,
-        headMax: filterOverview?.headMax ?? ov?.headMax ?? null,
-        flowMin: filterOverview?.flowMin ?? ov?.flowMin ?? null,
-        flowMax: filterOverview?.flowMax ?? ov?.flowMax ?? null,
-        modelCount: s.models.length,
-        published: ov?.published ?? governed?.published ?? null,
-      });
-
-      s.models.forEach((m) => {
-        allModels.push({
-          seriesId: sourceId,
-          modelName: m.name,
-          source: m.source,
-          reviewNote: m.reviewNote,
-        });
-      });
+    const purposeTags = ov?.purposeTags?.length
+      ? ov.purposeTags
+      : governed?.purposeTags?.length
+        ? governed.purposeTags
+        : [...s.purposeTags].sort();
+    const entry = canonicalSeries.get(canonicalId) ?? {
+      id: canonicalId,
+      brandId: s.brandId,
+      name: s.seriesName,
+      sourceSeriesName: s.seriesName,
+      productName: s.productName,
+      pumpType: s.pumpType,
+      purposeTags: new Set(),
+      headMin: null,
+      headMax: null,
+      flowMin: null,
+      flowMax: null,
+      published: null,
+      models: [],
+    };
+    if (entry.brandId !== s.brandId || entry.pumpType !== s.pumpType) {
+      throw new Error(`${MAIN_SHEET}!B${s.sourceRow}: canonical series "${entry.name}" has inconsistent brand or pump type`);
+    }
+    purposeTags.forEach((tag) => entry.purposeTags.add(tag));
+    entry.headMin = mergeRange(entry.headMin, filterOverview?.headMin ?? ov?.headMin ?? null, "min");
+    entry.headMax = mergeRange(entry.headMax, filterOverview?.headMax ?? ov?.headMax ?? null, "max");
+    entry.flowMin = mergeRange(entry.flowMin, filterOverview?.flowMin ?? ov?.flowMin ?? null, "min");
+    entry.flowMax = mergeRange(entry.flowMax, filterOverview?.flowMax ?? ov?.flowMax ?? null, "max");
+    entry.published = entry.published ?? ov?.published ?? governed?.published ?? null;
+    entry.models.push(...s.models.map((m) => ({ id: m.id, name: m.name, specs: m.specs })));
+    canonicalSeries.set(canonicalId, entry);
+    s.models.forEach((m) => allModels.push({ seriesId: canonicalId, modelName: m.name, source: m.source, reviewNote: m.reviewNote }));
   }
+
+  const generatedSeries = [...canonicalSeries.values()].map((entry) => ({
+    id: entry.id, brandId: entry.brandId, name: entry.name, sourceSeriesName: entry.sourceSeriesName,
+    productName: entry.productName, pumpType: entry.pumpType, purposeTags: [...entry.purposeTags],
+    modelCount: entry.models.length, models: entry.models,
+  }));
+  const overviewSeries = [...canonicalSeries.values()].map((entry) => ({
+    id: entry.id, brandId: entry.brandId, purposeTags: [...entry.purposeTags],
+    headMin: entry.headMin, headMax: entry.headMax, flowMin: entry.flowMin, flowMax: entry.flowMax,
+    modelCount: entry.models.length, published: entry.published,
+  }));
 
   const orphanedGovernance = [...governanceMap.keys()].filter((id) => !usedGovernanceIds.has(id));
   if (orphanedGovernance.length > 0) {
@@ -402,8 +424,8 @@ async function run() {
 
   const overview = { series: overviewSeries };
   const canonicalContent = JSON.parse(readFileSync(resolve(ROOT, "data", "catalog-content.json"), "utf-8"));
-  if (!Array.isArray(canonicalContent.series) || canonicalContent.series.length !== 22) {
-    throw new Error("catalog-content.json: expected exactly 22 governed canonical Series");
+  if (!Array.isArray(canonicalContent.series) || canonicalContent.series.length !== CANONICAL_SERIES_COUNT) {
+    throw new Error(`catalog-content.json: expected exactly ${CANONICAL_SERIES_COUNT} governed canonical Series`);
   }
   await publishCatalogCandidate({ generated, overview }, { releaseRoot: ROOT, expectedSeriesIds: canonicalContent.series.map(({ id }) => id), source: { file: "source-catalog.xlsx", sheet: MAIN_SHEET, row: 4 } });
   console.log("Atomically switched the catalog release indicator");

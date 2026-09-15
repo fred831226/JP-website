@@ -5,11 +5,30 @@
     "subtitle": "從設備選擇到工程服務，以清楚且可核實的資訊協助客戶找到合適方向。",
     "ctaLabel": "認識我們",
     "ctaHref": "/zh-tw/company",
-    "images": ["/media/hero-01.jpg", "/media/hero-02.png"]
+    "images": ["/media/homepage-hero-taiwan-riverside.webp", "/media/hero-01.jpg", "/media/hero-02.png"]
   },
   "companySummary": {
     "heading": "用可核實的經驗，建立長期工程信任",
     "body": "傑平有限公司（JP PUMP）專注於泵浦領域，以技術實證與完整服務鏈協助國內外建案與工業客戶。從估價、選型到安裝維修，每個環節皆可追溯。"
+  },
+  "projectGallery": {
+    "heading": "工程實績現場",
+    "description": "從建築系統到設備安裝，記錄每一個持續運作的工程現場。",
+    "approvalDate": "2026-09-07",
+    "source": "D:\\JP handoff\\實績\\實績\\首頁照片牆",
+    "photos": [
+      { "src": "/media/project-gallery/taipei-dome.jpg", "alt": "大型建築外觀工程現場", "sourceFile": "Taipei_Dome.jpg" },
+      { "src": "/media/project-gallery/taipei-101.jpg", "alt": "高層建築外觀工程現場", "sourceFile": "101.jpg" },
+      { "src": "/media/project-gallery/solar-pump-array.jpg", "alt": "屋頂泵浦與管路設備現場", "sourceFile": "75447074-4CAA-41C1-AB0C-1E2270AAA553.jpg" },
+      { "src": "/media/project-gallery/solar-pump-piping.jpg", "alt": "泵浦設備與管路系統現場", "sourceFile": "7CB4747E-7BB0-4B3B-BD48-CFF71CF0B3FD.jpg" },
+      { "src": "/media/project-gallery/crane-installation.jpg", "alt": "工程設備吊裝現場", "sourceFile": "B030239C-551F-4073-A82C-9C174C5EA979.jpg" },
+      { "src": "/media/project-gallery/pump-installation-left-bottom.jpg", "alt": "泵浦控制設備安裝現場", "sourceFile": "ED29541F-5873-4D4C-9096-5CE0AB8CD98A.jpg" },
+      { "src": "/media/project-gallery/pump-room-replacement.jpg", "alt": "泵浦機房設備安裝現場", "sourceFile": "S__661307406_0.jpg" },
+      { "src": "/media/project-gallery/controller-unit.jpg", "alt": "泵浦控制設備現場", "sourceFile": "S__17481745.jpg" },
+      { "src": "/media/project-gallery/stainless-pump-skid.jpg", "alt": "不鏽鋼泵浦設備組裝現場", "sourceFile": "S__661307402_0.jpg" },
+      { "src": "/media/project-gallery/blue-pump-skid.jpg", "alt": "藍色泵浦設備組裝現場", "sourceFile": "S__661307403_0.jpg" },
+      { "src": "/media/project-gallery/inline-pump-set.jpg", "alt": "管路中的雙泵設備現場", "sourceFile": "螢幕擷取畫面 2026-09-07 202644.png" }
+    ]
   },
   "purposes": [],
   "gateways": [
@@ -17,27 +36,33 @@
       "id": "products",
       "title": "產品總覽",
       "description": "瀏覽全系列泵浦產品，依品牌、類型或用途快速篩選。",
-      "href": "/zh-tw/products"
+      "href": "/zh-tw/products",
+      "background": "/media/gateway-backgrounds/products.jpg",
+      "sourceFile": "D:\\JP handoff\\實績\\實績\\明倫公宅\\75447074-4CAA-41C1-AB0C-1E2270AAA553.jpg"
     },
     {
       "id": "services",
       "title": "服務與實績",
       "description": "了解我們的服務能力與經核准的真實建案。",
-      "href": "/zh-tw/services"
+      "href": "/zh-tw/services",
+      "background": "/media/gateway-backgrounds/services.jpg",
+      "sourceFile": "D:\\JP handoff\\實績\\實績\\機場第三航廈\\機場第三航廈.jpg"
     },
     {
       "id": "contact",
       "title": "聯絡我們",
       "description": "直接以電話或 Email 與我們聯繫。",
-      "href": "/zh-tw/contact"
+      "href": "/zh-tw/contact",
+      "background": "/media/gateway-backgrounds/contact.jpg",
+      "sourceFile": "D:\\JP handoff\\media\\61448DAB-8026-431D-8CC3-F0607B4DE5CD.jpg"
     }
   ],
   "partners": [
     {
       "id": "grundfos",
       "name": "Grundfos 葛蘭富",
-      "description": "葛蘭富是全球泵浦領導品牌，與 JP PUMP 合作提供台灣市場在地化技術支援與選型服務。",
-      "logo": "/media/Grundfos.avif",
+      "description": "Grundfos 葛蘭富為全球泵浦領導品牌，授權 JP PUMP 傑平有限公司，提供台灣市場在地化的技術支援、選型服務與維修。",
+      "logo": "/media/grundfos-authorised-commercial-building-services-dealer.webp",
       "website": "https://www.grundfos.com"
     }
   ]

@@ -1,3 +1,14 @@
 __pycache__/
 *.py[cod]
 .gstack/
+outputs/
+tmp/
+*.log
+website/.next/
+website/node_modules/
+website/playwright-report/
+website/test-results/
+website/.vercel/
+website/releases/*
+!website/releases/d2ef16f4-c324-4ef6-8a99-f823b7f3a590/
+!website/releases/d2ef16f4-c324-4ef6-8a99-f823b7f3a590/**

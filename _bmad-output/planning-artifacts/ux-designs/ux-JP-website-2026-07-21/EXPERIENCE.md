@@ -262,10 +262,10 @@ Failure: rights, facts, links, or build checks fail → Production remains uncha
 
 ### UJ-5 — 阿哲 completes the annual product update
 
-1. 阿哲, the designated maintainer, runs the repeatable Excel importer for exactly 22 combined canonical Series pages; it fully regenerates importer-owned technical Series/Model fields while approximately 603 Models remain specification rows rather than individual pages.
+1. 阿哲, the designated maintainer, runs the repeatable Excel importer for exactly 22 combined canonical Series pages; it fully regenerates importer-owned technical Series/Model fields while the approved current baseline of exactly 1,777 Models remains specification rows rather than individual pages.
 2. The importer reports file/sheet/row/field errors and never overwrites manually governed stable IDs, slugs, taxonomy mappings, approved copy, or image references. Validation joins both sources and blocks duplicate, missing, or orphaned keys.
 3. He assigns the four governed dispositions—reviewed, pending, insufficient, or excluded—and records the offline technical reviewer and review date. For the 2026-08-21 approved baseline, `Fred` and review date `2026-08-21` remain internal while public Series pages show only the last-updated date `2026-08-21`.
-4. Validation stress-tests HS at approximately 12 rows and the largest combined SB/SBI/SBN Series page at approximately 491 rows.
+4. Validation stress-tests the largest Series in the selected approved release; the current 1,777-Model baseline includes a 491-row largest-Series fixture.
 5. He reviews the complete public impact in Vercel Preview and obtains JP PUMP confirmation.
 6. **Climax:** he promotes the named deployment, the public catalog changes atomically, the prior usable deployment remains recoverable, and another maintainer can follow the operating document.
 

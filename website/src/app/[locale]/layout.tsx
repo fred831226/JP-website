@@ -5,12 +5,14 @@ import Footer from "@/components/Footer";
 import PreviewBanner from "@/components/PreviewBanner";
 import { classifyDeploymentEnvironment } from "@/lib/deployment-environment";
 import Script from "next/script";
+import { SITE_ORIGIN } from "@/lib/site-origin.mjs";
 
 export function generateStaticParams() {
   return [{ locale: "zh-tw" }];
 }
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_ORIGIN),
   title: {
     default: "傑平有限公司 JP PUMP | 泵浦專業供應與服務",
     template: "%s | 傑平有限公司 JP PUMP",
@@ -46,7 +48,7 @@ export default function LocaleLayout({
               "@type": "Organization",
               name: "傑平有限公司",
               alternateName: "JP PUMP",
-              url: "https://www.jp-pump.com.tw",
+              url: SITE_ORIGIN,
               telephone: "+886-2-2649-6338",
               contactPoint: {
                 "@type": "ContactPoint",

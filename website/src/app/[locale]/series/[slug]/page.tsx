@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getSeriesList, getSeries, getBrands, getPumpTypes } from "@/lib/content/load-catalog";
 import SeriesActions from "./SeriesActions";
 import RevealSection from "@/components/RevealSection";
-import homeData from "@/data/home.json";
 import type { Series } from "@/lib/validation/catalog";
+import PageBanner from "@/components/PageBanner";
+import { createPageMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
   return getSeriesList().map((s) => ({ slug: s.slug }));
@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const series = getSeries(decodeURIComponent(slug));
   if (!series) return {};
-  return { title: series.name, description: series.description };
+  return createPageMetadata({ title: series.name, description: series.description, pathname: `/zh-tw/series/${series.slug}`, image: series.image });
 }
 
 export default async function SeriesPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -25,35 +25,10 @@ export default async function SeriesPage({ params }: { params: Promise<{ slug: s
   if (!series) notFound();
   const brand = getBrands().find((b) => b.id === series.brandId);
   const pumpType = getPumpTypes().find((type) => series.pumpTypeId === type.id);
-  const heroImage = homeData.hero.images[0];
 
   return (
     <div className="series-sect">
-      <section className="relative flex min-h-[360px] items-end overflow-hidden max-md:min-h-[280px]">
-        {heroImage ? (
-          <Image src={heroImage} alt="" fill priority sizes="100vw" className="object-cover" />
-        ) : (
-          <div className="absolute inset-0 bg-[var(--color-primary)]" />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-primary)]/96 via-[var(--color-primary)]/82 to-[var(--color-primary)]/38" />
-        <div
-          className="pointer-events-none absolute inset-0 opacity-45"
-          aria-hidden="true"
-          style={{
-            background: "linear-gradient(rgba(147,192,210,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(147,192,210,.1) 1px,transparent 1px)",
-            backgroundSize: "52px 52px",
-          }}
-        />
-        <div className="relative z-10 mx-auto w-full max-w-[var(--content-max)] px-[var(--page-gutter-desktop)] py-12 max-md:px-[var(--page-gutter-mobile)] max-md:py-9">
-          <p className="mb-3 text-xs font-[800] tracking-[0.14em] text-[var(--color-identity-detail)]">PRODUCT SERIES</p>
-          <h1 className="text-[var(--font-display-size)] font-[var(--font-display-weight)] leading-[var(--font-display-line-height)] tracking-[var(--font-display-letter-spacing)] text-white max-md:text-[var(--font-display-mobile-size)] max-md:leading-[var(--font-display-mobile-line-height)]">
-            {series.name}
-          </h1>
-          <p className="mt-4 text-sm font-[650] leading-relaxed text-[#edf4f6]">
-            {brand?.name ?? "未提供"}／{pumpType?.name ?? "未提供"}／{series.name}
-          </p>
-        </div>
-      </section>
+      <PageBanner eyebrow="PRODUCT SERIES" title={series.name} summary={`${brand?.name ?? "未提供"}／${pumpType?.name ?? "未提供"}／${series.name}`} />
 
       <div className="mx-auto max-w-[var(--content-max)] px-[var(--page-gutter-desktop)] py-12 max-md:px-[var(--page-gutter-mobile)] max-md:py-9">
         <section data-series-section="suitability" aria-label="適用性確認" className="rounded-[var(--radius-md)] border-l-[3px] border-[var(--color-action)] bg-[var(--color-surface-subtle)] px-4 py-3 text-sm text-[var(--color-text-muted)]">
@@ -101,11 +76,14 @@ export default async function SeriesPage({ params }: { params: Promise<{ slug: s
               </h2>
             </div>
             <div className="space-y-8">
-              {specificationGroups(series.id, series.models).map((group) => (
+              {specificationGroups(series).map((group) => (
                 <section key={group.name} aria-labelledby={`specification-group-${group.name}`}>
-                  <h3 id={`specification-group-${group.name}`} className="mb-3 text-[var(--font-heading-sm-size)] font-[var(--font-heading-sm-weight)] text-[var(--color-primary)]">
-                    {group.name} 規格表
+                  <h3 id={`specification-group-${group.name}`} className="text-[var(--font-heading-sm-size)] font-[var(--font-heading-sm-weight)] text-[var(--color-primary)]">
+                    {group.shortDescription ? `${group.name} 產品介紹` : `${group.name} 規格表`}
                   </h3>
+                  {group.shortDescription && <p className="mt-3 max-w-[var(--text-max)] leading-[var(--font-body-line-height)] text-[var(--color-text-muted)]">{group.shortDescription}</p>}
+                  {group.introduction && <p className="mt-3 max-w-[var(--text-max)] whitespace-pre-line leading-[var(--font-body-line-height)] text-[var(--color-text-muted)]">{group.introduction}</p>}
+                  {group.shortDescription && <h4 className="mb-3 mt-6 text-base font-[700] text-[var(--color-primary)]">{group.name} 產品規格表</h4>}
                   {group.models.length === 0 ? (
                     <p className="rounded-[var(--radius-lg)] border border-dashed border-[var(--color-border)] bg-[var(--color-surface-subtle)] px-4 py-5 text-sm text-[var(--color-text-muted)]">規格資料未提供</p>
                   ) : (
@@ -193,7 +171,10 @@ function powerValue(specs: ModelSpecs): React.ReactNode {
   return <span className="italic text-[var(--color-identity-detail)]">未提供</span>;
 }
 
-function specificationGroups<T extends { name: string }>(seriesId: string, models: T[]): { name: string; models: T[] }[] {
+function specificationGroups(series: Series): { name: string; models: Series["models"]; shortDescription?: string; introduction?: string }[] {
+  if (series.productSections.length > 0) {
+    return series.productSections;
+  }
   const groupDefinitions: Record<string, { name: string; matches: (name: string) => boolean }[]> = {
     "grundfos-cm-cme": [
       { name: "CM", matches: (name) => /^CM(?:\s|$)/.test(name) },
@@ -217,7 +198,7 @@ function specificationGroups<T extends { name: string }>(seriesId: string, model
       { name: "NBG／NBGE／NKG／NKGE", matches: (name) => /^(?:NBG|NBGE|NKG|NKGE)(?:\s|$)/.test(name) },
     ],
   };
-  const definitions = groupDefinitions[seriesId];
-  if (!definitions) return [{ name: "型號", models }];
-  return definitions.map((group) => ({ ...group, models: models.filter((model) => group.matches(model.name)) }));
+  const definitions = groupDefinitions[series.id];
+  if (!definitions) return [{ name: "型號", models: series.models }];
+  return definitions.map((group) => ({ ...group, models: series.models.filter((model) => group.matches(model.name)) }));
 }

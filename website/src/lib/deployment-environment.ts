@@ -1,3 +1,5 @@
+import { SITE_ORIGIN } from "./site-origin.mjs";
+
 export type DeploymentKind = "production" | "preview" | "development";
 
 export type DeploymentEnvironment = {
@@ -32,6 +34,6 @@ export function getRobotsPolicy(value = process.env.VERCEL_ENV) {
   }
   return {
     rules: { userAgent: "*", allow: "/" },
-    sitemap: "https://www.jp-pump.com.tw/sitemap.xml",
+    sitemap: `${SITE_ORIGIN}/sitemap.xml`,
   };
 }

@@ -96,16 +96,32 @@ async function mutateWorkbook(fixtureRoot, sheetName, headerRow, changes) {
   await writeFile(workbookPath, xlsx.write(workbook, { type: "buffer", bookType: "xlsx" }));
 }
 
-test("catalog data has exactly 22 canonical series with one pump type and unique model assignment", async () => {
-  const generated = await json("data/catalog.generated.json");
+test("catalog data has exactly 22 canonical series including approved Grundfos UPA with one pump type and unique model assignment", async () => {
+  const generated = await activeReleaseJson("data/catalog.generated.json");
   const content = await json("data/catalog-content.json");
-  const overview = await json("data/catalog-overview.json");
+  const overview = await activeReleaseJson("data/catalog-overview.json");
   assert.equal(generated.series.length, 22);
   assert.equal(content.series.length, 22);
   assert.equal(overview.series.length, 22);
   assert.equal(new Set(content.series.map(({ slug }) => slug)).size, 22);
   assert.ok(generated.series.every(({ pumpType }) => typeof pumpType === "string" && pumpType.length > 0));
-  assert.equal(generated.series.find(({ name }) => name === "VBSG")?.pumpType, "臥式泵");
+  assert.equal(generated.series.find(({ name }) => name === "VFJH")?.pumpType, "變頻恆壓泵");
+  assert.equal(generated.series.find(({ name }) => name === "VFJQ")?.pumpType, "變頻恆壓泵");
+  assert.equal(generated.series.find(({ name }) => name === "2VBSG")?.pumpType, "變頻恆壓泵");
+  assert.equal(generated.series.find(({ name }) => name === "VFJH")?.modelCount, 5);
+  assert.equal(generated.series.find(({ name }) => name === "VFJQ")?.modelCount, 28);
+  assert.equal(generated.series.find(({ name }) => name === "2VBSG")?.modelCount, 28);
+  assert.equal(generated.series.find(({ name }) => name === "2CM")?.pumpType, "變頻恆壓泵");
+  assert.equal(generated.series.find(({ name }) => name === "2CR(I,N) Booster")?.pumpType, "變頻恆壓泵");
+  assert.equal(generated.series.find(({ name }) => name === "VF變頻恆壓泵")?.pumpType, "變頻恆壓泵");
+  assert.equal(generated.series.find(({ name }) => name === "VF變頻恆壓泵")?.modelCount, 6);
+  assert.equal(generated.series.find(({ id }) => id === "grundfos-magna3")?.pumpType, "循環泵");
+  assert.equal(generated.series.find(({ id }) => id === "grundfos-upa")?.pumpType, "循環泵");
+  assert.equal(generated.series.find(({ id }) => id === "grundfos-upa")?.modelCount, 4);
+  assert.equal(generated.series.some(({ id }) => id === "jp-pump-y"), false);
+  assert.equal(content.series.find(({ id }) => id === "jp-pump-vbsg")?.productSections, undefined);
+  assert.ok(content.series.some(({ id, slug }) => id === "jp-pump-2vbsg" && slug === "2vbsg"));
+  assert.ok(content.series.some(({ id, slug }) => id === "jp-pump-kh-vbsg" && slug === "kh-vbsg"));
   const modelIds = generated.series.flatMap(({ models }) => models.map(({ id }) => id));
   assert.equal(new Set(modelIds).size, modelIds.length);
 });
@@ -154,8 +170,8 @@ test("candidate rejects an unknown stable Series ID even when all 22 records sti
   const overview = await activeReleaseJson("data/catalog-overview.json");
   const expectedIds = (await json("data/catalog-content.json")).series.map(({ id }) => id);
   const replacedId = "unapproved-replacement";
-  generated.series[21] = { ...generated.series[21], id: replacedId };
-  overview.series[21] = { ...overview.series[21], id: replacedId };
+  generated.series[18] = { ...generated.series[18], id: replacedId };
+  overview.series[18] = { ...overview.series[18], id: replacedId };
   await assert.rejects(
     publishCatalogCandidate({ generated, overview }, {
       expectedSeriesIds: expectedIds,
@@ -248,7 +264,7 @@ test("publisher exposes a complete four-file candidate through one atomic releas
     "data/catalog-overview.json",
     "src/data/catalog-overview.json",
   ].map((path) => readFile(join(dir, indicator.release, path), "utf8")));
-  assert.equal(released.filter((body) => body.includes("series-21")).length, 4);
+  assert.equal(released.filter((body) => body.includes("series-18")).length, 4);
 });
 
 test("release validation rejects legacy media assigned to a different Series", async () => {

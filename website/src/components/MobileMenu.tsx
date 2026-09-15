@@ -77,7 +77,10 @@ export default function MobileMenu({ items }: MobileMenuProps) {
                             key={child.id}
                             href={child.href!}
                             className="flex min-h-[44px] items-center text-sm text-[var(--color-text-muted)] hover:text-[var(--color-action)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2"
-                            onClick={close}
+                            onClick={() => {
+                              close();
+                              window.setTimeout(() => window.dispatchEvent(new Event("catalog-location-change")), 0);
+                            }}
                           >
                             {child.label}
                           </Link>

@@ -43,20 +43,22 @@ test.describe("Public smoke tests", () => {
   });
 
   test("Product overview page loads", async ({ page }) => {
-    await page.goto(`${BASE}/products`);
+    await page.goto(`${BASE}/products`, { waitUntil: "domcontentloaded" });
     await expect(page.locator("h1")).toContainText("產品總覽");
   });
 
-  test("產品篩選只公開四大泵浦類型與代表系列", async ({ page }) => {
+  test("產品篩選公開六個已核准類型與代表系列", async ({ page }) => {
     await page.goto(`${BASE}/products`);
-    const typeGroup = page.getByRole("group", { name: "泵浦類型" });
+    const typeGroup = page.getByRole("group", { name: "泵浦類型" }).last();
     const typeButtons = typeGroup.getByRole("button");
 
-    await expect(typeButtons).toHaveCount(4);
-    await expect(typeButtons).toHaveText(["臥式泵", "沉水式揚水泵", "沉水式污水泵", "立式楊水泵"]);
+    await expect(typeButtons).toHaveCount(6);
+    await expect(typeButtons).toHaveText(["臥式泵", "變頻恆壓泵", "循環泵", "沉水式揚水泵", "沉水式污水泵", "立式揚水泵"]);
 
     const representativeSeries = [
-      ["horizontal-pump", "2vbsg"],
+      ["horizontal-pump", "gp"],
+      ["variable-frequency-constant-pressure-system", "2vbsg"],
+      ["circulator-pump", "grundfos-magna3"],
       ["submersible-well-pump", "hs"],
       ["sewage-pump", "cv"],
       ["vertical-multistage-pump", "sb-sbi-sbn"],
@@ -67,21 +69,50 @@ test.describe("Public smoke tests", () => {
     }
   });
 
-  test("產品首頁只顯示四大泵浦類型", async ({ page }) => {
+  test("產品總覽導覽切換會同步套用或清除類型篩選", async ({ page }) => {
+    const variableFrequencyType = "variable-frequency-constant-pressure-system";
+    await page.goto(`${BASE}/products?type=${variableFrequencyType}`);
+    await expect(page.getByTestId("catalog-result-count")).toHaveText("共 6 個產品系列");
+
+    const productsMenu = page.getByRole("button", { name: "產品總覽" });
+    await productsMenu.click();
+    await page.getByRole("menuitem", { name: "全部產品" }).click();
+    await page.waitForURL(`${BASE}/products`);
+    await expect(page.getByTestId("catalog-result-count")).toHaveText("共 22 個產品系列");
+
+    await productsMenu.click();
+    await page.getByRole("menuitem", { name: "變頻恆壓泵" }).click();
+    await page.waitForURL(`${BASE}/products?type=${variableFrequencyType}`);
+    await expect(page.getByTestId("catalog-result-count")).toHaveText("共 6 個產品系列");
+  });
+
+  test("產品首頁顯示六個已核准類型", async ({ page }) => {
     await page.goto(BASE);
     const typeSection = page.locator("section").filter({
       has: page.getByRole("heading", { name: "依產品用途找到合適系列" }),
     });
-    await expect(typeSection.locator("a.purpose-card")).toHaveCount(4);
-    for (const name of ["臥式泵", "沉水式揚水泵", "沉水式污水泵", "立式楊水泵"]) {
+    await expect(typeSection.locator("a.purpose-card")).toHaveCount(6);
+    const homepageTypes = [
+      ["臥式泵", "horizontal-pump"],
+      ["變頻恆壓泵", "variable-frequency-constant-pressure-system"],
+      ["循環泵", "circulator-pump"],
+      ["沉水式揚水泵", "submersible-well-pump"],
+      ["沉水式污水泵", "sewage-pump"],
+      ["立式揚水泵", "vertical-multistage-pump"],
+    ];
+    for (const [name, typeId] of homepageTypes) {
       await expect(typeSection.getByText(name, { exact: true })).toBeVisible();
+      await expect(typeSection.locator("a.purpose-card").filter({ hasText: name })).toHaveAttribute(
+        "href",
+        `/zh-tw/products?type=${typeId}`,
+      );
     }
   });
 
   test("產品初始靜態 HTML 保留所有系列連結", async ({ browser }) => {
     const context = await browser.newContext({ javaScriptEnabled: false });
     const page = await context.newPage();
-    await page.goto(`${BASE}/products`);
+    await page.goto(`${BASE}/products`, { waitUntil: "domcontentloaded" });
     await expect(page.locator('a[href^="/zh-tw/series/"]')).toHaveCount(22);
     await expect(page.locator('a[href="/zh-tw/series/vbsg"]')).toBeAttached();
     await expect(page.locator('a[href="/zh-tw/series/grundfos-nb-nbg-nk-nkg-nbe-nbge-nke-nkge"]')).toBeAttached();
@@ -90,7 +121,6 @@ test.describe("Public smoke tests", () => {
 
   test("產品查詢會移除舊值、未知值、空值與重複值", async ({ page }) => {
     await page.goto(`${BASE}/products?brand=unknown&type=self-priming-pump&type=&type=sewage-pump&type=sewage-pump&purpose=unknown`);
-    await page.waitForLoadState("networkidle");
     await expect(page).toHaveURL(`${BASE}/products?type=sewage-pump`);
     await expect(page.getByRole("button", { name: "移除泵浦類型條件" }).locator(".."))
       .toContainText("沉水式污水泵");
@@ -101,13 +131,12 @@ test.describe("Public smoke tests", () => {
     await page.goto(`${BASE}/products?brand=jp-pump&brand=grundfos&type=horizontal-pump`);
     await expect(page).toHaveURL(`${BASE}/products?type=horizontal-pump`);
     await expect(page.getByRole("button", { name: "移除品牌條件" })).toHaveCount(0);
-    await expect(page.locator('a[href="/zh-tw/series/vbsg"]')).toBeVisible();
+    await expect(page.locator('a[href="/zh-tw/series/vbsg"]')).toBeHidden();
     await expect(page.locator('a[href="/zh-tw/series/grundfos-cm-cme"]')).toBeVisible();
   });
 
   test("產品搜尋輸入會隨上一頁與下一頁同步", async ({ page }) => {
     await page.goto(`${BASE}/products`);
-    await page.waitForLoadState("networkidle");
     const search = page.getByRole("textbox", { name: "搜尋" });
     await search.fill("HS");
     await search.press("Enter");
@@ -133,19 +162,18 @@ test.describe("Public smoke tests", () => {
 
   test("產品類型使用 OR，品牌與類型使用 AND", async ({ page }) => {
     await page.goto(`${BASE}/products`);
-    await page.waitForLoadState("networkidle");
     const typeGroup = page.getByRole("group", { name: "泵浦類型" });
     await typeGroup.getByRole("button", { name: "臥式泵" }).click();
     await expect(page).toHaveURL(`${BASE}/products?type=horizontal-pump`);
     await typeGroup.getByRole("button", { name: "沉水式污水泵" }).click();
     await expect(page).toHaveURL(`${BASE}/products?type=horizontal-pump&type=sewage-pump`);
-    await expect(page.locator('a[href="/zh-tw/series/2vbsg"]')).toBeVisible();
+    await expect(page.locator('a[href="/zh-tw/series/vbsg"]')).toBeHidden();
     await expect(page.locator('a[href="/zh-tw/series/cv"]')).toBeVisible();
     await expect(page.locator('a[href="/zh-tw/series/hs"]')).toBeHidden();
 
     await page.getByRole("button", { name: "移除泵浦類型條件" }).first().click();
     await expect(page).toHaveURL(`${BASE}/products?type=sewage-pump`);
-    await expect(page.locator('a[href="/zh-tw/series/2vbsg"]')).toBeHidden();
+    await expect(page.locator('a[href="/zh-tw/series/vbsg"]')).toBeHidden();
     await expect(page.locator('a[href="/zh-tw/series/cv"]')).toBeVisible();
 
     await page.getByRole("group", { name: "品牌" }).getByRole("button", { name: "Grundfos 葛蘭富" }).click();
@@ -219,16 +247,14 @@ test.describe("Public smoke tests", () => {
     await page.goto(`${BASE}/company`);
     await expect(page.locator("h1")).toContainText("公司資訊");
     await expect(page.getByText("台北大巨蛋")).toBeVisible();
-    await expect(page.getByText("3,000+").first()).toBeVisible();
-    await expect(page.getByText("15,000+")).toBeVisible();
-    await expect(page.getByText("總經理願景")).toBeVisible();
+    await expect(page.getByText("總經理願景")).toHaveCount(0);
   });
 
   test("Partners page shows Grundfos", async ({ page }) => {
     await page.goto(`${BASE}/partners`);
-    await expect(page.locator("h1")).toContainText("合作夥伴");
-    await expect(page.getByText("Grundfos 葛蘭富")).toBeVisible();
-    await expect(page.getByText("台灣葛蘭富公司總監 陳幼翎")).toBeVisible();
+    await expect(page.locator("h1")).toContainText("授權經銷品牌");
+    await expect(page.getByRole("heading", { name: "Grundfos 葛蘭富", exact: true })).toBeVisible();
+    await expect(page.getByText("台灣葛蘭富公司總監 陳幼翎")).toHaveCount(0);
   });
 
   test("Services page loads with capability tags", async ({ page }) => {

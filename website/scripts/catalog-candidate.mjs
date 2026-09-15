@@ -7,6 +7,7 @@ const technicalFields = ["horsepower_hp", "power_kw", "inlet_inch", "outlet_inch
 const requiredSeriesFields = ["id", "brandId", "name", "productName", "pumpType"];
 const requiredModelFields = ["id", "name", "specs"];
 const requiredOverviewFields = ["id", "brandId", "headMin", "headMax", "flowMin", "flowMax", "modelCount", "published"];
+const CANONICAL_SERIES_COUNT = 22;
 const decimalString = (value) => typeof value === "string" && /^\d+(\.\d+)?$/.test(value);
 
 function sourceLabel(source = {}) {
@@ -17,8 +18,8 @@ export function validateCatalogCandidate(candidate, source) {
   const generated = candidate?.generated?.series;
   const overview = candidate?.overview?.series;
   const at = sourceLabel(source);
-  if (!Array.isArray(generated) || generated.length !== 22) throw new Error(`${at} | series: violated rule: exactly 22 canonical Series required`);
-  if (!Array.isArray(overview) || overview.length !== 22) throw new Error(`${at} | overview.series: violated rule: exactly 22 canonical Series required`);
+  if (!Array.isArray(generated) || generated.length !== CANONICAL_SERIES_COUNT) throw new Error(`${at} | series: violated rule: exactly ${CANONICAL_SERIES_COUNT} canonical Series required`);
+  if (!Array.isArray(overview) || overview.length !== CANONICAL_SERIES_COUNT) throw new Error(`${at} | overview.series: violated rule: exactly ${CANONICAL_SERIES_COUNT} canonical Series required`);
   const ids = new Set();
   const models = new Set();
   for (const series of generated) {
@@ -65,7 +66,7 @@ export function validateCatalogCandidate(candidate, source) {
     if (record.published !== null && record.published !== "是") throw new Error(`${at} | overview.published | record ${record.id}: violated rule: approved published value or null required`);
   }
   const overviewIds = new Set(overview.map(({ id }) => id));
-  if (overviewIds.size !== 22 || [...ids].some((id) => !overviewIds.has(id))) throw new Error(`${at} | overview.id: violated rule: generated/overview stable-key join must be complete`);
+  if (overviewIds.size !== CANONICAL_SERIES_COUNT || [...ids].some((id) => !overviewIds.has(id))) throw new Error(`${at} | overview.id: violated rule: generated/overview stable-key join must be complete`);
   const overviewById = new Map(overview.map((record) => [record.id, record]));
   for (const series of generated) {
     if (overviewById.get(series.id).modelCount !== series.models.length) throw new Error(`${at} | overview.modelCount | record ${series.id}: violated rule: declared Model count must match Models`);
@@ -84,7 +85,7 @@ export function validateCanonicalSeriesIds(candidate, expectedSeriesIds, source)
 
 export async function publishCatalogCandidate(candidate, options) {
   validateCatalogCandidate(candidate, options.source);
-  if (!Array.isArray(options.expectedSeriesIds) || options.expectedSeriesIds.length !== 22) throw new Error("catalog publisher requires a governed canonical Series identity contract");
+  if (!Array.isArray(options.expectedSeriesIds) || options.expectedSeriesIds.length !== CANONICAL_SERIES_COUNT) throw new Error("catalog publisher requires a governed canonical Series identity contract");
   validateCanonicalSeriesIds(candidate, options.expectedSeriesIds, options.source);
   if (!options.releaseRoot) throw new Error("catalog publisher requires a releaseRoot for atomic version switching");
   return publishVersionedRelease(candidate, options);

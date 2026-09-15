@@ -32,7 +32,7 @@ test("Preview and unknown environments disallow crawling and omit Production sit
   });
   assert.deepEqual(getRobotsPolicy("production"), {
     rules: { userAgent: "*", allow: "/" },
-    sitemap: "https://www.jp-pump.com.tw/sitemap.xml",
+    sitemap: "https://jp-pump.com/sitemap.xml",
   });
 });
 

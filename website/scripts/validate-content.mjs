@@ -68,15 +68,18 @@ const brands = JSON.parse(readFileSync(brandsPath, "utf-8"));
 const pumpTypes = JSON.parse(readFileSync(typesPath, "utf-8"));
 const approvedPumpTypes = [
   { id: "horizontal-pump", name: "臥式泵", slug: "horizontal-pump" },
+  { id: "variable-frequency-constant-pressure-system", name: "變頻恆壓泵", slug: "variable-frequency-constant-pressure-system" },
+  { id: "circulator-pump", name: "循環泵", slug: "circulator-pump" },
   { id: "submersible-well-pump", name: "沉水式揚水泵", slug: "submersible-well-pump" },
   { id: "sewage-pump", name: "沉水式污水泵", slug: "sewage-pump" },
-  { id: "vertical-multistage-pump", name: "立式楊水泵", slug: "vertical-multistage-pump" },
+  { id: "vertical-multistage-pump", name: "立式揚水泵", slug: "vertical-multistage-pump" },
 ];
+const CANONICAL_SERIES_COUNT = 22;
 const approvedPumpTypeNames = new Set(approvedPumpTypes.map((type) => type.name));
 const homepagePumpTypeNames = content.homepagePumpTypes?.map((type) => type.name) ?? [];
 
 for (const [file, records] of [["catalog.generated.json", gen.series], ["catalog-content.json", content.series], ["catalog-overview.json", overview.series]]) {
-  if (!Array.isArray(records) || records.length !== 22) err(file, "series", "cardinality", "Must contain exactly 22 canonical Series");
+  if (!Array.isArray(records) || records.length !== CANONICAL_SERIES_COUNT) err(file, "series", "cardinality", `Must contain exactly ${CANONICAL_SERIES_COUNT} canonical Series`);
 }
 if (overviewGovernance.review?.reviewer !== "Fred" || overviewGovernance.review?.reviewDate !== "2026-08-21" || overviewGovernance.review?.publicLastUpdatedDate !== "2026-08-21") {
   err("catalog-overview-governance.json", "review", "boundary", "Internal reviewer/date and public last-updated date must match the approved 2026-08-21 baseline");
@@ -85,16 +88,27 @@ if (/Fred/.test(JSON.stringify(content)) || /reviewer/.test(JSON.stringify(conte
 const canonicalIds = new Set(gen.series.map(({ id }) => id));
 const contentIdsForJoin = new Set(content.series.map(({ id }) => id));
 const overviewIdsForJoin = new Set(overview.series.map(({ id }) => id));
-if (canonicalIds.size !== 22 || contentIdsForJoin.size !== 22 || overviewIdsForJoin.size !== 22 || [...canonicalIds].some((id) => !contentIdsForJoin.has(id) || !overviewIdsForJoin.has(id))) {
-  err("catalog", "series", "stable-key join", "Generated, content, and overview must have one complete unique 22-Series stable-key join");
+if (canonicalIds.size !== CANONICAL_SERIES_COUNT || contentIdsForJoin.size !== CANONICAL_SERIES_COUNT || overviewIdsForJoin.size !== CANONICAL_SERIES_COUNT || [...canonicalIds].some((id) => !contentIdsForJoin.has(id) || !overviewIdsForJoin.has(id))) {
+  err("catalog", "series", "stable-key join", `Generated, content, and overview must have one complete unique ${CANONICAL_SERIES_COUNT}-Series stable-key join`);
 }
-const vbsg = gen.series.find(({ name }) => name === "VBSG");
-if (!vbsg || vbsg.pumpType !== "臥式泵") err("catalog.generated.json", "VBSG", "pumpType", "VBSG must belong only to 臥式泵");
+const vbsg = gen.series.find(({ id }) => id === "jp-pump-vbsg");
+const khVbsg = gen.series.find(({ id }) => id === "jp-pump-kh-vbsg");
+const twoVbsg = gen.series.find(({ id }) => id === "jp-pump-2vbsg");
+const twoCm = gen.series.find(({ id }) => id === "grundfos-2cm");
+if (!vbsg || vbsg.pumpType !== "變頻恆壓泵") err("catalog.generated.json", "VFJH", "pumpType", "VFJH must belong only to 變頻恆壓泵");
+if (!khVbsg || khVbsg.pumpType !== "變頻恆壓泵") err("catalog.generated.json", "VFJQ", "pumpType", "VFJQ must belong only to 變頻恆壓泵");
+if (!twoVbsg || twoVbsg.pumpType !== "變頻恆壓泵") err("catalog.generated.json", "2VBSG", "pumpType", "2VBSG must belong only to 變頻恆壓泵");
+if (!twoCm || twoCm.pumpType !== "變頻恆壓泵") err("catalog.generated.json", "2CM", "pumpType", "2CM must belong only to 變頻恆壓泵");
+if (gen.series.some(({ id }) => id === "jp-pump-y")) err("catalog.generated.json", "Y系列", "publication", "Retired Y系列 must not be published");
+if (gen.series.find(({ id }) => id === "grundfos-magna3")?.pumpType !== "循環泵") err("catalog.generated.json", "MAGNA3", "pumpType", "MAGNA3 must belong only to 循環泵");
+if ([vbsg, khVbsg, twoVbsg].some((series) => content.series.find(({ id }) => id === series?.id)?.productSections?.length)) {
+  err("catalog-content.json", "VBSG", "productSections", "VBSG, 2VBSG, and KH-VBSG must have independent Series pages");
+}
 const allModelIds = gen.series.flatMap(({ models }) => models.map(({ id }) => id));
 if (new Set(allModelIds).size !== allModelIds.length) err("catalog.generated.json", "models", "id", "Each source Model must belong to exactly one canonical Series");
 
 if (JSON.stringify(homepagePumpTypeNames) !== JSON.stringify(approvedPumpTypes.map((type) => type.name))) {
-  err("catalog-content.json", "homepagePumpTypes", "name", "Homepage pump types must be exactly the four approved names and order");
+  err("catalog-content.json", "homepagePumpTypes", "name", "Homepage pump types must match the approved names and order");
 }
 
 if (JSON.stringify(gen.series) !== JSON.stringify(publicGen.series)) {
@@ -108,7 +122,7 @@ if (JSON.stringify(overview) !== JSON.stringify(publicOverview)) {
 }
 const publicPumpTypes = pumpTypes.map(({ id, name, slug }) => ({ id, name, slug }));
 if (JSON.stringify(publicPumpTypes) !== JSON.stringify(approvedPumpTypes)) {
-  err("src/data/catalog-types.json", "pumpTypes", "taxonomy", "Pump types must be exactly the four approved IDs, names, slugs, and order");
+  err("src/data/catalog-types.json", "pumpTypes", "taxonomy", "Pump types must match the approved IDs, names, slugs, and order");
 }
 
 const sourceWorkbook = xlsx.read(readFileSync(sourceCatalogPath), { type: "buffer" });
@@ -120,7 +134,11 @@ const excelSeries = new Map();
 const excelOverview = new Map();
 const excelFilterOverview = new Map();
 const text = (value) => String(value ?? "").trim();
-const canonicalSeriesName = (value) => text(value) === "自吸式" ? "Y系列" : text(value);
+const canonicalSeriesName = (value) => {
+  const name = text(value);
+  if (name === "自吸式") return "Y系列";
+  return name;
+};
 const decimalRange = (value, file, record, field) => {
   const normalized = text(value);
   if (!normalized) return null;
@@ -198,7 +216,7 @@ if (!sourceOverviewSheet) {
     for (const [rowIndex, row] of overviewRows.slice(1).entries()) {
       const sourceRow = rowIndex + 2;
       const brandName = text(row[column["品牌"]]);
-      const seriesName = text(row[column["產品系列"]]);
+      const seriesName = canonicalSeriesName(row[column["產品系列"]]);
       if (!brandName && !seriesName) continue;
       const brandId = brandIdByName.get(brandName);
       const pumpType = text(row[column["泵浦類型"]]);
@@ -210,8 +228,7 @@ if (!sourceOverviewSheet) {
       const main = excelSeries.get(key);
       if (!main) err("source-catalog.xlsx", `${seriesName}@overview-row${sourceRow}`, "產品系列", "Overview series is missing from main sheet");
       else if (main.pumpType !== pumpType) err("source-catalog.xlsx", `${seriesName}@overview-row${sourceRow}`, "泵浦類型", `Overview value "${pumpType}" does not match main sheet "${main.pumpType}"`);
-      if (excelOverview.has(key)) err("source-catalog.xlsx", `${seriesName}@overview-row${sourceRow}`, "產品系列", "Duplicate overview series");
-      excelOverview.set(key, {
+      const record = {
         purpose: text(row[column["用途標籤"] ?? column["用途"]]),
         purposeTags: text(row[column["用途標籤"] ?? column["用途"]]).split(/[,，、/]/).map((value) => value.trim()).filter(Boolean),
         headMin: column["揚程最小值_m"] !== undefined ? decimalRange(row[column["揚程最小值_m"]], "source-catalog.xlsx", `網頁_產品總覽!${xlsx.utils.encode_col(column["揚程最小值_m"])}${sourceRow}`, "揚程最小值_m") : null,
@@ -220,7 +237,21 @@ if (!sourceOverviewSheet) {
         flowMax: column["水量最大值_Lmin"] !== undefined ? decimalRange(row[column["水量最大值_Lmin"]], "source-catalog.xlsx", `網頁_產品總覽!${xlsx.utils.encode_col(column["水量最大值_Lmin"])}${sourceRow}`, "水量最大值_Lmin") : null,
         modelCount: column["型號數量"] !== undefined && row[column["型號數量"]] != null ? Number(row[column["型號數量"]]) : null,
         published: text(row[column["首頁代表"] ?? column["是否發布"]]),
-      });
+      };
+      const existing = excelOverview.get(key);
+      if (existing && key !== "jp-pump|VBSG") err("source-catalog.xlsx", `${seriesName}@overview-row${sourceRow}`, "產品系列", "Duplicate overview series");
+      if (existing) {
+        existing.purposeTags = [...new Set([...existing.purposeTags, ...record.purposeTags])];
+        for (const [field, mode] of [["headMin", "min"], ["headMax", "max"], ["flowMin", "min"], ["flowMax", "max"]]) {
+          if (record[field] == null) continue;
+          if (existing[field] == null) existing[field] = record[field];
+          else existing[field] = String(mode === "min" ? Math.min(Number(existing[field]), Number(record[field])) : Math.max(Number(existing[field]), Number(record[field])));
+        }
+        existing.modelCount = (existing.modelCount ?? 0) + (record.modelCount ?? 0);
+        existing.published = existing.published || record.published;
+      } else {
+        excelOverview.set(key, record);
+      }
     }
   }
 }
@@ -311,7 +342,7 @@ for (const [key, generatedGroup] of generatedByKey) {
 }
 
 for (const generated of overview.series) {
-  const excelKey = `${generated.brandId}|${generated.id === "jp-pump-y" ? "Y系列" : gen.series.find((series) => series.id === generated.id)?.sourceSeriesName}`;
+  const excelKey = `${generated.brandId}|${gen.series.find((series) => series.id === generated.id)?.sourceSeriesName}`;
   const excel = excelOverview.get(excelKey);
   const filter = excelFilterOverview.get(excelKey);
   const governed = overviewGovernance.series.find((entry) => entry.id === generated.id);
@@ -508,16 +539,19 @@ if (errors.length === 0) {
 
   if (contactInfoPhone(contact) !== "02-2649-6338") err("contact.json", "info", "phone", "Phone does not match approved value");
   if (contactInfoEmail(contact) !== "jie.ping@msa.hinet.net") err("contact.json", "info", "email", "Primary email does not match approved value");
+  const approvedEmails = ["jie.ping@msa.hinet.net", "jiepingpump@gmail.com"];
+  if (JSON.stringify(contact.info.emails) !== JSON.stringify(approvedEmails)) err("contact.json", "info", "emails", "Email list does not match approved values");
   if (!/新北市汐止區水源路二段90號/.test(contactInfoAddress(contact))) err("contact.json", "info", "address", "Address does not match approved value");
   if (site.contactInfo.phone !== contact.info.phone) err("site.json", "contactInfo", "phone", "Mismatch with contact.json");
   if (site.contactInfo.email !== contact.info.email) err("site.json", "contactInfo", "email", "Mismatch with contact.json");
+  if (JSON.stringify(site.contactInfo.emails) !== JSON.stringify(contact.info.emails)) err("site.json", "contactInfo", "emails", "Mismatch with contact.json");
   const expectedNavTypes = approvedPumpTypes.map(({ id, name }) => ({
     id,
     label: name,
     href: `/zh-tw/products?type=${id}`,
   }));
   if (JSON.stringify(site.nav?.products?.pumpTypes) !== JSON.stringify(expectedNavTypes)) {
-    err("site.json", "nav.products", "pumpTypes", "Product navigation must match the four approved pump types");
+    err("site.json", "nav.products", "pumpTypes", "Product navigation must match the approved pump types");
   }
   if (partners.length === 0) err("partners.json", "partners", "content", "No approved partner records");
 }

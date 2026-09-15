@@ -63,6 +63,18 @@ export const SeriesSchema = z.object({
     name: z.string().min(1),
     specs: ModelSpecsSchema,
   })),
+  productSections: z.array(z.object({
+    id: z.string().min(1),
+    name: z.string().min(1),
+    modelPrefixes: z.array(z.string().min(1)).min(1),
+    shortDescription: z.string(),
+    introduction: z.string(),
+    models: z.array(z.object({
+      id: z.string().min(1),
+      name: z.string().min(1),
+      specs: ModelSpecsSchema,
+    })),
+  })),
 });
 
 export const CatalogSchema = z.object({

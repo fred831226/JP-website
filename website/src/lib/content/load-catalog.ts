@@ -28,6 +28,7 @@ type ContentSeries = {
   images?: string[];
   shortDescription: string;
   introduction: string;
+  productSections?: { id: string; name: string; modelPrefixes: string[]; shortDescription: string; introduction: string }[];
 };
 
 type OverviewSeries = {
@@ -66,16 +67,19 @@ const generated = release.generated;
 const content = contentRaw as { series: ContentSeries[] };
 const overview = release.overview;
 const governance = governanceRaw as { review: ReviewGovernance };
+const CANONICAL_SERIES_COUNT = 22;
 
-if (generated.series.length !== 22 || content.series.length !== 22 || overview.series.length !== 22) {
-  throw new Error("catalog: generated, content, and overview must each contain exactly 22 canonical Series");
+if (generated.series.length !== CANONICAL_SERIES_COUNT || content.series.length !== CANONICAL_SERIES_COUNT || overview.series.length !== CANONICAL_SERIES_COUNT) {
+  throw new Error(`catalog: generated, content, and overview must each contain exactly ${CANONICAL_SERIES_COUNT} canonical Series`);
 }
 
 const PUMP_TYPE_ID_MAP = {
   "臥式泵": "horizontal-pump",
+  "變頻恆壓泵": "variable-frequency-constant-pressure-system",
+  "循環泵": "circulator-pump",
   "沉水式揚水泵": "submersible-well-pump",
   "沉水式污水泵": "sewage-pump",
-  "立式楊水泵": "vertical-multistage-pump",
+  "立式揚水泵": "vertical-multistage-pump",
 } as const;
 
 function pumpTypeIdFor(seriesId: string, pumpType: string): string {
@@ -136,6 +140,10 @@ const seriesList: Series[] = generated.series.map((gs) => {
       name: m.name,
       specs: m.specs,
     })),
+    productSections: c.productSections?.map((section) => ({
+      ...section,
+      models: gs.models.filter((model) => section.modelPrefixes.some((prefix) => model.name.startsWith(prefix))),
+    })) ?? [],
     lastUpdatedDate: governance.review.publicLastUpdatedDate,
   };
 });

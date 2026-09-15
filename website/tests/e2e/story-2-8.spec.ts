@@ -5,7 +5,7 @@ const base = "/zh-tw";
 test("22 cards are crawlable and sitemap contains the same canonical routes", async ({ browser, request }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
-  await page.goto(`${base}/products`);
+  await page.goto(`${base}/products`, { waitUntil: "domcontentloaded" });
   const hrefs = await page.locator('[data-catalog-series]').evaluateAll((cards) => cards.map((card) => card.getAttribute("href")));
   expect(hrefs).toHaveLength(22);
   expect(new Set(hrefs).size).toBe(22);
@@ -26,6 +26,25 @@ test("Product card has classification, complete ranges, and one canonical link",
   await expect(card.locator("a")).toHaveCount(0);
 });
 
+test("approved Grundfos UPA is filterable, routable, and shows four voltage models with governed media", async ({ page }) => {
+  await page.goto(`${base}/products?type=circulator-pump`);
+  await expect(page.getByTestId("catalog-result-count")).toHaveText("共 2 個產品系列");
+  const card = page.locator('[data-catalog-series="grundfos-upa"]');
+  await expect(card).toHaveAttribute("href", "/zh-tw/series/upa");
+  await expect(card.getByText("UPA", { exact: true })).toBeVisible();
+  await expect(card.locator('img[src*="grundfos-upa-120-cutout"]').first()).toBeVisible();
+
+  await page.goto(`${base}/series/upa`);
+  await expect(page.getByRole("heading", { level: 1, name: "UPA" })).toBeVisible();
+  await expect(page.getByText("循環泵", { exact: true })).toBeVisible();
+  await expect(page.locator("tbody tr")).toHaveCount(4);
+  for (const model of ["UPA 15-90 110V", "UPA 15-90 220V", "UPA 120 110V", "UPA 120 220V"]) {
+    await expect(page.getByText(model, { exact: true })).toBeVisible();
+  }
+  await expect(page.locator('img[src*="grundfos-upa-120-cutout"]').first()).toBeVisible();
+  await expect(page.locator('img[src*="grundfos-upa-photo-cutout"]')).toBeAttached();
+});
+
 test("Series content follows the required reading order and public review boundary", async ({ page }) => {
   await page.goto(`${base}/series/hs`);
   for (const label of ["最小揚程", "最大揚程", "最小揚水量", "最大揚水量"]) await expect(page.getByText(label, { exact: true })).toBeVisible();
@@ -35,9 +54,21 @@ test("Series content follows the required reading order and public review bounda
   expect(order).toEqual(["suitability", "media", "key-data", "introduction", "models", "purposes", "actions"]);
 });
 
+test("VFJH、VFJQ、2VBSG 各有獨立系列頁與規格表", async ({ page }) => {
+  for (const [slug, name, pumpType, modelCount] of ([
+    ["vbsg", "VFJH", "變頻恆壓泵", 5],
+    ["kh-vbsg", "VFJQ", "變頻恆壓泵", 28],
+    ["2vbsg", "2VBSG", "變頻恆壓泵", 28],
+  ] satisfies Array<[string, string, string, number]>)) {
+    await page.goto(`${base}/series/${slug}`);
+    await expect(page.getByRole("heading", { level: 1, name })).toBeVisible();
+    await expect(page.getByText(pumpType, { exact: true })).toBeVisible();
+    await expect(page.locator("tbody tr")).toHaveCount(modelCount);
+  }
+});
+
 test("filter changes are immediate, latest-state safe, selected, counted, and announced", async ({ page }) => {
   await page.goto(`${base}/products`);
-  await page.waitForLoadState("networkidle");
   const search = page.getByRole("textbox", { name: "搜尋" });
   await search.fill("HS");
   await expect(page).toHaveURL(/q=HS/, { timeout: 10_000 });
@@ -95,9 +126,8 @@ test("empty results preserve conditions and provide recovery actions", async ({ 
 });
 
 test("dialog failure is labelled and focus returns to the exact trigger", async ({ page }) => {
-  await page.goto(`${base}/series/2vbsg`);
-  await page.waitForLoadState("networkidle");
-  const trigger = page.getByRole("button", { name: /放大檢視 2VBSG/ }).first();
+  await page.goto(`${base}/series/vbsg`);
+  const trigger = page.getByRole("button", { name: /放大檢視 VFJH/ }).first();
   await trigger.focus();
   await trigger.click();
   const dialog = page.getByRole("dialog", { name: "圖片放大檢視" });
@@ -111,7 +141,6 @@ test("dialog failure is labelled and focus returns to the exact trigger", async 
 
 test("a failed gallery image does not prevent a later approved image from opening", async ({ page }) => {
   await page.goto(`${base}/series/2vbsg`);
-  await page.waitForLoadState("networkidle");
   const firstTrigger = page.getByRole("button", { name: /放大檢視 2VBSG 圖片 1/ });
   await firstTrigger.click();
   const dialog = page.getByRole("dialog", { name: "圖片放大檢視" });

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 interface ImageDialogProps {
   src: string;
@@ -48,7 +49,7 @@ export default function ImageDialog({ src, alt, initiallyFailed = false, onClose
         {failed ? (
           <div role="status" aria-label="圖片無法載入" className="flex min-h-48 min-w-64 items-center justify-center rounded-[var(--radius-lg)] bg-white p-8 text-[var(--color-text)]">圖片無法載入，請關閉後稍後再試。</div>
         ) : (
-          <img src={src} alt={alt} onError={() => setFailed(true)} className="max-h-[85vh] max-w-[85vw] rounded-[var(--radius-lg)] object-contain" />
+          <Image src={src} alt={alt} width={1600} height={1200} onError={() => setFailed(true)} className="max-h-[85vh] max-w-[85vw] rounded-[var(--radius-lg)] object-contain" />
         )}
       </div>
     </dialog>

@@ -1,0 +1,116 @@
+name: Release gates
+
+on:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      preview_deployment:
+        description: Immutable Vercel deployment ID
+        required: true
+        type: string
+      rollback_target:
+        description: Known-good Production Vercel deployment ID
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-gates-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  validate-candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      VERCEL_ENV: preview
+    steps:
+      - name: Check out the complete candidate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+
+      - name: Install locked dependencies
+        run: npm --prefix website ci
+
+      - name: Audit the complete locked dependency tree
+        run: npm --prefix website audit --audit-level=high
+
+      - name: Install Chromium for public behavior tests
+        working-directory: website
+        run: npx --no-install playwright install --with-deps chromium
+
+      - name: Validate governed content
+        run: npm --prefix website run validate
+
+      - name: Lint
+        run: npm --prefix website run lint
+
+      - name: Build Preview-shaped output
+        run: npm --prefix website run build
+
+      - name: Test release contract
+        run: npm --prefix website run test:release
+
+      - name: Test public behavior
+        run: npm --prefix website test
+
+      - name: Record passed commit-bound gates
+        shell: pwsh
+        run: |
+          $gateReportPath = Join-Path '${{ runner.temp }}' 'release-gates.json'
+          $report = @{
+            passed = $true
+            sourceCommit = '${{ github.sha }}'
+            gates = @(
+              @{ name = 'validate'; passed = $true }
+              @{ name = 'audit'; passed = $true }
+              @{ name = 'lint'; passed = $true }
+              @{ name = 'build'; passed = $true }
+              @{ name = 'test:release'; passed = $true }
+              @{ name = 'test'; passed = $true }
+            )
+          }
+          $report | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath $gateReportPath -Encoding utf8NoBOM
+
+      - name: Create immutable Preview evidence
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          RELEASE_PREVIEW_DEPLOYMENT: ${{ inputs.preview_deployment }}
+          RELEASE_ROLLBACK_TARGET: ${{ inputs.rollback_target }}
+          VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_TEAM_ID: ${{ secrets.VERCEL_TEAM_ID }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: >-
+          npm --prefix website run release:evidence --
+          --preview-deployment "$RELEASE_PREVIEW_DEPLOYMENT"
+          --rollback-target "$RELEASE_ROLLBACK_TARGET"
+          --gates "${{ runner.temp }}/release-gates.json"
+          --output "${{ runner.temp }}/release-evidence.json"
+
+      - name: Upload gate evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-gates-${{ github.sha }}
+          path: ${{ runner.temp }}/release-gates.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload release evidence
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-evidence-${{ github.sha }}
+          path: ${{ runner.temp }}/release-evidence.json
+          if-no-files-found: error
+          retention-days: 30

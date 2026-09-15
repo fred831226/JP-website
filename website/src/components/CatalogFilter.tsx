@@ -89,11 +89,11 @@ export default function CatalogFilter({ brands, pumpTypes, purposes, state, onCh
   const hasFilters = currentBrand || currentTypes.length > 0 || currentPurposes.length > 0 || currentQ;
 
   return (
-    <aside className="w-full shrink-0 md:w-64" aria-label="產品篩選">
-      <div className="space-y-5">
+    <aside className="w-full shrink-0 md:w-64 md:border-r md:border-[var(--color-border)] md:pr-6" aria-label="產品篩選">
+      <div className="space-y-7">
         {/* Search */}
         <div>
-          <label htmlFor="catalog-search" className="text-sm font-[650] text-[var(--color-text)]">
+          <label htmlFor="catalog-search" className="text-xs font-[750] uppercase tracking-[0.08em] text-[var(--color-text)]">
             搜尋
           </label>
           <input
@@ -103,18 +103,18 @@ export default function CatalogFilter({ brands, pumpTypes, purposes, state, onCh
             defaultValue={state.q}
             onChange={(event) => updateSearch(event.currentTarget.value)}
             placeholder="系列名稱或型號..."
-            className="mt-1 block min-h-[44px] w-full rounded-[var(--radius-md)] bg-white px-3 py-2 text-sm shadow-[0_3px_10px_rgba(11,42,61,0.10)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]"
+            className="catalog-filter-search mt-2 block min-h-[44px] w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white px-3 py-2 text-sm shadow-[0_3px_10px_rgba(11,42,61,0.06)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]"
           />
         </div>
 
         {/* Brand */}
-        <fieldset>
-          <legend className="text-sm font-[650] text-[var(--color-text)]">品牌</legend>
-          <div className="mt-2 space-y-1">
+        <fieldset className="border-t border-[var(--color-border)] pt-5">
+          <legend className="text-xs font-[750] uppercase tracking-[0.08em] text-[var(--color-text)]">品牌</legend>
+          <div className="mt-3 space-y-1">
             <button
               type="button"
-              className={`flex min-h-[44px] w-full items-center rounded-[var(--radius-md)] px-3 text-sm text-left focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] ${
-                !currentBrand ? "bg-[var(--color-action)] text-[var(--color-on-action)]" : "bg-[var(--color-surface-subtle)] text-[var(--color-text)] hover:bg-[var(--color-border)]"
+              className={`catalog-filter-option flex min-h-[36px] w-full items-center rounded-[var(--radius-xs)] px-2 text-sm text-left focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] ${
+                !currentBrand ? "catalog-filter-option-active text-[var(--color-action)]" : "text-[var(--color-text)] hover:bg-[var(--color-surface-subtle)]"
               }`}
               onClick={() => setBrand(null)}
               aria-pressed={!currentBrand}
@@ -125,8 +125,8 @@ export default function CatalogFilter({ brands, pumpTypes, purposes, state, onCh
               <button
                 key={b.id}
                 type="button"
-                className={`flex min-h-[44px] w-full items-center rounded-[var(--radius-md)] px-3 text-sm text-left focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] ${
-                  currentBrand === b.id ? "bg-[var(--color-action)] text-[var(--color-on-action)]" : "bg-[var(--color-surface-subtle)] text-[var(--color-text)] hover:bg-[var(--color-border)]"
+                className={`catalog-filter-option flex min-h-[36px] w-full items-center rounded-[var(--radius-xs)] px-2 text-sm text-left focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] ${
+                  currentBrand === b.id ? "catalog-filter-option-active text-[var(--color-action)]" : "text-[var(--color-text)] hover:bg-[var(--color-surface-subtle)]"
                 }`}
                 onClick={() => setBrand(currentBrand === b.id ? null : b.id)}
                 aria-pressed={currentBrand === b.id}
@@ -138,17 +138,17 @@ export default function CatalogFilter({ brands, pumpTypes, purposes, state, onCh
         </fieldset>
 
         {/* Pump Type */}
-        <fieldset>
-          <legend className="text-sm font-[650] text-[var(--color-text)]">泵浦類型</legend>
-          <div className="mt-2 flex flex-wrap gap-2">
+        <fieldset className="border-t border-[var(--color-border)] pt-5">
+          <legend className="text-xs font-[750] uppercase tracking-[0.08em] text-[var(--color-text)]">泵浦類型</legend>
+          <div className="mt-3 space-y-1" role="group" aria-label="泵浦類型">
             {pumpTypes.map((t) => {
               const active = currentTypes.includes(t.id);
               return (
                 <button
                   key={t.id}
                   type="button"
-                  className={`inline-flex min-h-[44px] items-center rounded-[var(--radius-xs)] px-3 text-sm font-[650] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] ${
-                    active ? "bg-[var(--color-action)] text-[var(--color-on-action)]" : "bg-[var(--color-surface-subtle)] text-[var(--color-primary)] hover:bg-[var(--color-border)]"
+                  className={`catalog-filter-option catalog-filter-option-radio flex min-h-[36px] w-full items-center rounded-[var(--radius-xs)] px-2 text-left text-sm font-[600] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] ${
+                    active ? "catalog-filter-option-active text-[var(--color-action)]" : "text-[var(--color-primary)] hover:bg-[var(--color-surface-subtle)]"
                   }`}
                   onClick={() => toggleArray("type", t.id)}
                   aria-pressed={active}
@@ -161,17 +161,17 @@ export default function CatalogFilter({ brands, pumpTypes, purposes, state, onCh
         </fieldset>
 
         {/* Purpose */}
-        <fieldset>
-          <legend className="text-sm font-[650] text-[var(--color-text)]">用途</legend>
-          <div className="mt-2 flex flex-wrap gap-2">
+        <fieldset className="border-t border-[var(--color-border)] pt-5">
+          <legend className="text-xs font-[750] uppercase tracking-[0.08em] text-[var(--color-text)]">用途</legend>
+          <div className="mt-3 space-y-1">
             {purposes.map((p) => {
               const active = currentPurposes.includes(p.id);
               return (
                 <button
                   key={p.id}
                   type="button"
-                  className={`inline-flex min-h-[44px] items-center rounded-[var(--radius-xs)] px-3 text-sm font-[650] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] ${
-                    active ? "bg-[var(--color-action)] text-[var(--color-on-action)]" : "bg-[var(--color-surface-subtle)] text-[var(--color-primary)] hover:bg-[var(--color-border)]"
+                  className={`catalog-filter-option flex min-h-[36px] w-full items-center rounded-[var(--radius-xs)] px-2 text-left text-sm font-[600] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] ${
+                    active ? "catalog-filter-option-active text-[var(--color-action)]" : "text-[var(--color-primary)] hover:bg-[var(--color-surface-subtle)]"
                   }`}
                   onClick={() => toggleArray("purpose", p.id)}
                   aria-pressed={active}

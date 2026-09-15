@@ -3,23 +3,27 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=22.13.0"
+    "node": "24.x"
   },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "test": "playwright test",
+    "test:release": "node --test tests/release/*.test.mjs",
     "import-catalog": "node scripts/import-catalog.mjs",
     "validate": "node scripts/validate-content.mjs",
+    "release:evidence": "node scripts/release.mjs evidence",
+    "release:digest": "node scripts/release.mjs digest",
+    "release:promote": "node scripts/release.mjs promote",
+    "release:rollback": "node scripts/release.mjs rollback",
     "check": "npm run validate && npm run lint && npm run build",
     "lint": "eslint src/"
   },
   "dependencies": {
-    "next": "16.2.10",
+    "next": "16.3.5",
     "react": "19.2.7",
     "react-dom": "19.2.7",
-    "xlsx": "^0.18.5",
     "zod": "4.4.3"
   },
   "devDependencies": {
@@ -29,9 +33,13 @@
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "eslint": "9.39.4",
-    "eslint-config-next": "16.2.10",
+    "eslint-config-next": "16.3.5",
     "tailwindcss": "4.3.3",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+  },
+  "overrides": {
+    "nanoid": "3.3.18"
   },
   "type": "module"
 }

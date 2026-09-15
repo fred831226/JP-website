@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 interface HeroCarouselProps {
   images: string[];
@@ -16,43 +17,68 @@ export default function HeroCarousel({ images, fallbackImage }: HeroCarouselProp
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
 
-    const totalDuration = 5000;
-    const step = totalDuration / images.length;
+    const slideDuration = 5000;
 
     timerRef.current = setInterval(() => {
-      setCurrentIndex((prev) => {
-        const next = prev + 1;
-        if (next >= images.length && timerRef.current) {
-          clearInterval(timerRef.current);
-          return prev;
-        }
-        return next;
-      });
-    }, step);
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, slideDuration);
 
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [images]);
 
-  const showImage = images.length > 0 ? images[currentIndex] : fallbackImage;
+  const carouselImages = images.length > 0 ? images : (fallbackImage ? [fallbackImage] : []);
+  const goToPrevious = () => {
+    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  };
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  };
 
   return (
-    <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-      {showImage ? (
-        <img
-          src={showImage}
-          alt=""
-          className="h-full w-full object-cover"
-          loading="eager"
-        />
-      ) : (
-        <div className="h-full w-full bg-[var(--color-primary)]" />
-      )}
-      <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-primary)]/96 via-[var(--color-primary)]/83 to-[var(--color-primary)]/33" />
-      <div className="absolute bottom-4 right-4 z-20 max-w-[360px] rounded-[4px] bg-[var(--color-primary)]/88 px-2.5 py-1.5 text-xs text-[var(--color-contact-text-muted)] shadow-[0_8px_22px_rgba(11,42,61,0.2)]">
-        首頁氣氛／情境示意參考 · 非建案實績或工程成果證據
+    <div className="absolute inset-0 overflow-hidden" role="group" aria-label="首頁主視覺輪播">
+      <div className="absolute inset-0" aria-hidden="true">
+        {carouselImages.length > 0 ? (
+          carouselImages.map((image, index) => (
+            <Image
+              key={`${image}-${index}`}
+              src={image}
+              alt=""
+              data-carousel-slide={index}
+              data-active={index === currentIndex}
+              fill
+              sizes="100vw"
+              className={`object-cover transition-opacity duration-700 ease-out motion-reduce:transition-none ${index === currentIndex ? "opacity-100" : "opacity-0"}`}
+              loading={index === 0 ? "eager" : "lazy"}
+            />
+          ))
+        ) : (
+          <div className="h-full w-full bg-[var(--color-primary)]" />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-l from-[var(--color-primary)]/80 via-[var(--color-primary)]/42 to-[var(--color-primary)]/10" />
       </div>
+
+      {images.length > 1 && (
+        <>
+          <button
+            type="button"
+            aria-label="上一張 Hero 圖片"
+            onClick={goToPrevious}
+            className="absolute left-4 top-1/2 z-20 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/40 bg-[var(--color-primary)]/65 text-2xl leading-none text-white backdrop-blur-sm transition-colors duration-200 hover:bg-[var(--color-primary)]/90 focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] max-md:left-2"
+          >
+            <span aria-hidden="true">‹</span>
+          </button>
+          <button
+            type="button"
+            aria-label="下一張 Hero 圖片"
+            onClick={goToNext}
+            className="absolute right-4 top-1/2 z-20 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/40 bg-[var(--color-primary)]/65 text-2xl leading-none text-white backdrop-blur-sm transition-colors duration-200 hover:bg-[var(--color-primary)]/90 focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] max-md:right-2"
+          >
+            <span aria-hidden="true">›</span>
+          </button>
+        </>
+      )}
     </div>
   );
 }

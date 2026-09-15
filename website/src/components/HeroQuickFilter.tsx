@@ -24,14 +24,14 @@ export default function HeroQuickFilter({ brands, purposes }: QuickFilterProps) 
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-end">
         <div className="flex-1">
-          <label htmlFor="qf-brand" className="block text-sm font-[700] text-[var(--color-primary)]">品牌</label>
+          <label htmlFor="qf-brand" className="block text-xs font-[700] text-[var(--color-primary)]">品牌</label>
           <select
             id="qf-brand"
             value={brand}
             onChange={(e) => setBrand(e.target.value)}
-            className="mt-1 block w-full min-h-[48px] rounded-[6px] bg-white px-3 text-sm shadow-[0_3px_10px_rgba(11,42,61,0.10)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]"
+            className="mt-1 block w-full min-h-[42px] rounded-[6px] bg-white px-2.5 text-xs shadow-[0_3px_10px_rgba(11,42,61,0.10)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]"
           >
             <option value="">全部</option>
             {brands.map((b) => (
@@ -40,12 +40,12 @@ export default function HeroQuickFilter({ brands, purposes }: QuickFilterProps) 
           </select>
         </div>
         <div className="flex-1">
-          <label htmlFor="qf-purpose" className="block text-sm font-[700] text-[var(--color-primary)]">用途</label>
+          <label htmlFor="qf-purpose" className="block text-xs font-[700] text-[var(--color-primary)]">用途</label>
           <select
             id="qf-purpose"
             value={purpose}
             onChange={(e) => setPurpose(e.target.value)}
-            className="mt-1 block w-full min-h-[48px] rounded-[6px] bg-white px-3 text-sm shadow-[0_3px_10px_rgba(11,42,61,0.10)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]"
+            className="mt-1 block w-full min-h-[42px] rounded-[6px] bg-white px-2.5 text-xs shadow-[0_3px_10px_rgba(11,42,61,0.10)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]"
           >
             <option value="">全部</option>
             {purposes.map((p) => (
@@ -55,7 +55,7 @@ export default function HeroQuickFilter({ brands, purposes }: QuickFilterProps) 
         </div>
         <button
           type="submit"
-          className="inline-flex min-h-[48px] items-center rounded-[6px] bg-[var(--color-action)] px-6 text-sm font-[800] text-[var(--color-on-action)] shadow-[0_5px_14px_rgba(0,109,143,0.20)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] hover:brightness-110"
+          className="inline-flex min-h-[42px] items-center rounded-[6px] bg-[var(--color-action)] px-4 text-xs font-[800] text-[var(--color-on-action)] shadow-[0_5px_14px_rgba(0,109,143,0.20)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] hover:brightness-110"
         >
           搜尋產品
         </button>

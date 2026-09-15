@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import DropdownMenu from "./DropdownMenu";
 import MobileMenu from "./MobileMenu";
@@ -104,7 +105,7 @@ export default function Header() {
           className="flex min-h-[44px] items-center focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2"
           aria-label="回首頁"
         >
-          <img src="/media/jp-pump-logo.png" alt="JP PUMP" className="h-12 w-auto" />
+          <Image src="/media/jp-pump-logo.png" alt="JP PUMP" width={240} height={96} className="h-12 w-auto" />
         </Link>
 
         {/* Desktop nav */}
@@ -128,7 +129,7 @@ export default function Header() {
               <Link
                 key={item.key}
                 href={href}
-                className={`flex min-h-[44px] items-center px-3 text-sm font-[650] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2 ${
+                className={`site-nav-link flex min-h-[44px] items-center px-3 text-sm font-[650] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2 ${
                   isActive(href)
                     ? "text-[var(--color-action)] underline underline-offset-4"
                     : "text-[var(--color-text)] hover:text-[var(--color-action)]"
