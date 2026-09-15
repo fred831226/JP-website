@@ -9,6 +9,7 @@ export default defineConfig({
   testDir: "./tests/e2e",
   timeout: 30000,
   retries: 0,
+  workers: isCI ? 1 : undefined,
   use: {
     baseURL: `http://localhost:${port}`,
     headless: true,
