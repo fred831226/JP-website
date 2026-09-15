@@ -1,0 +1,20 @@
+[
+  {
+    "id": "grundfos",
+    "name": "Grundfos 葛蘭富",
+    "logo": "/media/grundfos-authorised-commercial-building-services-dealer.webp",
+    "website": "https://www.grundfos.com/tw",
+    "summary": "Grundfos 葛蘭富為全球泵浦領導品牌，授權 JP PUMP 傑平有限公司，提供台灣市場在地化的技術支援、選型服務與維修。",
+    "sections": [
+      {
+        "id": "history",
+        "heading": "沿革與業務",
+        "type": "paragraphs",
+        "paragraphs": [
+          "葛蘭富於1989年在台灣設立泵浦生產工廠，1991年成立台灣葛蘭富銷售公司，是第一家在台設廠生產泵浦的外商公司；目前員工約277人，2024年在台生產泵浦超過18萬台。",
+          "葛蘭富提供大樓供水、工業製程、半導體超純水、空調泵浦與智慧型水處理等全方位解決方案，協助客戶提升效率、節能減碳、共創永續未來。"
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "productPurposes": [
+    { "id": "water-supply", "label": "給水", "slug": "water-supply" },
+    { "id": "drainage", "label": "排水", "slug": "drainage" },
+    { "id": "circulation", "label": "循環", "slug": "circulation" },
+    { "id": "pressure-boosting", "label": "加壓", "slug": "pressure-boosting" },
+    { "id": "sewage", "label": "污水", "slug": "sewage" },
+    { "id": "industrial", "label": "工業用", "slug": "industrial" },
+    { "id": "fire-fighting", "label": "消防", "slug": "fire-fighting" },
+    { "id": "agricultural", "label": "農業用", "slug": "agricultural" }
+  ]
+}

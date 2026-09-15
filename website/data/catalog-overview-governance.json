@@ -1,0 +1,17 @@
+{
+  "review": {
+    "reviewer": "Fred",
+    "reviewDate": "2026-08-21",
+    "publicLastUpdatedDate": "2026-08-21"
+  },
+  "series": [
+    {
+      "id": "jp-pump-sn",
+      "published": "是"
+    },
+    {
+      "id": "jp-pump-tp",
+      "published": "是"
+    }
+  ]
+}

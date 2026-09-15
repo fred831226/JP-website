@@ -1,0 +1,44 @@
+{
+  "companyName": "傑平有限公司",
+  "brandName": "JP PUMP",
+  "nav": {
+    "products": {
+      "label": "產品總覽",
+      "href": "/zh-tw/products",
+      "pumpTypes": [
+        { "id": "horizontal-pump", "label": "臥式泵", "href": "/zh-tw/products?type=horizontal-pump" },
+        { "id": "variable-frequency-constant-pressure-system", "label": "變頻恆壓泵", "href": "/zh-tw/products?type=variable-frequency-constant-pressure-system" },
+        { "id": "circulator-pump", "label": "循環泵", "href": "/zh-tw/products?type=circulator-pump" },
+        { "id": "submersible-well-pump", "label": "沉水式揚水泵", "href": "/zh-tw/products?type=submersible-well-pump" },
+        { "id": "sewage-pump", "label": "沉水式污水泵", "href": "/zh-tw/products?type=sewage-pump" },
+        { "id": "vertical-multistage-pump", "label": "立式揚水泵", "href": "/zh-tw/products?type=vertical-multistage-pump" }
+      ]
+    },
+    "services": {
+      "label": "服務與實績",
+      "href": "/zh-tw/services"
+    },
+    "about": {
+      "label": "關於傑平",
+      "children": [
+        { "id": "company", "label": "公司資訊", "href": "/zh-tw/company" },
+        { "id": "partners", "label": "授權經銷品牌", "href": "/zh-tw/partners" }
+      ]
+    },
+    "contact": {
+      "label": "聯絡我們",
+      "href": "/zh-tw/contact"
+    }
+  },
+  "contactInfo": {
+    "phone": "02-2649-6338",
+    "email": "jie.ping@msa.hinet.net",
+    "emails": ["jie.ping@msa.hinet.net", "jiepingpump@gmail.com"],
+    "address": "221 新北市汐止區水源路二段90號1樓"
+  },
+  "footer": {
+    "displayName": "傑平泵浦有限公司",
+    "tagline": "JP Pump Solution",
+    "headOfficeTitle": "公司聯絡資訊"
+  }
+}

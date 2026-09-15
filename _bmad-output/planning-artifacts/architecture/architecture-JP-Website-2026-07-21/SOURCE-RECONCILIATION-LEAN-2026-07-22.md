@@ -16,7 +16,7 @@ This file records user-confirmed decisions made during Architecture Review on 20
 | --- | --- |
 | FR-5 and FR-19 — Latest Information/News | Remove from V1, including listing/detail, publishing and home-page references. Record as deferred rather than silently deleting product history. |
 | FR-4 and FR-20 — Project content | Amend V1 to show approved Project summaries/evidence within Services & Projects. Remove the requirement for individual Project detail routes and per-item publishing. |
-| FR-9 — taxonomy landing pages | Keep Brand, Pump Type and Purpose landing pages in V1. Their paths remain locale-prefixed. |
+| FR-9 — taxonomy landing pages | Keep Pump Type landing pages in V1. Brand and Purpose remain governed metadata and Product overview filters, but no longer have standalone public routes. |
 | FR-17 and FR-34..FR-36 — attribution, analytics and consent | Defer GA4, contact attribution, consent tooling and related analytics acceptance criteria beyond V1. Direct contact links remain. |
 | FR-18 and FR-21 — authority/media wording | Remove News references and simplify media governance to approved optimized files plus alt/source/rights metadata; no media entity graph is required. |
 | NFR-1 — real-user measurement wording | Keep the Core Web Vitals targets as launch-quality goals, but remove the V1 dependency on RUM/GA4. Use prelaunch lab checks and Vercel data only if available without adding the deferred analytics stack. |
@@ -31,7 +31,7 @@ This file records user-confirmed decisions made during Architecture Review on 20
 
 - Remove Latest Information/News from information architecture, navigation, home-page modules and page inventory.
 - Treat Project cards/evidence as content within Services & Projects; do not design a Project detail route for V1.
-- Keep the Brand, Pump Type and Purpose landing-page flows.
+- Keep the Pump Type landing-page flow; route Brand and Purpose exploration through Product overview filters without standalone Brand or Purpose pages.
 - Remove analytics/attribution/consent behavior from V1 interaction contracts.
 - Remove Latest Information from navigation and revise any service/project interactions that imply a separate detail page.
 - Preserve approved visual mockups as design references while documenting that implementation uses clean Next.js App Router components and Tailwind utilities.

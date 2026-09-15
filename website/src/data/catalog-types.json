@@ -1,0 +1,38 @@
+[
+  {
+    "id": "horizontal-pump",
+    "name": "臥式泵",
+    "slug": "horizontal-pump",
+    "description": "臥式泵適用於給水、加壓、空調循環及一般液體輸送。"
+  },
+  {
+    "id": "variable-frequency-constant-pressure-system",
+    "name": "變頻恆壓泵",
+    "slug": "variable-frequency-constant-pressure-system",
+    "description": "變頻恆壓泵由泵浦與變頻恆壓控制設備組成，適用於需要穩定供水壓力的系統。"
+  },
+  {
+    "id": "circulator-pump",
+    "name": "循環泵",
+    "slug": "circulator-pump",
+    "description": "循環泵適用於冷凍空調、暖通與工業系統的循環輸送。"
+  },
+  {
+    "id": "submersible-well-pump",
+    "name": "沉水式揚水泵",
+    "slug": "submersible-well-pump",
+    "description": "沉水式揚水泵完全浸沒於液體中運轉，適用於大樓揚水、深井取水及排水應用。"
+  },
+  {
+    "id": "sewage-pump",
+    "name": "沉水式污水泵",
+    "slug": "sewage-pump",
+    "description": "沉水式污水泵適用於污水、污物及廢水排放。"
+  },
+  {
+    "id": "vertical-multistage-pump",
+    "name": "立式揚水泵",
+    "slug": "vertical-multistage-pump",
+    "description": "立式揚水泵適用於加壓供水、消防、工業系統及空調循環。"
+  }
+]

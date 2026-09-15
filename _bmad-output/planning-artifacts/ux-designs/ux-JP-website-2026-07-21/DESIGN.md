@@ -3,12 +3,13 @@ name: "JP PUMP Technical Blueprint"
 description: "A restrained industrial B2B visual system for trustworthy product discovery, evidence-led company credibility, and direct contact."
 status: final
 created: 2026-07-21
-updated: 2026-07-22
+updated: 2026-08-27
 sources:
   - ../../prds/prd-JP-Website-2026-07-20/prd.md
   - ../../prds/prd-JP-Website-2026-07-20/addendum.md
   - ../../architecture/architecture-JP-Website-2026-07-21/ARCHITECTURE-SPINE.md
   - ../../architecture/architecture-JP-Website-2026-07-21/SOURCE-RECONCILIATION-LEAN-2026-07-22.md
+  - ../../architecture/architecture-JP-Website-2026-07-21/SOURCE-RECONCILIATION-EPIC2-2026-08-21.md
   - reconcile-architecture-lean-2026-07-22.md
   - imports/company-sign-original.jpg
   - imports/company-sign-ai-enhanced.png
@@ -174,6 +175,8 @@ The semantic tokens in this file remain the visual authority during implementati
 
 The supplied `imports/jp-pump-logo-source.png` is the identity master. It may be cleaned, cropped, and exported for the web, but its lettering and structure must not be redrawn. `imports/company-sign-original.jpg` is historical evidence; `imports/company-sign-ai-enhanced.png` is mood reference only.
 
+The public image set confirmed by the project owner on 2026-08-21 is an approved governance baseline. It must not be blocked solely because an additional per-image `source`/`rights`/`approval` metadata inventory was not created. Useful alt text, file existence, loadability, content relationships, and accessibility remain mandatory. Images added or replaced after that baseline follow the normal provenance, rights, approval, and accessibility governance rules.
+
 The retained exploration library is `.working/color-themes-brand-01.html`, `.working/design-directions-a-01.html`, and `.working/uipro-color-comparison-01.html`. These files explain discarded/alternate palette and density directions; the tokens in this spine are the active contract.
 
 ## Colors
@@ -236,7 +239,7 @@ Controls use `{rounded.md}`; general panels and product cards do not exceed `{ro
 - **Catalog sidebar** — A seamless cool-gray rail holds a labelled series/model search field, one exclusive segmented Brand group, multi-select Pump type chips, multi-select Purpose chips, and removable active-condition tags. The selected states use the existing Technical Blueprint navy/action colors and restrained motion; checkbox lists, dropdown fields, sorting, and a separate apply button are not shown. Normal-state visual dimensions may remain compact, but each control provides an effective 44px touch target, visible keyboard focus, and programmatic selected state.
 - **Result summary** — Page heading and a live result count form one compact responsive region. Active conditions appear as removable tags in the filter rail with one text-led clear-all action. No sorting control is shown in V1.
 - **Product card** — One link wraps the full card. Anatomy: a compact approved image or explicitly labelled approval-pending media area that blends directly into the card without an inner frame or hard divider; a soft tonal category tag; series title; short approved description; one or two compact key-data lines at bottom-left with explicit units; and a text-only `看更多` cue at bottom-right. The cue is not a nested link or button. Avoid excessive blank image padding. Hover adds only a restrained lift/shadow; focus uses a 3px `{colors.focus-ring}` outline with a 2px surface offset.
-- **Category page** — Brand, Pump Type and Purpose pages reuse the Product overview card/result language, preceded by one crawlable approved introduction. They require no alternate visual system or auto-generated thin copy.
+- **Pump Type page** — Pump Type pages reuse the Product overview card/result language, preceded by one crawlable approved introduction. Brand and Purpose remain Product overview filters and Series metadata without standalone page templates. Pump Type pages require no alternate visual system or auto-generated thin copy.
 - **Product image** — Approved series media sits on a borderless white surface with restrained elevation. The entire image surface is the enlargement trigger and keeps a 3px `{colors.focus-ring}` outline on keyboard focus.
 - **Key data block** — Four fields only: minimum/maximum head in `m`, minimum/maximum flow in `L/min`. Missing values show `未提供`; do not gray them into illegibility.
 - **Model table** — Sticky visual header within the table container when useful, clear model-to-column association, tabular numerals, and explicit units. Missing cells say `未提供`, never `0` or an em dash. Table borders are structural exceptions to the public no-outline direction.
