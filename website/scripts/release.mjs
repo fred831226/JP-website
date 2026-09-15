@@ -63,7 +63,7 @@ async function probePreview(url) {
   // The public application deliberately redirects the deployment root to its
   // only V1 locale. Probe the canonical public route directly so redirects
   // remain forbidden for the response we treat as release evidence.
-  const publicEntry = new URL("/zh-tw/", url).toString();
+  const publicEntry = new URL("/zh-tw", url).toString();
   const [page, robots] = await Promise.all([
     fetch(publicEntry, { headers, redirect: "error" }),
     fetch(`${url}/robots.txt`, { headers, redirect: "error" }),
