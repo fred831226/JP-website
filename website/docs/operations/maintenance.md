@@ -4,6 +4,8 @@
 
 維護回應時間、待命方式與事故通知時限屬獨立的維護服務協議，不是網站產品行為或本手冊承諾的 SLA。
 
+目前正式站的可追溯部署、網域與後續範圍，見 [current-deployment.md](./current-deployment.md)。它是日常維護的起點；本手冊與 `recovery-readiness.md` 則定義發布、復原與尚待完成的治理事項。
+
 ## 權威來源與存取前置
 
 - 外層 repository 是唯一 Git authority；Vercel 應設定 Root Directory `website`。

@@ -60,8 +60,12 @@ async function getVercelDeployment(deploymentId) {
 async function probePreview(url) {
   const bypassSecret = requireEnvironment("VERCEL_AUTOMATION_BYPASS_SECRET");
   const headers = { "x-vercel-protection-bypass": bypassSecret };
+  // The public application deliberately redirects the deployment root to its
+  // only V1 locale. Probe the canonical public route directly so redirects
+  // remain forbidden for the response we treat as release evidence.
+  const publicEntry = new URL("/zh-tw", url).toString();
   const [page, robots] = await Promise.all([
-    fetch(url, { headers, redirect: "error" }),
+    fetch(publicEntry, { headers, redirect: "error" }),
     fetch(`${url}/robots.txt`, { headers, redirect: "error" }),
   ]);
   if (!page.ok || !robots.ok) throw new ReleaseContractError("Unable to verify the protected Preview response");

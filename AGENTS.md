@@ -102,3 +102,20 @@ When asked to validate or review:
 ## Maintaining this guide
 
 Keep this file concise and project-specific. Update it whenever the application boundary, package manager, commands, target architecture, or verification baseline changes. Add nested `AGENTS.md` files only when a subtree needs genuinely different rules; do not duplicate this file wholesale.
+
+## JP PUMP 發布流程
+
+在本 repository 中，使用者說「執行 JP PUMP 發布流程」即要求依
+`website/docs/operations/codex-release-flow.md` 執行；當目前工作區明確是本
+repository 時，「執行發布流程」也可視為相同指令。其他專案不得套用本流程。
+
+先保存並檢查 working tree，絕不覆寫他人變更。依變更範圍選擇 Fast Release 或
+Full Release；範圍不明時一律 Full Release。任何 required gate 失敗、Preview
+不完整、證據與 commit 不一致、或正式設定未核對時，必須 STOP，不得 merge 或
+發布 Production。
+
+第一次建立流程或未取得本次明確授權時，只能做到 Production-ready。不得自行
+commit、push、建立或合併 PR、修改 GitHub branch protection / secrets、修改
+Vercel project、網域、DNS、帳務、帳號權限，或執行 Production promotion。未來
+收到發布指令時，仍須在 promotion 前要求針對該 immutable deployment 的明確
+Production 授權。

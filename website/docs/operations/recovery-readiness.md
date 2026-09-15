@@ -1,5 +1,13 @@
 # JP PUMP Recovery Readiness Record
 
+## 正式上線現況（2026-09-15，Asia/Taipei）
+
+網站已正式部署。詳細的 Production／Preview deployment、commit、網域、HTTPS、`www` 308 導向、搜尋收錄待辦與後續小型變更／英文版邊界，見 [current-deployment.md](./current-deployment.md)。
+
+本段更新目前公開服務狀態；下列 2026-08-29 表格保留為當時的 baseline observation。它的 `BLOCKED` 治理項目（公司控制的帳號／MFA／recovery、billing、備份與第二位維護者）並不因網站已上線而自動解除，仍須以受控證據更新。
+
+---
+
 記錄日期：2026-08-29（Asia/Taipei）
 Repository baseline：`843dd1b51cee8757d282b9f42f7a9abb9197215e`
 
