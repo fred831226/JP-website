@@ -8,9 +8,9 @@
     },
     {
       "name": "變頻恆壓泵",
-      "seriesId": "jp-pump-2vbsg",
+      "seriesId": "jp-pump-vbsg",
       "pumpTypeId": "variable-frequency-constant-pressure-system",
-      "silhouette": "/media/2vbsg-product-1-cutout-v4.png"
+      "silhouette": "/media/vbsg-product-1-cutout-v2.png"
     },
     {
       "name": "循環泵",
@@ -64,6 +64,7 @@
     },
     {
       "id": "jp-pump-2vbsg",
+      "isPublic": false,
       "image": "/media/2vbsg-product-1-cutout-v4.png",
       "images": [
         "/media/2vbsg-product-1-cutout-v4.png",

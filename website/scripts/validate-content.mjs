@@ -431,6 +431,7 @@ for (const gs of gen.series) {
 
 for (const cs of content.series) {
   if (!cs.slug) err("catalog-content.json", cs.id, "slug", "Missing slug");
+  if (cs.isPublic !== undefined && typeof cs.isPublic !== "boolean") err("catalog-content.json", cs.id, "isPublic", "Must be a boolean when provided");
   if (!cs.shortDescription) warn("catalog-content.json", cs.id, "shortDescription", "Missing short description");
 }
 
