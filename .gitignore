@@ -12,3 +12,9 @@ website/.vercel/
 website/releases/*
 !website/releases/d2ef16f4-c324-4ef6-8a99-f823b7f3a590/
 !website/releases/d2ef16f4-c324-4ef6-8a99-f823b7f3a590/**
+
+# Local AI workflows and planning records; not part of the deployed website.
+.agents/
+.codex/
+_bmad/
+_bmad-output/
