@@ -24,6 +24,7 @@ type GeneratedSeries = {
 type ContentSeries = {
   id: string;
   slug: string;
+  isPublic?: boolean;
   image?: string;
   images?: string[];
   shortDescription: string;
@@ -108,18 +109,19 @@ function uniqueMap<T extends { id: string }>(records: T[], source: string): Map<
 const contentMap = uniqueMap(content.series, "catalog-content.json");
 const overviewMap = uniqueMap(overview.series, "catalog-overview.json");
 
-const seriesList: Series[] = generated.series.map((gs) => {
+const seriesList: Series[] = generated.series.flatMap((gs) => {
   const c = contentMap.get(gs.id);
   const o = overviewMap.get(gs.id);
   if (!c) throw new Error(`catalog-content.json: missing Series id "${gs.id}"`);
   if (!o) throw new Error(`catalog-overview.json: missing Series id "${gs.id}"`);
+  if (c.isPublic === false) return [];
   const ptId = pumpTypeIdFor(gs.id, gs.pumpType);
   const purposeTags = o.purposeTags;
   const purposeIds = purposeTags
     .map((t) => PURPOSE_TAG_TO_ID[t] ?? t.replace(/\s+/g, "-").replace(/[\/]/g, "-"))
     .filter((id, i, arr) => arr.indexOf(id) === i); // deduplicate
 
-  return {
+  return [{
     id: gs.id,
     brandId: gs.brandId,
     name: gs.name,
@@ -145,7 +147,7 @@ const seriesList: Series[] = generated.series.map((gs) => {
       models: gs.models.filter((model) => section.modelPrefixes.some((prefix) => model.name.startsWith(prefix))),
     })) ?? [],
     lastUpdatedDate: governance.review.publicLastUpdatedDate,
-  };
+  }];
 });
 
 const catalog = CatalogSchema.parse({

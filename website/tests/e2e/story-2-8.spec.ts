@@ -2,16 +2,18 @@ import { expect, test } from "@playwright/test";
 
 const base = "/zh-tw";
 
-test("22 cards are crawlable and sitemap contains the same canonical routes", async ({ browser, request }) => {
+test("21 public cards are crawlable and sitemap excludes retired series routes", async ({ browser, request }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
   await page.goto(`${base}/products`, { waitUntil: "domcontentloaded" });
   const hrefs = await page.locator('[data-catalog-series]').evaluateAll((cards) => cards.map((card) => card.getAttribute("href")));
-  expect(hrefs).toHaveLength(22);
-  expect(new Set(hrefs).size).toBe(22);
+  expect(hrefs).toHaveLength(21);
+  expect(new Set(hrefs).size).toBe(21);
+  expect(hrefs).not.toContain("/zh-tw/series/2vbsg");
   const sitemap = await (await request.get("/sitemap.xml")).text();
   const sitemapSeries = [...sitemap.matchAll(/<loc>[^<]*\/zh-tw\/series\/[^<]+<\/loc>/g)].map(([value]) => value);
-  expect(sitemapSeries).toHaveLength(22);
+  expect(sitemapSeries).toHaveLength(21);
+  expect(sitemap).not.toContain("/zh-tw/series/2vbsg");
   expect(sitemap).not.toMatch(/\/brands\/|\/purposes\/|\/models\//);
   await context.close();
 });
@@ -54,17 +56,18 @@ test("Series content follows the required reading order and public review bounda
   expect(order).toEqual(["suitability", "media", "key-data", "introduction", "models", "purposes", "actions"]);
 });
 
-test("VFJH、VFJQ、2VBSG 各有獨立系列頁與規格表", async ({ page }) => {
+test("VFJH、VFJQ 各有獨立系列頁與規格表，而 2VBSG 已下架", async ({ page }) => {
   for (const [slug, name, pumpType, modelCount] of ([
     ["vbsg", "VFJH", "變頻恆壓泵", 5],
     ["kh-vbsg", "VFJQ", "變頻恆壓泵", 28],
-    ["2vbsg", "2VBSG", "變頻恆壓泵", 28],
   ] satisfies Array<[string, string, string, number]>)) {
     await page.goto(`${base}/series/${slug}`);
     await expect(page.getByRole("heading", { level: 1, name })).toBeVisible();
     await expect(page.getByText(pumpType, { exact: true })).toBeVisible();
     await expect(page.locator("tbody tr")).toHaveCount(modelCount);
   }
+  const retiredResponse = await page.goto(`${base}/series/2vbsg`);
+  expect(retiredResponse?.status()).toBe(404);
 });
 
 test("filter changes are immediate, latest-state safe, selected, counted, and announced", async ({ page }) => {
@@ -137,21 +140,6 @@ test("dialog failure is labelled and focus returns to the exact trigger", async 
   expect((await close.boundingBox())?.width).toBeGreaterThanOrEqual(44);
   await close.click();
   await expect(trigger).toBeFocused();
-});
-
-test("a failed gallery image does not prevent a later approved image from opening", async ({ page }) => {
-  await page.goto(`${base}/series/2vbsg`);
-  const firstTrigger = page.getByRole("button", { name: /放大檢視 2VBSG 圖片 1/ });
-  await firstTrigger.click();
-  const dialog = page.getByRole("dialog", { name: "圖片放大檢視" });
-  await dialog.locator("img").evaluate((image) => image.dispatchEvent(new Event("error")));
-  await expect(dialog.getByRole("status")).toBeVisible();
-  await dialog.getByRole("button", { name: "關閉" }).click();
-  await page.getByRole("button", { name: "下一張圖片" }).click();
-  const secondTrigger = page.getByRole("button", { name: /放大檢視 2VBSG 圖片 2/ });
-  await secondTrigger.click();
-  await expect(dialog.getByRole("status")).toHaveCount(0);
-  await expect(dialog.locator("img")).toBeVisible();
 });
 
 test("model table is labelled, contained at 320px, and preserves 491 semantic rows", async ({ page }) => {

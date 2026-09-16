@@ -141,7 +141,7 @@ async function getRouteInventory() {
     readJson(resolve(WEBSITE_ROOT, "src", "data", "catalog-types.json"), "Catalog types"),
   ]);
   const catalogRoutes = new Set(["/zh-tw/", "/zh-tw/products"]);
-  for (const series of catalog.series ?? []) if (series?.slug) catalogRoutes.add(`/zh-tw/series/${series.slug}`);
+  for (const series of catalog.series ?? []) if (series?.slug && series.isPublic !== false) catalogRoutes.add(`/zh-tw/series/${series.slug}`);
   for (const type of types ?? []) if (type?.slug) catalogRoutes.add(`/zh-tw/types/${type.slug}`);
   const all = new Set([
     ...catalogRoutes,

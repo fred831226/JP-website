@@ -57,7 +57,7 @@ test.describe("Public smoke tests", () => {
 
     const representativeSeries = [
       ["horizontal-pump", "gp"],
-      ["variable-frequency-constant-pressure-system", "2vbsg"],
+      ["variable-frequency-constant-pressure-system", "vbsg"],
       ["circulator-pump", "grundfos-magna3"],
       ["submersible-well-pump", "hs"],
       ["sewage-pump", "cv"],
@@ -72,18 +72,18 @@ test.describe("Public smoke tests", () => {
   test("產品總覽導覽切換會同步套用或清除類型篩選", async ({ page }) => {
     const variableFrequencyType = "variable-frequency-constant-pressure-system";
     await page.goto(`${BASE}/products?type=${variableFrequencyType}`);
-    await expect(page.getByTestId("catalog-result-count")).toHaveText("共 6 個產品系列");
+    await expect(page.getByTestId("catalog-result-count")).toHaveText("共 5 個產品系列");
 
     const productsMenu = page.getByRole("button", { name: "產品總覽" });
     await productsMenu.click();
     await page.getByRole("menuitem", { name: "全部產品" }).click();
     await page.waitForURL(`${BASE}/products`);
-    await expect(page.getByTestId("catalog-result-count")).toHaveText("共 22 個產品系列");
+    await expect(page.getByTestId("catalog-result-count")).toHaveText("共 21 個產品系列");
 
     await productsMenu.click();
     await page.getByRole("menuitem", { name: "變頻恆壓泵" }).click();
     await page.waitForURL(`${BASE}/products?type=${variableFrequencyType}`);
-    await expect(page.getByTestId("catalog-result-count")).toHaveText("共 6 個產品系列");
+    await expect(page.getByTestId("catalog-result-count")).toHaveText("共 5 個產品系列");
   });
 
   test("產品首頁顯示六個已核准類型", async ({ page }) => {
@@ -113,7 +113,7 @@ test.describe("Public smoke tests", () => {
     const context = await browser.newContext({ javaScriptEnabled: false });
     const page = await context.newPage();
     await page.goto(`${BASE}/products`, { waitUntil: "domcontentloaded" });
-    await expect(page.locator('a[href^="/zh-tw/series/"]')).toHaveCount(22);
+    await expect(page.locator('a[href^="/zh-tw/series/"]')).toHaveCount(21);
     await expect(page.locator('a[href="/zh-tw/series/vbsg"]')).toBeAttached();
     await expect(page.locator('a[href="/zh-tw/series/grundfos-nb-nbg-nk-nkg-nbe-nbge-nke-nkge"]')).toBeAttached();
     await context.close();

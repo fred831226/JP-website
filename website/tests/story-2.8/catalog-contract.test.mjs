@@ -121,6 +121,7 @@ test("catalog data has exactly 22 canonical series including approved Grundfos U
   assert.equal(generated.series.some(({ id }) => id === "jp-pump-y"), false);
   assert.equal(content.series.find(({ id }) => id === "jp-pump-vbsg")?.productSections, undefined);
   assert.ok(content.series.some(({ id, slug }) => id === "jp-pump-2vbsg" && slug === "2vbsg"));
+  assert.equal(content.series.find(({ id }) => id === "jp-pump-2vbsg")?.isPublic, false);
   assert.ok(content.series.some(({ id, slug }) => id === "jp-pump-kh-vbsg" && slug === "kh-vbsg"));
   const modelIds = generated.series.flatMap(({ models }) => models.map(({ id }) => id));
   assert.equal(new Set(modelIds).size, modelIds.length);
