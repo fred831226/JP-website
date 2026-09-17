@@ -103,7 +103,7 @@ export default function CatalogFilter({ brands, pumpTypes, purposes, state, onCh
             defaultValue={state.q}
             onChange={(event) => updateSearch(event.currentTarget.value)}
             placeholder="系列名稱或型號..."
-            className="catalog-filter-search mt-2 block min-h-[44px] w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white px-3 py-2 text-sm shadow-[0_3px_10px_rgba(11,42,61,0.06)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]"
+            className="catalog-filter-search mt-2 block min-h-[45px] w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white px-3 py-2 text-sm shadow-[0_3px_10px_rgba(11,42,61,0.06)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]"
           />
         </div>
 

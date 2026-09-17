@@ -22,49 +22,21 @@ export default function ContactPage() {
       <PageBanner title={hero.title} summary={hero.summary} />
       <div className="bg-[var(--color-contact-surface)] text-[var(--color-on-primary)]">
       <div className="mx-auto max-w-[var(--content-max)] px-[var(--page-gutter-desktop)] py-14 max-md:px-[var(--page-gutter-mobile)]">
-        <div className="grid gap-12 md:grid-cols-[1.15fr_0.85fr] md:items-start md:gap-16">
-          <section aria-labelledby="contact-brand-title" className="space-y-8">
-            <div>
+        <div className="grid gap-12 md:grid-cols-[0.85fr_1.15fr] md:items-start md:gap-16">
+          <section aria-labelledby="contact-info-title">
+            <div className="mb-8 flex items-center gap-5 max-md:gap-4">
               <Image
                 src="/media/jp-pump-logo-edited.png"
                 alt="JP PUMP"
                 width={360}
                 height={144}
-                className="h-20 w-auto object-contain object-left"
+                className="h-20 w-auto shrink-0 object-contain object-left max-md:h-16"
               />
-              <h2 id="contact-brand-title" className="mt-5 text-2xl font-[750] text-[var(--color-on-primary)]">
-                傑平有限公司
-              </h2>
-              <p className="mt-2 text-sm tracking-[0.12em] text-[var(--color-contact-text-muted)]">
-                JP Pump Solution
-              </p>
-            </div>
-
-            {info.address && (
-              <div className="overflow-hidden rounded-[var(--radius-md)] border border-white/15 bg-[var(--color-contact-surface-raised)]">
-                <iframe
-                  title="傑平有限公司位置地圖"
-                  src={mapEmbedUrl}
-                  className="h-[320px] w-full border-0 max-md:h-[260px]"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-                <div className="flex items-center justify-between gap-4 px-4 py-3 max-md:flex-col max-md:items-start">
-                  <p className="text-sm leading-6 text-[var(--color-contact-text-muted)]">{info.address}</p>
-                  <a
-                    href={mapUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex min-h-[44px] shrink-0 items-center rounded-[var(--button-primary-radius)] bg-[var(--button-primary-bg)] px-4 text-sm font-[650] text-[var(--button-primary-fg)] transition-[filter] hover:brightness-110 focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2"
-                  >
-                    在 Google 地圖開啟
-                  </a>
-                </div>
+              <div>
+                <p className="text-2xl font-[750] text-[var(--color-on-primary)]">傑平有限公司</p>
+                <p className="mt-2 text-sm tracking-[0.12em] text-[var(--color-contact-text-muted)]">JP Pump Solution</p>
               </div>
-            )}
-          </section>
-
-          <section aria-labelledby="contact-info-title">
+            </div>
             <h2 id="contact-info-title" className="text-[var(--font-heading-sm-size)] font-[var(--font-heading-sm-weight)] leading-[var(--font-heading-sm-line-height)] text-[var(--color-on-primary)]">
               聯絡資訊
             </h2>
@@ -113,6 +85,31 @@ export default function ContactPage() {
               </div>
             )}
             </div>
+          </section>
+
+          <section aria-label="傑平有限公司位置地圖" className="space-y-8">
+            {info.address && (
+              <div className="overflow-hidden rounded-[var(--radius-md)] border border-white/15 bg-[var(--color-contact-surface-raised)]">
+                <iframe
+                  title="傑平有限公司位置地圖"
+                  src={mapEmbedUrl}
+                  className="h-[320px] w-full border-0 max-md:h-[260px]"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+                <div className="flex items-center justify-between gap-4 px-4 py-3 max-md:flex-col max-md:items-start">
+                  <p className="text-sm leading-6 text-[var(--color-contact-text-muted)]">{info.address}</p>
+                  <a
+                    href={mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-[44px] shrink-0 items-center rounded-[var(--button-primary-radius)] bg-[var(--button-primary-bg)] px-4 text-sm font-[650] text-[var(--button-primary-fg)] transition-[filter] hover:brightness-110 focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2"
+                  >
+                    在 Google 地圖開啟
+                  </a>
+                </div>
+              </div>
+            )}
           </section>
 
           {/* FAQ */}

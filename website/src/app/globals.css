@@ -31,6 +31,55 @@
 /* ==========================================================================
    Hero animations — static elements
    ========================================================================== */
+@keyframes page-banner-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-banner-reveal {
+  animation: page-banner-reveal 1.65s cubic-bezier(.16, 1, .3, 1) both;
+}
+.page-banner-reveal--eyebrow { animation-delay: .04s; }
+.page-banner-reveal--title { animation-delay: .10s; }
+.page-banner-reveal--summary { animation-delay: .20s; }
+.page-banner-reveal--children { animation-delay: .30s; }
+
+@keyframes home-hero-panel-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.home-hero-wordmark {
+  animation: home-hero-wordmark-arrive 4s cubic-bezier(.16, 1, .3, 1) .2s both;
+}
+
+@keyframes home-hero-wordmark-arrive {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.home-hero-panel {
+  animation: home-hero-panel-arrive 4s cubic-bezier(.16, 1, .3, 1) .2s both;
+}
+
 @keyframes ping-soft {
   0%   { transform: scale(.4); opacity: 1; }
   100% { transform: scale(2.2); opacity: 0; }
@@ -62,6 +111,21 @@
 /* ==========================================================================
    Company section — pipe-flow decorative paths
    ========================================================================== */
+@keyframes company-brand-sign-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.company-brand-sign {
+  animation: company-brand-sign-arrive 2s cubic-bezier(.16, 1, .3, 1) .2s both;
+}
+
 @keyframes flow-path {
   to { stroke-dashoffset: -220; }
 }
@@ -383,7 +447,8 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .company-contact-mark,
-  .company-contact-card {
+  .company-contact-card,
+  .company-brand-sign {
     animation: none;
   }
   .company-contact-card {
@@ -516,6 +581,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .home-hero-wordmark,
+  .home-hero-panel,
+  .page-banner-reveal {
+    animation: none;
+  }
+
   .site-nav-link,
   .site-nav-dropdown-trigger,
   .site-nav-link::after,

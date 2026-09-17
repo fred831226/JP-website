@@ -22,10 +22,10 @@ export default function CompanyPage() {
 
   return (
     <>
-      <PageBanner title="公司資訊" />
+      <PageBanner title="關於傑平" />
       <div className="relative z-10 mx-auto max-w-[var(--content-max)] space-y-14 px-[var(--page-gutter-desktop)] pb-12 pt-0 max-md:space-y-10 max-md:px-[var(--page-gutter-mobile)] max-md:pb-9">
-        <section className="-mt-16 flex flex-col items-center text-center max-md:-mt-12">
-          <div className="w-full max-w-[440px] overflow-hidden rounded-[8px] bg-[var(--color-primary)] p-2 shadow-[0_18px_40px_rgba(11,42,61,.20)]">
+        <section className="-mt-20 flex flex-col items-center text-center max-md:-mt-14">
+          <div className="company-brand-sign w-full max-w-[440px] overflow-hidden rounded-[8px] bg-[var(--color-primary)] p-2 shadow-[0_18px_40px_rgba(11,42,61,.20)]">
             <Image src="/media/company-brand-sign.png" alt="傑平有限公司 JP PUMP 招牌" width={880} height={660} className="aspect-[4/3] w-full object-cover" />
           </div>
           <div className="mt-8 max-w-[760px]">

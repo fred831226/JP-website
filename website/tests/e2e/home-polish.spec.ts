@@ -6,6 +6,47 @@ test("首頁不顯示情境示意標籤", async ({ page }) => {
   await expect(page.getByText("首頁氣氛／情境示意參考 · 非建案實績或工程成果證據")).toHaveCount(0);
 });
 
+test("首頁 Hero 保留精簡搜尋卡片與無障礙主標題", async ({ page }) => {
+  await page.goto("/zh-tw");
+
+  await expect(page.getByText("以扎實經驗，守護每一套泵浦系統")).toHaveCount(0);
+  await expect(page.getByText("從設備選擇到工程服務，以清楚且可核實的資訊協助客戶找到合適方向。")).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "JP PUMP", level: 1 })).toBeAttached();
+  await expect(page.getByRole("img", { name: "傑平有限公司", exact: true })).toHaveAttribute(
+    "src",
+    /company-name-horizontal-spaced-transparent\.png/,
+  );
+  const heroPanel = page.locator(".home-hero-panel");
+  await expect(heroPanel).toHaveCount(1);
+  await expect(heroPanel).not.toHaveClass(/md:w-\[32%\]/);
+  await expect(heroPanel).toHaveCSS("animation-duration", "4s");
+  await expect(heroPanel).toHaveCSS("animation-delay", "0.2s");
+  const wordmark = page.locator(".home-hero-wordmark");
+  await expect(wordmark).toHaveCount(1);
+  await expect(wordmark).toHaveCSS("animation-duration", "4s");
+  await expect(wordmark).toHaveCSS("animation-delay", "0.2s");
+  expect(await wordmark.evaluate((element) => element.closest(".home-hero-panel"))).toBeNull();
+  const heroLink = page.getByRole("link", { name: "認識我們" });
+  await expect(heroLink).toHaveCSS("display", "flex");
+  const kickerBox = await page.getByText("可靠歷史 · 工程能力 · 快速回應").boundingBox();
+  const heroLinkBox = await heroLink.boundingBox();
+  expect(heroLinkBox?.y).toBeGreaterThan(kickerBox?.y ?? 0);
+});
+
+test("首頁 Hero 卡片在寬窄螢幕均維持可讀寬度", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/zh-tw");
+  const wideCard = await page.locator(".home-hero-panel").boundingBox();
+  expect(wideCard?.width).toBeGreaterThan(300);
+  expect(wideCard?.width).toBeLessThanOrEqual(360);
+
+  await page.setViewportSize({ width: 320, height: 900 });
+  await page.reload();
+  const narrowCard = await page.locator(".home-hero-panel").boundingBox();
+  expect(narrowCard?.width).toBeGreaterThan(250);
+  expect(narrowCard?.width).toBeLessThanOrEqual(320);
+});
+
 test("頁尾使用更新後的 JP PUMP Logo", async ({ page }) => {
   await page.goto("/zh-tw");
 
@@ -44,7 +85,7 @@ test("服務頁使用首頁 Hero 圖作為橫幅背景", async ({ page }) => {
 
   const banner = page.locator("main > section").first();
   await expect(banner.locator("img").first()).toHaveAttribute("src", /homepage-hero-taiwan-riverside\.webp/);
-  await expect(banner).toHaveClass(/min-h-\[280px\]/);
+  await expect(banner).toHaveClass(/h-\[320px\]/);
 });
 
 test("主要內頁共用首頁 Hero 圖橫幅", async ({ page }) => {
