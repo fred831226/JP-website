@@ -73,7 +73,8 @@ digest 與 rollback target 後，另取得針對該次 deployment 的明確授�
    `workflow_dispatch` 時，明確選取**候選 branch/ref**，核對 run 的
    `head_sha` 等於候選完整 SHA；不能把預設分支的成功 run 當候選證據。
 5. 確認 Vercel 為同一 commit 建立 immutable Preview。Preview 必須有
-   `noindex, nofollow`、禁止索引的 `robots.txt`、不使用 Production sitemap，並
+   `noindex, nofollow`、禁止索引的 `robots.txt`；**直接讀取 Preview 的
+   `/sitemap.xml`，確認沒有任何 `<loc>`，尤其不得列出 Production 網域**，並
    在需要時受到 Deployment Protection。不可用會隨 branch 移動的 URL 作核准。
 6. 依模式完成 Preview QA：首頁、產品總覽、代表性 series/type、導覽、聯絡動作、
    locale、桌面與手機、404、redirect、圖片、console/network、metadata、canonical、
@@ -105,7 +106,8 @@ digest 與 rollback target 後，另取得針對該次 deployment 的明確授�
 - Preview、evidence、approval、HEAD、Vercel project 或 rollback target 的 immutable
   ID / commit 不一致。
 - Preview 可被索引、污染 Production SEO、無法通過保護機制，或有 Critical/High QA
-  failure。
+  failure。僅檢查 `robots.txt` 不足以證明 sitemap 隔離；Preview sitemap 含正式
+  網域 `<loc>` 也屬 blocker。
 - Production domain、HTTPS、www redirect、GitHub branch protection、Vercel Root
   Directory、environment scope 或 rollback target 尚未核對。
 - 沒有針對本次 immutable deployment 的 Production 授權。
