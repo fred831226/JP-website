@@ -12,7 +12,8 @@ test("21 public cards are crawlable and sitemap excludes retired series routes",
   expect(hrefs).not.toContain("/zh-tw/series/2vbsg");
   const sitemap = await (await request.get("/sitemap.xml")).text();
   const sitemapSeries = [...sitemap.matchAll(/<loc>[^<]*\/zh-tw\/series\/[^<]+<\/loc>/g)].map(([value]) => value);
-  expect(sitemapSeries).toHaveLength(21);
+  expect(sitemapSeries).toHaveLength(process.env.VERCEL_ENV === "production" ? 21 : 0);
+  if (process.env.VERCEL_ENV !== "production") expect(sitemap).not.toContain("<loc>");
   expect(sitemap).not.toContain("/zh-tw/series/2vbsg");
   expect(sitemap).not.toMatch(/\/brands\/|\/purposes\/|\/models\//);
   await context.close();

@@ -14,7 +14,7 @@ import {
   verifyPromotionPreconditions,
   verifyRollbackPreconditions,
 } from "../../scripts/release-contract.mjs";
-import { runReleaseCli } from "../../scripts/release.mjs";
+import { assertPreviewPolicy, runReleaseCli } from "../../scripts/release.mjs";
 
 const COMMIT = "0123456789abcdef0123456789abcdef01234567";
 const BASE_COMMIT = "89abcdef0123456789abcdef0123456789abcdef";
@@ -631,6 +631,7 @@ test("evidence CLI derives immutable Preview, rollback, base commit, and noindex
       return {
         xRobotsTag: "noindex, nofollow",
         robotsText: "User-agent: *\nDisallow: /\n",
+        sitemapText: '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>',
       };
     },
     getContentSnapshots: async () => ({ base: {}, current: {} }),
@@ -664,6 +665,16 @@ test("evidence CLI derives immutable Preview, rollback, base commit, and noindex
   assert.equal(evidence.preview.indexable, false);
   assert.equal(evidence.rollback.deploymentId, ROLLBACK);
   assert.equal(evidence.baseCommit, BASE_COMMIT);
+});
+
+test("Preview policy rejects Production URLs in the Preview sitemap", () => {
+  const policy = {
+    xRobotsTag: "noindex, nofollow",
+    robotsText: "User-agent: *\nDisallow: /\n",
+    sitemapText: '<urlset><url><loc>https://jp-pump.com/zh-tw</loc></url></urlset>',
+  };
+  assert.throws(() => assertPreviewPolicy(policy), /sitemap isolation/i);
+  assert.doesNotThrow(() => assertPreviewPolicy({ ...policy, sitemapText: "<urlset></urlset>" }));
 });
 
 test("evidence generation blocks when the rollback commit is not an ancestor of the candidate", async () => {

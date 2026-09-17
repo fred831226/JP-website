@@ -306,7 +306,8 @@ test.describe("Public smoke tests", () => {
     const sitemapBody = await sitemap.text();
     expect(sitemapBody).not.toContain("/brands/");
     expect(sitemapBody).not.toContain("/purposes/");
-    expect(sitemapBody).toContain("/series/");
+    if (process.env.VERCEL_ENV === "production") expect(sitemapBody).toContain("/series/");
+    else expect(sitemapBody).not.toContain("<loc>");
   });
 
   test("Not found returns 404 page", async ({ page }) => {
