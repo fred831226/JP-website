@@ -29,7 +29,7 @@ test.describe("Public smoke tests", () => {
 
   test("Home page loads with correct title", async ({ page }) => {
     await page.goto(BASE);
-    await expect(page.locator("h1")).toContainText("以扎實經驗，守護每一套泵浦系統");
+    await expect(page.locator("h1")).toContainText("JP PUMP");
   });
 
   test("Header navigation shows all items", async ({ page }) => {
@@ -245,7 +245,7 @@ test.describe("Public smoke tests", () => {
 
   test("Company page loads", async ({ page }) => {
     await page.goto(`${BASE}/company`);
-    await expect(page.locator("h1")).toContainText("公司資訊");
+    await expect(page.locator("h1")).toContainText("關於傑平");
     await expect(page.getByText("台北大巨蛋")).toBeVisible();
     await expect(page.getByText("總經理願景")).toHaveCount(0);
   });

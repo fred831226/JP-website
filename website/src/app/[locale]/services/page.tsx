@@ -1,7 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
-import homeData from "@/data/home.json";
 import services from "@/data/services.json";
+import PageBanner from "@/components/PageBanner";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
@@ -23,21 +22,11 @@ interface Project {
 
 export default function ServicesPage() {
   const projects = services.projects as Project[];
-  const heroImage = homeData.hero.images[0];
   const stats = services.stats;
 
   return (
     <>
-      {/* Service Hero */}
-      <section className="relative flex min-h-[280px] items-center overflow-hidden px-[var(--page-gutter-desktop)] py-14 max-md:min-h-[250px] max-md:px-[var(--page-gutter-mobile)]">
-        <div className="absolute inset-0" aria-hidden="true">
-          <Image src={heroImage} alt="" fill sizes="100vw" loading="eager" className="object-cover object-center" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-primary)]/95 via-[var(--color-primary)]/84 to-[var(--color-primary)]/58" />
-        </div>
-        <div className="relative z-10 mx-auto w-full max-w-[var(--content-max)]">
-          <h1 className="text-[clamp(2.5rem,5vw,4.5rem)] font-[var(--font-heading-lg-weight)] leading-[1.08] text-white">
-            {services.hero.title}
-          </h1>
+      <PageBanner title={services.hero.title} summary={services.hero.summary}>
           <div className="mt-6 flex flex-wrap gap-3">
             {services.hero.capabilities.map((c) => (
               <span
@@ -48,11 +37,7 @@ export default function ServicesPage() {
               </span>
             ))}
           </div>
-          <p className="mt-6 max-w-[var(--text-max)] leading-[var(--font-body-line-height)] text-[var(--color-on-primary)]/80">
-            {services.hero.summary}
-          </p>
-        </div>
-      </section>
+      </PageBanner>
 
       {/* Track record */}
       {stats && (

@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 interface DropdownItem {
@@ -74,18 +73,17 @@ export default function DropdownMenu({ label, items }: DropdownMenuProps) {
           className="absolute left-0 top-full z-50 min-w-[200px] rounded-[var(--floating-layer-radius)] bg-white p-1 shadow-[var(--floating-layer-shadow)]"
         >
           {items.map((item) => (
-            <Link
+            <a
               key={item.id}
               role="menuitem"
               href={item.href}
               className="flex min-h-[44px] items-center rounded-[var(--radius-md)] px-4 text-sm text-[var(--color-text)] hover:bg-[var(--color-surface-subtle)] hover:text-[var(--color-action)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2"
               onClick={() => {
                 close();
-                window.setTimeout(() => window.dispatchEvent(new Event("catalog-location-change")), 0);
               }}
             >
               {item.label}
-            </Link>
+            </a>
           ))}
         </div>
       )}

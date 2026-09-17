@@ -13,6 +13,15 @@ interface CatalogBrowserProps {
   brands: FilterOption[]; pumpTypes: FilterOption[]; purposes: FilterOption[]; series: SeriesMetadata[]; children: ReactNode;
 }
 
+function sameCatalogState(a: CatalogFilterState, b: CatalogFilterState) {
+  return a.brand === b.brand
+    && a.q === b.q
+    && a.types.length === b.types.length
+    && a.types.every((value, index) => value === b.types[index])
+    && a.purposes.length === b.purposes.length
+    && a.purposes.every((value, index) => value === b.purposes[index]);
+}
+
 export default function CatalogBrowser({ brands, pumpTypes, purposes, series, children }: CatalogBrowserProps) {
   const emptyState = normalizeCatalogQuery(new URLSearchParams(), {
     brandIds: brands.map(({ id }) => id), typeIds: pumpTypes.map(({ id }) => id), purposeIds: purposes.map(({ id }) => id),
@@ -29,30 +38,18 @@ export default function CatalogBrowser({ brands, pumpTypes, purposes, series, ch
         typeIds: pumpTypes.map(({ id }) => id),
         purposeIds: purposes.map(({ id }) => id),
       });
-      latestState.current = next;
-      setState(next);
+      if (!sameCatalogState(latestState.current, next)) {
+        latestState.current = next;
+        setState(next);
+      }
       const nextCanonical = catalogHref(next);
       const current = `/zh-tw/products${window.location.search}`;
       if (current !== nextCanonical) window.history.replaceState(window.history.state, "", nextCanonical);
     };
     syncFromLocation();
-    const originalPushState = window.history.pushState;
-    const originalReplaceState = window.history.replaceState;
-    const patchedPushState: History["pushState"] = function (this: History, ...args: Parameters<History["pushState"]>) {
-      originalPushState.apply(this, args);
-      syncFromLocation();
-    };
-    const patchedReplaceState: History["replaceState"] = function (this: History, ...args: Parameters<History["replaceState"]>) {
-      originalReplaceState.apply(this, args);
-      syncFromLocation();
-    };
-    window.history.pushState = patchedPushState;
-    window.history.replaceState = patchedReplaceState;
     window.addEventListener("popstate", syncFromLocation);
     window.addEventListener("catalog-location-change", syncFromLocation);
     return () => {
-      if (window.history.pushState === patchedPushState) window.history.pushState = originalPushState;
-      if (window.history.replaceState === patchedReplaceState) window.history.replaceState = originalReplaceState;
       window.removeEventListener("popstate", syncFromLocation);
       window.removeEventListener("catalog-location-change", syncFromLocation);
     };

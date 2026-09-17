@@ -57,31 +57,39 @@ export default function HomePage() {
         </svg>
 
         <div className="relative z-10 mx-auto flex w-full max-w-[var(--content-max)] justify-end px-[var(--page-gutter-desktop)] py-8 max-md:px-[var(--page-gutter-mobile)]">
-          <div className="w-full max-w-[420px] rounded-l-[8px] border-r-[4px] border-[var(--color-identity-detail)] bg-[var(--color-primary)]/76 p-3 sm:p-4 md:w-[38%]">
-            {hero.kicker && (
-              <p className="mb-2 inline-flex items-center gap-2 text-sm font-[750] text-[#d8c18d]">
-                <span className="kicker-dot" aria-hidden="true" />
-                {hero.kicker}
-              </p>
+          <div className="flex w-full max-w-[500px] flex-col items-end">
+            <h1 className="sr-only">JP PUMP</h1>
+            {hero.companyNameWordmark && (
+              <div className="home-hero-wordmark mb-3 w-[460px] max-w-full">
+                <Image
+                  src={hero.companyNameWordmark.src}
+                  alt={hero.companyNameWordmark.alt}
+                  width={1200}
+                  height={400}
+                  className="h-auto w-full object-contain"
+                />
+              </div>
             )}
-            <h1 className="text-[clamp(2rem,4vw,3.5rem)] font-[800] leading-[1.08] text-[var(--color-on-primary)]">
-              {hero.title}
-            </h1>
-            <p className="mt-3 leading-[var(--font-body-line-height)] text-[var(--color-on-primary)]/85">
-              {hero.subtitle}
-            </p>
-            <Link
-              href={hero.ctaHref}
-              className="mt-3 inline-flex min-h-[44px] items-center font-[800] text-[var(--color-on-primary)] underline decoration-[var(--color-identity-detail)] decoration-2 underline-offset-[6px] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2"
-            >
-              {hero.ctaLabel}
-            </Link>
+            <div className="home-hero-panel w-full max-w-[360px] rounded-l-[8px] border-r-[4px] border-[var(--color-identity-detail)] bg-[var(--color-primary)]/76 p-3 sm:p-4">
+              {hero.kicker && (
+                <p className="mb-2 inline-flex items-center gap-2 text-sm font-[750] text-[#d8c18d]">
+                  <span className="kicker-dot" aria-hidden="true" />
+                  {hero.kicker}
+                </p>
+              )}
+              <Link
+                href={hero.ctaHref}
+                className="mt-3 flex min-h-[44px] w-fit items-center font-[800] text-[var(--color-on-primary)] underline decoration-[var(--color-identity-detail)] decoration-2 underline-offset-[6px] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2"
+              >
+                {hero.ctaLabel}
+              </Link>
 
-            <div className="mt-4 rounded-[8px] bg-white p-3 shadow-[0_12px_32px_rgba(11,42,61,0.12)]">
-              <HeroQuickFilter
-                brands={brands.map((b) => ({ id: b.id, name: b.name }))}
-                purposes={purposes.map((p) => ({ id: p.id, name: p.name }))}
-              />
+              <div className="mt-4 rounded-[8px] bg-white p-3 shadow-[0_12px_32px_rgba(11,42,61,0.12)]">
+                <HeroQuickFilter
+                  brands={brands.map((b) => ({ id: b.id, name: b.name }))}
+                  purposes={purposes.map((p) => ({ id: p.id, name: p.name }))}
+                />
+              </div>
             </div>
           </div>
         </div>
