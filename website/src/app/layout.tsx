@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     default: "傑平有限公司 JP PUMP | 泵浦專業供應與服務",
     template: "%s | 傑平有限公司 JP PUMP",
   },
-  description: "傑平有限公司（JP PUMP）— 專業泵浦選型、供應、安裝、維修與顧問服務。提供經技術驗證的品牌、泵浦類型、應用情境與型號規格資訊。",
+  description: "傑平有限公司（JP PUMP）— 專業泵浦選型、供應、安裝、維修與顧問服務。提供經技術驗證的品牌、泵浦類型與型號規格資訊。",
 };
 
 export const viewport: Viewport = {

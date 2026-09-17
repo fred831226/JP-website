@@ -25,7 +25,7 @@
 
 `xlsx` 僅存在於 development toolchain，不能由公開路由、Vercel runtime 或 CI 觸發匯入。套件固定為 SheetJS 官方 CDN 的 `0.20.3` 發行包，不能退回 npm registry 已凍結的 `0.18.5`；每次升級都要使用官方固定版本 URL、更新 lockfile，並通過完整 dependency audit。即使已修補，workbook 仍是高風險解析輸入：只可在隔離的維護環境處理由 JP PUMP 核准、來源可追溯的 workbook，不得匯入訪客上傳或未知檔案；執行後必須完成全部驗證並只提交 JSON 輸出與對應 release snapshot。替換 workbook parser 前需以同一來源檔驗證欄位型別、公式／日期行為及 22 Series／Model identity 契約。
 
-1. 將核准 Excel 放在 `website/data/source-catalog.xlsx`。主表 G 欄是初始 Pump Type 輸入；舊 `用途` 欄不得改作 Pump Type 或用途標籤。
+1. 將核准 Excel 放在 `website/data/source-catalog.xlsx`。主表 G 欄是初始 Pump Type 輸入；舊 `用途` 欄不得改作任何產品分類，V1 不建立用途標籤或篩選。
 2. 執行 `npm --prefix website run import-catalog`。匯入只更新 importer-owned 技術欄位並原子切換 versioned catalog；不得改寫 stable ID、slug、taxonomy mapping、核准文案或圖片參照。
 3. 檢查 exactly 22 canonical Series（含已核准新增的 Grundfos `UPA`）、完整 stable-key join、每個 Model 唯一分組、VFJH、VFJQ、2VBSG、2CM、2CR(I,N) Booster 與 VF變頻恆壓泵屬變頻恆壓泵、MAGNA3 與 UPA 屬循環泵，以及 `null` 缺值。錯誤或 no-op 不得產生部分發布。
 4. 技術人員的線下覆核人、日期、處置與來源保留在治理資料；公開頁只呈現核准值和公開更新日。

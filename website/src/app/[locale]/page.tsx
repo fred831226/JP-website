@@ -3,7 +3,7 @@ import Image from "next/image";
 import HeroCarousel from "@/components/HeroCarousel";
 import HeroQuickFilter from "@/components/HeroQuickFilter";
 import RevealSection from "@/components/RevealSection";
-import { getBrands, getPurposes } from "@/lib/content/load-catalog";
+import { getBrands, getPumpTypes } from "@/lib/content/load-catalog";
 import contentRaw from "@/data/catalog-content.json";
 import homeData from "@/data/home.json";
 import { createPageMetadata } from "@/lib/seo";
@@ -18,7 +18,7 @@ export const metadata = createPageMetadata({
 export default function HomePage() {
   const { hero, companySummary, projectGallery, gateways, partners } = homeData;
   const brands = getBrands();
-  const purposes = getPurposes();
+  const pumpTypes = getPumpTypes();
 
   return (
     <>
@@ -87,7 +87,7 @@ export default function HomePage() {
               <div className="mt-4 rounded-[8px] bg-white p-3 shadow-[0_12px_32px_rgba(11,42,61,0.12)]">
                 <HeroQuickFilter
                   brands={brands.map((b) => ({ id: b.id, name: b.name }))}
-                  purposes={purposes.map((p) => ({ id: p.id, name: p.name }))}
+                  pumpTypes={pumpTypes.map((type) => ({ id: type.id, name: type.name }))}
                 />
               </div>
             </div>
@@ -161,7 +161,7 @@ export default function HomePage() {
       )}
 
       {/* ================================================================
-          Purpose Cards — radial-glow bg, reveal with stagger delays
+          Product Type Cards — radial-glow bg, reveal with stagger delays
           ================================================================ */}
       {content.homepagePumpTypes.length > 0 && (
         <section className="relative overflow-hidden" style={{ background: "radial-gradient(ellipse 62% 50% at 85% -2%,rgba(0,109,143,.1),transparent 60%),var(--color-background)" }}>
@@ -170,7 +170,7 @@ export default function HomePage() {
               <div className="mb-8 max-w-[500px]">
                 <p className="mb-2 text-xs font-[800] tracking-[0.08em] text-[var(--color-action)]">PRODUCT USES</p>
                 <h2 className="text-[var(--font-heading-lg-size)] font-[var(--font-heading-lg-weight)] leading-[var(--font-heading-lg-line-height)] text-[var(--color-primary)]">
-                  依產品用途找到合適系列
+                  依產品類別找到合適系列
                 </h2>
               </div>
             </RevealSection>
@@ -179,9 +179,9 @@ export default function HomePage() {
                 <RevealSection key={pt.seriesId} delayMs={i * 80} className={i < 6 ? `rv-d${i + 1}` : ""}>
                   <Link
                     href={`/zh-tw/products?type=${pt.pumpTypeId}`}
-                    className="purpose-card group relative flex flex-col overflow-hidden rounded-[var(--product-card-radius)] border border-transparent bg-white shadow-[var(--product-card-shadow)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2"
+                    className="product-type-card group relative flex flex-col overflow-hidden rounded-[var(--product-card-radius)] border border-transparent bg-white shadow-[var(--product-card-shadow)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2"
                   >
-                    <div className="purpose-card-media relative h-[280px] bg-[var(--color-surface-subtle)] sm:h-[340px]">
+                    <div className="product-type-card-media relative h-[280px] bg-[var(--color-surface-subtle)] sm:h-[340px]">
                       {pt.silhouette && (
                         <Image src={pt.silhouette} alt="" fill sizes="(min-width: 768px) 33vw, 100vw" className="object-contain px-5 pt-5 pb-20 transition-transform duration-300 group-hover:scale-105" />
                       )}
@@ -189,7 +189,7 @@ export default function HomePage() {
                       <span className="absolute inset-x-12 bottom-3 z-[2] text-center text-[var(--font-heading-sm-size)] font-[var(--font-heading-sm-weight)] leading-[var(--font-heading-sm-line-height)] !text-white drop-shadow-[0_2px_8px_rgba(0,0,0,.72)]" style={{ color: "#fff" }}>
                         {pt.name}
                       </span>
-                      <span className="purpose-arrow-hover absolute bottom-2 right-5 z-[2] text-2xl text-white/85 transition-all duration-300 group-hover:text-white" aria-hidden="true">→</span>
+                      <span className="product-type-arrow-hover absolute bottom-2 right-5 z-[2] text-2xl text-white/85 transition-all duration-300 group-hover:text-white" aria-hidden="true">→</span>
                     </div>
                   </Link>
                 </RevealSection>

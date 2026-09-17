@@ -41,13 +41,10 @@ const NUMERIC_SPEC_FIELDS = new Set(["horsepower_hp", "power_kw", "rated_head_m"
 // its contractual header prevents numeric data from being silently relabelled
 // when a workbook column is inserted, swapped, or renamed.
 const MAIN_HEADER_CONTRACT = new Map([
-  [0, "品牌"], [1, "產品系列"], [2, "產品名稱"], [3, "型號"], [4, "產品識別碼"], [5, "用途"], [6, "泵浦類型"],
+  [0, "品牌"], [1, "產品系列"], [2, "產品名稱"], [3, "型號"], [4, "產品識別碼"], [6, "泵浦類型"],
   [7, "馬力_HP"], [8, "功率_kW"], [9, "入口口徑_inch"], [10, "出口口徑_inch"], [12, "額定揚程_m"], [14, "最高揚程_m"], [15, "全揚程_m"],
   [17, "額定水量_Lmin"], [19, "最大水量_Lmin"], [23, "電源"], [36, "重量_kg"], [39, "來源PDF"], [40, "資料狀態"],
-  [41, "用途標籤1"], [42, "用途標籤2"], [43, "用途標籤3"], [44, "用途標籤4"], [45, "用途標籤5"], [46, "用途標籤6"], [47, "用途標籤7"], [48, "用途標籤8"],
 ]);
-
-const purposeTagCols = [41, 42, 43, 44, 45, 46, 47, 48];
 
 // normalize series names for cross-sheet matching
 const SERIES_KEY_NORMALIZE = {
@@ -187,16 +184,13 @@ async function run() {
   }
   const governanceMap = new Map();
   for (const entry of governance.series) {
-    const allowedFields = new Set(["id", "purposeTags", "published"]);
+    const allowedFields = new Set(["id", "published"]);
     const unknownFields = Object.keys(entry).filter((field) => !allowedFields.has(field));
     if (!entry.id || unknownFields.length > 0) {
       throw new Error(`catalog-overview-governance.json: invalid entry "${entry.id || "(missing id)"}"${unknownFields.length ? `; unknown fields: ${unknownFields.join(", ")}` : ""}`);
     }
     if (governanceMap.has(entry.id)) {
       throw new Error(`catalog-overview-governance.json: duplicate series id "${entry.id}"`);
-    }
-    if (entry.purposeTags !== undefined && (!Array.isArray(entry.purposeTags) || entry.purposeTags.some((tag) => !sv(tag)))) {
-      throw new Error(`catalog-overview-governance.json: series "${entry.id}" has invalid purposeTags`);
     }
     if (entry.published !== undefined && entry.published !== "是") {
       throw new Error(`catalog-overview-governance.json: series "${entry.id}" has invalid published value "${entry.published}"`);
@@ -240,13 +234,6 @@ async function run() {
         : toNullIfEmpty(row[col]);
     }
 
-    // Gather purpose tags
-    const tags = [];
-    for (const c of purposeTagCols) {
-      const t = sv(row[c]);
-      if (t) tags.push(t);
-    }
-
     // Source & review status
     const sourceRef = sv(row[39] || "");
     const dataStatus = sv(row[40] || "");
@@ -264,7 +251,6 @@ async function run() {
         seriesName,
         pumpType,
         productName: sv(row[2] || ""),
-        purposeTags: new Set(),
         models: [],
         sourceRow,
       });
@@ -276,8 +262,6 @@ async function run() {
     if (entry.models.some((model) => model.id === ident || model.name === modelName)) {
       throw new Error(`${MAIN_SHEET}!D${sourceRow}: duplicate model "${modelName}" or identifier "${ident}" in series "${seriesName}"`);
     }
-    tags.forEach((t) => entry.purposeTags.add(t));
-
     entry.models.push({
       id: ident || modelName,
       name: modelName,
@@ -296,7 +280,6 @@ async function run() {
     const ovBrandCol = ovColOf["\u54c1\u724c"];
     const ovSeriesCol = ovColOf["\u7522\u54c1\u7cfb\u5217"];
     const ovTypeCol = ovColOf["\u6cf5\u6d66\u985e\u578b"];
-    const ovPurposesCol = ovColOf["\u7528\u9014\u6a19\u7c64"] ?? ovColOf["\u7528\u9014"];
     const ovHeadMinCol = ovColOf["\u63da\u7a0b\u6700\u5c0f\u503c_m"] ?? ovColOf["\u63da\u7a0b\u6700\u5c0f\u503c"];
     const ovHeadMaxCol = ovColOf["\u63da\u7a0b\u6700\u5927\u503c_m"] ?? ovColOf["\u63da\u7a0b\u6700\u5927\u503c"];
     const ovFlowMinCol = ovColOf["\u6c34\u91cf\u6700\u5c0f\u503c_Lmin"] ?? ovColOf["\u6c34\u91cf\u6700\u5c0f\u503c"];
@@ -329,11 +312,7 @@ async function run() {
         throw new Error(`${OVERVIEW_SHEET}!B${sourceRow}: duplicate series "${ovSeries}"`);
       }
 
-      const purposeStr = ovPurposesCol !== undefined ? sv(row[ovPurposesCol]) : "";
-      const purposeTags = purposeStr ? purposeStr.split(/[,，、\u002f\u3001]/).map((t) => t.trim()).filter(Boolean) : [];
-
       overviewMap.set(ovKey, {
-        purposeTags,
         headMin: ovHeadMinCol !== undefined ? decimalOrNull(row[ovHeadMinCol], `source-catalog.xlsx | ${OVERVIEW_SHEET}!${xlsx.utils.encode_col(ovHeadMinCol)}${sourceRow}`, "揚程最小值_m") : null,
         headMax: ovHeadMaxCol !== undefined ? decimalOrNull(row[ovHeadMaxCol], `source-catalog.xlsx | ${OVERVIEW_SHEET}!${xlsx.utils.encode_col(ovHeadMaxCol)}${sourceRow}`, "揚程最大值_m") : null,
         flowMin: ovFlowMinCol !== undefined ? decimalOrNull(row[ovFlowMinCol], `source-catalog.xlsx | ${OVERVIEW_SHEET}!${xlsx.utils.encode_col(ovFlowMinCol)}${sourceRow}`, "水量最小值_Lmin") : null,
@@ -365,11 +344,6 @@ async function run() {
     const canonicalId = sourceId;
     const governed = governanceMap.get(canonicalId) ?? governanceMap.get(sourceId);
     if (governed) usedGovernanceIds.add(sourceId);
-    const purposeTags = ov?.purposeTags?.length
-      ? ov.purposeTags
-      : governed?.purposeTags?.length
-        ? governed.purposeTags
-        : [...s.purposeTags].sort();
     const entry = canonicalSeries.get(canonicalId) ?? {
       id: canonicalId,
       brandId: s.brandId,
@@ -377,7 +351,6 @@ async function run() {
       sourceSeriesName: s.seriesName,
       productName: s.productName,
       pumpType: s.pumpType,
-      purposeTags: new Set(),
       headMin: null,
       headMax: null,
       flowMin: null,
@@ -388,7 +361,6 @@ async function run() {
     if (entry.brandId !== s.brandId || entry.pumpType !== s.pumpType) {
       throw new Error(`${MAIN_SHEET}!B${s.sourceRow}: canonical series "${entry.name}" has inconsistent brand or pump type`);
     }
-    purposeTags.forEach((tag) => entry.purposeTags.add(tag));
     entry.headMin = mergeRange(entry.headMin, filterOverview?.headMin ?? ov?.headMin ?? null, "min");
     entry.headMax = mergeRange(entry.headMax, filterOverview?.headMax ?? ov?.headMax ?? null, "max");
     entry.flowMin = mergeRange(entry.flowMin, filterOverview?.flowMin ?? ov?.flowMin ?? null, "min");
@@ -401,11 +373,11 @@ async function run() {
 
   const generatedSeries = [...canonicalSeries.values()].map((entry) => ({
     id: entry.id, brandId: entry.brandId, name: entry.name, sourceSeriesName: entry.sourceSeriesName,
-    productName: entry.productName, pumpType: entry.pumpType, purposeTags: [...entry.purposeTags],
+    productName: entry.productName, pumpType: entry.pumpType,
     modelCount: entry.models.length, models: entry.models,
   }));
   const overviewSeries = [...canonicalSeries.values()].map((entry) => ({
-    id: entry.id, brandId: entry.brandId, purposeTags: [...entry.purposeTags],
+    id: entry.id, brandId: entry.brandId,
     headMin: entry.headMin, headMax: entry.headMax, flowMin: entry.flowMin, flowMax: entry.flowMax,
     modelCount: entry.models.length, published: entry.published,
   }));

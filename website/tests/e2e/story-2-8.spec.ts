@@ -28,6 +28,12 @@ test("Product card has classification, complete ranges, and one canonical link",
   await expect(card.locator("a")).toHaveCount(0);
 });
 
+test("fractional nonzero specifications never display as zero", async ({ page }) => {
+  await page.goto(`${base}/series/cv`);
+  await expect(page.locator("tbody")).toContainText("小於 1");
+  await expect(page.locator("tbody")).not.toContainText("0 kW");
+});
+
 test("approved Grundfos UPA is filterable, routable, and shows four voltage models with governed media", async ({ page }) => {
   await page.goto(`${base}/products?type=circulator-pump`);
   await expect(page.getByTestId("catalog-result-count")).toHaveText("共 2 個產品系列");
@@ -40,6 +46,8 @@ test("approved Grundfos UPA is filterable, routable, and shows four voltage mode
   await expect(page.getByRole("heading", { level: 1, name: "UPA" })).toBeVisible();
   await expect(page.getByText("循環泵", { exact: true })).toBeVisible();
   await expect(page.locator("tbody tr")).toHaveCount(4);
+  await expect(page.locator("tbody")).toContainText("58");
+  await expect(page.locator("tbody")).not.toContainText("58.333");
   for (const model of ["UPA 15-90 110V", "UPA 15-90 220V", "UPA 120 110V", "UPA 120 220V"]) {
     await expect(page.getByText(model, { exact: true })).toBeVisible();
   }
@@ -53,7 +61,8 @@ test("Series content follows the required reading order and public review bounda
   await expect(page.getByText("最後更新：2026-08-21", { exact: true })).toBeVisible();
   expect(await page.locator("body").innerText()).not.toContain("Fred");
   const order = await page.locator("[data-series-section]").evaluateAll((nodes) => nodes.map((node) => node.getAttribute("data-series-section")));
-  expect(order).toEqual(["suitability", "media", "key-data", "introduction", "models", "purposes", "actions"]);
+  expect(order).toEqual(["suitability", "media", "key-data", "introduction", "models", "classification", "actions"]);
+  await expect(page.getByLabel("用途標籤")).toHaveCount(0);
 });
 
 test("VFJH、VFJQ 各有獨立系列頁與規格表，而 2VBSG 已下架", async ({ page }) => {
@@ -85,16 +94,16 @@ test("filter changes are immediate, latest-state safe, selected, counted, and an
   await expect(page.getByRole("status")).toContainText("1");
 });
 
-test("duplicate or invalid Brand queries reset to all without losing valid Type and Purpose", async ({ page }) => {
+test("duplicate or invalid Brand queries reset to all without losing valid Type", async ({ page }) => {
   await page.goto(`${base}/products?brand=grundfos&brand=grundfos&brand=invalid&type=horizontal-pump&purpose=一般工業用水`);
   await expect.poll(() => new URL(page.url()).searchParams.getAll("brand")).toEqual([]);
-  await expect(page).toHaveURL(/\/zh-tw\/products\?type=horizontal-pump&purpose=/);
+  await expect(page).toHaveURL(`${base}/products?type=horizontal-pump`);
   await expect(page.getByRole("button", { name: "全部", exact: true })).toHaveAttribute("aria-pressed", "true");
   await expect(page.getByRole("group", { name: "泵浦類型" }).getByRole("button", { name: "臥式泵" })).toHaveAttribute("aria-pressed", "true");
-  await expect(page.getByRole("group", { name: "用途" }).getByRole("button", { name: "一般工業用水" })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByRole("group", { name: "用途" })).toHaveCount(0);
 });
 
-test("keyboard search and rapid Type/Purpose changes preserve focus and every selected condition", async ({ page }) => {
+test("keyboard search and Type changes preserve focus and the selected condition", async ({ page }) => {
   await page.goto(`${base}/products`);
   const search = page.getByRole("textbox", { name: "搜尋" });
   await search.focus();
@@ -103,12 +112,10 @@ test("keyboard search and rapid Type/Purpose changes preserve focus and every se
   await expect(page).toHaveURL(/q=HS/);
   await expect(search).toBeFocused();
   const type = page.getByRole("group", { name: "泵浦類型" }).getByRole("button", { name: "沉水式揚水泵" });
-  const purpose = page.getByRole("group", { name: "用途" }).getByRole("button", { name: "大樓揚水" });
   await type.click();
-  await purpose.click();
-  await expect(page).toHaveURL(/q=HS.*type=submersible-well-pump.*purpose=|type=submersible-well-pump.*purpose=.*q=HS/, { timeout: 10_000 });
+  await expect(page).toHaveURL(/q=HS.*type=submersible-well-pump|type=submersible-well-pump.*q=HS/);
   await expect(type).toHaveAttribute("aria-pressed", "true");
-  await expect(purpose).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByRole("group", { name: "用途" })).toHaveCount(0);
 });
 
 test("catalog search input has a 44 by 44 CSS px touch target", async ({ page }) => {
@@ -123,7 +130,8 @@ test("empty results preserve conditions and provide recovery actions", async ({ 
   await page.goto(`${base}/products?brand=grundfos&type=submersible-well-pump&q=definitely-no-match`);
   const empty = page.getByTestId("catalog-empty-state");
   await expect(empty).toBeVisible();
-  await expect(page.getByRole("button", { name: "移除品牌條件" })).toBeVisible();
+  await expect(page.getByRole("group", { name: "品牌" }).getByRole("button", { name: "Grundfos 葛蘭富" })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByRole("button", { name: /移除.*條件/ })).toHaveCount(0);
   await expect(empty.getByRole("button", { name: "重設全部條件" })).toBeVisible();
   await expect(empty.getByRole("link", { name: /聯絡/ })).toHaveAttribute("href", "/zh-tw/contact");
 });

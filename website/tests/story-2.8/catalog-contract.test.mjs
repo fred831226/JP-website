@@ -42,12 +42,11 @@ function candidateFixture(label = "candidate") {
         name: label,
         productName: label,
         pumpType: "臥式泵",
-        purposeTags: [],
         modelCount: 0,
         models: [],
       })),
     },
-    overview: { series: Array.from({ length: 22 }, (_, index) => ({ id: `series-${index}`, brandId: "jp-pump", purposeTags: [], headMin: null, headMax: null, flowMin: null, flowMax: null, modelCount: 0, published: null })) },
+    overview: { series: Array.from({ length: 22 }, (_, index) => ({ id: `series-${index}`, brandId: "jp-pump", headMin: null, headMax: null, flowMin: null, flowMax: null, modelCount: 0, published: null })) },
   };
 }
 

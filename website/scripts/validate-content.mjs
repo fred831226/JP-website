@@ -46,9 +46,8 @@ const overviewGovernancePath = resolve(ROOT, "data", "catalog-overview-governanc
 const sourceCatalogPath = resolve(ROOT, "data", "source-catalog.xlsx");
 const brandsPath = resolve(ROOT, "src", "data", "catalog-brands.json");
 const typesPath = resolve(ROOT, "src", "data", "catalog-types.json");
-const purposesPath = resolve(ROOT, "src", "data", "catalog-purposes.json");
 
-for (const [label, p] of [["generated", genPath], ["public-generated", publicGenPath], ["content", contentPath], ["public-content", publicContentPath], ["overview", overviewPath], ["public-overview", publicOverviewPath], ["overview-governance", overviewGovernancePath], ["source-catalog", sourceCatalogPath], ["brands", brandsPath], ["types", typesPath], ["purposes", purposesPath]]) {
+for (const [label, p] of [["generated", genPath], ["public-generated", publicGenPath], ["content", contentPath], ["public-content", publicContentPath], ["overview", overviewPath], ["public-overview", publicOverviewPath], ["overview-governance", overviewGovernancePath], ["source-catalog", sourceCatalogPath], ["brands", brandsPath], ["types", typesPath]]) {
   if (!p || !existsSync(p)) err("N/A", label, "file", `Missing file: ${p ?? "selected release"}`);
 }
 
@@ -80,6 +79,20 @@ const homepagePumpTypeNames = content.homepagePumpTypes?.map((type) => type.name
 
 for (const [file, records] of [["catalog.generated.json", gen.series], ["catalog-content.json", content.series], ["catalog-overview.json", overview.series]]) {
   if (!Array.isArray(records) || records.length !== CANONICAL_SERIES_COUNT) err(file, "series", "cardinality", `Must contain exactly ${CANONICAL_SERIES_COUNT} canonical Series`);
+}
+for (const [file, records] of [
+  ["catalog.generated.json", gen.series],
+  ["src/data/catalog.generated.json", publicGen.series],
+  ["catalog-content.json", content.series],
+  ["src/data/catalog-content.json", publicContent.series],
+  ["catalog-overview.json", overview.series],
+  ["src/data/catalog-overview.json", publicOverview.series],
+]) {
+  for (const record of records ?? []) {
+    if (Object.hasOwn(record, "purposeTags") || Object.hasOwn(record, "purposeIds")) {
+      err(file, record.id ?? "(unknown series)", "classification", "Purpose tags and IDs are not part of the V1 catalog contract");
+    }
+  }
 }
 if (overviewGovernance.review?.reviewer !== "Fred" || overviewGovernance.review?.reviewDate !== "2026-08-21" || overviewGovernance.review?.publicLastUpdatedDate !== "2026-08-21") {
   err("catalog-overview-governance.json", "review", "boundary", "Internal reviewer/date and public last-updated date must match the approved 2026-08-21 baseline");
@@ -149,10 +162,9 @@ const decimalRange = (value, file, record, field) => {
   return normalized;
 };
 const governedMainHeaders = new Map([
-  [0, "品牌"], [1, "產品系列"], [2, "產品名稱"], [3, "型號"], [4, "產品識別碼"], [5, "用途"], [6, "泵浦類型"],
+  [0, "品牌"], [1, "產品系列"], [2, "產品名稱"], [3, "型號"], [4, "產品識別碼"], [6, "泵浦類型"],
   [7, "馬力_HP"], [8, "功率_kW"], [9, "入口口徑_inch"], [10, "出口口徑_inch"], [12, "額定揚程_m"], [14, "最高揚程_m"], [15, "全揚程_m"],
   [17, "額定水量_Lmin"], [19, "最大水量_Lmin"], [23, "電源"], [36, "重量_kg"], [39, "來源PDF"], [40, "資料狀態"],
-  [41, "用途標籤1"], [42, "用途標籤2"], [43, "用途標籤3"], [44, "用途標籤4"], [45, "用途標籤5"], [46, "用途標籤6"], [47, "用途標籤7"], [48, "用途標籤8"],
 ]);
 const governedMainNumericFields = new Map([
   [7, "horsepower_hp"], [8, "power_kw"], [12, "rated_head_m"], [14, "max_head_m"],
@@ -229,8 +241,6 @@ if (!sourceOverviewSheet) {
       if (!main) err("source-catalog.xlsx", `${seriesName}@overview-row${sourceRow}`, "產品系列", "Overview series is missing from main sheet");
       else if (main.pumpType !== pumpType) err("source-catalog.xlsx", `${seriesName}@overview-row${sourceRow}`, "泵浦類型", `Overview value "${pumpType}" does not match main sheet "${main.pumpType}"`);
       const record = {
-        purpose: text(row[column["用途標籤"] ?? column["用途"]]),
-        purposeTags: text(row[column["用途標籤"] ?? column["用途"]]).split(/[,，、/]/).map((value) => value.trim()).filter(Boolean),
         headMin: column["揚程最小值_m"] !== undefined ? decimalRange(row[column["揚程最小值_m"]], "source-catalog.xlsx", `網頁_產品總覽!${xlsx.utils.encode_col(column["揚程最小值_m"])}${sourceRow}`, "揚程最小值_m") : null,
         headMax: column["揚程最大值_m"] !== undefined ? decimalRange(row[column["揚程最大值_m"]], "source-catalog.xlsx", `網頁_產品總覽!${xlsx.utils.encode_col(column["揚程最大值_m"])}${sourceRow}`, "揚程最大值_m") : null,
         flowMin: column["水量最小值_Lmin"] !== undefined ? decimalRange(row[column["水量最小值_Lmin"]], "source-catalog.xlsx", `網頁_產品總覽!${xlsx.utils.encode_col(column["水量最小值_Lmin"])}${sourceRow}`, "水量最小值_Lmin") : null,
@@ -241,7 +251,6 @@ if (!sourceOverviewSheet) {
       const existing = excelOverview.get(key);
       if (existing && key !== "jp-pump|VBSG") err("source-catalog.xlsx", `${seriesName}@overview-row${sourceRow}`, "產品系列", "Duplicate overview series");
       if (existing) {
-        existing.purposeTags = [...new Set([...existing.purposeTags, ...record.purposeTags])];
         for (const [field, mode] of [["headMin", "min"], ["headMax", "max"], ["flowMin", "min"], ["flowMax", "max"]]) {
           if (record[field] == null) continue;
           if (existing[field] == null) existing[field] = record[field];
@@ -360,7 +369,6 @@ for (const generated of overview.series) {
     if (generated[field] !== value) err("catalog-overview.json", generated.id, field, `Value "${generated[field]}" does not match Excel aggregation "${value}"`);
   }
   if (generated.modelCount !== excel.modelCount) err("catalog-overview.json", generated.id, "modelCount", `Value "${generated.modelCount}" does not match Excel "${excel.modelCount}"`);
-  if (JSON.stringify(generated.purposeTags) !== JSON.stringify(excel.purposeTags)) err("catalog-overview.json", generated.id, "purposeTags", "Value does not match Excel");
   const expectedPublished = excel.published || governed?.published || "";
   if ((generated.published ?? "") !== expectedPublished) err("catalog-overview.json", generated.id, "published", "Value does not match the Excel or governed fallback value");
 }
@@ -370,18 +378,16 @@ if (!Array.isArray(overviewGovernance.series)) {
 } else {
   const seenGovernanceIds = new Set();
   for (const entry of overviewGovernance.series) {
-    const allowedFields = new Set(["id", "purposeTags", "published"]);
+    const allowedFields = new Set(["id", "published"]);
     const unknownFields = Object.keys(entry).filter((field) => !allowedFields.has(field));
     if (!entry.id) err("catalog-overview-governance.json", "(missing id)", "id", "Missing series id");
     else if (seenGovernanceIds.has(entry.id)) err("catalog-overview-governance.json", entry.id, "id", "Duplicate series id");
     if (unknownFields.length) err("catalog-overview-governance.json", entry.id || "(missing id)", "fields", `Unknown fields: ${unknownFields.join(", ")}`);
-    if (entry.purposeTags !== undefined && (!Array.isArray(entry.purposeTags) || entry.purposeTags.some((tag) => !text(tag)))) err("catalog-overview-governance.json", entry.id, "purposeTags", "Invalid purposeTags");
     if (entry.published !== undefined && entry.published !== "是") err("catalog-overview-governance.json", entry.id, "published", `Invalid value: ${entry.published}`);
     const generated = gen.series.find((series) => series.id === entry.id);
     if (entry.id && !generated) err("catalog-overview-governance.json", entry.id, "id", "Orphaned governance entry");
     if (generated) {
       const excel = excelOverview.get(`${generated.brandId}|${generated.sourceSeriesName ?? generated.name}`);
-      if (entry.purposeTags !== undefined && excel?.purpose) err("catalog-overview-governance.json", entry.id, "purposeTags", "Governance duplicates an Excel-owned purpose value");
       if (entry.published !== undefined && excel?.published) err("catalog-overview-governance.json", entry.id, "published", "Governance duplicates an Excel-owned published value");
     }
     if (entry.id) seenGovernanceIds.add(entry.id);

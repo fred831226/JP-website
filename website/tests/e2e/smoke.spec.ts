@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 
-const BASE = "http://localhost:3000/zh-tw";
+const ORIGIN = `http://localhost:${process.env.PLAYWRIGHT_PORT ?? "3000"}`;
+const BASE = `${ORIGIN}/zh-tw`;
 
 test.describe("Public smoke tests", () => {
   test("Home page does not expose internal implementation notes", async ({ page }) => {
@@ -14,7 +15,7 @@ test.describe("Public smoke tests", () => {
       "可公開的服務事實待核准",
       "正式區域與能力待核准",
       "正式聯絡流程待核准",
-      "用途名稱、排序與圖片須依正式受控分類核准。點擊整張卡片後前往系列產品頁。",
+      "產品類別名稱、排序與圖片須依正式受控分類核准。點擊整張卡片後前往系列產品頁。",
       "此區負責說明網站的三條主要路徑，不重複 Hero 篩選器。",
       "正式實績照片待核准",
       "來源、使用權與真實性確認後顯示",
@@ -30,6 +31,26 @@ test.describe("Public smoke tests", () => {
   test("Home page loads with correct title", async ({ page }) => {
     await page.goto(BASE);
     await expect(page.locator("h1")).toContainText("JP PUMP");
+  });
+
+  test("首頁快速篩選顯示產品類別並套用類型條件", async ({ page }) => {
+    await page.goto(BASE);
+
+    const typeSelect = page.locator("#qf-type");
+    await expect(page.getByLabel("類別")).toBeVisible();
+    await expect(typeSelect.locator("option")).toHaveText([
+      "全部",
+      "臥式泵",
+      "變頻恆壓泵",
+      "循環泵",
+      "沉水式揚水泵",
+      "沉水式污水泵",
+      "立式揚水泵",
+    ]);
+
+    await typeSelect.selectOption("vertical-multistage-pump");
+    await page.getByRole("button", { name: "搜尋產品" }).click();
+    await expect(page).toHaveURL(`${BASE}/products?type=vertical-multistage-pump`);
   });
 
   test("Header navigation shows all items", async ({ page }) => {
@@ -89,9 +110,9 @@ test.describe("Public smoke tests", () => {
   test("產品首頁顯示六個已核准類型", async ({ page }) => {
     await page.goto(BASE);
     const typeSection = page.locator("section").filter({
-      has: page.getByRole("heading", { name: "依產品用途找到合適系列" }),
+      has: page.getByRole("heading", { name: "依產品類別找到合適系列" }),
     });
-    await expect(typeSection.locator("a.purpose-card")).toHaveCount(6);
+    await expect(typeSection.locator("a.product-type-card")).toHaveCount(6);
     const homepageTypes = [
       ["臥式泵", "horizontal-pump"],
       ["變頻恆壓泵", "variable-frequency-constant-pressure-system"],
@@ -102,7 +123,7 @@ test.describe("Public smoke tests", () => {
     ];
     for (const [name, typeId] of homepageTypes) {
       await expect(typeSection.getByText(name, { exact: true })).toBeVisible();
-      await expect(typeSection.locator("a.purpose-card").filter({ hasText: name })).toHaveAttribute(
+      await expect(typeSection.locator("a.product-type-card").filter({ hasText: name })).toHaveAttribute(
         "href",
         `/zh-tw/products?type=${typeId}`,
       );
@@ -119,19 +140,20 @@ test.describe("Public smoke tests", () => {
     await context.close();
   });
 
-  test("產品查詢會移除舊值、未知值、空值與重複值", async ({ page }) => {
+  test("產品查詢會移除舊值、未知值、空值與多重類型值", async ({ page }) => {
     await page.goto(`${BASE}/products?brand=unknown&type=self-priming-pump&type=&type=sewage-pump&type=sewage-pump&purpose=unknown`);
     await expect(page).toHaveURL(`${BASE}/products?type=sewage-pump`);
-    await expect(page.getByRole("button", { name: "移除泵浦類型條件" }).locator(".."))
-      .toContainText("沉水式污水泵");
+    await expect(page.getByRole("group", { name: "泵浦類型" }).getByRole("button", { name: "沉水式污水泵" }))
+      .toHaveAttribute("aria-pressed", "true");
+    await expect(page.getByRole("button", { name: /移除.*條件/ })).toHaveCount(0);
     await expect(page.getByText("self-priming-pump", { exact: true })).toHaveCount(0);
     await expect(page.locator('a[href="/zh-tw/series/cv"]')).toBeVisible();
     await expect(page.locator('a[href="/zh-tw/series/vbsg"]')).toBeHidden();
 
-    await page.goto(`${BASE}/products?brand=jp-pump&brand=grundfos&type=horizontal-pump`);
-    await expect(page).toHaveURL(`${BASE}/products?type=horizontal-pump`);
-    await expect(page.getByRole("button", { name: "移除品牌條件" })).toHaveCount(0);
-    await expect(page.locator('a[href="/zh-tw/series/vbsg"]')).toBeHidden();
+    await page.goto(`${BASE}/products?brand=jp-pump&brand=grundfos&type=horizontal-pump&type=sewage-pump`);
+    await expect(page).toHaveURL(`${BASE}/products`);
+    await expect(page.getByRole("group", { name: "品牌" }).getByRole("button", { name: "全部", exact: true })).toHaveAttribute("aria-pressed", "true");
+    await expect(page.locator('a[href="/zh-tw/series/vbsg"]')).toBeVisible();
     await expect(page.locator('a[href="/zh-tw/series/grundfos-cm-cme"]')).toBeVisible();
   });
 
@@ -160,30 +182,28 @@ test.describe("Public smoke tests", () => {
     await expect(page.locator('a[href="/zh-tw/series/cv"]')).toBeVisible();
   });
 
-  test("產品類型使用 OR，品牌與類型使用 AND", async ({ page }) => {
+  test("產品類型只能單選，品牌與類型使用 AND", async ({ page }) => {
     await page.goto(`${BASE}/products`);
     const typeGroup = page.getByRole("group", { name: "泵浦類型" });
     await typeGroup.getByRole("button", { name: "臥式泵" }).click();
     await expect(page).toHaveURL(`${BASE}/products?type=horizontal-pump`);
     await typeGroup.getByRole("button", { name: "沉水式污水泵" }).click();
-    await expect(page).toHaveURL(`${BASE}/products?type=horizontal-pump&type=sewage-pump`);
+    await expect(page).toHaveURL(`${BASE}/products?type=sewage-pump`);
     await expect(page.locator('a[href="/zh-tw/series/vbsg"]')).toBeHidden();
     await expect(page.locator('a[href="/zh-tw/series/cv"]')).toBeVisible();
     await expect(page.locator('a[href="/zh-tw/series/hs"]')).toBeHidden();
 
-    await page.getByRole("button", { name: "移除泵浦類型條件" }).first().click();
-    await expect(page).toHaveURL(`${BASE}/products?type=sewage-pump`);
-    await expect(page.locator('a[href="/zh-tw/series/vbsg"]')).toBeHidden();
+    await typeGroup.getByRole("button", { name: "沉水式污水泵" }).click();
+    await expect(page).toHaveURL(`${BASE}/products`);
+    await expect(page.locator('a[href="/zh-tw/series/vbsg"]')).toBeVisible();
     await expect(page.locator('a[href="/zh-tw/series/cv"]')).toBeVisible();
 
     await page.getByRole("group", { name: "品牌" }).getByRole("button", { name: "Grundfos 葛蘭富" }).click();
-    await expect(page).toHaveURL(`${BASE}/products?brand=grundfos&type=sewage-pump`);
+    await expect(page).toHaveURL(`${BASE}/products?brand=grundfos`);
     await expect(page.locator('a[href="/zh-tw/series/grundfos-sc-hc"]')).toBeVisible();
     await expect(page.locator('a[href="/zh-tw/series/cv"]')).toBeHidden();
-    await expect(page.getByRole("button", { name: "移除泵浦類型條件" }).locator(".."))
-      .toContainText("沉水式污水泵");
-    await page.getByRole("button", { name: "移除品牌條件" }).click();
-    await expect(page).toHaveURL(`${BASE}/products?type=sewage-pump`);
+    await page.getByRole("group", { name: "品牌" }).getByRole("button", { name: "Grundfos 葛蘭富" }).click();
+    await expect(page).toHaveURL(`${BASE}/products`);
     await expect(page.locator('a[href="/zh-tw/series/cv"]')).toBeVisible();
   });
 
@@ -267,10 +287,10 @@ test.describe("Public smoke tests", () => {
     await expect(page.locator("h1")).toContainText("產品總覽");
   });
 
-  test("Brand and Purpose remain filters without standalone pages", async ({ page, request }) => {
+  test("Brand remains a filter without a standalone page", async ({ page, request }) => {
     await page.goto(`${BASE}/products`);
     await expect(page.getByRole("group", { name: "品牌" })).toBeVisible();
-    await expect(page.getByRole("group", { name: "用途" })).toBeVisible();
+    await expect(page.getByRole("group", { name: "用途" })).toHaveCount(0);
 
     const brandPage = await page.goto(`${BASE}/brands/jp-pump`);
     expect(brandPage?.status()).toBe(404);
@@ -281,7 +301,7 @@ test.describe("Public smoke tests", () => {
     const purposePage = await page.goto(`${BASE}/purposes/${encodeURIComponent("大樓揚水")}`);
     expect(purposePage?.status()).toBe(404);
 
-    const sitemap = await request.get("http://localhost:3000/sitemap.xml");
+    const sitemap = await request.get(`${ORIGIN}/sitemap.xml`);
     expect(sitemap.ok()).toBeTruthy();
     const sitemapBody = await sitemap.text();
     expect(sitemapBody).not.toContain("/brands/");

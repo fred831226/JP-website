@@ -32,12 +32,11 @@
       { "src": "/media/project-gallery/inline-pump-set.jpg", "alt": "管路中的雙泵設備現場", "sourceFile": "螢幕擷取畫面 2026-09-07 202644.png" }
     ]
   },
-  "purposes": [],
   "gateways": [
     {
       "id": "products",
       "title": "產品總覽",
-      "description": "瀏覽全系列泵浦產品，依品牌、類型或用途快速篩選。",
+      "description": "瀏覽全系列泵浦產品，依品牌與產品類別快速篩選。",
       "href": "/zh-tw/products",
       "background": "/media/gateway-backgrounds/products.jpg",
       "sourceFile": "D:\\JP handoff\\實績\\實績\\明倫公宅\\75447074-4CAA-41C1-AB0C-1E2270AAA553.jpg"

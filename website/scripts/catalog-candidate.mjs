@@ -28,7 +28,7 @@ export function validateCatalogCandidate(candidate, source) {
     }
     if (!series.id || ids.has(series.id)) throw new Error(`${at} | series.id | record ${series.id ?? "(missing)"}: violated rule: unique stable Series id`);
     ids.add(series.id);
-    if (!Array.isArray(series.purposeTags)) throw new Error(`${at} | series.purposeTags | record ${series.id}: violated rule: required Series field`);
+    if (Object.hasOwn(series, "purposeTags") || Object.hasOwn(series, "purposeIds")) throw new Error(`${at} | series.classification | record ${series.id}: Purpose tags and IDs are not part of the V1 catalog contract`);
     if (!Number.isInteger(series.modelCount) || series.modelCount < 0) throw new Error(`${at} | series.modelCount | record ${series.id}: violated rule: required Series field`);
     if (!Array.isArray(series.models)) throw new Error(`${at} | series.models | record ${series.id}: violated rule: Models must be an array`);
     if (series.modelCount !== series.models.length) throw new Error(`${at} | series.modelCount | record ${series.id}: violated rule: declared Model count must match Models`);
@@ -54,9 +54,10 @@ export function validateCatalogCandidate(candidate, source) {
     for (const field of requiredOverviewFields) {
       if (!Object.hasOwn(record ?? {}, field)) throw new Error(`${at} | overview.${field} | record ${record?.id ?? "(missing)"}: violated rule: required Overview field`);
     }
-    if (typeof record.id !== "string" || !record.id || typeof record.brandId !== "string" || !record.brandId || !Array.isArray(record.purposeTags) || record.purposeTags.some((tag) => typeof tag !== "string" || !tag.trim())) {
+    if (typeof record.id !== "string" || !record.id || typeof record.brandId !== "string" || !record.brandId) {
       throw new Error(`${at} | overview | record ${record?.id ?? "(missing)"}: violated rule: required Overview field`);
     }
+    if (Object.hasOwn(record, "purposeTags") || Object.hasOwn(record, "purposeIds")) throw new Error(`${at} | overview.classification | record ${record.id}: Purpose tags and IDs are not part of the V1 catalog contract`);
     if (!Number.isInteger(record.modelCount) || record.modelCount < 0 || record.modelCount === null || record.published === undefined) {
       throw new Error(`${at} | overview | record ${record.id}: violated rule: required Overview field`);
     }

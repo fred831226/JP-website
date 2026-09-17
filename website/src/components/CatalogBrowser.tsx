@@ -7,24 +7,21 @@ import { catalogHref, normalizeCatalogQuery, type CatalogFilterState } from "@/l
 
 interface FilterOption { id: string; name: string }
 interface SeriesMetadata {
-  id: string; brandId: string; name: string; pumpTypeId: string; purposeIds: string[]; modelNames: string[];
+  id: string; brandId: string; name: string; pumpTypeId: string; modelNames: string[];
 }
 interface CatalogBrowserProps {
-  brands: FilterOption[]; pumpTypes: FilterOption[]; purposes: FilterOption[]; series: SeriesMetadata[]; children: ReactNode;
+  brands: FilterOption[]; pumpTypes: FilterOption[]; series: SeriesMetadata[]; children: ReactNode;
 }
 
 function sameCatalogState(a: CatalogFilterState, b: CatalogFilterState) {
   return a.brand === b.brand
+    && a.type === b.type
     && a.q === b.q
-    && a.types.length === b.types.length
-    && a.types.every((value, index) => value === b.types[index])
-    && a.purposes.length === b.purposes.length
-    && a.purposes.every((value, index) => value === b.purposes[index]);
 }
 
-export default function CatalogBrowser({ brands, pumpTypes, purposes, series, children }: CatalogBrowserProps) {
+export default function CatalogBrowser({ brands, pumpTypes, series, children }: CatalogBrowserProps) {
   const emptyState = normalizeCatalogQuery(new URLSearchParams(), {
-    brandIds: brands.map(({ id }) => id), typeIds: pumpTypes.map(({ id }) => id), purposeIds: purposes.map(({ id }) => id),
+    brandIds: brands.map(({ id }) => id), typeIds: pumpTypes.map(({ id }) => id),
   });
   const [state, setState] = useState(emptyState);
   const latestState = useRef(state);
@@ -36,7 +33,6 @@ export default function CatalogBrowser({ brands, pumpTypes, purposes, series, ch
       const next = normalizeCatalogQuery(new URLSearchParams(window.location.search), {
         brandIds: brands.map(({ id }) => id),
         typeIds: pumpTypes.map(({ id }) => id),
-        purposeIds: purposes.map(({ id }) => id),
       });
       if (!sameCatalogState(latestState.current, next)) {
         latestState.current = next;
@@ -53,7 +49,7 @@ export default function CatalogBrowser({ brands, pumpTypes, purposes, series, ch
       window.removeEventListener("popstate", syncFromLocation);
       window.removeEventListener("catalog-location-change", syncFromLocation);
     };
-  }, [brands, pumpTypes, purposes]);
+  }, [brands, pumpTypes]);
 
   const transition = useCallback((update: (previous: CatalogFilterState) => CatalogFilterState) => {
     const next = update(latestState.current);
@@ -66,8 +62,7 @@ export default function CatalogBrowser({ brands, pumpTypes, purposes, series, ch
   const query = state.q.toLowerCase();
   const filtered = series.filter((item) =>
     (!state.brand || item.brandId === state.brand)
-    && (state.types.length === 0 || state.types.includes(item.pumpTypeId))
-    && (state.purposes.length === 0 || state.purposes.every((id) => item.purposeIds.includes(id)))
+    && (!state.type || item.pumpTypeId === state.type)
     && (!query || item.name.toLowerCase().includes(query) || item.id.toLowerCase().includes(query) || item.modelNames.some((name) => name.toLowerCase().includes(query))),
   );
   const visibleIdsKey = filtered.map(({ id }) => id).join("\u0000");
@@ -85,7 +80,7 @@ export default function CatalogBrowser({ brands, pumpTypes, purposes, series, ch
 
   return (
     <div className="flex flex-col gap-6 md:flex-row">
-        <CatalogFilter brands={brands} pumpTypes={pumpTypes} purposes={purposes} state={state} onChange={transition} />
+        <CatalogFilter brands={brands} pumpTypes={pumpTypes} state={state} onChange={transition} />
       <div className="min-w-0 flex-1">
         <p data-testid="catalog-result-count" className="mb-4 text-sm font-[650] text-[var(--color-text)]">共 {filtered.length} 個產品系列</p>
         <p role="status" aria-live="polite" aria-atomic="true" className="sr-only">{announcement}</p>
@@ -94,7 +89,7 @@ export default function CatalogBrowser({ brands, pumpTypes, purposes, series, ch
             <p className="text-lg font-[700] text-[var(--color-primary)]">沒有符合目前條件的產品。</p>
             <p className="mt-2 text-sm text-[var(--color-text-muted)]">目前條件會保留，您可個別移除條件、重設全部條件，或聯絡我們確認需求。</p>
             <div className="mt-4 flex flex-wrap justify-center gap-3">
-              <button type="button" onClick={() => transition(() => ({ brand: null, types: [], purposes: [], q: "" }))} className="inline-flex min-h-[44px] items-center px-4 text-sm font-[650] text-[var(--color-action)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]">重設全部條件</button>
+              <button type="button" onClick={() => transition(() => ({ brand: null, type: null, q: "" }))} className="inline-flex min-h-[44px] items-center px-4 text-sm font-[650] text-[var(--color-action)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]">重設全部條件</button>
               <Link href="/zh-tw/contact" className="inline-flex min-h-[44px] items-center px-4 text-sm font-[650] text-[var(--color-action)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]">聯絡我們</Link>
             </div>
           </div>
