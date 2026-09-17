@@ -25,12 +25,10 @@ const GOVERNED_CONTENT_FILES = [
   "website/data/catalog-overview.json",
   "website/data/catalog.generated.json",
   "website/src/data/catalog-brands.json",
-  "website/src/data/catalog-purposes.json",
   "website/src/data/catalog-types.json",
   "website/src/data/company.json",
   "website/src/data/contact.json",
   "website/src/data/home.json",
-  "website/src/data/navigation.json",
   "website/src/data/partners.json",
   "website/src/data/services.json",
   "website/src/data/site.json",
@@ -64,15 +62,27 @@ async function probePreview(url) {
   // only V1 locale. Probe the canonical public route directly so redirects
   // remain forbidden for the response we treat as release evidence.
   const publicEntry = new URL("/zh-tw", url).toString();
-  const [page, robots] = await Promise.all([
+  const [page, robots, sitemap] = await Promise.all([
     fetch(publicEntry, { headers, redirect: "error" }),
     fetch(`${url}/robots.txt`, { headers, redirect: "error" }),
+    fetch(`${url}/sitemap.xml`, { headers, redirect: "error" }),
   ]);
-  if (!page.ok || !robots.ok) throw new ReleaseContractError("Unable to verify the protected Preview response");
+  if (!page.ok || !robots.ok || !sitemap.ok) throw new ReleaseContractError("Unable to verify the protected Preview response");
   return {
     xRobotsTag: page.headers.get("x-robots-tag") ?? "",
     robotsText: await robots.text(),
+    sitemapText: await sitemap.text(),
   };
+}
+
+export function assertPreviewPolicy(policy) {
+  if (!/\bnoindex\b/i.test(policy.xRobotsTag)
+    || !/^\s*Disallow:\s*\/\s*$/im.test(policy.robotsText)
+    || /^\s*Sitemap:/im.test(policy.robotsText)
+    || typeof policy.sitemapText !== "string"
+    || /<loc\b/i.test(policy.sitemapText)) {
+    throw new ReleaseContractError("Preview live responses did not prove the required non-indexing policy or sitemap isolation");
+  }
 }
 
 function providerDeploymentEvidence(deployment, expectedProjectId) {
@@ -240,11 +250,7 @@ async function generateEvidence(options, dependencies) {
     throw new ReleaseContractError("Rollback commit is not an ancestor of the candidate commit");
   }
   const policy = await dependencies.probePreview(preview.url);
-  if (!/\bnoindex\b/i.test(policy.xRobotsTag)
-    || !/^\s*Disallow:\s*\/\s*$/im.test(policy.robotsText)
-    || /^\s*Sitemap:/im.test(policy.robotsText)) {
-    throw new ReleaseContractError("Preview live responses did not prove the required non-indexing policy");
-  }
+  assertPreviewPolicy(policy);
   const changes = parseGitNameStatus(await dependencies.git([
     "diff", "--name-status", "-z", `${rollback.sourceCommit}...${sourceCommit}`,
   ]));

@@ -1,28 +1,18 @@
 {
   "series": [
     {
-      "id": "jp-pump-vbsg",
+      "id": "jp-pump-2vbsg",
       "brandId": "jp-pump",
-      "purposeTags": [
-        "公寓或大樓頂樓加壓",
-        "免水塔地面直接供水",
-        "美容",
-        "美髮",
-        "SPA 或相關行業之恆壓淋浴設備供水"
-      ],
       "headMin": "15",
       "headMax": "65",
-      "flowMin": "40",
+      "flowMin": "80",
       "flowMax": "400",
-      "modelCount": 33,
+      "modelCount": 28,
       "published": "是"
     },
     {
       "id": "jp-pump-hs",
       "brandId": "jp-pump",
-      "purposeTags": [
-        "大樓揚水"
-      ],
       "headMin": "40",
       "headMax": "200",
       "flowMin": "200",
@@ -33,29 +23,26 @@
     {
       "id": "jp-pump-kh-vbsg",
       "brandId": "jp-pump",
-      "purposeTags": [],
       "headMin": "15",
-      "headMax": "55",
-      "flowMin": "80",
+      "headMax": "60",
+      "flowMin": "40",
       "flowMax": "400",
-      "modelCount": 11,
+      "modelCount": 28,
       "published": "是"
     },
     {
-      "id": "jp-pump-2vbsg",
+      "id": "jp-pump-vbsg",
       "brandId": "jp-pump",
-      "purposeTags": [],
       "headMin": "15",
-      "headMax": "60",
-      "flowMin": "80",
-      "flowMax": "400",
-      "modelCount": 17,
+      "headMax": "30",
+      "flowMin": "40",
+      "flowMax": "100",
+      "modelCount": 5,
       "published": "是"
     },
     {
       "id": "jp-pump-jq",
       "brandId": "jp-pump",
-      "purposeTags": [],
       "headMin": "15",
       "headMax": "25",
       "flowMin": "28",
@@ -66,9 +53,6 @@
     {
       "id": "jp-pump-cv",
       "brandId": "jp-pump",
-      "purposeTags": [
-        "污水"
-      ],
       "headMin": "6",
       "headMax": "30",
       "flowMin": "150",
@@ -79,9 +63,6 @@
     {
       "id": "jp-pump-sn",
       "brandId": "jp-pump",
-      "purposeTags": [
-        "污水"
-      ],
       "headMin": "6",
       "headMax": "38",
       "flowMin": "200",
@@ -92,9 +73,6 @@
     {
       "id": "jp-pump-tp",
       "brandId": "jp-pump",
-      "purposeTags": [
-        "污水"
-      ],
       "headMin": "6",
       "headMax": "8",
       "flowMin": "100",
@@ -105,46 +83,16 @@
     {
       "id": "jp-pump-gp",
       "brandId": "jp-pump",
-      "purposeTags": [
-        "工業系統",
-        "大樓揚水",
-        "空調循環給水",
-        "農業灌溉用水"
-      ],
-      "headMin": null,
-      "headMax": "100",
-      "flowMin": null,
-      "flowMax": "500",
-      "modelCount": 1,
-      "published": "是"
-    },
-    {
-      "id": "jp-pump-y",
-      "brandId": "jp-pump",
-      "purposeTags": [
-        "化工液體",
-        "工業系統",
-        "船舶",
-        "礦山排水",
-        "農業灌溉用水",
-        "釀造食品"
-      ],
-      "headMin": "5",
-      "headMax": "30",
+      "headMin": "11",
+      "headMax": "110",
       "flowMin": "70",
-      "flowMax": "3600",
-      "modelCount": 14,
+      "flowMax": "8500",
+      "modelCount": 54,
       "published": "是"
     },
     {
       "id": "jp-pump-sb-sbi-sbn",
       "brandId": "jp-pump",
-      "purposeTags": [
-        "冷凍及空調",
-        "大樓揚水",
-        "工業系統",
-        "農業灌溉用水"
-      ],
       "headMin": "0",
       "headMax": "280",
       "flowMin": "0",
@@ -155,11 +103,6 @@
     {
       "id": "grundfos-2cm",
       "brandId": "grundfos",
-      "purposeTags": [
-        "大樓揚水",
-        "工業系統",
-        "一般工業用水"
-      ],
       "headMin": "22",
       "headMax": "79",
       "flowMin": "166.66666666666666",
@@ -170,11 +113,6 @@
     {
       "id": "grundfos-2cr-i-n-booster",
       "brandId": "grundfos",
-      "purposeTags": [
-        "大樓揚水",
-        "工業系統",
-        "一般工業用水"
-      ],
       "headMin": "14",
       "headMax": "178",
       "flowMin": "500",
@@ -185,12 +123,6 @@
     {
       "id": "grundfos-cm-cme",
       "brandId": "grundfos",
-      "purposeTags": [
-        "工業系統",
-        "水處理",
-        "冷凍及空調",
-        "大樓揚水"
-      ],
       "headMin": null,
       "headMax": "130",
       "flowMin": null,
@@ -201,12 +133,6 @@
     {
       "id": "grundfos-cr-cri-crn",
       "brandId": "grundfos",
-      "purposeTags": [
-        "大樓揚水",
-        "工業系統",
-        "冷凍及空調",
-        "農業灌溉用水"
-      ],
       "headMin": null,
       "headMax": null,
       "flowMin": null,
@@ -217,10 +143,6 @@
     {
       "id": "grundfos-dwk-dpk",
       "brandId": "grundfos",
-      "purposeTags": [
-        "污水",
-        "工業系統"
-      ],
       "headMin": "5",
       "headMax": "95",
       "flowMin": null,
@@ -231,11 +153,6 @@
     {
       "id": "grundfos-sp-a-sp",
       "brandId": "grundfos",
-      "purposeTags": [
-        "大樓揚水",
-        "農業灌溉用水",
-        "工業系統"
-      ],
       "headMin": null,
       "headMax": null,
       "flowMin": null,
@@ -246,10 +163,6 @@
     {
       "id": "grundfos-sc-hc",
       "brandId": "grundfos",
-      "purposeTags": [
-        "污水",
-        "工業系統"
-      ],
       "headMin": null,
       "headMax": "50",
       "flowMin": null,
@@ -260,10 +173,6 @@
     {
       "id": "grundfos-magna3",
       "brandId": "grundfos",
-      "purposeTags": [
-        "冷凍及空調",
-        "工業系統"
-      ],
       "headMin": null,
       "headMax": null,
       "flowMin": null,
@@ -274,11 +183,6 @@
     {
       "id": "grundfos-hydro-mpc",
       "brandId": "grundfos",
-      "purposeTags": [
-        "大樓揚水",
-        "工業系統",
-        "農業灌溉用水"
-      ],
       "headMin": null,
       "headMax": null,
       "flowMin": null,
@@ -287,34 +191,34 @@
       "published": "是"
     },
     {
-      "id": "grundfos-cl-lf",
-      "brandId": "grundfos",
-      "purposeTags": [
-        "工業系統",
-        "冷凍及空調",
-        "一般工業用水"
-      ],
-      "headMin": null,
-      "headMax": "250",
-      "flowMin": null,
-      "flowMax": "40000",
-      "modelCount": 2,
-      "published": "是"
-    },
-    {
       "id": "grundfos-nb-nbg-nk-nkg-nbe-nbge-nke-nkge",
       "brandId": "grundfos",
-      "purposeTags": [
-        "工業系統",
-        "冷凍及空調",
-        "一般工業用水"
-      ],
       "headMin": "2",
       "headMax": "200",
       "flowMin": "66.7",
       "flowMax": "25000",
       "modelCount": 4,
       "published": null
+    },
+    {
+      "id": "jp-pump-vf",
+      "brandId": "jp-pump",
+      "headMin": null,
+      "headMax": null,
+      "flowMin": null,
+      "flowMax": null,
+      "modelCount": 6,
+      "published": "是"
+    },
+    {
+      "id": "grundfos-upa",
+      "brandId": "grundfos",
+      "headMin": "9",
+      "headMax": "12",
+      "flowMin": "25",
+      "flowMax": "58.3333333333333",
+      "modelCount": 4,
+      "published": "是"
     }
   ]
 }

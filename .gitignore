@@ -14,6 +14,8 @@ website/releases/*
 website/.working/
 !website/releases/d2ef16f4-c324-4ef6-8a99-f823b7f3a590/
 !website/releases/d2ef16f4-c324-4ef6-8a99-f823b7f3a590/**
+!website/releases/60b66f52-a673-41ec-b70e-671000a4fe79/
+!website/releases/60b66f52-a673-41ec-b70e-671000a4fe79/**
 
 # Local AI workflows and planning records; not part of the deployed website.
 .agents/

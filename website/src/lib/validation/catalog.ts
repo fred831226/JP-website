@@ -34,13 +34,6 @@ export const PumpTypeSchema = z.object({
   description: z.string(),
 });
 
-export const PurposeSchema = z.object({
-  id: z.string().min(1),
-  name: z.string().min(1),
-  slug: z.string().min(1),
-  description: z.string(),
-});
-
 export const SeriesSchema = z.object({
   id: z.string().min(1),
   brandId: z.string().min(1),
@@ -51,8 +44,6 @@ export const SeriesSchema = z.object({
   image: z.string().nullable(),
   images: z.array(z.string()),
   pumpTypeId: z.string().min(1),
-  purposeIds: z.array(z.string()),
-  purposeTags: z.array(z.string()),
   headMin: TechnicalDecimal,
   headMax: TechnicalDecimal,
   flowMin: TechnicalDecimal,
@@ -80,13 +71,11 @@ export const SeriesSchema = z.object({
 export const CatalogSchema = z.object({
   brands: z.array(BrandSchema),
   pumpTypes: z.array(PumpTypeSchema),
-  purposes: z.array(PurposeSchema),
   seriesList: z.array(SeriesSchema),
 });
 
 export type Brand = z.infer<typeof BrandSchema>;
 export type PumpType = z.infer<typeof PumpTypeSchema>;
-export type Purpose = z.infer<typeof PurposeSchema>;
 export type Series = z.infer<typeof SeriesSchema>;
 export type Catalog = z.infer<typeof CatalogSchema>;
 export type { Unit };

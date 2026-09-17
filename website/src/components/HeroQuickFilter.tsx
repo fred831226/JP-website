@@ -5,19 +5,19 @@ import { useState } from "react";
 
 interface QuickFilterProps {
   brands: { id: string; name: string }[];
-  purposes: { id: string; name: string }[];
+  pumpTypes: { id: string; name: string }[];
 }
 
-export default function HeroQuickFilter({ brands, purposes }: QuickFilterProps) {
+export default function HeroQuickFilter({ brands, pumpTypes }: QuickFilterProps) {
   const router = useRouter();
   const [brand, setBrand] = useState("");
-  const [purpose, setPurpose] = useState("");
+  const [pumpType, setPumpType] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const params = new URLSearchParams();
     if (brand) params.set("brand", brand);
-    if (purpose) params.set("purpose", purpose);
+    if (pumpType) params.set("type", pumpType);
     const qs = params.toString();
     router.push(`/zh-tw/products${qs ? `?${qs}` : ""}`);
   };
@@ -40,16 +40,16 @@ export default function HeroQuickFilter({ brands, purposes }: QuickFilterProps) 
           </select>
         </div>
         <div className="flex-1">
-          <label htmlFor="qf-purpose" className="block text-xs font-[700] text-[var(--color-primary)]">用途</label>
+          <label htmlFor="qf-type" className="block text-xs font-[700] text-[var(--color-primary)]">類別</label>
           <select
-            id="qf-purpose"
-            value={purpose}
-            onChange={(e) => setPurpose(e.target.value)}
+            id="qf-type"
+            value={pumpType}
+            onChange={(e) => setPumpType(e.target.value)}
             className="mt-1 block w-full min-h-[42px] rounded-[6px] bg-white px-2.5 text-xs shadow-[0_3px_10px_rgba(11,42,61,0.10)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]"
           >
             <option value="">全部</option>
-            {purposes.map((p) => (
-              <option key={p.id} value={p.id}>{p.name}</option>
+            {pumpTypes.map((type) => (
+              <option key={type.id} value={type.id}>{type.name}</option>
             ))}
           </select>
         </div>

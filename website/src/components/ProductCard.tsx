@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Series } from "@/lib/validation/catalog";
+import { formatCatalogRange } from "@/lib/catalog-format";
 
 export default function ProductCard({ series, pumpTypeName, filterable = false }: { series: Series; pumpTypeName: string; filterable?: boolean }) {
-  const range = (min: string | null, max: string | null) => min !== null && max !== null ? `${min}–${max}` : "未提供";
   return (
     <Link
       href={`/zh-tw/series/${series.slug}`}
@@ -19,8 +19,8 @@ export default function ProductCard({ series, pumpTypeName, filterable = false }
         <span className="text-[var(--font-heading-sm-size)] font-[var(--font-heading-sm-weight)] text-[var(--color-primary)]">{series.name}</span>
         <p className="flex-1 text-sm leading-[var(--font-body-line-height)] text-[var(--color-text-muted)]">{series.description}</p>
         <div className="text-xs font-[600] text-[var(--color-action)]">
-          <span>揚程範圍（m）{range(series.headMin, series.headMax)}</span>
-          <span className="ml-2">揚水量範圍（L/min）{range(series.flowMin, series.flowMax)}</span>
+          <span>揚程範圍（m）{formatCatalogRange(series.headMin, series.headMax)}</span>
+          <span className="ml-2">揚水量範圍（L/min）{formatCatalogRange(series.flowMin, series.flowMax)}</span>
         </div>
         <span className="pcat-arrow mt-2 inline-flex min-h-[44px] w-11 self-end items-center justify-center rounded-full text-[var(--color-text-muted)] transition-colors" aria-hidden="true">
           <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

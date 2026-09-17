@@ -1,8 +1,11 @@
 import type { MetadataRoute } from "next";
 import { getPumpTypes, getSeriesList } from "@/lib/content/load-catalog";
+import { classifyDeploymentEnvironment } from "@/lib/deployment-environment";
 import { SITE_ORIGIN } from "@/lib/site-origin.mjs";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  if (!classifyDeploymentEnvironment().isIndexable) return [];
+
   const types = getPumpTypes().map((t) => ({
     url: `${SITE_ORIGIN}/zh-tw/types/${t.slug}`,
     lastModified: new Date(),

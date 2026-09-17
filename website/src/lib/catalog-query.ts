@@ -1,27 +1,16 @@
 export interface CatalogFilterState {
   brand: string | null;
-  types: string[];
-  purposes: string[];
+  type: string | null;
   q: string;
 }
 
 interface CatalogQueryOptions {
   brandIds: string[];
   typeIds: string[];
-  purposeIds: string[];
 }
 
 interface SearchParamsReader {
   getAll(name: string): string[];
-}
-
-function allowedUnique(values: string[], allowed: Set<string>): string[] {
-  const result: string[] = [];
-  for (const value of values) {
-    if (!allowed.has(value) || result.includes(value)) continue;
-    result.push(value);
-  }
-  return result;
 }
 
 export function normalizeCatalogQuery(
@@ -34,18 +23,19 @@ export function normalizeCatalogQuery(
     ? rawBrands[0]
     : null;
 
-  const types = allowedUnique(searchParams.getAll("type").filter(Boolean), new Set(options.typeIds));
-  const purposes = allowedUnique(searchParams.getAll("purpose").filter(Boolean), new Set(options.purposeIds));
+  const rawTypes = [...new Set(searchParams.getAll("type").filter(Boolean))];
+  const typeAllowed = new Set(options.typeIds);
+  const validTypes = rawTypes.filter((value) => typeAllowed.has(value));
+  const type = validTypes.length === 1 ? validTypes[0] : null;
   const q = searchParams.getAll("q").map((value) => value.trim()).find(Boolean) ?? "";
 
-  return { brand, types, purposes, q };
+  return { brand, type, q };
 }
 
 export function catalogHref(state: CatalogFilterState): string {
   const params = new URLSearchParams();
   if (state.brand) params.set("brand", state.brand);
-  for (const type of state.types) params.append("type", type);
-  for (const purpose of state.purposes) params.append("purpose", purpose);
+  if (state.type) params.set("type", state.type);
   if (state.q) params.set("q", state.q);
   const query = params.toString();
   return `/zh-tw/products${query ? `?${query}` : ""}`;

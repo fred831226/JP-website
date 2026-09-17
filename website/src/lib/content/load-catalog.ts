@@ -3,10 +3,9 @@ import "server-only";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
-import { CatalogSchema, type Brand, type PumpType, type Purpose, type Series } from "@/lib/validation/catalog";
+import { CatalogSchema, type Brand, type PumpType, type Series } from "@/lib/validation/catalog";
 import brandsRaw from "@/data/catalog-brands.json";
 import typesRaw from "@/data/catalog-types.json";
-import purposesRaw from "@/data/catalog-purposes.json";
 import contentRaw from "@/data/catalog-content.json";
 import governanceRaw from "../../../data/catalog-overview-governance.json";
 
@@ -16,7 +15,6 @@ type GeneratedSeries = {
   name: string;
   productName: string;
   pumpType: string;
-  purposeTags: string[];
   modelCount: number;
   models: { id: string; name: string; specs: Record<string, string | null> }[];
 };
@@ -35,7 +33,6 @@ type ContentSeries = {
 type OverviewSeries = {
   id: string;
   brandId: string;
-  purposeTags: string[];
   headMin: string | null;
   headMax: string | null;
   flowMin: string | null;
@@ -91,12 +88,6 @@ function pumpTypeIdFor(seriesId: string, pumpType: string): string {
   return id;
 }
 
-// Map purpose tags from overview to governed purpose IDs
-const PURPOSE_TAG_TO_ID: Record<string, string> = {
-  "船舶": "船舶-礦山排水",
-  "礦山排水": "船舶-礦山排水",
-};
-
 function uniqueMap<T extends { id: string }>(records: T[], source: string): Map<string, T> {
   const result = new Map<string, T>();
   for (const record of records) {
@@ -116,11 +107,6 @@ const seriesList: Series[] = generated.series.flatMap((gs) => {
   if (!o) throw new Error(`catalog-overview.json: missing Series id "${gs.id}"`);
   if (c.isPublic === false) return [];
   const ptId = pumpTypeIdFor(gs.id, gs.pumpType);
-  const purposeTags = o.purposeTags;
-  const purposeIds = purposeTags
-    .map((t) => PURPOSE_TAG_TO_ID[t] ?? t.replace(/\s+/g, "-").replace(/[\/]/g, "-"))
-    .filter((id, i, arr) => arr.indexOf(id) === i); // deduplicate
-
   return [{
     id: gs.id,
     brandId: gs.brandId,
@@ -131,8 +117,6 @@ const seriesList: Series[] = generated.series.flatMap((gs) => {
     image: c.image ?? null,
     images: c.images?.length ? c.images : (c.image ? [c.image] : []),
     pumpTypeId: ptId,
-    purposeIds,
-    purposeTags,
     headMin: o.headMin,
     headMax: o.headMax,
     flowMin: o.flowMin,
@@ -153,7 +137,6 @@ const seriesList: Series[] = generated.series.flatMap((gs) => {
 const catalog = CatalogSchema.parse({
   brands: brandsRaw,
   pumpTypes: typesRaw,
-  purposes: purposesRaw,
   seriesList,
 });
 
@@ -171,10 +154,6 @@ export function getPumpType(id: string): PumpType | undefined {
 
 export function getPumpTypeBySlug(slug: string): PumpType | undefined {
   return catalog.pumpTypes.find((t) => t.slug === slug);
-}
-
-export function getPurposes(): Purpose[] {
-  return catalog.purposes;
 }
 
 export function getSeriesList(): Series[] {

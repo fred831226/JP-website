@@ -7,6 +7,7 @@ import RevealSection from "@/components/RevealSection";
 import type { Series } from "@/lib/validation/catalog";
 import PageBanner from "@/components/PageBanner";
 import { createPageMetadata } from "@/lib/seo";
+import { floorCatalogNumber } from "@/lib/catalog-format";
 
 export function generateStaticParams() {
   return getSeriesList().map((s) => ({ slug: s.slug }));
@@ -52,7 +53,7 @@ export default async function SeriesPage({ params }: { params: Promise<{ slug: s
             {[["最小揚程", series.headMin, "m"], ["最大揚程", series.headMax, "m"], ["最小揚水量", series.flowMin, "L/min"], ["最大揚水量", series.flowMax, "L/min"]].map(([label, value, unit]) => (
               <div key={label} className="rounded-[var(--radius-md)] bg-white p-4 shadow-[var(--product-card-shadow)]">
                 <dt className="text-sm text-[var(--color-text-muted)]">{label}</dt>
-                <dd className="mt-1 text-lg font-[700] text-[var(--color-primary)]">{value === null ? "未提供" : `${value} ${unit}`}</dd>
+                <dd className="mt-1 text-lg font-[700] text-[var(--color-primary)]">{floorCatalogNumber(value as string | null) ?? "未提供"}{value === null ? "" : ` ${unit}`}</dd>
               </div>
             ))}
           </dl>
@@ -117,19 +118,14 @@ export default async function SeriesPage({ params }: { params: Promise<{ slug: s
           </section>
         </RevealSection>
 
-        {/* Pump type + Purpose tags（來自網頁_產品總覽 sheet） */}
+        {/* Pump type classification */}
         <RevealSection delayMs={220}>
-          <div data-series-section="purposes" className="mt-6 flex flex-wrap gap-2" aria-label="用途標籤">
+          <div data-series-section="classification" className="mt-6 flex flex-wrap gap-2" aria-label="泵浦類型">
             {pumpType ? (
               <span className="rounded-[var(--radius-xs)] border border-[var(--color-action)] bg-[rgba(0,109,143,.06)] px-2.5 py-1 text-xs font-[650] text-[var(--color-action)]">
                 {pumpType.name}
               </span>
             ) : null}
-            {series.purposeTags.map((tag) => (
-              <span key={tag} className="rounded-[var(--radius-xs)] border border-[var(--color-border)] bg-white px-2.5 py-1 text-xs text-[var(--color-primary)]">
-                {tag}
-              </span>
-            ))}
           </div>
         </RevealSection>
 
@@ -160,14 +156,14 @@ type ModelSpecs = Series["models"][number]["specs"];
 function specValue(specs: ModelSpecs, ...keys: (keyof ModelSpecs)[]): React.ReactNode {
   for (const k of keys) {
     const v = specs[k];
-    if (v != null && v !== "" && v !== "null") return v;
+      if (v != null && v !== "" && v !== "null") return floorCatalogNumber(v) ?? v;
   }
   return <span className="italic text-[var(--color-identity-detail)]">未提供</span>;
 }
 
 function powerValue(specs: ModelSpecs): React.ReactNode {
   const kw = specs["power_kw"];
-  if (kw != null && kw !== "" && kw !== "null") return kw;
+  if (kw != null && kw !== "" && kw !== "null") return floorCatalogNumber(kw) ?? kw;
   return <span className="italic text-[var(--color-identity-detail)]">未提供</span>;
 }
 

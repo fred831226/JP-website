@@ -251,16 +251,16 @@
 }
 
 /* ==========================================================================
-   Purpose card hover
+   Product type card hover
    ========================================================================== */
-.purpose-card {
+.product-type-card {
   transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s, border-color .35s;
 }
-.purpose-card:hover {
+.product-type-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 24px 56px rgba(11, 42, 61, .18), 0 0 0 1px rgba(0, 109, 143, .2);
 }
-.purpose-card:hover .purpose-arrow-hover {
+.product-type-card:hover .product-type-arrow-hover {
   transform: translate(4px, -4px);
 }
 
