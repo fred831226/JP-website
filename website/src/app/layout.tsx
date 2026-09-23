@@ -43,17 +43,27 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Organization",
-              name: "傑平有限公司",
-              alternateName: "JP PUMP",
-              url: SITE_ORIGIN,
-              telephone: "+886-2-2649-6338",
-              contactPoint: {
-                "@type": "ContactPoint",
-                telephone: "+886-2-2649-6338",
-                email: "jie.ping@msa.hinet.net",
-                contactType: "sales",
-              },
+              "@graph": [
+                {
+                  "@type": "WebSite",
+                  name: "傑平泵浦",
+                  alternateName: ["傑平有限公司", "JP PUMP"],
+                  url: SITE_ORIGIN,
+                },
+                {
+                  "@type": "Organization",
+                  name: "傑平有限公司",
+                  alternateName: "JP PUMP",
+                  url: SITE_ORIGIN,
+                  telephone: "+886-2-2649-6338",
+                  contactPoint: {
+                    "@type": "ContactPoint",
+                    telephone: "+886-2-2649-6338",
+                    email: "jie.ping@msa.hinet.net",
+                    contactType: "sales",
+                  },
+                },
+              ],
             }),
           }}
         />

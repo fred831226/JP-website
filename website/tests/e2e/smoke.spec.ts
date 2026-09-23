@@ -33,6 +33,19 @@ test.describe("Public smoke tests", () => {
     await expect(page.locator("h1")).toContainText("JP PUMP");
   });
 
+  test("根站 JSON-LD 以傑平泵浦作為網站名稱並保留公司正式名稱", async ({ page }) => {
+    await page.goto(BASE);
+    const schema = JSON.parse(await page.locator('script#schema-org[type="application/ld+json"]').textContent() ?? "{}");
+    const website = schema["@graph"]?.find((entry: { "@type"?: string }) => entry["@type"] === "WebSite");
+    const organization = schema["@graph"]?.find((entry: { "@type"?: string }) => entry["@type"] === "Organization");
+
+    expect(website).toMatchObject({
+      name: "傑平泵浦",
+      alternateName: ["傑平有限公司", "JP PUMP"],
+    });
+    expect(organization).toMatchObject({ name: "傑平有限公司" });
+  });
+
   test("首頁快速篩選顯示產品類別並套用類型條件", async ({ page }) => {
     await page.goto(BASE);
 
