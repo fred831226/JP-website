@@ -4,6 +4,10 @@ on:
   pull_request:
   workflow_dispatch:
     inputs:
+      gate_run_id:
+        description: Successful pull-request Release gates run ID for this candidate
+        required: true
+        type: string
       preview_deployment:
         description: Immutable Vercel deployment ID
         required: true
@@ -14,23 +18,27 @@ on:
         type: string
 
 permissions:
+  actions: read
   contents: read
 
 concurrency:
-  group: release-gates-${{ github.event.pull_request.number || github.sha }}
+  group: release-${{ github.event.pull_request.number || github.sha }}-${{ github.event_name }}
   cancel-in-progress: true
 
 jobs:
   validate-candidate:
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
+      CANDIDATE_SHA: ${{ github.event.pull_request.head.sha }}
       VERCEL_ENV: preview
     steps:
       - name: Check out the complete candidate
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ env.CANDIDATE_SHA }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -70,7 +78,7 @@ jobs:
           $gateReportPath = Join-Path '${{ runner.temp }}' 'release-gates.json'
           $report = @{
             passed = $true
-            sourceCommit = '${{ github.sha }}'
+            sourceCommit = '${{ env.CANDIDATE_SHA }}'
             gates = @(
               @{ name = 'validate'; passed = $true }
               @{ name = 'audit'; passed = $true }
@@ -82,8 +90,63 @@ jobs:
           }
           $report | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath $gateReportPath -Encoding utf8NoBOM
 
-      - name: Create immutable Preview evidence
-        if: github.event_name == 'workflow_dispatch'
+      - name: Upload gate evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-gates-${{ env.CANDIDATE_SHA }}
+          path: ${{ runner.temp }}/release-gates.json
+          if-no-files-found: error
+          retention-days: 30
+
+  create-evidence:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Verify the referenced pull-request gate run
+        uses: actions/github-script@v7
+        env:
+          GATE_RUN_ID: ${{ inputs.gate_run_id }}
+        with:
+          script: |
+            const runId = Number(process.env.GATE_RUN_ID);
+            if (!Number.isSafeInteger(runId) || runId <= 0) {
+              core.setFailed('gate_run_id must be a positive GitHub Actions run ID');
+              return;
+            }
+            const { data: run } = await github.rest.actions.getWorkflowRun({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: runId,
+            });
+            if (!run.path.endsWith('/release-gates.yml')
+              || run.event !== 'pull_request'
+              || run.status !== 'completed'
+              || run.conclusion !== 'success'
+              || run.head_sha !== context.sha) {
+              core.setFailed('Referenced run is not a successful Release gates PR run for this exact candidate SHA');
+            }
+
+      - name: Check out the exact candidate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.sha }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
+
+      - name: Download the passed gate report
+        uses: actions/download-artifact@v4
+        with:
+          name: release-gates-${{ github.sha }}
+          path: ${{ runner.temp }}/gate-evidence
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ inputs.gate_run_id }}
+
+      - name: Create immutable Preview evidence without rerunning gates
         env:
           RELEASE_PREVIEW_DEPLOYMENT: ${{ inputs.preview_deployment }}
           RELEASE_ROLLBACK_TARGET: ${{ inputs.rollback_target }}
@@ -92,22 +155,13 @@ jobs:
           VERCEL_TEAM_ID: ${{ secrets.VERCEL_TEAM_ID }}
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: >-
-          npm --prefix website run release:evidence --
+          node website/scripts/release.mjs evidence
           --preview-deployment "$RELEASE_PREVIEW_DEPLOYMENT"
           --rollback-target "$RELEASE_ROLLBACK_TARGET"
-          --gates "${{ runner.temp }}/release-gates.json"
+          --gates "${{ runner.temp }}/gate-evidence/release-gates.json"
           --output "${{ runner.temp }}/release-evidence.json"
 
-      - name: Upload gate evidence
-        uses: actions/upload-artifact@v4
-        with:
-          name: release-gates-${{ github.sha }}
-          path: ${{ runner.temp }}/release-gates.json
-          if-no-files-found: error
-          retention-days: 30
-
       - name: Upload release evidence
-        if: github.event_name == 'workflow_dispatch'
         uses: actions/upload-artifact@v4
         with:
           name: release-evidence-${{ github.sha }}
