@@ -15,6 +15,11 @@ export const metadata: Metadata = {
     template: "%s | 傑平有限公司 JP PUMP",
   },
   description: "傑平有限公司（JP PUMP）— 專業泵浦選型、供應、安裝、維修與顧問服務。提供經技術驗證的品牌、泵浦類型與型號規格資訊。",
+  icons: {
+    icon: [{ url: "/favicon.png", type: "image/png", sizes: "512x512" }],
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export const viewport: Viewport = {
