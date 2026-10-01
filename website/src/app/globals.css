@@ -61,21 +61,6 @@
   }
 }
 
-.home-hero-wordmark {
-  animation: home-hero-wordmark-arrive 4s cubic-bezier(.16, 1, .3, 1) .2s both;
-}
-
-@keyframes home-hero-wordmark-arrive {
-  from {
-    opacity: 0;
-    transform: translateX(-32px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 .home-hero-panel {
   animation: home-hero-panel-arrive 4s cubic-bezier(.16, 1, .3, 1) .2s both;
 }
@@ -581,7 +566,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .home-hero-wordmark,
   .home-hero-panel,
   .page-banner-reveal {
     animation: none;

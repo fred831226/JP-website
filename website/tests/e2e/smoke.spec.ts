@@ -41,7 +41,7 @@ test.describe("Public smoke tests", () => {
 
     expect(website).toMatchObject({
       name: "傑平泵浦",
-      alternateName: ["傑平有限公司", "JP PUMP"],
+      alternateName: ["傑平", "傑平有限公司", "JP PUMP"],
     });
     expect(organization).toMatchObject({ name: "傑平有限公司" });
   });

@@ -59,17 +59,6 @@ export default function HomePage() {
         <div className="relative z-10 mx-auto flex w-full max-w-[var(--content-max)] justify-end px-[var(--page-gutter-desktop)] py-8 max-md:px-[var(--page-gutter-mobile)]">
           <div className="flex w-full max-w-[500px] flex-col items-end">
             <h1 className="sr-only">JP PUMP</h1>
-            {hero.companyNameWordmark && (
-              <div className="home-hero-wordmark mb-3 w-[460px] max-w-full">
-                <Image
-                  src={hero.companyNameWordmark.src}
-                  alt={hero.companyNameWordmark.alt}
-                  width={1200}
-                  height={400}
-                  className="h-auto w-full object-contain"
-                />
-              </div>
-            )}
             <div className="home-hero-panel w-full max-w-[360px] rounded-l-[8px] border-r-[4px] border-[var(--color-identity-detail)] bg-[var(--color-primary)]/76 p-3 sm:p-4">
               {hero.kicker && (
                 <p className="mb-2 inline-flex items-center gap-2 text-sm font-[750] text-[#d8c18d]">
