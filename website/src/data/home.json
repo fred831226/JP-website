@@ -1,10 +1,6 @@
 {
   "hero": {
     "kicker": "可靠歷史 · 工程能力 · 快速回應",
-    "companyNameWordmark": {
-      "src": "/media/company-name-horizontal-spaced-transparent.png",
-      "alt": "傑平有限公司"
-    },
     "ctaLabel": "認識我們",
     "ctaHref": "/zh-tw/company",
     "images": ["/media/homepage-hero-taiwan-riverside.webp", "/media/hero-01.jpg", "/media/hero-02.png"]

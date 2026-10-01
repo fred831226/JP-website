@@ -47,7 +47,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 {
                   "@type": "WebSite",
                   name: "傑平泵浦",
-                  alternateName: ["傑平有限公司", "JP PUMP"],
+                  alternateName: ["傑平", "傑平有限公司", "JP PUMP"],
                   url: SITE_ORIGIN,
                 },
                 {

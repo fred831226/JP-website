@@ -12,20 +12,13 @@ test("首頁 Hero 保留精簡搜尋卡片與無障礙主標題", async ({ page 
   await expect(page.getByText("以扎實經驗，守護每一套泵浦系統")).toHaveCount(0);
   await expect(page.getByText("從設備選擇到工程服務，以清楚且可核實的資訊協助客戶找到合適方向。")).toHaveCount(0);
   await expect(page.getByRole("heading", { name: "JP PUMP", level: 1 })).toBeAttached();
-  await expect(page.getByRole("img", { name: "傑平有限公司", exact: true })).toHaveAttribute(
-    "src",
-    /company-name-horizontal-spaced-transparent\.png/,
-  );
+  await expect(page.getByRole("img", { name: "傑平有限公司", exact: true })).toHaveCount(0);
   const heroPanel = page.locator(".home-hero-panel");
   await expect(heroPanel).toHaveCount(1);
   await expect(heroPanel).not.toHaveClass(/md:w-\[32%\]/);
   await expect(heroPanel).toHaveCSS("animation-duration", "4s");
   await expect(heroPanel).toHaveCSS("animation-delay", "0.2s");
-  const wordmark = page.locator(".home-hero-wordmark");
-  await expect(wordmark).toHaveCount(1);
-  await expect(wordmark).toHaveCSS("animation-duration", "4s");
-  await expect(wordmark).toHaveCSS("animation-delay", "0.2s");
-  expect(await wordmark.evaluate((element) => element.closest(".home-hero-panel"))).toBeNull();
+  await expect(page.locator(".home-hero-wordmark")).toHaveCount(0);
   const heroLink = page.getByRole("link", { name: "認識我們" });
   await expect(heroLink).toHaveCSS("display", "flex");
   const kickerBox = await page.getByText("可靠歷史 · 工程能力 · 快速回應").boundingBox();
