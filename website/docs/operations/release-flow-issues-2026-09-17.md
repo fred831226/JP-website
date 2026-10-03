@@ -19,3 +19,11 @@
 | R12 | Vercel CLI 首次將臨時 checkout 連到已核對 project 時，自動產生本機 `.env.local`（含 OIDC token）；原命令文件沒有提醒此副作用。 | 檔案在忽略追蹤的臨時 worktree，未提交或輸出值；清理該 worktree 時須一併移除。 |
 
 第一輪候選 `be47554bab3c3266e2b5c42a7b2b9ef03de594c1` 曾在乾淨 Node 24 checkout 通過 `npm ci`、validate、lint、Preview-shaped build、34 個 release contract tests、48 個 Chromium tests 與 npm audit（0 個漏洞），並建立 PR #6；但其 immutable Preview 因 R11 的 sitemap 問題失效，不得沿用。R11 修正後必須在新 commit 的乾淨 checkout 重跑 Full Release gates、等待新 Preview 與 GitHub checks 並重新 QA。R10 未解前不得 merge；Production promotion 仍需對具體 deployment 的另一次明確授權。
+
+## 2026-09-23 後續核對與流程精簡
+
+| 編號 | 核對結果 | 處理狀態 |
+| --- | --- | --- |
+| R13 | Repository 已由 owner 改為 Public，先前私人 repository 方案造成的 branch protection 403 已解除；但 `main` API 回覆 `Branch not protected`。公開狀態本身不會自動建立保護規則。 | Public 狀態已確認；仍須經 owner 明確授權後啟用 `main` branch protection，required check 應為 GitHub Actions 的 `validate-candidate`。 |
+| R14 | 原 workflow 在 PR 完整跑過 audit、validate、lint、build、release tests 與 Playwright，手動 `workflow_dispatch` 建 evidence 時又全部重跑一次；本機 clean checkout 也要求再跑相同 gates。 | 已改為 PR run 是唯一權威 gate。手動 evidence 必須引用成功 PR `gate_run_id`、驗證同一 SHA 並下載既有 artifact，只執行 deployment/evidence 身分檢查。 |
+| R15 | Vercel API 顯示 project `prj_i5wRQZCh0hmNqt8Pxks1no8t7reh`、Root Directory `website`、Node 24.x、Production Branch `main` 均正確。現行 Production deployment `dpl_HEHy1vgXPnNsdCobuviECuzi55Z8` 是先前從 Preview promotion 產生，source commit 為 `f743bae`。 | 平台設定正確；既有 Production 與 merge commit `845525c` 的 Git tree 相同，不需只為分支名稱 rollback。下一次發布必須由受保護的 `main` 合併候選與 immutable evidence 進行。 |

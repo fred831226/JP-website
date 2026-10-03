@@ -41,6 +41,29 @@ const ROUTE_INVENTORY = {
   ],
 };
 
+test("release evidence reuses the successful PR gate instead of rerunning it", async () => {
+  const workflow = await readFile(
+    new URL("../../../.github/workflows/release-gates.yml", import.meta.url),
+    "utf8",
+  );
+  for (const command of [
+    "npm --prefix website ci",
+    "npm --prefix website audit --audit-level=high",
+    "npm --prefix website run validate",
+    "npm --prefix website run lint",
+    "npm --prefix website run build",
+    "npm --prefix website run test:release",
+    "npm --prefix website test",
+  ]) {
+    assert.equal(workflow.split(command).length - 1, 1, `${command} must run exactly once`);
+  }
+  assert.match(workflow, /gate_run_id:/);
+  assert.match(workflow, /github\.rest\.actions\.getWorkflowRun/);
+  assert.match(workflow, /run\.head_sha !== context\.sha/);
+  assert.match(workflow, /actions\/download-artifact@v4/);
+  assert.match(workflow, /Create immutable Preview evidence without rerunning gates/);
+});
+
 function validEvidence(overrides = {}) {
   return buildReleaseEvidence({
     sourceCommit: COMMIT,
