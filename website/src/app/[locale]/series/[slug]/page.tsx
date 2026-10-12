@@ -13,15 +13,17 @@ export function generateStaticParams() {
   return getSeriesList().map((s) => ({ slug: s.slug }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
+  const { locale, slug } = await params;
+  if (locale !== "zh-tw") return {};
   const series = getSeries(decodeURIComponent(slug));
   if (!series) return {};
   return createPageMetadata({ title: series.name, description: series.description, pathname: `/zh-tw/series/${series.slug}`, image: series.image });
 }
 
-export default async function SeriesPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
+export default async function SeriesPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
+  const { locale, slug } = await params;
+  if (locale !== "zh-tw") notFound();
   const series = getSeries(slug);
   if (!series) notFound();
   const brand = getBrands().find((b) => b.id === series.brandId);

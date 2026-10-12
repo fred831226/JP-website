@@ -3,18 +3,32 @@ import CatalogBrowser from "@/components/CatalogBrowser";
 import ProductCard from "@/components/ProductCard";
 import PageBanner from "@/components/PageBanner";
 import { createPageMetadata } from "@/lib/seo";
+import { englishContent } from "@/lib/content/en";
 
-export const metadata = createPageMetadata({
-  title: "產品總覽",
-  description: "傑平有限公司全系列泵浦產品，依品牌與泵浦類型快速瀏覽。",
-  pathname: "/zh-tw/products",
-});
+const englishPumpTypes: Record<string, string> = {
+  "horizontal-pump": "Horizontal pumps",
+  "variable-frequency-constant-pressure-system": "Variable frequency constant pressure systems",
+  "circulator-pump": "Circulator pumps",
+  "submersible-well-pump": "Submersible well pumps",
+  "sewage-pump": "Submersible sewage pumps",
+  "vertical-multistage-pump": "Vertical multistage pumps",
+};
 
-export default function ProductsPage() {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return locale === "en"
+    ? createPageMetadata({ title: englishContent.products.title, description: englishContent.products.intro, pathname: "/en/products", locale: "en", alternatePathname: "/zh-tw/products" })
+    : createPageMetadata({ title: "產品總覽", description: "傑平有限公司全系列泵浦產品，依品牌與泵浦類型快速瀏覽。", pathname: "/zh-tw/products", alternatePathname: "/en/products" });
+}
+
+export default async function ProductsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = (await params).locale === "en" ? "en" : "zh-tw";
+  const en = locale === "en";
   const brands = getBrands();
   const pumpTypes = getPumpTypes();
   const series = getSeriesList();
-  const pumpTypeNames = new Map(pumpTypes.map(({ id, name }) => [id, name]));
+  const localizedPumpTypes = pumpTypes.map(({ id, name }) => ({ id, name: en ? englishPumpTypes[id] ?? id : name }));
+  const pumpTypeNames = new Map(localizedPumpTypes.map(({ id, name }) => [id, name]));
   const browserSeries = series.map((item) => ({
     id: item.id,
     brandId: item.brandId,
@@ -32,12 +46,13 @@ export default function ProductsPage() {
 
   return (
     <>
-      <PageBanner title="產品總覽" summary="瀏覽全系列泵浦產品，依品牌與泵浦類型快速篩選。" />
+      <PageBanner title={en ? englishContent.products.title : "產品總覽"} summary={en ? englishContent.products.intro : "瀏覽全系列泵浦產品，依品牌與泵浦類型快速篩選。"} />
 
       <section className="mx-auto max-w-[var(--content-max)] px-[var(--page-gutter-desktop)] py-8 max-md:px-[var(--page-gutter-mobile)]">
           <CatalogBrowser
-              brands={brands.map(({ id, name }) => ({ id, name }))}
-              pumpTypes={pumpTypes.map(({ id, name }) => ({ id, name }))}
+              locale={locale}
+              brands={brands.map(({ id, name }) => ({ id, name: en ? (id === "grundfos" ? "Grundfos" : "JP PUMP") : name }))}
+              pumpTypes={localizedPumpTypes}
               series={browserSeries.map(({ id, brandId, name, pumpTypeId, modelNames }) => ({
                 id,
                 brandId,
@@ -46,7 +61,7 @@ export default function ProductsPage() {
                 modelNames,
               }))}
             >
-              {series.map((item) => <ProductCard key={item.id} series={item} pumpTypeName={pumpTypeNames.get(item.pumpTypeId) ?? "未提供"} filterable />)}
+              {series.map((item) => <ProductCard key={item.id} series={item} pumpTypeName={pumpTypeNames.get(item.pumpTypeId) ?? (en ? "Not provided" : "未提供")} englishDescription={englishContent.view.seriesDescriptions[item.id]} locale={locale} filterable />)}
           </CatalogBrowser>
       </section>
     </>

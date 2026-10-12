@@ -2,6 +2,7 @@ import Link from "next/link";
 import services from "@/data/services.json";
 import PageBanner from "@/components/PageBanner";
 import { createPageMetadata } from "@/lib/seo";
+import { notFound } from "next/navigation";
 
 export const metadata = createPageMetadata({
   title: "服務與實績",
@@ -20,7 +21,8 @@ interface Project {
   image?: string;
 }
 
-export default function ServicesPage() {
+export default async function ServicesPage({ params }: { params: Promise<{ locale: string }> }) {
+  if ((await params).locale !== "zh-tw") notFound();
   const projects = services.projects as Project[];
   const stats = services.stats;
 

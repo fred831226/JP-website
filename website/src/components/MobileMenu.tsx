@@ -12,9 +12,10 @@ interface MobileMenuItem {
 
 interface MobileMenuProps {
   items: MobileMenuItem[];
+  locale?: "zh-tw" | "en";
 }
 
-export default function MobileMenu({ items }: MobileMenuProps) {
+export default function MobileMenu({ items, locale = "zh-tw" }: MobileMenuProps) {
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -40,7 +41,7 @@ export default function MobileMenu({ items }: MobileMenuProps) {
         ref={buttonRef}
         type="button"
         aria-expanded={open}
-        aria-label="選單"
+        aria-label={locale === "en" ? "Menu" : "選單"}
         className="flex min-h-[44px] min-w-[44px] items-center justify-center text-[var(--color-text)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2 md:hidden"
         onClick={() => setOpen((v) => !v)}
       >
@@ -48,7 +49,7 @@ export default function MobileMenu({ items }: MobileMenuProps) {
       </button>
       {open && (
         <div className="absolute left-0 right-0 top-full z-50 border-t border-[var(--color-border)] bg-white shadow-[var(--floating-layer-shadow)] md:hidden">
-          <nav className="flex flex-col px-4 py-3" role="navigation" aria-label="行動選單">
+          <nav className="flex flex-col px-4 py-3" role="navigation" aria-label={locale === "en" ? "Mobile navigation" : "行動選單"}>
             {items.map((item) => (
               <div key={item.id}>
                 {item.children ? (

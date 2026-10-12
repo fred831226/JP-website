@@ -32,11 +32,11 @@ export function normalizeCatalogQuery(
   return { brand, type, q };
 }
 
-export function catalogHref(state: CatalogFilterState): string {
+export function catalogHref(state: CatalogFilterState, locale: "zh-tw" | "en" = "zh-tw"): string {
   const params = new URLSearchParams();
   if (state.brand) params.set("brand", state.brand);
   if (state.type) params.set("type", state.type);
   if (state.q) params.set("q", state.q);
   const query = params.toString();
-  return `/zh-tw/products${query ? `?${query}` : ""}`;
+  return `/${locale}/products${query ? `?${query}` : ""}`;
 }

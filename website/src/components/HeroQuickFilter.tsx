@@ -6,9 +6,11 @@ import { useState } from "react";
 interface QuickFilterProps {
   brands: { id: string; name: string }[];
   pumpTypes: { id: string; name: string }[];
+  locale?: "zh-tw" | "en";
 }
 
-export default function HeroQuickFilter({ brands, pumpTypes }: QuickFilterProps) {
+export default function HeroQuickFilter({ brands, pumpTypes, locale = "zh-tw" }: QuickFilterProps) {
+  const en = locale === "en";
   const router = useRouter();
   const [brand, setBrand] = useState("");
   const [pumpType, setPumpType] = useState("");
@@ -19,35 +21,35 @@ export default function HeroQuickFilter({ brands, pumpTypes }: QuickFilterProps)
     if (brand) params.set("brand", brand);
     if (pumpType) params.set("type", pumpType);
     const qs = params.toString();
-    router.push(`/zh-tw/products${qs ? `?${qs}` : ""}`);
+    router.push(`/${locale}/products${qs ? `?${qs}` : ""}`);
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex flex-col gap-2 sm:flex-row sm:items-end">
         <div className="flex-1">
-          <label htmlFor="qf-brand" className="block text-xs font-[700] text-[var(--color-primary)]">品牌</label>
+          <label htmlFor="qf-brand" className="block text-xs font-[700] text-[var(--color-primary)]">{en ? "Brand" : "品牌"}</label>
           <select
             id="qf-brand"
             value={brand}
             onChange={(e) => setBrand(e.target.value)}
             className="mt-1 block w-full min-h-[42px] rounded-[6px] bg-white px-2.5 text-xs shadow-[0_3px_10px_rgba(11,42,61,0.10)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]"
           >
-            <option value="">全部</option>
+            <option value="">{en ? "All" : "全部"}</option>
             {brands.map((b) => (
               <option key={b.id} value={b.id}>{b.name}</option>
             ))}
           </select>
         </div>
         <div className="flex-1">
-          <label htmlFor="qf-type" className="block text-xs font-[700] text-[var(--color-primary)]">類別</label>
+          <label htmlFor="qf-type" className="block text-xs font-[700] text-[var(--color-primary)]">{en ? "Type" : "類別"}</label>
           <select
             id="qf-type"
             value={pumpType}
             onChange={(e) => setPumpType(e.target.value)}
             className="mt-1 block w-full min-h-[42px] rounded-[6px] bg-white px-2.5 text-xs shadow-[0_3px_10px_rgba(11,42,61,0.10)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]"
           >
-            <option value="">全部</option>
+            <option value="">{en ? "All" : "全部"}</option>
             {pumpTypes.map((type) => (
               <option key={type.id} value={type.id}>{type.name}</option>
             ))}
@@ -57,7 +59,7 @@ export default function HeroQuickFilter({ brands, pumpTypes }: QuickFilterProps)
           type="submit"
           className="inline-flex min-h-[42px] items-center rounded-[6px] bg-[var(--color-action)] px-4 text-xs font-[800] text-[var(--color-on-action)] shadow-[0_5px_14px_rgba(0,109,143,0.20)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] hover:brightness-110"
         >
-          搜尋產品
+          {en ? "Search products" : "搜尋產品"}
         </button>
       </div>
     </form>
