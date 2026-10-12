@@ -18,7 +18,7 @@ const expectedChain = {
 };
 const candidateBranch = "codex/home-gallery-release";
 const candidateExpiresAt = "2026-10-16T23:59:59+08:00";
-const candidateLockHash = "fdec693ac7881c0278c6792ec844709af101708d5b6a5a504b64800e8bee77b4";
+const candidateLockHash = "c9a2ba644e991237bb64c8e4eafb5371c8540342cdd19372c77b299277af53ca";
 const candidateFiles = {
   "website/src/app/[locale]/company/page.tsx": "90fd5489b14a612ba839c9a5cdb7d861e15c946d23a9182741f7cf66ab73f069",
   "website/src/app/[locale]/page.tsx": "6ab66127a514ad8a27602255c6437a19fa6d6449fc451c28764da3aa6fc36872",
@@ -44,6 +44,11 @@ function candidateContentHash() {
     return `${path}:${hash}`;
   }).join("\n");
   return createHash("sha256").update(actual).digest("hex");
+}
+
+export function lockedDependencyHash() {
+  const normalized = readFileSync(resolve(websiteRoot, "package-lock.json"), "utf8").replaceAll("\r\n", "\n");
+  return createHash("sha256").update(normalized).digest("hex");
 }
 
 function hasExactCandidateChanges() {
@@ -93,7 +98,7 @@ async function isThisPullRequest() {
     || !["pull_request", "workflow_dispatch"].includes(process.env.GITHUB_EVENT_NAME ?? "")
     || new Date() > new Date("2026-10-31T23:59:59+08:00")) return false;
 
-  const lockHash = createHash("sha256").update(readFileSync(resolve(websiteRoot, "package-lock.json"))).digest("hex");
+  const lockHash = lockedDependencyHash();
   if (lockHash !== expectedLockHash) return false;
 
   if (process.env.GITHUB_EVENT_NAME === "pull_request") {
@@ -119,7 +124,7 @@ async function isThisCandidate() {
     || process.env.GITHUB_REPOSITORY !== "fred831226/JP-website"
     || !["pull_request", "workflow_dispatch"].includes(process.env.GITHUB_EVENT_NAME ?? "")
     || new Date() > new Date(candidateExpiresAt)) return false;
-  const lockHash = createHash("sha256").update(readFileSync(resolve(websiteRoot, "package-lock.json"))).digest("hex");
+  const lockHash = lockedDependencyHash();
   if (lockHash !== candidateLockHash) return false;
   candidateContentHash();
   if (!hasExactCandidateChanges()) return false;

@@ -12,7 +12,7 @@ const PR11_AUDIT_EXCEPTION = {
 const HOME_GALLERY_AUDIT_EXCEPTION = {
   candidate: "codex/home-gallery-release",
   advisory: "GHSA-vfj7-8cjw-p6xm",
-  lockfileSha256: "fdec693ac7881c0278c6792ec844709af101708d5b6a5a504b64800e8bee77b4",
+  lockfileSha256: "c9a2ba644e991237bb64c8e4eafb5371c8540342cdd19372c77b299277af53ca",
   contentSha256: "ad30373d3a9832c40cc9bd524b586769566b9849f5cee652e74f8389ec824cd2",
 };
 

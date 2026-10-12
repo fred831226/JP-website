@@ -39,7 +39,7 @@ Owner 於 2026-10-12 明確授權本次候選略過開發工具鏈中
 `codex/home-gallery-release` 的 Release gates 仍執行完整 `npm audit`；
 只有報告精確包含同一漏洞及其四層相依鏈共五筆 High、正式環境依賴
 `npm audit --omit=dev` 為零筆、lockfile SHA-256 為
-`fdec693ac7881c0278c6792ec844709af101708d5b6a5a504b64800e8bee77b4`、
+`c9a2ba644e991237bb64c8e4eafb5371c8540342cdd19372c77b299277af53ca`、
 七份產品與測試檔的內容雜湊符合已核准候選、PR branch/base/head 與實際
 變更檔案清單完全符合時，才可記錄例外並讓 audit gate 通過。此例外在
 2026-10-16 23:59（台灣時間）失效。CI 必須把例外與完整 source commit
