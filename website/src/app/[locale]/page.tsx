@@ -64,19 +64,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <div className="relative z-10 mx-auto flex w-full max-w-[var(--content-max)] justify-end px-[var(--page-gutter-desktop)] py-8 max-md:px-[var(--page-gutter-mobile)]">
           <div className="flex w-full max-w-[500px] flex-col items-end">
             <h1 className="sr-only">JP PUMP</h1>
-            {en ? (
-              <div className="home-hero-wordmark mb-3 w-[460px] max-w-full text-right text-[clamp(2rem,4vw,3.5rem)] font-[800] tracking-[0.04em] text-white drop-shadow-[0_3px_12px_rgba(0,0,0,.55)]">JIEPING CO., LTD</div>
-            ) : hero.companyNameWordmark && (
-              <div className="home-hero-wordmark mb-3 w-[460px] max-w-full">
-                <Image
-                  src={hero.companyNameWordmark.src}
-                  alt={en ? "JIEPING CO., LTD" : hero.companyNameWordmark.alt}
-                  width={1200}
-                  height={400}
-                  className="h-auto w-full object-contain"
-                />
-              </div>
-            )}
             <div className="home-hero-panel w-full max-w-[360px] rounded-l-[8px] border-r-[4px] border-[var(--color-identity-detail)] bg-[var(--color-primary)]/76 p-3 sm:p-4">
               {hero.kicker && (
                 <p className="mb-2 inline-flex items-center gap-2 text-sm font-[750] text-[#d8c18d]">
