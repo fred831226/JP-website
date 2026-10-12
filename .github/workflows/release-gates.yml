@@ -28,7 +28,7 @@ jobs:
     env:
       VERCEL_ENV: preview
       CANDIDATE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
-      AUDIT_EXCEPTION_REPORT: ${{ runner.temp }}/audit-exception.json
+      AUDIT_EXCEPTION_REPORT: ${{ github.workspace }}/audit-exception.json
       GITHUB_TOKEN: ${{ github.token }}
     steps:
       - name: Check out the complete candidate
