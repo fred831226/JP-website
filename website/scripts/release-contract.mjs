@@ -9,6 +9,12 @@ const PR11_AUDIT_EXCEPTION = {
   advisory: "GHSA-vfj7-8cjw-p6xm",
   lockfileSha256: "c9a2ba644e991237bb64c8e4eafb5371c8540342cdd19372c77b299277af53ca",
 };
+const HOME_GALLERY_AUDIT_EXCEPTION = {
+  candidate: "codex/home-gallery-release",
+  advisory: "GHSA-vfj7-8cjw-p6xm",
+  lockfileSha256: "fdec693ac7881c0278c6792ec844709af101708d5b6a5a504b64800e8bee77b4",
+  contentSha256: "ad30373d3a9832c40cc9bd524b586769566b9849f5cee652e74f8389ec824cd2",
+};
 
 export class ReleaseContractError extends Error {
   constructor(message) {
@@ -201,14 +207,17 @@ function validateGates(validation, sourceCommit) {
     const normalized = { name: gate.name.trim(), passed: true };
     if (gate.exception !== undefined) {
       requireCondition(normalized.name === "audit", "Only the audit gate may record an exception");
+      const isPr11 = gate.exception && typeof gate.exception === "object"
+        && Object.keys(gate.exception).sort().join(",") === "advisory,lockfileSha256,prNumber,sourceCommit"
+        && Object.entries(PR11_AUDIT_EXCEPTION).every(([key, value]) => gate.exception[key] === value);
+      const isHomeGallery = gate.exception && typeof gate.exception === "object"
+        && Object.keys(gate.exception).sort().join(",") === "advisory,candidate,contentSha256,lockfileSha256,sourceCommit"
+        && Object.entries(HOME_GALLERY_AUDIT_EXCEPTION).every(([key, value]) => gate.exception[key] === value);
       requireCondition(
-        gate.exception && typeof gate.exception === "object"
-          && Object.keys(gate.exception).sort().join(",") === "advisory,lockfileSha256,prNumber,sourceCommit"
-          && Object.entries(PR11_AUDIT_EXCEPTION).every(([key, value]) => gate.exception[key] === value)
-          && gate.exception.sourceCommit === sourceCommit,
-        "Audit exception must match the one-time PR #11 advisory, lockfile, and source commit",
+        (isPr11 || isHomeGallery) && gate.exception.sourceCommit === sourceCommit,
+        "Audit exception must match an approved one-time advisory, candidate, lockfile, content, and source commit",
       );
-      normalized.exception = { ...PR11_AUDIT_EXCEPTION, sourceCommit };
+      normalized.exception = { ...(isPr11 ? PR11_AUDIT_EXCEPTION : HOME_GALLERY_AUDIT_EXCEPTION), sourceCommit };
     }
     return normalized;
   });

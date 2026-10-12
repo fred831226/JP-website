@@ -55,9 +55,27 @@
   "view": {
     "heroKicker": "Established experience · Engineering capability · Responsive service",
     "companySummaryHeading": "Building lasting trust through verifiable experience",
-    "companySummaryBody": "JIEPING CO., LTD (JP PUMP) supports building and industrial customers with pump selection, quotations, installation and repair.",
+    "companySummaryBody": "Since its founding in Taiwan in 1998, JIEPING CO., LTD (JP PUMP) has focused on its customers’ long-term needs. Beyond installing and repairing pumps, we help plan complete pumping systems suited to the operating conditions of each site.\nWe aim to be a trusted partner at every stage of a project, with experience extending to Japan, Vietnam, and Palau.",
     "projectGalleryHeading": "Project gallery",
-    "projectGalleryDescription": "A view of approved building systems and equipment installation projects.",
+    "projectGalleryDescription": [
+      { "parts": [
+        { "text": "We work across ", "strong": false },
+        { "text": "residential, industrial, and commercial sites as well as major landmarks", "strong": true },
+        { "text": ", each with distinct needs and project scales.", "strong": false }
+      ] },
+      { "parts": [
+        { "text": "Our project experience includes ", "strong": false },
+        { "text": "Taipei Dome, Taipei 101, Taichung MRT G03, and the FISU Games Village", "strong": true },
+        { "text": ".", "strong": false }
+      ] },
+      { "parts": [
+        { "text": "JP PUMP values ", "strong": false },
+        { "text": "lasting customer relationships", "strong": true },
+        { "text": "; at some sites, we continue to support ", "strong": false },
+        { "text": "equipment replacement, maintenance, and inspections", "strong": true },
+        { "text": " after installation to meet ongoing operational needs.", "strong": false }
+      ] }
+    ],
     "galleryAction": "Contact us about your project",
     "pumpTypesHeading": "Find a series by pump type",
     "gatewaysHeading": "Explore products and get in touch",

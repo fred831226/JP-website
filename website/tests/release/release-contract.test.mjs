@@ -331,6 +331,29 @@ test("one-time PR #11 audit exception is preserved and bound to its commit and l
   }
 });
 
+test("home gallery audit exception is bound to this candidate's content, lockfile, and commit", () => {
+  const exception = {
+    candidate: "codex/home-gallery-release",
+    advisory: "GHSA-vfj7-8cjw-p6xm",
+    lockfileSha256: "fdec693ac7881c0278c6792ec844709af101708d5b6a5a504b64800e8bee77b4",
+    contentSha256: "ad30373d3a9832c40cc9bd524b586769566b9849f5cee652e74f8389ec824cd2",
+    sourceCommit: COMMIT,
+  };
+  const gates = validEvidence().validation.gates.map((gate) => gate.name === "audit" ? { ...gate, exception } : gate);
+  const evidence = validEvidence({ validation: { sourceCommit: COMMIT, passed: true, gates } });
+  assert.deepEqual(evidence.validation.gates.find((gate) => gate.name === "audit").exception, exception);
+  for (const invalid of [
+    { ...exception, candidate: "other-branch" },
+    { ...exception, sourceCommit: BASE_COMMIT },
+    { ...exception, contentSha256: "0".repeat(64) },
+    { ...exception, lockfileSha256: "0".repeat(64) },
+    { ...exception, advisory: "other-advisory" },
+  ]) {
+    const invalidGates = gates.map((gate) => gate.name === "audit" ? { ...gate, exception: invalid } : gate);
+    assert.throws(() => validEvidence({ validation: { sourceCommit: COMMIT, passed: true, gates: invalidGates } }), /audit exception/i);
+  }
+});
+
 test("rollback evidence must be a different ready Production deployment from the same project", () => {
   for (const rollback of [
     { deploymentId: "dpl_candidateImmutable123", sourceCommit: BASE_COMMIT, projectId: PROJECT, readyState: "READY", environment: "production" },

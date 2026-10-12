@@ -3,6 +3,7 @@ import Image from "next/image";
 import HeroCarousel from "@/components/HeroCarousel";
 import HeroQuickFilter from "@/components/HeroQuickFilter";
 import RevealSection from "@/components/RevealSection";
+import ProjectGalleryDescription from "@/components/ProjectGalleryDescription";
 import { getBrands, getPumpTypes } from "@/lib/content/load-catalog";
 import contentRaw from "@/data/catalog-content.json";
 import homeData from "@/data/home.json";
@@ -110,7 +111,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <h2 className="text-[var(--font-heading-lg-size)] font-[var(--font-heading-lg-weight)] leading-[var(--font-heading-lg-line-height)] text-[var(--color-primary)]">
                 {en ? englishContent.view.companySummaryHeading : companySummary.heading}
               </h2>
-              <p className="mt-4 leading-[var(--font-body-line-height)] text-[var(--color-text-muted)]">
+              <p className="mt-4 whitespace-pre-line leading-[var(--font-body-line-height)] text-[var(--color-text-muted)]">
                 {en ? englishContent.view.companySummaryBody : companySummary.body}
               </p>
               <Link
@@ -127,21 +128,25 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {projectGallery && (
         <section className="project-gallery-section relative overflow-hidden">
           <div className="mx-auto max-w-[var(--content-max)] px-[var(--page-gutter-desktop)] py-14 max-md:px-[var(--page-gutter-mobile)]">
-            <RevealSection className="mb-8 flex flex-wrap items-end justify-between gap-5">
-              <div className="max-w-[620px]">
-                <p className="mb-2 text-xs font-[800] tracking-[0.08em] text-[var(--color-action)]">PROJECT GALLERY</p>
-                <h2 className="text-[var(--font-heading-lg-size)] font-[var(--font-heading-lg-weight)] leading-[var(--font-heading-lg-line-height)] text-[var(--color-primary)]">
-                  {en ? englishContent.view.projectGalleryHeading : projectGallery.heading}
-                </h2>
-                <p className="mt-3 leading-[var(--font-body-line-height)] text-[var(--color-text-muted)]">{en ? englishContent.view.projectGalleryDescription : projectGallery.description}</p>
+            <div className="mb-8 flex flex-wrap items-end justify-between gap-5">
+              <div className="max-w-[680px]">
+                <RevealSection>
+                  <p className="mb-2 text-xs font-[800] tracking-[0.08em] text-[var(--color-action)]">PROJECT GALLERY</p>
+                  <h2 className="text-[var(--font-heading-lg-size)] font-[var(--font-heading-lg-weight)] leading-[var(--font-heading-lg-line-height)] text-[var(--color-primary)]">
+                    {en ? englishContent.view.projectGalleryHeading : projectGallery.heading}
+                  </h2>
+                </RevealSection>
+                <ProjectGalleryDescription paragraphs={(en ? englishContent.view.projectGalleryDescription : projectGallery.description).slice(0, 2)} />
               </div>
-              <Link
-                href={en ? "/en/contact" : "/zh-tw/services"}
-                className="inline-flex min-h-[44px] items-center font-[800] text-[var(--color-action)] underline underline-offset-[5px] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]"
-              >
-                {en ? englishContent.view.galleryAction : "查看服務與實績"}
-              </Link>
-            </RevealSection>
+              <RevealSection delayMs={160}>
+                <Link
+                  href={en ? "/en/contact" : "/zh-tw/services"}
+                  className="inline-flex min-h-[44px] items-center font-[800] text-[var(--color-action)] underline underline-offset-[5px] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]"
+                >
+                  {en ? englishContent.view.galleryAction : "查看服務與實績"}
+                </Link>
+              </RevealSection>
+            </div>
             <div className="project-gallery-grid" aria-label={en ? "Project photo gallery" : "工程實績照片牆"}>
               {projectGallery.photos.map((photo, i) => (
                 <RevealSection key={photo.src} delayMs={i * 85} className="project-gallery-reveal">
@@ -151,6 +156,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 </RevealSection>
               ))}
             </div>
+            <ProjectGalleryDescription paragraphs={(en ? englishContent.view.projectGalleryDescription : projectGallery.description).slice(2)} belowGallery />
           </div>
         </section>
       )}

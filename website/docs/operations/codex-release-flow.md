@@ -32,6 +32,21 @@ PR #11 的 GitHub `Release gates` 仍須執行完整 `npm audit`。僅當稽核�
 失效；其他發現或其他候選仍立即停止。證據必須記錄例外、同一 source commit，
 其他 gates、Preview QA 與 Production 授權均照常執行。
 
+### 僅限首頁文案與照片牆候選的一次性稽核例外
+
+Owner 於 2026-10-12 明確授權本次候選略過開發工具鏈中
+`GHSA-vfj7-8cjw-p6xm` 造成的稽核失敗。這不是一般性關閉安全稽核。
+`codex/home-gallery-release` 的 Release gates 仍執行完整 `npm audit`；
+只有報告精確包含同一漏洞及其四層相依鏈共五筆 High、正式環境依賴
+`npm audit --omit=dev` 為零筆、lockfile SHA-256 為
+`fdec693ac7881c0278c6792ec844709af101708d5b6a5a504b64800e8bee77b4`、
+七份產品與測試檔的內容雜湊符合已核准候選、PR branch/base/head 與實際
+變更檔案清單完全符合時，才可記錄例外並讓 audit gate 通過。此例外在
+2026-10-16 23:59（台灣時間）失效。CI 必須把例外與完整 source commit
+記入 gate evidence；任何其他安全警示、檔案變更或過期均停止發布。
+Preview、其他 required gates 與 Production 授權維持原要求。原始完整
+`npm audit --audit-level=high` 的結果仍須記錄為未通過，不得宣稱零警示。
+
 ## 候選準備與停止點
 
 「準備並合併 JP PUMP 候選發布」只授權在完成下列 gates 後，對**本次確認的候選**
@@ -75,6 +90,8 @@ digest 與 rollback target 後，另取得針對該次 deployment 的明確授�
 
    Fast Release 只可略過與變更無關的 Full Release gate，且要在 release record
    說明原因；不能略過 lint、build、relevant tests、Preview 或 required checks。
+   本次候選的完整 audit 預期因上述唯一警示回傳非零；只有 CI 在所有限定條件
+   通過並記錄例外時，才將 audit gate 視為有條件通過。
 
 4. 在得到使用者對本次變更的明確授權後才 commit、push 與建立 PR。先確認 staged
    files 與候選清單一致、沒有被 ignore 的 release inputs；commit 後確認工作樹乾淨，

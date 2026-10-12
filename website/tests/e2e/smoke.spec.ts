@@ -279,7 +279,7 @@ test.describe("Public smoke tests", () => {
   test("Company page loads", async ({ page }) => {
     await page.goto(`${BASE}/company`);
     await expect(page.locator("h1")).toContainText("關於傑平");
-    await expect(page.getByText("台北大巨蛋")).toBeVisible();
+    await expect(page.getByText("台北大巨蛋", { exact: true })).toBeVisible();
     await expect(page.getByText("總經理願景")).toHaveCount(0);
   });
 

@@ -11,11 +11,29 @@
   },
   "companySummary": {
     "heading": "用可核實的經驗，建立長期工程信任",
-    "body": "傑平有限公司（JP PUMP）專注於泵浦領域，以技術實證與完整服務鏈協助國內外建案與工業客戶。從估價、選型到安裝維修，每個環節皆可追溯。"
+    "body": "自 1998 年在台灣成立以來，傑平有限公司（JP PUMP）始終以客戶的長期需求為出發點。我們不只負責泵浦設備的安裝與維修，更參與整套泵浦系統的工程規劃，協助客戶因應不同場域的使用條件。\n我們希望成為客戶在每個工程階段都能信賴的夥伴，合作經驗亦延伸至日本、越南及帛琉。"
   },
   "projectGallery": {
     "heading": "工程實績現場",
-    "description": "從建築系統到設備安裝，記錄每一個持續運作的工程現場。",
+    "description": [
+      { "parts": [
+        { "text": "服務場域橫跨", "strong": false },
+        { "text": "住宅、工廠、商業建築與大型地標", "strong": true },
+        { "text": "，規模與使用需求各有不同。", "strong": false }
+      ] },
+      { "parts": [
+        { "text": "我們的工程經驗涵蓋", "strong": false },
+        { "text": "台北大巨蛋、台北 101、台中捷運 G03 及世大運選手村", "strong": true },
+        { "text": "等建案。", "strong": false }
+      ] },
+      { "parts": [
+        { "text": "傑平重視與客戶建立", "strong": false },
+        { "text": "長期合作關係", "strong": true },
+        { "text": "；部分建案在設備投入使用後，仍由我們協助", "strong": false },
+        { "text": "設備汰換、保養及檢修", "strong": true },
+        { "text": "，持續回應現場的運轉需求。", "strong": false }
+      ] }
+    ],
     "approvalDate": "2026-09-07",
     "source": "D:\\JP handoff\\實績\\實績\\首頁照片牆",
     "photos": [
