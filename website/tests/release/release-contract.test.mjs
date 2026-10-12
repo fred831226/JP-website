@@ -309,7 +309,7 @@ test("one-time PR #11 audit exception is preserved and bound to its commit and l
   const exception = {
     prNumber: 11,
     advisory: "GHSA-vfj7-8cjw-p6xm",
-    lockfileSha256: "fdec693ac7881c0278c6792ec844709af101708d5b6a5a504b64800e8bee77b4",
+    lockfileSha256: "c9a2ba644e991237bb64c8e4eafb5371c8540342cdd19372c77b299277af53ca",
     sourceCommit: COMMIT,
   };
   const gates = validEvidence().validation.gates.map((gate) => gate.name === "audit" ? { ...gate, exception } : gate);

@@ -27,7 +27,7 @@ Preview evidence 不能綁定同一個 commit，立即停止並修復後從頭�
 PR #11 的 GitHub `Release gates` 仍須執行完整 `npm audit`。僅當稽核結果只含
 `GHSA-vfj7-8cjw-p6xm`（`braces` 與其開發工具依賴鏈的五筆 High）、Production
 依賴稽核為零筆、候選 branch/PR/commit 相符、且 lockfile SHA-256 為
-`fdec693ac7881c0278c6792ec844709af101708d5b6a5a504b64800e8bee77b4`
+`c9a2ba644e991237bb64c8e4eafb5371c8540342cdd19372c77b299277af53ca`
 時，允許 audit gate 記錄例外並通過。這項例外於 2026-10-31 23:59（台灣時間）
 失效；其他發現或其他候選仍立即停止。證據必須記錄例外、同一 source commit，
 其他 gates、Preview QA 與 Production 授權均照常執行。
