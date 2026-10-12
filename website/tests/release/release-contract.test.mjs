@@ -15,6 +15,7 @@ import {
   verifyRollbackPreconditions,
 } from "../../scripts/release-contract.mjs";
 import { assertPreviewPolicy, runReleaseCli } from "../../scripts/release.mjs";
+import { lockedDependencyHash } from "../../scripts/audit-pr11.mjs";
 
 const COMMIT = "0123456789abcdef0123456789abcdef01234567";
 const BASE_COMMIT = "89abcdef0123456789abcdef0123456789abcdef";
@@ -329,6 +330,33 @@ test("one-time PR #11 audit exception is preserved and bound to its commit and l
     const invalidGates = gates.map((gate) => gate.name === "audit" ? { ...gate, exception: invalid } : gate);
     assert.throws(() => validEvidence({ validation: { sourceCommit: COMMIT, passed: true, gates: invalidGates } }), /audit exception/i);
   }
+});
+
+test("home gallery audit exception is bound to this candidate's content, lockfile, and commit", () => {
+  const exception = {
+    candidate: "codex/home-gallery-release",
+    advisory: "GHSA-vfj7-8cjw-p6xm",
+    lockfileSha256: "c9a2ba644e991237bb64c8e4eafb5371c8540342cdd19372c77b299277af53ca",
+    contentSha256: "ad30373d3a9832c40cc9bd524b586769566b9849f5cee652e74f8389ec824cd2",
+    sourceCommit: COMMIT,
+  };
+  const gates = validEvidence().validation.gates.map((gate) => gate.name === "audit" ? { ...gate, exception } : gate);
+  const evidence = validEvidence({ validation: { sourceCommit: COMMIT, passed: true, gates } });
+  assert.deepEqual(evidence.validation.gates.find((gate) => gate.name === "audit").exception, exception);
+  for (const invalid of [
+    { ...exception, candidate: "other-branch" },
+    { ...exception, sourceCommit: BASE_COMMIT },
+    { ...exception, contentSha256: "0".repeat(64) },
+    { ...exception, lockfileSha256: "0".repeat(64) },
+    { ...exception, advisory: "other-advisory" },
+  ]) {
+    const invalidGates = gates.map((gate) => gate.name === "audit" ? { ...gate, exception: invalid } : gate);
+    assert.throws(() => validEvidence({ validation: { sourceCommit: COMMIT, passed: true, gates: invalidGates } }), /audit exception/i);
+  }
+});
+
+test("the locked dependency hash is stable across checkout line endings", () => {
+  assert.equal(lockedDependencyHash(), "c9a2ba644e991237bb64c8e4eafb5371c8540342cdd19372c77b299277af53ca");
 });
 
 test("rollback evidence must be a different ready Production deployment from the same project", () => {
