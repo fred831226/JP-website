@@ -305,6 +305,32 @@ test("evidence requires the exact unique release gate set", () => {
   }
 });
 
+test("one-time PR #11 audit exception is preserved and bound to its commit and lockfile", () => {
+  const exception = {
+    prNumber: 11,
+    advisory: "GHSA-vfj7-8cjw-p6xm",
+    lockfileSha256: "fdec693ac7881c0278c6792ec844709af101708d5b6a5a504b64800e8bee77b4",
+    sourceCommit: COMMIT,
+  };
+  const gates = validEvidence().validation.gates.map((gate) => gate.name === "audit" ? { ...gate, exception } : gate);
+  const evidence = validEvidence({ validation: { sourceCommit: COMMIT, passed: true, gates } });
+  assert.deepEqual(evidence.validation.gates.find((gate) => gate.name === "audit").exception, exception);
+  assert.doesNotThrow(() => verifyPromotionPreconditions({
+    evidence,
+    approval: validApproval(evidence),
+    currentCommit: COMMIT,
+    workingTreeClean: true,
+  }));
+  for (const invalid of [
+    { ...exception, prNumber: 12 },
+    { ...exception, sourceCommit: BASE_COMMIT },
+    { ...exception, lockfileSha256: "0".repeat(64) },
+  ]) {
+    const invalidGates = gates.map((gate) => gate.name === "audit" ? { ...gate, exception: invalid } : gate);
+    assert.throws(() => validEvidence({ validation: { sourceCommit: COMMIT, passed: true, gates: invalidGates } }), /audit exception/i);
+  }
+});
+
 test("rollback evidence must be a different ready Production deployment from the same project", () => {
   for (const rollback of [
     { deploymentId: "dpl_candidateImmutable123", sourceCommit: BASE_COMMIT, projectId: PROJECT, readyState: "READY", environment: "production" },

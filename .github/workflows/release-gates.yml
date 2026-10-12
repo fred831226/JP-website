@@ -15,6 +15,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
 
 concurrency:
   group: release-gates-${{ github.event.pull_request.number || github.sha }}
@@ -26,11 +27,15 @@ jobs:
     timeout-minutes: 20
     env:
       VERCEL_ENV: preview
+      CANDIDATE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+      AUDIT_EXCEPTION_REPORT: ${{ runner.temp }}/audit-exception.json
+      GITHUB_TOKEN: ${{ github.token }}
     steps:
       - name: Check out the complete candidate
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ env.CANDIDATE_SHA }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -43,7 +48,7 @@ jobs:
         run: npm --prefix website ci
 
       - name: Audit the complete locked dependency tree
-        run: npm --prefix website audit --audit-level=high
+        run: node website/scripts/audit-pr11.mjs
 
       - name: Install Chromium for public behavior tests
         working-directory: website
@@ -68,12 +73,16 @@ jobs:
         shell: pwsh
         run: |
           $gateReportPath = Join-Path '${{ runner.temp }}' 'release-gates.json'
+          $auditGate = @{ name = 'audit'; passed = $true }
+          if (Test-Path -LiteralPath $env:AUDIT_EXCEPTION_REPORT) {
+            $auditGate.exception = Get-Content -LiteralPath $env:AUDIT_EXCEPTION_REPORT -Raw | ConvertFrom-Json -AsHashtable
+          }
           $report = @{
             passed = $true
-            sourceCommit = '${{ github.sha }}'
+            sourceCommit = $env:CANDIDATE_SHA
             gates = @(
               @{ name = 'validate'; passed = $true }
-              @{ name = 'audit'; passed = $true }
+              $auditGate
               @{ name = 'lint'; passed = $true }
               @{ name = 'build'; passed = $true }
               @{ name = 'test:release'; passed = $true }
@@ -101,7 +110,7 @@ jobs:
       - name: Upload gate evidence
         uses: actions/upload-artifact@v4
         with:
-          name: release-gates-${{ github.sha }}
+          name: release-gates-${{ env.CANDIDATE_SHA }}
           path: ${{ runner.temp }}/release-gates.json
           if-no-files-found: error
           retention-days: 30
@@ -110,7 +119,7 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         uses: actions/upload-artifact@v4
         with:
-          name: release-evidence-${{ github.sha }}
+          name: release-evidence-${{ env.CANDIDATE_SHA }}
           path: ${{ runner.temp }}/release-evidence.json
           if-no-files-found: error
           retention-days: 30

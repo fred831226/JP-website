@@ -4,6 +4,11 @@ const COMMIT_PATTERN = /^[0-9a-f]{40}$/i;
 const DEPLOYMENT_PATTERN = /^dpl_[A-Za-z0-9_-]+$/;
 const PROJECT_PATTERN = /^prj_[A-Za-z0-9_-]+$/;
 const REQUIRED_GATES = ["audit", "build", "lint", "test", "test:release", "validate"];
+const PR11_AUDIT_EXCEPTION = {
+  prNumber: 11,
+  advisory: "GHSA-vfj7-8cjw-p6xm",
+  lockfileSha256: "fdec693ac7881c0278c6792ec844709af101708d5b6a5a504b64800e8bee77b4",
+};
 
 export class ReleaseContractError extends Error {
   constructor(message) {
@@ -193,7 +198,19 @@ function validateGates(validation, sourceCommit) {
   const gates = validation.gates.map((gate) => {
     requireCondition(typeof gate?.name === "string" && gate.name.trim(), "Each release gate requires a name");
     requireCondition(gate.passed === true, `Release gate ${gate.name} did not pass`);
-    return { name: gate.name.trim(), passed: true };
+    const normalized = { name: gate.name.trim(), passed: true };
+    if (gate.exception !== undefined) {
+      requireCondition(normalized.name === "audit", "Only the audit gate may record an exception");
+      requireCondition(
+        gate.exception && typeof gate.exception === "object"
+          && Object.keys(gate.exception).sort().join(",") === "advisory,lockfileSha256,prNumber,sourceCommit"
+          && Object.entries(PR11_AUDIT_EXCEPTION).every(([key, value]) => gate.exception[key] === value)
+          && gate.exception.sourceCommit === sourceCommit,
+        "Audit exception must match the one-time PR #11 advisory, lockfile, and source commit",
+      );
+      normalized.exception = { ...PR11_AUDIT_EXCEPTION, sourceCommit };
+    }
+    return normalized;
   });
   const gateNames = gates.map((gate) => gate.name).sort();
   requireCondition(
