@@ -10,15 +10,17 @@ export function generateStaticParams() {
   return getPumpTypes().map((t) => ({ slug: t.slug }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
+  const { locale, slug } = await params;
+  if (locale !== "zh-tw") return {};
   const type = getPumpTypeBySlug(decodeURIComponent(slug));
   if (!type) return {};
   return createPageMetadata({ title: type.name, description: type.description, pathname: `/zh-tw/types/${type.slug}` });
 }
 
-export default async function PumpTypePage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
+export default async function PumpTypePage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
+  const { locale, slug } = await params;
+  if (locale !== "zh-tw") notFound();
   const type = getPumpTypeBySlug(slug);
   if (!type) notFound();
   const seriesList = getSeriesByPumpType(type.id);

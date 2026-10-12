@@ -7,15 +7,20 @@ import { getBrands, getPumpTypes } from "@/lib/content/load-catalog";
 import contentRaw from "@/data/catalog-content.json";
 import homeData from "@/data/home.json";
 import { createPageMetadata } from "@/lib/seo";
+import { englishContent } from "@/lib/content/en";
 
 const content = contentRaw as { homepagePumpTypes: { name: string; seriesId: string; pumpTypeId: string; silhouette: string }[] };
 
-export const metadata = createPageMetadata({
-  description: "傑平有限公司（JP PUMP）— 專業泵浦選型、供應、安裝、維修與顧問服務。",
-  pathname: "/zh-tw",
-});
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return locale === "en"
+    ? createPageMetadata({ description: englishContent.home.intro, pathname: "/en", locale: "en", alternatePathname: "/zh-tw" })
+    : createPageMetadata({ description: "傑平有限公司（JP PUMP）— 專業泵浦選型、供應、安裝、維修與顧問服務。", pathname: "/zh-tw", alternatePathname: "/en" });
+}
 
-export default function HomePage() {
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = (await params).locale === "en" ? "en" : "zh-tw";
+  const en = locale === "en";
   const { hero, companySummary, projectGallery, gateways, partners } = homeData;
   const brands = getBrands();
   const pumpTypes = getPumpTypes();
@@ -59,24 +64,38 @@ export default function HomePage() {
         <div className="relative z-10 mx-auto flex w-full max-w-[var(--content-max)] justify-end px-[var(--page-gutter-desktop)] py-8 max-md:px-[var(--page-gutter-mobile)]">
           <div className="flex w-full max-w-[500px] flex-col items-end">
             <h1 className="sr-only">JP PUMP</h1>
+            {en ? (
+              <div className="home-hero-wordmark mb-3 w-[460px] max-w-full text-right text-[clamp(2rem,4vw,3.5rem)] font-[800] tracking-[0.04em] text-white drop-shadow-[0_3px_12px_rgba(0,0,0,.55)]">JIEPING CO., LTD</div>
+            ) : hero.companyNameWordmark && (
+              <div className="home-hero-wordmark mb-3 w-[460px] max-w-full">
+                <Image
+                  src={hero.companyNameWordmark.src}
+                  alt={en ? "JIEPING CO., LTD" : hero.companyNameWordmark.alt}
+                  width={1200}
+                  height={400}
+                  className="h-auto w-full object-contain"
+                />
+              </div>
+            )}
             <div className="home-hero-panel w-full max-w-[360px] rounded-l-[8px] border-r-[4px] border-[var(--color-identity-detail)] bg-[var(--color-primary)]/76 p-3 sm:p-4">
               {hero.kicker && (
                 <p className="mb-2 inline-flex items-center gap-2 text-sm font-[750] text-[#d8c18d]">
                   <span className="kicker-dot" aria-hidden="true" />
-                  {hero.kicker}
+                  {en ? englishContent.view.heroKicker : hero.kicker}
                 </p>
               )}
               <Link
-                href={hero.ctaHref}
+                href={en ? "/en/company" : hero.ctaHref}
                 className="mt-3 flex min-h-[44px] w-fit items-center font-[800] text-[var(--color-on-primary)] underline decoration-[var(--color-identity-detail)] decoration-2 underline-offset-[6px] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2"
               >
-                {hero.ctaLabel}
+                {en ? englishContent.shared.learnMore : hero.ctaLabel}
               </Link>
 
               <div className="mt-4 rounded-[8px] bg-white p-3 shadow-[0_12px_32px_rgba(11,42,61,0.12)]">
                 <HeroQuickFilter
-                  brands={brands.map((b) => ({ id: b.id, name: b.name }))}
-                  pumpTypes={pumpTypes.map((type) => ({ id: type.id, name: type.name }))}
+                  brands={brands.map((b) => ({ id: b.id, name: en ? (b.id === "grundfos" ? "Grundfos" : "JP PUMP") : b.name }))}
+                  pumpTypes={pumpTypes.map((type, index) => ({ id: type.id, name: en ? englishContent.view.pumpTypeNames[index] : type.name }))}
+                  locale={locale}
                 />
               </div>
             </div>
@@ -92,7 +111,7 @@ export default function HomePage() {
               <div className="relative z-[2] overflow-hidden rounded-[8px] bg-[var(--color-primary)] p-2 shadow-[0_18px_40px_rgba(11,42,61,.16)] md:-mt-24">
                 <Image
                   src="/media/company-brand-sign.png"
-                  alt="傑平有限公司 JP PUMP 招牌"
+                  alt={en ? "JP PUMP company sign" : "傑平有限公司 JP PUMP 招牌"}
                   width={880}
                   height={660}
                   className="aspect-[4/3] w-full object-cover"
@@ -102,16 +121,16 @@ export default function HomePage() {
             <RevealSection className="order-1 md:order-2">
               <p className="mb-2 text-xs font-[800] tracking-[0.08em] text-[var(--color-action)]">ABOUT JP PUMP</p>
               <h2 className="text-[var(--font-heading-lg-size)] font-[var(--font-heading-lg-weight)] leading-[var(--font-heading-lg-line-height)] text-[var(--color-primary)]">
-                {companySummary.heading}
+                {en ? englishContent.view.companySummaryHeading : companySummary.heading}
               </h2>
               <p className="mt-4 leading-[var(--font-body-line-height)] text-[var(--color-text-muted)]">
-                {companySummary.body}
+                {en ? englishContent.view.companySummaryBody : companySummary.body}
               </p>
               <Link
-                href="/zh-tw/company"
+                href={`/${locale}/company`}
                 className="mt-4 inline-flex min-h-[44px] items-center font-[800] text-[var(--color-action)] underline underline-offset-[5px] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]"
               >
-                認識 JP PUMP
+                {en ? englishContent.company.title : "認識 JP PUMP"}
               </Link>
             </RevealSection>
           </div>
@@ -125,22 +144,22 @@ export default function HomePage() {
               <div className="max-w-[620px]">
                 <p className="mb-2 text-xs font-[800] tracking-[0.08em] text-[var(--color-action)]">PROJECT GALLERY</p>
                 <h2 className="text-[var(--font-heading-lg-size)] font-[var(--font-heading-lg-weight)] leading-[var(--font-heading-lg-line-height)] text-[var(--color-primary)]">
-                  {projectGallery.heading}
+                  {en ? englishContent.view.projectGalleryHeading : projectGallery.heading}
                 </h2>
-                <p className="mt-3 leading-[var(--font-body-line-height)] text-[var(--color-text-muted)]">{projectGallery.description}</p>
+                <p className="mt-3 leading-[var(--font-body-line-height)] text-[var(--color-text-muted)]">{en ? englishContent.view.projectGalleryDescription : projectGallery.description}</p>
               </div>
               <Link
-                href="/zh-tw/services"
+                href={en ? "/en/contact" : "/zh-tw/services"}
                 className="inline-flex min-h-[44px] items-center font-[800] text-[var(--color-action)] underline underline-offset-[5px] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]"
               >
-                查看服務與實績
+                {en ? englishContent.view.galleryAction : "查看服務與實績"}
               </Link>
             </RevealSection>
-            <div className="project-gallery-grid" aria-label="工程實績照片牆">
+            <div className="project-gallery-grid" aria-label={en ? "Project photo gallery" : "工程實績照片牆"}>
               {projectGallery.photos.map((photo, i) => (
                 <RevealSection key={photo.src} delayMs={i * 85} className="project-gallery-reveal">
                   <figure className="project-gallery-tile">
-                    <Image src={photo.src} alt={photo.alt} width={1200} height={800} loading="lazy" />
+                    <Image src={photo.src} alt={en ? englishContent.view.photoAlts[i] : photo.alt} width={1200} height={800} loading="lazy" />
                   </figure>
                 </RevealSection>
               ))}
@@ -159,7 +178,7 @@ export default function HomePage() {
               <div className="mb-8 max-w-[500px]">
                 <p className="mb-2 text-xs font-[800] tracking-[0.08em] text-[var(--color-action)]">PRODUCT USES</p>
                 <h2 className="text-[var(--font-heading-lg-size)] font-[var(--font-heading-lg-weight)] leading-[var(--font-heading-lg-line-height)] text-[var(--color-primary)]">
-                  依產品類別找到合適系列
+                  {en ? englishContent.view.pumpTypesHeading : "依產品類別找到合適系列"}
                 </h2>
               </div>
             </RevealSection>
@@ -167,7 +186,7 @@ export default function HomePage() {
               {content.homepagePumpTypes.map((pt, i) => (
                 <RevealSection key={pt.seriesId} delayMs={i * 80} className={i < 6 ? `rv-d${i + 1}` : ""}>
                   <Link
-                    href={`/zh-tw/products?type=${pt.pumpTypeId}`}
+                    href={`/${locale}/products?type=${pt.pumpTypeId}`}
                     className="product-type-card group relative flex flex-col overflow-hidden rounded-[var(--product-card-radius)] border border-transparent bg-white shadow-[var(--product-card-shadow)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2"
                   >
                     <div className="product-type-card-media relative h-[280px] bg-[var(--color-surface-subtle)] sm:h-[340px]">
@@ -176,7 +195,7 @@ export default function HomePage() {
                       )}
                       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[42%] bg-gradient-to-t from-[rgba(11,42,61,.96)] via-[rgba(11,42,61,.64)] to-transparent" aria-hidden="true" />
                       <span className="absolute inset-x-12 bottom-3 z-[2] text-center text-[var(--font-heading-sm-size)] font-[var(--font-heading-sm-weight)] leading-[var(--font-heading-sm-line-height)] !text-white drop-shadow-[0_2px_8px_rgba(0,0,0,.72)]" style={{ color: "#fff" }}>
-                        {pt.name}
+                        {en ? englishContent.view.pumpTypeNames[i] : pt.name}
                       </span>
                       <span className="product-type-arrow-hover absolute bottom-2 right-5 z-[2] text-2xl text-white/85 transition-all duration-300 group-hover:text-white" aria-hidden="true">→</span>
                     </div>
@@ -196,34 +215,34 @@ export default function HomePage() {
           <RevealSection className="mb-10 max-w-[600px]">
             <p className="mb-2 text-xs font-[800] tracking-[0.08em] text-[var(--color-action)]">PRODUCTS &amp; SERVICES</p>
             <h2 className="text-[var(--font-heading-lg-size)] font-[var(--font-heading-lg-weight)] leading-[var(--font-heading-lg-line-height)] text-[var(--color-primary)]">
-              從產品探索到工程支援，選擇下一步
+              {en ? englishContent.view.gatewaysHeading : "從產品探索到工程支援，選擇下一步"}
             </h2>
           </RevealSection>
           <RevealSection delayMs={260}>
             <div
               className="gateway-grid grid gap-5"
               role="group"
-              aria-label="主要入口"
+              aria-label={en ? "Main destinations" : "主要入口"}
             >
-              {gateways.map((g) => (
+              {gateways.map((g, i) => (
                 <Link
                   key={g.id}
-                  href={g.href}
+                  href={en ? (g.id === "products" ? "/en/products" : "/en/contact") : g.href}
                   className={`gateway gateway--${g.id} group relative flex min-h-[200px] flex-col justify-center overflow-hidden rounded-[var(--product-card-radius)] border border-[var(--color-border)] p-7 shadow-[var(--product-card-shadow)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2 ${g.id === "services" ? "items-start text-left" : "items-end text-right"}`}
                 >
                   <span className="gateway-media pointer-events-none absolute inset-0" aria-hidden="true">
                     <Image src={g.background} alt="" fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" />
                   </span>
                   <div className="relative z-[2] max-w-[640px]">
-                    <span className="block text-sm font-[700] tracking-[.16em] text-[var(--color-identity-detail)]">{getGatewayLabel(g.id)}</span>
+                    <span className="block text-sm font-[700] tracking-[.16em] text-[var(--color-identity-detail)]">{en ? (g.id === "products" ? "PRODUCTS" : g.id === "services" ? "SERVICES" : "CONTACT") : getGatewayLabel(g.id)}</span>
                     <span className="mt-1 block text-[var(--font-heading-sm-size)] font-[var(--font-heading-sm-weight)] leading-[var(--font-heading-sm-line-height)] text-white drop-shadow-[0_2px_8px_rgba(0,0,0,.7)]">
-                      {g.title}
+                      {en ? englishContent.view.gatewayTitles[i] : g.title}
                     </span>
                     <span className="mt-2 block text-sm leading-[var(--font-body-line-height)] text-white/90 drop-shadow-[0_2px_8px_rgba(0,0,0,.7)]">
-                      {g.description}
+                      {en ? englishContent.view.gatewayDescriptions[i] : g.description}
                     </span>
                   </div>
-                  <span className="relative z-[2] mt-5 text-sm font-[700] text-white underline decoration-[var(--color-identity-detail)] underline-offset-[5px] drop-shadow-[0_2px_8px_rgba(0,0,0,.7)]">{getGatewayAction(g.id)}</span>
+                  <span className="relative z-[2] mt-5 text-sm font-[700] text-white underline decoration-[var(--color-identity-detail)] underline-offset-[5px] drop-shadow-[0_2px_8px_rgba(0,0,0,.7)]">{en ? englishContent.view.gatewayActions[i] : getGatewayAction(g.id)}</span>
                 </Link>
               ))}
             </div>
@@ -243,14 +262,14 @@ export default function HomePage() {
               <div>
                 <p className="mb-2 text-xs font-[800] tracking-[0.08em] text-[var(--color-action)]">PARTNERS</p>
                 <h2 className="text-[var(--font-heading-lg-size)] font-[var(--font-heading-lg-weight)] leading-[var(--font-heading-lg-line-height)] text-[var(--color-primary)]">
-                  授權經銷品牌
+                  {en ? englishContent.view.partnerHeading : "授權經銷品牌"}
                 </h2>
               </div>
               <Link
-                href="/zh-tw/partners"
+                href={`/${locale}/partners`}
                 className="min-h-[44px] whitespace-nowrap font-[800] text-[var(--color-action)] underline underline-offset-[5px]"
               >
-                查看授權經銷品牌
+                {en ? englishContent.view.partnerAction : "查看授權經銷品牌"}
               </Link>
             </RevealSection>
             {partners.map((p, i) => (
@@ -258,14 +277,14 @@ export default function HomePage() {
                 <div className="partner-row flex items-center gap-6 rounded-[var(--product-card-radius)] border border-[var(--color-border)] bg-white p-6 shadow-[0_4px_18px_rgba(11,42,61,.06)] transition-all duration-300 ease-out">
                   <div className="flex h-[104px] w-[184px] flex-shrink-0 items-center justify-center rounded-[8px] bg-white p-2">
                     {p.logo ? (
-                      <Image src={p.logo} alt={p.name} width={368} height={208} className="max-h-full max-w-full object-contain" />
+                      <Image src={p.logo} alt={en ? "Grundfos" : p.name} width={368} height={208} className="max-h-full max-w-full object-contain" />
                     ) : (
                       <span className="text-[11px] font-[700] tracking-[.1em] text-[var(--color-text-muted)]">LOGO</span>
                     )}
                   </div>
                   <div className="min-w-0">
-                    <strong className="text-[var(--font-heading-sm-size)] font-[var(--font-heading-sm-weight)] leading-[var(--font-heading-sm-line-height)] text-[var(--color-primary)]">{p.name}</strong>
-                    <p className="mt-1 text-sm leading-[var(--font-body-line-height)] text-[var(--color-text-muted)]">{p.description}</p>
+                    <strong className="text-[var(--font-heading-sm-size)] font-[var(--font-heading-sm-weight)] leading-[var(--font-heading-sm-line-height)] text-[var(--color-primary)]">{en ? "Grundfos" : p.name}</strong>
+                    <p className="mt-1 text-sm leading-[var(--font-body-line-height)] text-[var(--color-text-muted)]">{en ? englishContent.partners.grundfosSummary : p.description}</p>
                     {p.website && (
                       <a
                         href={p.website}
@@ -273,7 +292,7 @@ export default function HomePage() {
                         rel="noopener noreferrer"
                         className="mt-2 inline-flex min-h-[36px] items-center text-sm font-[700] text-[var(--color-action)] underline underline-offset-[4px]"
                       >
-                        拜訪網站
+                        {en ? englishContent.partners.websiteAction : "拜訪網站"}
                       </a>
                     )}
                   </div>

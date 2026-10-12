@@ -10,7 +10,7 @@ interface SeriesMetadata {
   id: string; brandId: string; name: string; pumpTypeId: string; modelNames: string[];
 }
 interface CatalogBrowserProps {
-  brands: FilterOption[]; pumpTypes: FilterOption[]; series: SeriesMetadata[]; children: ReactNode;
+  brands: FilterOption[]; pumpTypes: FilterOption[]; series: SeriesMetadata[]; children: ReactNode; locale?: "zh-tw" | "en";
 }
 
 function sameCatalogState(a: CatalogFilterState, b: CatalogFilterState) {
@@ -19,14 +19,15 @@ function sameCatalogState(a: CatalogFilterState, b: CatalogFilterState) {
     && a.q === b.q
 }
 
-export default function CatalogBrowser({ brands, pumpTypes, series, children }: CatalogBrowserProps) {
+export default function CatalogBrowser({ brands, pumpTypes, series, children, locale = "zh-tw" }: CatalogBrowserProps) {
+  const en = locale === "en";
   const emptyState = normalizeCatalogQuery(new URLSearchParams(), {
     brandIds: brands.map(({ id }) => id), typeIds: pumpTypes.map(({ id }) => id),
   });
   const [state, setState] = useState(emptyState);
   const latestState = useRef(state);
   const [announcement, setAnnouncement] = useState("");
-  const canonical = catalogHref(state);
+  const canonical = catalogHref(state, locale);
 
   useEffect(() => {
     const syncFromLocation = () => {
@@ -38,8 +39,8 @@ export default function CatalogBrowser({ brands, pumpTypes, series, children }: 
         latestState.current = next;
         setState(next);
       }
-      const nextCanonical = catalogHref(next);
-      const current = `/zh-tw/products${window.location.search}`;
+      const nextCanonical = catalogHref(next, locale);
+      const current = `/${locale}/products${window.location.search}`;
       if (current !== nextCanonical) window.history.replaceState(window.history.state, "", nextCanonical);
     };
     syncFromLocation();
@@ -49,15 +50,15 @@ export default function CatalogBrowser({ brands, pumpTypes, series, children }: 
       window.removeEventListener("popstate", syncFromLocation);
       window.removeEventListener("catalog-location-change", syncFromLocation);
     };
-  }, [brands, pumpTypes]);
+  }, [brands, pumpTypes, locale]);
 
   const transition = useCallback((update: (previous: CatalogFilterState) => CatalogFilterState) => {
     const next = update(latestState.current);
-    const href = catalogHref(next);
+    const href = catalogHref(next, locale);
     latestState.current = next;
     setState(next);
     window.history.pushState(window.history.state, "", href);
-  }, []);
+  }, [locale]);
 
   const query = state.q.toLowerCase();
   const filtered = series.filter((item) =>
@@ -74,23 +75,23 @@ export default function CatalogBrowser({ brands, pumpTypes, series, children }: 
     });
   }, [visibleIdsKey]);
   useEffect(() => {
-    const timer = window.setTimeout(() => setAnnouncement(`目前顯示 ${filtered.length} 個產品系列`), 400);
+    const timer = window.setTimeout(() => setAnnouncement(en ? `Showing ${filtered.length} product series` : `目前顯示 ${filtered.length} 個產品系列`), 400);
     return () => window.clearTimeout(timer);
-  }, [filtered.length, canonical]);
+  }, [filtered.length, canonical, en]);
 
   return (
     <div className="flex flex-col gap-6 md:flex-row">
-        <CatalogFilter brands={brands} pumpTypes={pumpTypes} state={state} onChange={transition} />
+        <CatalogFilter brands={brands} pumpTypes={pumpTypes} state={state} onChange={transition} locale={locale} />
       <div className="min-w-0 flex-1">
-        <p data-testid="catalog-result-count" className="mb-4 text-sm font-[650] text-[var(--color-text)]">共 {filtered.length} 個產品系列</p>
+        <p data-testid="catalog-result-count" className="mb-4 text-sm font-[650] text-[var(--color-text)]">{en ? `${filtered.length} product series` : `共 ${filtered.length} 個產品系列`}</p>
         <p role="status" aria-live="polite" aria-atomic="true" className="sr-only">{announcement}</p>
         {filtered.length === 0 && (
           <div data-testid="catalog-empty-state" className="mb-5 rounded-[var(--product-card-radius)] border border-dashed border-[var(--color-border)] bg-white p-8 text-center shadow-[var(--product-card-shadow)]">
-            <p className="text-lg font-[700] text-[var(--color-primary)]">沒有符合目前條件的產品。</p>
-            <p className="mt-2 text-sm text-[var(--color-text-muted)]">目前條件會保留，您可個別移除條件、重設全部條件，或聯絡我們確認需求。</p>
+            <p className="text-lg font-[700] text-[var(--color-primary)]">{en ? "No products match these filters." : "沒有符合目前條件的產品。"}</p>
+            <p className="mt-2 text-sm text-[var(--color-text-muted)]">{en ? "Remove a filter, reset all filters, or contact us to discuss your requirements." : "目前條件會保留，您可個別移除條件、重設全部條件，或聯絡我們確認需求。"}</p>
             <div className="mt-4 flex flex-wrap justify-center gap-3">
-              <button type="button" onClick={() => transition(() => ({ brand: null, type: null, q: "" }))} className="inline-flex min-h-[44px] items-center px-4 text-sm font-[650] text-[var(--color-action)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]">重設全部條件</button>
-              <Link href="/zh-tw/contact" className="inline-flex min-h-[44px] items-center px-4 text-sm font-[650] text-[var(--color-action)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]">聯絡我們</Link>
+              <button type="button" onClick={() => transition(() => ({ brand: null, type: null, q: "" }))} className="inline-flex min-h-[44px] items-center px-4 text-sm font-[650] text-[var(--color-action)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]">{en ? "Reset all filters" : "重設全部條件"}</button>
+              <Link href={`/${locale}/contact`} className="inline-flex min-h-[44px] items-center px-4 text-sm font-[650] text-[var(--color-action)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]">{en ? "Contact us" : "聯絡我們"}</Link>
             </div>
           </div>
         )}

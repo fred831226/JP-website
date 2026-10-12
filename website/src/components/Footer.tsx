@@ -32,19 +32,25 @@ const footerNavigation: NavItem[] = [
   nav.contact as NavItem,
 ];
 
-export default function Footer() {
+export default function Footer({ locale = "zh-tw" }: { locale?: "zh-tw" | "en" }) {
+  const en = locale === "en";
+  const navigation = en ? [
+    { label: "Home", href: "/en" }, { label: "Products", href: "/en/products" },
+    { label: "Company", href: "/en/company" }, { label: "Partners", href: "/en/partners" },
+    { label: "Contact", href: "/en/contact" },
+  ] : footerNavigation;
   return (
     <footer className="bg-[var(--footer-bg)] text-[var(--footer-fg)]">
       <div className="mx-auto grid max-w-[var(--content-max)] gap-8 px-[var(--page-gutter-desktop)] py-9 max-md:px-[var(--page-gutter-mobile)] md:grid-cols-[1.2fr_3.35fr] md:gap-12">
-        <section aria-label="品牌資訊" className="flex flex-col items-start">
+        <section aria-label={en ? "Brand information" : "品牌資訊"} className="flex flex-col items-start">
           <Image src="/media/jp-pump-logo-edited.png" alt="JP PUMP" width={360} height={144} className="h-24 w-auto object-contain object-left" />
-          <p className="mt-4 text-xl font-[750] tracking-[0.02em] text-[var(--color-on-primary)]">{footer.displayName}</p>
-          <p className="mt-1 text-sm tracking-[0.12em] text-[var(--color-contact-text-muted)]">{footer.tagline}</p>
+          <p className="mt-4 text-xl font-[750] tracking-[0.02em] text-[var(--color-on-primary)]">{en ? "JIEPING CO., LTD" : footer.displayName}</p>
+          <p className="mt-1 text-sm tracking-[0.12em] text-[var(--color-contact-text-muted)]">{en ? "JP PUMP" : footer.tagline}</p>
         </section>
 
         <div>
-          <nav aria-label="頁尾導覽" className="flex min-h-[52px] flex-wrap items-start gap-x-8 gap-y-1 border-b border-white/20 pb-3 max-md:gap-x-5">
-            {footerNavigation.map((item) => (
+          <nav aria-label={en ? "Footer navigation" : "頁尾導覽"} className="flex min-h-[52px] flex-wrap items-start gap-x-8 gap-y-1 border-b border-white/20 pb-3 max-md:gap-x-5">
+            {navigation.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -57,13 +63,13 @@ export default function Footer() {
 
           <div className="pt-6">
             <section aria-labelledby="footer-office-title">
-              <h2 id="footer-office-title" className="text-sm font-[750] text-[var(--color-on-primary)]">{footer.headOfficeTitle}</h2>
+              <h2 id="footer-office-title" className="text-sm font-[750] text-[var(--color-on-primary)]">{en ? "Head office" : footer.headOfficeTitle}</h2>
               <address className="mt-4 flex not-italic flex-col gap-2 text-sm leading-6 text-[var(--color-contact-text-muted)]">
-                <a href={`tel:${contact.phone}`} className="transition-colors hover:text-[var(--color-on-primary)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2">電話：{contact.phone}</a>
+                <a href={`tel:${contact.phone}`} className="transition-colors hover:text-[var(--color-on-primary)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2">{en ? "Phone" : "電話"}：{contact.phone}</a>
                 {contactEmails.map((email) => (
-                  <a key={email} href={`mailto:${email}`} className="transition-colors hover:text-[var(--color-on-primary)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2">信箱：{email}</a>
+                  <a key={email} href={`mailto:${email}`} className="transition-colors hover:text-[var(--color-on-primary)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2">{en ? "Email" : "信箱"}：{email}</a>
                 ))}
-                <span>地址：{contact.address}</span>
+                <span>{en ? "Address: 1 F., No. 90, Sec. 2, Shuiyuan Rd., Xizhi Dist., New Taipei City 22162, Taiwan (R.O.C.)" : `地址：${contact.address}`}</span>
               </address>
             </section>
 

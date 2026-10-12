@@ -6,8 +6,8 @@ export function floorCatalogNumber(value: string | null | undefined): string | n
   return String(Math.floor(numericValue));
 }
 
-export function formatCatalogRange(min: string | null, max: string | null): string {
+export function formatCatalogRange(min: string | null, max: string | null, missing = "未提供"): string {
   const formattedMin = floorCatalogNumber(min);
   const formattedMax = floorCatalogNumber(max);
-  return formattedMin !== null && formattedMax !== null ? `${formattedMin}–${formattedMax}` : "未提供";
+  return formattedMin !== null && formattedMax !== null ? `${formattedMin.replace("小於 1", missing === "未提供" ? "小於 1" : "Less than 1")}–${formattedMax.replace("小於 1", missing === "未提供" ? "小於 1" : "Less than 1")}` : missing;
 }

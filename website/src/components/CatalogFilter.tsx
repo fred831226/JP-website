@@ -13,9 +13,11 @@ interface CatalogFilterProps {
   pumpTypes: FilterOption[];
   state: CatalogFilterState;
   onChange: (update: (previous: CatalogFilterState) => CatalogFilterState) => void;
+  locale?: "zh-tw" | "en";
 }
 
-export default function CatalogFilter({ brands, pumpTypes, state, onChange }: CatalogFilterProps) {
+export default function CatalogFilter({ brands, pumpTypes, state, onChange, locale = "zh-tw" }: CatalogFilterProps) {
+  const en = locale === "en";
   const lastStateQuery = useRef(state.q);
   const searchValue = useRef(state.q);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -81,12 +83,12 @@ export default function CatalogFilter({ brands, pumpTypes, state, onChange }: Ca
   const hasFilters = currentBrand || currentType || currentQ;
 
   return (
-    <aside className="w-full shrink-0 md:w-64 md:border-r md:border-[var(--color-border)] md:pr-6" aria-label="產品篩選">
+    <aside className="w-full shrink-0 md:w-64 md:border-r md:border-[var(--color-border)] md:pr-6" aria-label={en ? "Product filters" : "產品篩選"}>
       <div className="space-y-7">
         {/* Search */}
         <div>
           <label htmlFor="catalog-search" className="text-xs font-[750] uppercase tracking-[0.08em] text-[var(--color-text)]">
-            搜尋
+            {en ? "Search" : "搜尋"}
           </label>
           <input
             id="catalog-search"
@@ -94,14 +96,14 @@ export default function CatalogFilter({ brands, pumpTypes, state, onChange }: Ca
             type="text"
             defaultValue={state.q}
             onChange={(event) => updateSearch(event.currentTarget.value)}
-            placeholder="系列名稱或型號..."
+            placeholder={en ? "Series name or model..." : "系列名稱或型號..."}
             className="catalog-filter-search mt-2 block min-h-[45px] w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white px-3 py-2 text-sm shadow-[0_3px_10px_rgba(11,42,61,0.06)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]"
           />
         </div>
 
         {/* Brand */}
         <fieldset className="border-t border-[var(--color-border)] pt-5">
-          <legend className="text-xs font-[750] uppercase tracking-[0.08em] text-[var(--color-text)]">品牌</legend>
+          <legend className="text-xs font-[750] uppercase tracking-[0.08em] text-[var(--color-text)]">{en ? "Brand" : "品牌"}</legend>
           <div className="mt-3 space-y-1">
             <button
               type="button"
@@ -111,7 +113,7 @@ export default function CatalogFilter({ brands, pumpTypes, state, onChange }: Ca
               onClick={() => setBrand(null)}
               aria-pressed={!currentBrand}
             >
-              全部
+              {en ? "All" : "全部"}
             </button>
             {brands.map((b) => (
               <button
@@ -131,8 +133,8 @@ export default function CatalogFilter({ brands, pumpTypes, state, onChange }: Ca
 
         {/* Pump Type */}
         <fieldset className="border-t border-[var(--color-border)] pt-5">
-          <legend className="text-xs font-[750] uppercase tracking-[0.08em] text-[var(--color-text)]">泵浦類型</legend>
-          <div className="mt-3 space-y-1" role="group" aria-label="泵浦類型">
+          <legend className="text-xs font-[750] uppercase tracking-[0.08em] text-[var(--color-text)]">{en ? "Pump type" : "泵浦類型"}</legend>
+          <div className="mt-3 space-y-1" role="group" aria-label={en ? "Pump type" : "泵浦類型"}>
             {pumpTypes.map((t) => {
               const active = currentType === t.id;
               return (
@@ -155,7 +157,7 @@ export default function CatalogFilter({ brands, pumpTypes, state, onChange }: Ca
         {/* Keep reset available without rendering selected-condition tags. */}
         {hasFilters && (
           <button type="button" onClick={clearAll} className="inline-flex min-h-[44px] items-center text-xs text-[var(--color-action)] hover:underline focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)]">
-            重設全部條件
+            {en ? "Reset all filters" : "重設全部條件"}
           </button>
         )}
       </div>
