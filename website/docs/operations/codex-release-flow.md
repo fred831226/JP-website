@@ -47,6 +47,19 @@ Owner 於 2026-10-12 明確授權本次候選略過開發工具鏈中
 Preview、其他 required gates 與 Production 授權維持原要求。原始完整
 `npm audit --audit-level=high` 的結果仍須記錄為未通過，不得宣稱零警示。
 
+### 僅限 Hero 動畫候選的一次性稽核處置
+
+Owner 於 2026-10-14 授權為本次 Hero 候選處置既有開發工具鏈的稽核阻擋。
+`codex/hero-release-20261014` 的 Release gates 仍執行完整 `npm audit`；
+只有報告精確包含 `GHSA-vfj7-8cjw-p6xm` 及其四層相依鏈共五筆 High、
+正式環境依賴稽核為零筆、lockfile SHA-256 為
+`c9a2ba644e991237bb64c8e4eafb5371c8540342cdd19372c77b299277af53ca`、
+四份 Hero 產品與測試檔的內容雜湊符合已確認候選、PR branch/base/head 與
+實際變更檔案清單完全符合時，才可記錄例外並讓 audit gate 有條件通過。
+此處置於 2026-10-16 23:59（台灣時間）失效；任何額外警示或檔案變更都停止發布。
+原始完整稽核結果須保留為未通過，其他 gates、Preview QA 與特定部署的
+Production 授權仍須完成。
+
 ## 候選準備與停止點
 
 「準備並合併 JP PUMP 候選發布」只授權在完成下列 gates 後，對**本次確認的候選**

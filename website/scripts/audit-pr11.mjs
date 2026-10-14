@@ -35,15 +35,38 @@ const candidateChangedPaths = [
   "website/tests/release/release-contract.test.mjs",
   "website/docs/operations/codex-release-flow.md",
 ].sort();
+const heroCandidateBranch = "codex/hero-release-20261014";
+const heroCandidateExpiresAt = "2026-10-16T23:59:59+08:00";
+const heroCandidateFiles = {
+  "website/src/app/globals.css": "e0d93f49839ac870fbff814266c16e1c9ec3c5d3e5ac357f47143828281f4a3e",
+  "website/src/components/HeroCarousel.tsx": "bf19f36e23a6cb2c9b0bdbe67f66e182a1089a8c21a79b86221c257c702ed55d",
+  "website/tests/e2e/home-polish.spec.ts": "bbeba93840383d98833411a85401fa5401effdde9b3ad16c5e1ce001912661b1",
+  "website/tests/e2e/hero-zoom.spec.ts": "cd9aaaceba0126a66e0565cac744be633d54955d9e5572aad98eeab629eb9fbc",
+};
+const heroCandidateChangedPaths = [
+  ...Object.keys(heroCandidateFiles),
+  "website/scripts/audit-pr11.mjs",
+  "website/scripts/release-contract.mjs",
+  "website/tests/release/release-contract.test.mjs",
+  "website/docs/operations/codex-release-flow.md",
+].sort();
 
-function candidateContentHash() {
-  const actual = Object.keys(candidateFiles).map((path) => {
+function contentHash(files) {
+  const actual = Object.keys(files).map((path) => {
     const normalized = readFileSync(resolve(websiteRoot, "..", path), "utf8").replaceAll("\r\n", "\n");
     const hash = createHash("sha256").update(normalized).digest("hex");
-    if (hash !== candidateFiles[path]) throw new Error(`Candidate file changed: ${path}`);
+    if (hash !== files[path]) throw new Error(`Candidate file changed: ${path}`);
     return `${path}:${hash}`;
   }).join("\n");
   return createHash("sha256").update(actual).digest("hex");
+}
+
+function candidateContentHash() {
+  return contentHash(candidateFiles);
+}
+
+export function heroCandidateContentHash() {
+  return contentHash(heroCandidateFiles);
 }
 
 export function lockedDependencyHash() {
@@ -51,13 +74,13 @@ export function lockedDependencyHash() {
   return createHash("sha256").update(normalized).digest("hex");
 }
 
-function hasExactCandidateChanges() {
+function hasExactCandidateChanges(expectedPaths) {
   const result = spawnSync("git", ["diff", "--name-only", "origin/main...HEAD"], {
     cwd: resolve(websiteRoot, ".."), encoding: "utf8",
   });
   if (result.status !== 0) return false;
   const paths = result.stdout.trim().split(/\r?\n/).filter(Boolean).sort();
-  return JSON.stringify(paths) === JSON.stringify(candidateChangedPaths);
+  return JSON.stringify(paths) === JSON.stringify(expectedPaths);
 }
 
 function runAudit(args) {
@@ -118,30 +141,38 @@ async function isThisPullRequest() {
   return pr.state === "open" && pr.head?.sha === candidate && pr.head?.ref === "codex/english-site-release" && pr.base?.ref === "main";
 }
 
-async function isThisCandidate() {
+async function isScopedCandidate(branch, expiresAt, files, changedPaths) {
   const candidate = process.env.CANDIDATE_SHA;
   if (!/^[a-f0-9]{40}$/.test(candidate ?? "")
     || process.env.GITHUB_REPOSITORY !== "fred831226/JP-website"
     || !["pull_request", "workflow_dispatch"].includes(process.env.GITHUB_EVENT_NAME ?? "")
-    || new Date() > new Date(candidateExpiresAt)) return false;
+    || new Date() > new Date(expiresAt)) return false;
   const lockHash = lockedDependencyHash();
   if (lockHash !== candidateLockHash) return false;
-  candidateContentHash();
-  if (!hasExactCandidateChanges()) return false;
+  contentHash(files);
+  if (!hasExactCandidateChanges(changedPaths)) return false;
   if (process.env.GITHUB_EVENT_NAME === "pull_request") {
     const event = JSON.parse(readFileSync(process.env.GITHUB_EVENT_PATH, "utf8"));
     return event.pull_request?.head?.sha === candidate
-      && event.pull_request?.head?.ref === candidateBranch
+      && event.pull_request?.head?.ref === branch
       && event.pull_request?.base?.ref === "main"
       && event.pull_request?.state === "open";
   }
-  if (process.env.GITHUB_REF_NAME !== candidateBranch || !process.env.GITHUB_TOKEN) return false;
-  const response = await fetch(`https://api.github.com/repos/fred831226/JP-website/pulls?state=open&head=fred831226:${candidateBranch}&base=main`, {
+  if (process.env.GITHUB_REF_NAME !== branch || !process.env.GITHUB_TOKEN) return false;
+  const response = await fetch(`https://api.github.com/repos/fred831226/JP-website/pulls?state=open&head=fred831226:${branch}&base=main`, {
     headers: { Authorization: `Bearer ${process.env.GITHUB_TOKEN}`, Accept: "application/vnd.github+json" },
   });
   if (!response.ok) return false;
   const prs = await response.json();
-  return prs.some((pr) => pr.head?.sha === candidate && pr.head?.ref === candidateBranch && pr.base?.ref === "main");
+  return prs.some((pr) => pr.head?.sha === candidate && pr.head?.ref === branch && pr.base?.ref === "main");
+}
+
+async function isThisCandidate() {
+  return isScopedCandidate(candidateBranch, candidateExpiresAt, candidateFiles, candidateChangedPaths);
+}
+
+async function isHeroCandidate() {
+  return isScopedCandidate(heroCandidateBranch, heroCandidateExpiresAt, heroCandidateFiles, heroCandidateChangedPaths);
 }
 
 async function main() {
@@ -155,7 +186,8 @@ async function main() {
   }
   const pr11 = await isThisPullRequest();
   const scopedCandidate = !pr11 && await isThisCandidate();
-  if ((!pr11 && !scopedCandidate) || !isOnlyApprovedAdvisory(complete.report))
+  const heroCandidate = !pr11 && !scopedCandidate && await isHeroCandidate();
+  if ((!pr11 && !scopedCandidate && !heroCandidate) || !isOnlyApprovedAdvisory(complete.report))
     throw new Error("Complete dependency audit failed outside the exact approved braces exceptions");
   const production = runAudit(["--omit=dev"]);
   if (production.status !== 0 || production.report.metadata?.vulnerabilities?.total !== 0) {
@@ -163,9 +195,9 @@ async function main() {
   }
   const exception = pr11
     ? { prNumber: 11, advisory, lockfileSha256: expectedLockHash, sourceCommit: process.env.CANDIDATE_SHA }
-    : { candidate: candidateBranch, advisory, lockfileSha256: candidateLockHash, contentSha256: candidateContentHash(), sourceCommit: process.env.CANDIDATE_SHA };
+    : { candidate: heroCandidate ? heroCandidateBranch : candidateBranch, advisory, lockfileSha256: candidateLockHash, contentSha256: heroCandidate ? heroCandidateContentHash() : candidateContentHash(), sourceCommit: process.env.CANDIDATE_SHA };
   writeFileSync(process.env.AUDIT_EXCEPTION_REPORT, JSON.stringify(exception));
-  console.warn(`One-time ${pr11 ? "PR #11" : candidateBranch} exception: ${advisory} is confined to development tooling; production dependencies have no audit findings.`);
+  console.warn(`One-time ${pr11 ? "PR #11" : heroCandidate ? heroCandidateBranch : candidateBranch} exception: ${advisory} is confined to development tooling; production dependencies have no audit findings.`);
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

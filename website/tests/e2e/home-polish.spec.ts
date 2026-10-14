@@ -6,19 +6,19 @@ test("首頁不顯示情境示意標籤", async ({ page }) => {
   await expect(page.getByText("首頁氣氛／情境示意參考 · 非建案實績或工程成果證據")).toHaveCount(0);
 });
 
-test("首頁 Hero 保留精簡搜尋卡片與無障礙主標題", async ({ page }) => {
+test("首頁 Hero 保留精簡搜尋卡片與無障礙主標題，沒有公司字樣", async ({ page }) => {
   await page.goto("/zh-tw");
 
   await expect(page.getByText("以扎實經驗，守護每一套泵浦系統")).toHaveCount(0);
   await expect(page.getByText("從設備選擇到工程服務，以清楚且可核實的資訊協助客戶找到合適方向。")).toHaveCount(0);
   await expect(page.getByRole("heading", { name: "JP PUMP", level: 1 })).toBeAttached();
-  await expect(page.getByRole("img", { name: "傑平有限公司", exact: true })).toHaveCount(0);
+  await expect(page.locator(".home-hero-wordmark")).toHaveCount(0);
   const heroPanel = page.locator(".home-hero-panel");
   await expect(heroPanel).toHaveCount(1);
   await expect(heroPanel).not.toHaveClass(/md:w-\[32%\]/);
-  await expect(heroPanel).toHaveCSS("animation-duration", "4s");
-  await expect(heroPanel).toHaveCSS("animation-delay", "0.2s");
-  await expect(page.locator(".home-hero-wordmark")).toHaveCount(0);
+  await expect(heroPanel).toHaveCSS("animation-duration", "6s");
+  await expect(heroPanel).toHaveCSS("animation-delay", "0.1s");
+  await expect(heroPanel).toHaveCSS("animation-timing-function", "cubic-bezier(0.4, 0, 0.2, 1)");
   const heroLink = page.getByRole("link", { name: "認識我們" });
   await expect(heroLink).toHaveCSS("display", "flex");
   const kickerBox = await page.getByText("可靠歷史 · 工程能力 · 快速回應").boundingBox();
