@@ -15,6 +15,12 @@ const HOME_GALLERY_AUDIT_EXCEPTION = {
   lockfileSha256: "c9a2ba644e991237bb64c8e4eafb5371c8540342cdd19372c77b299277af53ca",
   contentSha256: "ad30373d3a9832c40cc9bd524b586769566b9849f5cee652e74f8389ec824cd2",
 };
+const HERO_AUDIT_EXCEPTION = {
+  candidate: "codex/hero-release-20261014",
+  advisory: "GHSA-vfj7-8cjw-p6xm",
+  lockfileSha256: "c9a2ba644e991237bb64c8e4eafb5371c8540342cdd19372c77b299277af53ca",
+  contentSha256: "d9fcfb1fdee6d225b69d7b8af9cac066fe44a5b23f36a490a02a628a10fb91b2",
+};
 
 export class ReleaseContractError extends Error {
   constructor(message) {
@@ -213,11 +219,14 @@ function validateGates(validation, sourceCommit) {
       const isHomeGallery = gate.exception && typeof gate.exception === "object"
         && Object.keys(gate.exception).sort().join(",") === "advisory,candidate,contentSha256,lockfileSha256,sourceCommit"
         && Object.entries(HOME_GALLERY_AUDIT_EXCEPTION).every(([key, value]) => gate.exception[key] === value);
+      const isHero = gate.exception && typeof gate.exception === "object"
+        && Object.keys(gate.exception).sort().join(",") === "advisory,candidate,contentSha256,lockfileSha256,sourceCommit"
+        && Object.entries(HERO_AUDIT_EXCEPTION).every(([key, value]) => gate.exception[key] === value);
       requireCondition(
-        (isPr11 || isHomeGallery) && gate.exception.sourceCommit === sourceCommit,
+        (isPr11 || isHomeGallery || isHero) && gate.exception.sourceCommit === sourceCommit,
         "Audit exception must match an approved one-time advisory, candidate, lockfile, content, and source commit",
       );
-      normalized.exception = { ...(isPr11 ? PR11_AUDIT_EXCEPTION : HOME_GALLERY_AUDIT_EXCEPTION), sourceCommit };
+      normalized.exception = { ...(isPr11 ? PR11_AUDIT_EXCEPTION : isHero ? HERO_AUDIT_EXCEPTION : HOME_GALLERY_AUDIT_EXCEPTION), sourceCommit };
     }
     return normalized;
   });

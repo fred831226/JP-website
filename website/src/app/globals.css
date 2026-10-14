@@ -31,6 +31,17 @@
 /* ==========================================================================
    Hero animations — static elements
    ========================================================================== */
+@keyframes home-hero-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+
+.home-hero-image[data-zoom="true"] {
+  animation-name: home-hero-zoom;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+
 @keyframes page-banner-reveal {
   from {
     opacity: 0;
@@ -61,23 +72,8 @@
   }
 }
 
-.home-hero-wordmark {
-  animation: home-hero-wordmark-arrive 4s cubic-bezier(.16, 1, .3, 1) .2s both;
-}
-
-@keyframes home-hero-wordmark-arrive {
-  from {
-    opacity: 0;
-    transform: translateX(-32px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 .home-hero-panel {
-  animation: home-hero-panel-arrive 4s cubic-bezier(.16, 1, .3, 1) .2s both;
+  animation: home-hero-panel-arrive 6s cubic-bezier(.4, 0, .2, 1) .1s both;
 }
 
 @keyframes ping-soft {
@@ -581,7 +577,16 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .home-hero-wordmark,
+  .home-hero-image {
+    animation: none;
+    transition: none;
+  }
+  .home-hero-image:not(:last-of-type) {
+    opacity: 0;
+  }
+  .home-hero-image:last-of-type {
+    opacity: 1;
+  }
   .home-hero-panel,
   .page-banner-reveal {
     animation: none;
