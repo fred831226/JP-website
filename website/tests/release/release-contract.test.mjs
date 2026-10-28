@@ -380,7 +380,7 @@ test("Hero audit exception is bound to exact content, branch, lockfile, advisory
 });
 
 test("the locked dependency hash is stable across checkout line endings", () => {
-  assert.equal(lockedDependencyHash(), "c9a2ba644e991237bb64c8e4eafb5371c8540342cdd19372c77b299277af53ca");
+  assert.equal(lockedDependencyHash(), "a48d1bd7ef89168834b88f05bae1950222761c28df79147f134ea80e19f15cd9");
 });
 
 test("rollback evidence must be a different ready Production deployment from the same project", () => {
