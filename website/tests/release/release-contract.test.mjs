@@ -210,6 +210,19 @@ test("repository change classification covers atomic public surfaces and ignores
   });
 });
 
+test("bilingual release evidence includes every published English route touched by shared and English content", () => {
+  const routes = { all: ["/zh-tw/", "/zh-tw/company", "/zh-tw/services", "/en", "/en/company", "/en/products"] };
+  const classified = classifyRepositoryChanges([
+    { status: "M", path: "website/src/app/[locale]/page.tsx" },
+    { status: "M", path: "website/src/data/en.json" },
+    { status: "M", path: "website/src/data/home.json" },
+  ], routes);
+  assert.deepEqual(classified.affectedRoutes, ["/en", "/en/company", "/en/products", "/zh-tw/"]);
+  assert.deepEqual(classifyRepositoryChanges([
+    { status: "M", path: "website/src/app/[locale]/services/page.tsx" },
+  ], routes).affectedRoutes, ["/zh-tw/services"]);
+});
+
 test("stable governed records are classified at content level and expose route-changing removals", () => {
   const baseSnapshots = {
     "website/data/catalog-content.json": {

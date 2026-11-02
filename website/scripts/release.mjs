@@ -59,7 +59,7 @@ async function probePreview(url) {
   const bypassSecret = requireEnvironment("VERCEL_AUTOMATION_BYPASS_SECRET");
   const headers = { "x-vercel-protection-bypass": bypassSecret };
   // The public application deliberately redirects the deployment root to its
-  // only V1 locale. Probe the canonical public route directly so redirects
+  // default locale. Probe the canonical public route directly so redirects
   // remain forbidden for the response we treat as release evidence.
   const publicEntry = new URL("/zh-tw", url).toString();
   const [page, robots, sitemap] = await Promise.all([
@@ -159,6 +159,11 @@ async function getRouteInventory() {
     "/zh-tw/contact",
     "/zh-tw/partners",
     "/zh-tw/services",
+    "/en",
+    "/en/company",
+    "/en/contact",
+    "/en/partners",
+    "/en/products",
   ]);
   return { all: [...all].sort(), catalog: [...catalogRoutes].sort() };
 }
