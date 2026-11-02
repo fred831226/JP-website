@@ -7,10 +7,9 @@
     },
     "ctaLabel": "認識我們",
     "ctaHref": "/zh-tw/company",
-    "images": ["/media/homepage-hero-taiwan-riverside.webp", "/media/hero-01.jpg", "/media/hero-02.png"]
+    "images": ["/media/homepage-hero-taiwan-riverside.webp", "/media/hero-01-restored.webp", "/media/hero-02-restored.webp"]
   },
   "companySummary": {
-    "heading": "用可核實的經驗，建立長期工程信任",
     "body": "自 1998 年在台灣成立以來，傑平有限公司（JP PUMP）始終以客戶的長期需求為出發點。我們不只負責泵浦設備的安裝與維修，更參與整套泵浦系統的工程規劃，協助客戶因應不同場域的使用條件。\n我們希望成為客戶在每個工程階段都能信賴的夥伴，合作經驗亦延伸至日本、越南及帛琉。"
   },
   "projectGallery": {

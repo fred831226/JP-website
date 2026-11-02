@@ -7,6 +7,7 @@ import DropdownMenu from "./DropdownMenu";
 import MobileMenu from "./MobileMenu";
 import LanguageSwitch from "./LanguageSwitch";
 import navData from "@/data/site.json";
+import companyData from "@/data/company.json";
 
 interface NavItem {
   label: string;
@@ -115,14 +116,22 @@ export default function Header({ locale = "zh-tw" }: { locale?: "zh-tw" | "en" }
   const isActive = (href: string) => pathname === href;
 
   return (
-    <header className="relative z-40 border-b border-[var(--color-border)] bg-white">
+    <header className="sticky top-0 z-40 border-b border-[var(--color-border)] bg-white shadow-[0_6px_20px_rgba(11,42,61,.10)]">
       <div className="mx-auto flex h-16 max-w-[var(--content-max)] items-center justify-between px-[var(--page-gutter-desktop)] max-md:px-[var(--page-gutter-mobile)]">
         <Link
           href={en ? "/en" : "/zh-tw"}
-          className="flex min-h-[44px] items-center focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2"
-          aria-label={en ? "Home" : "回首頁"}
+          className="flex min-h-[44px] shrink-0 items-center gap-2 focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2"
+          aria-label={en ? "JIEPING CO., LTD., Home" : `${companyData.name}，回首頁`}
         >
-          <Image src="/media/jp-pump-logo.png" alt="JP PUMP" width={240} height={96} className="h-12 w-auto" />
+          <Image src="/media/jp-pump-logo.png" alt="" width={190} height={188} className="h-12 w-12 object-contain" />
+          <span className="flex flex-col whitespace-nowrap leading-tight">
+            <span className="text-[17px] font-[800] tracking-[0.02em] text-[var(--color-primary)] sm:text-[19px]">
+              {en ? "JIEPING CO., LTD" : companyData.name}
+            </span>
+            <span className="mt-0.5 text-[10px] font-[650] tracking-[0.05em] text-[var(--color-text-muted)] sm:text-[11px]">
+              {en ? "JP PUMP" : "JIEPING CO., LTD"}
+            </span>
+          </span>
         </Link>
 
         {/* Desktop nav */}

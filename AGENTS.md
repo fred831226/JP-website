@@ -4,7 +4,7 @@ This file is the shared project instruction for coding and review agents. It app
 
 ## Mission
 
-Build JP PUMP's public, Traditional Chinese, industrial B2B website. The V1 experience must help professional buyers find, understand, trust, and contact JP PUMP through approved evidence and readable product specifications.
+Build JP PUMP's public, Traditional Chinese and approved English, industrial B2B website. The V1 experience must help professional buyers find, understand, trust, and contact JP PUMP through approved evidence and readable product specifications.
 
 Communicate with the project owner in Traditional Chinese unless another language is requested. Keep code identifiers and established technical terms in English.
 
@@ -19,7 +19,7 @@ Read the documents relevant to the task before making decisions:
 - Interaction and responsive behavior: `_bmad-output/planning-artifacts/ux-designs/ux-JP-website-2026-07-21/EXPERIENCE.md`
 - Delivery order and acceptance criteria: `_bmad-output/planning-artifacts/epics.md`
 
-Finalized PRD, architecture, reconciliation, UX, and epic documents are authoritative. Files under review or polish folders are supporting evidence, not replacement decisions. If authoritative documents genuinely conflict, report the exact conflict instead of inventing a resolution.
+The English V1 scope amendment in `website/docs/product/english-v1-scope.md` records the owner-approved change to the historical Chinese-only requirement. Finalized PRD, architecture, reconciliation, UX, and epic documents remain authoritative for all other decisions. Files under review or polish folders are supporting evidence, not replacement decisions. If authoritative documents genuinely conflict, report the exact conflict instead of inventing a resolution.
 
 Treat planning artifacts as read-only during implementation or validation unless the task explicitly asks to change requirements or planning.
 
@@ -56,7 +56,7 @@ Until that migration is completed, distinguish planned architecture gaps from ne
 - Prefer Server Components and static generation. Use small Client Components only for real browser state or interaction.
 - Keep public content and governed data in version-controlled, schema-validated repository files.
 - V1 has no CMS, database, ORM, authentication, admin UI, management API, runtime writes, server-side contact form, analytics, RUM, or application backend.
-- Publish only Traditional Chinese routes under `/zh-tw/`; do not create placeholder or machine-translated `/en/` pages.
+- Publish Traditional Chinese routes under `/zh-tw/` and the owner-approved English routes under `/en/` listed in `website/docs/product/english-v1-scope.md`. New English content requires independent owner review before publication; do not create empty or fallback-copied pages.
 - Do not add News, individual Project detail routes, arbitrary indexable filter pages, or Model detail pages.
 - Contact uses approved `tel:` and `mailto:` actions. Optional LINE, hours, FAQ, or map content appears only when approved.
 - Never invent product values, claims, partner relationships, project evidence, contact details, translations, images, rights, or approvals.
