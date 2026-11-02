@@ -148,7 +148,7 @@
   background:
     linear-gradient(112deg, transparent 0 42%, rgba(0, 109, 143, 0.05) 42.1% 42.7%, transparent 42.8% 100%),
     radial-gradient(ellipse 48% 88% at 92% 52%, rgba(0, 109, 143, 0.14), transparent 72%),
-    linear-gradient(135deg, #ffffff 0%, #f4f8f9 54%, #e6f0f3 100%);
+    linear-gradient(135deg, #f5f9fa 0%, #eaf2f5 54%, #e1edf1 100%);
 }
 
 .company-preview::after {
@@ -170,8 +170,8 @@
    ======================================================================== */
 .project-gallery-section {
   background:
-    radial-gradient(ellipse 48% 72% at 100% 14%, rgba(0,109,143,.10), transparent 70%),
-    linear-gradient(180deg, var(--color-surface) 0%, var(--color-background) 100%);
+    radial-gradient(ellipse 48% 72% at 100% 14%, rgba(0,109,143,.055), transparent 70%),
+    var(--color-surface);
 }
 .project-gallery-grid {
   display: grid;
@@ -247,6 +247,42 @@
 }
 
 /* ==========================================================================
+   Home sections — alternating surfaces with a restrained angled seam
+   ========================================================================== */
+.home-seam {
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: clamp(24px, 4vw, 48px);
+  background: var(--seam-next);
+  pointer-events: none;
+}
+.home-seam--right {
+  clip-path: polygon(0 100%, 100% 0, 100% 100%);
+}
+.home-seam--left {
+  clip-path: polygon(0 0, 0 100%, 100% 100%);
+}
+.company-preview { --seam-next: var(--color-surface); }
+.project-gallery-section { --seam-next: #edf3f5; }
+.home-product-section { --seam-next: #dfeaf0; }
+.gateways-section { --seam-next: var(--color-surface); }
+
+.home-product-section {
+  background:
+    radial-gradient(ellipse 60% 46% at 86% 14%, rgba(0, 109, 143, .075), transparent 70%),
+    #edf3f5;
+}
+
+.home-partners-section {
+  background:
+    radial-gradient(ellipse 52% 62% at 8% 45%, rgba(0, 109, 143, .055), transparent 72%),
+    var(--color-surface);
+}
+
+/* ==========================================================================
    Product type card hover
    ========================================================================== */
 .product-type-card {
@@ -265,17 +301,25 @@
    ======================================================================== */
 .gateways-section {
   background:
-    linear-gradient(rgba(0, 109, 143, .045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 109, 143, .045) 1px, transparent 1px);
-  background-size: 48px 48px, 48px 48px;
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
+    radial-gradient(ellipse 54% 52% at 10% 38%, rgba(0, 109, 143, .075), transparent 72%),
+    #dfeaf0;
+}
+.gateways-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0, 109, 143, .035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 109, 143, .035) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 78%, transparent 100%);
 }
 
 .gateway {
   isolation: isolate;
   background: var(--color-primary);
-  transition: transform .32s cubic-bezier(.2,.7,.2,1), border-color .32s ease, box-shadow .32s ease;
+  transition: transform .32s cubic-bezier(.2,.7,.2,1), box-shadow .32s ease;
 }
 .gateway-media img {
   display: block;
@@ -299,7 +343,6 @@
 .gateway:hover,
 .gateway:focus-visible {
   transform: translateX(8px);
-  border-color: rgba(0, 109, 143, .5);
   box-shadow: 0 20px 42px rgba(11, 42, 61, .16);
 }
 .gateway:hover::before,
@@ -345,8 +388,10 @@
    ========================================================================== */
 .partner-row:hover {
   transform: translateX(8px);
-  border-color: rgba(0, 109, 143, .4);
-  box-shadow: 0 8px 26px rgba(11, 42, 61, .1);
+  box-shadow: 0 16px 38px rgba(11, 42, 61, .12);
+}
+@media (width < 640px) {
+  .partner-row:hover { transform: none; }
 }
 
 /* ==========================================================================

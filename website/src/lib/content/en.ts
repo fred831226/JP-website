@@ -17,7 +17,7 @@ const EnglishContentSchema = z.object({
   contact: z.object({ title: Text, intro: Text, phone: Text, fax: Text, email: Text, address: Text }),
   shared: z.object({ learnMore: Text, viewProducts: Text, contactUs: Text, backHome: Text, notFoundTitle: Text, notFoundBody: Text }),
   view: z.object({
-    heroKicker: Text, companySummaryHeading: Text, companySummaryBody: Text,
+    heroKicker: Text, companySummaryBody: Text,
     projectGalleryHeading: Text, projectGalleryDescription: GalleryDescription, galleryAction: Text,
     pumpTypesHeading: Text, gatewaysHeading: Text, partnerHeading: Text, partnerAction: Text,
     photoAlts: z.array(Text).length(11), pumpTypeNames: z.array(Text).length(6),

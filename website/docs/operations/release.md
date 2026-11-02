@@ -1,36 +1,57 @@
 # JP PUMP 原子發布作業
 
-本流程將 Git commit、Vercel Preview、JP PUMP 核准與 Production promotion 綁定成同一份可追溯證據。任何 gate、commit 或部署身分不一致都停止；不以分支別名作為核准依據，也不從未提交的工作樹發布。
+本流程將候選 Git commit、單次 GitHub gate、Vercel Preview、JP PUMP 核准與 Production
+promotion 綁定成可追溯證據。完整測試只在 PR 上執行一次；evidence 與 promotion 驗證身分，
+不重跑相同 build 與 tests。
 
-## 權限與平台前置檢查
+## 平台前置條件
 
-以下項目由具權限的維護者在 GitHub 與 Vercel 後台人工確認，不由 repository script 改動：
+- Vercel project 為預期 team/project，Root Directory 為 `website`，Production Branch 為 `main`。
+- `main` 已啟用 branch protection，required check 為 `validate-candidate`。
+- Preview 為 READY、來源為候選 SHA，且禁止索引；Production rollback target 為同 project 的
+  READY immutable deployment。
+- 執行 promotion 的 `website` 已連到正確 Vercel project；Vercel CLI 為工具指定版本。
 
-- Vercel Root Directory 為 `website`，Production branch 與正式網域歸屬正確。
-- 執行 promotion 的 `website` 目錄已 link 到預期 Vercel project，登入帳號位於正確 team scope；先以唯讀方式核對 project/team，不可只依賴本機既有登入狀態。
-- promotion 工具會在任何外部變更前強制核對 Vercel CLI 必須精確為 `56.5.0`；版本缺失或不一致時直接停止。
-- Preview 使用 Standard Deployment Protection；含未核准證據時不得公開分享。
-- GitHub 必要檢查與分支保護已啟用，帳號使用 MFA 與最小權限。
-- Preview 顯示「預覽環境」，回傳 `X-Robots-Tag: noindex, nofollow`，且 `robots.txt` 禁止索引、沒有 Production sitemap 宣告。
-- 已記錄目前 Production 的 immutable deployment ID，作為 rollback target。
+## 1. PR gate：完整檢查只跑一次
 
-## 1. 建立並檢查 Preview 證據
+PR 的 `validate-candidate` 在 head SHA 上執行 locked install、dependency audit、content validation、
+lint、Preview-shaped build、release contract tests 與 Playwright。成功後產生：
 
-1. 將完整 candidate commit 推送並等候 Vercel 建立 commit 專屬 Preview。不要使用會跟著分支移動的 alias。
-2. 在 GitHub 手動執行 **Release gates** workflow，只輸入 immutable Preview deployment ID 與目前 known-good Production deployment ID。workflow 使用 Vercel API 取得兩者的 URL、project、environment、ready state 與 Git commit；不接受手填 URL、source commit 或 base commit。
-3. workflow 依序執行 governed content validation、lint、Preview-shaped build、release contract tests 與 public behavior tests。只有全部成功才產生 `release-evidence-<commit>` artifact。
-4. 下載並檢查證據：`sourceCommit`、`preview.sourceCommit` 與被審查的 commit 必須相同；確認 added/changed/removed、`contentChanges`、affected routes、所有 gates、Preview URL/deployment ID 與 rollback target 都完整。工具也會驗證 rollback commit 是 candidate 的祖先，並實際探測 Preview header 與 `robots.txt`。證據不應包含內容 body、聯絡資料或 secret。
-5. 在受保護 Preview 檢查所有受影響頁面屬於同一 repository state；不得出現 News、Project detail、未發布內容或部分更新。
+```text
+release-gates-<candidate SHA>/release-gates.json
+```
 
-## 2. 記錄核准
+這是唯一權威 gate report。不要在 `workflow_dispatch`、另一個 clean checkout 或 promotion 前
+再次重跑相同套件。candidate SHA 改變時，GitHub 自動產生新的權威 run。
 
-JP PUMP 核准應另存於 repository 與 CI artifact 之外的受存取控制 release record，並輸出最小 JSON 給 CLI。record 必須保留核准來源、核准角色、時間、完整 commit 與不可變參照；不得把核准秘密或私人聯絡資料放入 JSON、log 或 artifact：
+## 2. 建立 immutable Preview evidence
+
+等待 Vercel 為 candidate SHA 建立 Preview，完成受影響範圍 QA 後，手動執行 **Release gates**，
+選取候選 ref 並輸入：
+
+- `gate_run_id`：該 SHA 已成功的 PR gate run ID
+- `preview_deployment`：immutable Preview deployment ID
+- `rollback_target`：目前 known-good Production deployment ID
+
+workflow 會驗證 run 的 workflow、事件、結論與 head SHA，下載既有 gate artifact，並直接執行
+release evidence 工具。工具核對 project、deployment state、source commit、rollback ancestry、
+Preview headers、robots、空 sitemap、內容差異與 routes，最後產生：
+
+```text
+release-evidence-<candidate SHA>/release-evidence.json
+```
+
+外部權限或 evidence input 錯誤可在同一 SHA 上修正後重跑此步，不需要重跑 PR gates。
+
+## 3. 記錄核准
+
+JP PUMP 核准保存在 repository 與 CI artifact 之外的受控 release record；給 CLI 的最小 JSON：
 
 ```json
 {
   "status": "approved",
   "sourceCommit": "完整 40 字元 commit SHA",
-  "deploymentId": "dpl_不可變 Preview deployment ID",
+  "deploymentId": "dpl_immutable Preview deployment ID",
   "approvedAt": "ISO 8601 timestamp",
   "approvedBy": "designated JP PUMP approver role/identifier",
   "approvalReference": "access-controlled record ID",
@@ -38,51 +59,42 @@ JP PUMP 核准應另存於 repository 與 CI artifact 之外的受存取控制 r
 }
 ```
 
-以同一份 evidence 產生待抄入核准紀錄的 digest：
+產生 digest：
 
 ```powershell
 npm --prefix website run release:digest -- --evidence <release-evidence.json>
 ```
 
-拒絕或修正後必須建立新的 commit、重新跑 gates、取得新 Preview 與新核准；不得沿用舊核准。
+任何 candidate SHA 或 Preview deployment ID 改變都需要新的 evidence 與核准。
 
-## 3. Promotion：永遠先 dry-run
+## 4. Promotion：一次 dry-run，一次授權
 
-在與核准 commit 相同且乾淨的 checkout 執行：
+在核准 commit 的乾淨 checkout 執行：
 
 ```powershell
 npm --prefix website run release:promote -- --evidence <release-evidence.json> --approval <approval.json>
 ```
 
-預設只顯示精確的 `vercel promote <deployment-id> --yes`，不呼叫 Vercel。逐項確認 evidence commit、approval commit、目前 HEAD、Preview source commit、passed gates、乾淨工作樹與 rollback target 後，具權限的維護者才可明確執行：
+dry-run 核對 evidence、approval、HEAD、Preview、passed gates、working tree 與 rollback target，
+並顯示將執行的精確命令。Owner 對畫面所列 immutable deployment 明確授權後執行：
 
 ```powershell
 npm --prefix website run release:promote -- --evidence <release-evidence.json> --approval <approval.json> --execute
 ```
 
-依 [Vercel 官方 Preview promotion 流程](https://vercel.com/docs/deployments/promote-preview-to-production)，從 Preview promotion 會以同一份 source code 和 Production environment values 建立新的 Production deployment。執行完成後仍須人工檢查正式網域指向該次 promotion 產生的 deployment、非正式環境 banner 已消失、索引 header/robots/metadata/sitemap 正確。不要把「CLI 命令完成」單獨視為正式發布確認。
+完成後只做一次 Production verification：確認正式網域指向新 deployment，來源 commit/tree 正確，
+核心與受影響路由可用，且 Production robots、sitemap、canonical 與 redirect 正常。不要重跑 PR
+build 或 Playwright；除非 Production smoke 發現只在正式環境出現的問題。
 
-## 失敗、重試與升級
+## 失敗與 rollback
 
-- 任一前置條件失敗：CLI 以非零狀態結束且不呼叫 Vercel。修正 evidence、approval 或 checkout 後重跑 dry-run。
-- Vercel promotion 回報失敗、逾時或狀態不明：結果屬於 **indeterminate**，不可宣稱 Production 未變，也不可假設 promotion 成功。不要重複盲目執行；先用 `vercel promote status` 與 Vercel Dashboard 核對目前 Production deployment、domain assignment 與 deployment logs，再決定安全重試或升級給 Vercel account owner。
-- GitHub gate 失敗：保留 log 與 commit SHA，修正後建立新 candidate；不要略過失敗 gate 或手工拼接部分檔案發布。
-- log 與工單只記 commit、deployment ID、route、gate 名稱與錯誤類型；不得貼 token、環境變數、聯絡資料、來源文件或內容 body。
+- PR gate 失敗：修正 candidate，讓新 SHA 自動重跑。
+- evidence 失敗但 candidate 未改：修正 deployment/input/權限後只重跑 evidence。
+- promotion 失敗、逾時或狀態不明：視為 indeterminate；先用 Vercel 狀態與 Dashboard 確認
+  Production deployment 和 domain assignment，不可盲目重試。
+- rollback 必須指向已知可用的 immutable Production deployment，先 dry-run 並取得明確授權。
+- log 與 release record 只保留 commit、deployment ID、route、gate、digest 與錯誤類型；不記錄
+  token、環境變數值、私人聯絡資料或內容 body。
 
-## 移除與封存
-
-公開 route 的移除必須在另一個 reviewed commit 內處理。優先在 `data/redirects.json` 新增已審查的最近替代頁 redirect；確實沒有正確替代頁時，才在 `data/not-found-routes.json` 登錄明確 not-found route。未處理的公開 route removal 會阻擋 evidence 與 promotion。先前 Production deployment 必須保留為 rollback target。
-
-`data/redirects.json` 格式：
-
-```json
-[
-  {
-    "source": "/zh-tw/series/old-slug",
-    "destination": "/zh-tw/products",
-    "permanent": true
-  }
-]
-```
-
-Production rollback 屬 Story 3.7 與人工受權操作；本 Story 不自動 rollback，也不以 Git destructive commands 或選取檔案回復取代完整 deployment rollback。
+公開 route 移除仍須在 `data/redirects.json` 指定正確替代頁；沒有合理替代時，才加入
+`data/not-found-routes.json`。未處理的公開 route removal 會阻止 evidence。

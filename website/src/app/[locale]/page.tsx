@@ -107,10 +107,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </div>
             </RevealSection>
             <RevealSection className="order-1 md:order-2">
-              <p className="mb-2 text-xs font-[800] tracking-[0.08em] text-[var(--color-action)]">ABOUT JP PUMP</p>
-              <h2 className="text-[var(--font-heading-lg-size)] font-[var(--font-heading-lg-weight)] leading-[var(--font-heading-lg-line-height)] text-[var(--color-primary)]">
-                {en ? englishContent.view.companySummaryHeading : companySummary.heading}
-              </h2>
+              <h2 className="mb-2 text-xs font-[800] tracking-[0.08em] text-[var(--color-action)]">ABOUT JP PUMP</h2>
               <p className="mt-4 whitespace-pre-line leading-[var(--font-body-line-height)] text-[var(--color-text-muted)]">
                 {en ? englishContent.view.companySummaryBody : companySummary.body}
               </p>
@@ -123,6 +120,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </RevealSection>
           </div>
         </div>
+        <span className="home-seam home-seam--right" aria-hidden="true" />
       </section>
 
       {projectGallery && (
@@ -158,6 +156,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </div>
             <ProjectGalleryDescription paragraphs={(en ? englishContent.view.projectGalleryDescription : projectGallery.description).slice(2)} belowGallery />
           </div>
+          <span className="home-seam home-seam--left" aria-hidden="true" />
         </section>
       )}
 
@@ -165,8 +164,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           Product Type Cards — radial-glow bg, reveal with stagger delays
           ================================================================ */}
       {content.homepagePumpTypes.length > 0 && (
-        <section className="relative overflow-hidden" style={{ background: "radial-gradient(ellipse 62% 50% at 85% -2%,rgba(0,109,143,.1),transparent 60%),var(--color-background)" }}>
-          <div className="mx-auto max-w-[var(--content-max)] px-[var(--page-gutter-desktop)] py-14 max-md:px-[var(--page-gutter-mobile)]">
+        <section className="home-product-section relative overflow-hidden">
+          <div className="mx-auto max-w-[var(--content-max)] px-[var(--page-gutter-desktop)] py-20 max-md:px-[var(--page-gutter-mobile)] max-md:py-16">
             <RevealSection>
               <div className="mb-8 max-w-[500px]">
                 <p className="mb-2 text-xs font-[800] tracking-[0.08em] text-[var(--color-action)]">PRODUCT USES</p>
@@ -197,6 +196,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               ))}
             </div>
           </div>
+          <span className="home-seam home-seam--right" aria-hidden="true" />
         </section>
       )}
 
@@ -204,7 +204,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           Destination Gateways — grid bg, ghost numbers, expansion
           ================================================================ */}
       <section className="gateways-section relative overflow-hidden">
-        <div className="mx-auto max-w-[var(--content-max)] px-[var(--page-gutter-desktop)] py-14 max-md:px-[var(--page-gutter-mobile)]">
+        <div className="relative mx-auto max-w-[var(--content-max)] px-[var(--page-gutter-desktop)] py-20 max-md:px-[var(--page-gutter-mobile)] max-md:py-16">
           <RevealSection className="mb-10 max-w-[600px]">
             <p className="mb-2 text-xs font-[800] tracking-[0.08em] text-[var(--color-action)]">PRODUCTS &amp; SERVICES</p>
             <h2 className="text-[var(--font-heading-lg-size)] font-[var(--font-heading-lg-weight)] leading-[var(--font-heading-lg-line-height)] text-[var(--color-primary)]">
@@ -221,7 +221,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 <Link
                   key={g.id}
                   href={en ? (g.id === "products" ? "/en/products" : "/en/contact") : g.href}
-                  className={`gateway gateway--${g.id} group relative flex min-h-[200px] flex-col justify-center overflow-hidden rounded-[var(--product-card-radius)] border border-[var(--color-border)] p-7 shadow-[var(--product-card-shadow)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2 ${g.id === "services" ? "items-start text-left" : "items-end text-right"}`}
+                  className={`gateway gateway--${g.id} group relative flex min-h-[200px] flex-col justify-center overflow-hidden rounded-[var(--product-card-radius)] p-7 shadow-[var(--product-card-shadow)] focus-visible:outline-[3px] focus-visible:outline-[var(--color-focus-ring)] focus-visible:outline-offset-2 ${g.id === "services" ? "items-start text-left" : "items-end text-right"}`}
                 >
                   <span className="gateway-media pointer-events-none absolute inset-0" aria-hidden="true">
                     <Image src={g.background} alt="" fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" />
@@ -241,17 +241,16 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </div>
           </RevealSection>
         </div>
+        <span className="home-seam home-seam--left" aria-hidden="true" />
       </section>
 
       {/* ================================================================
           Partners — logo rows with hover accent
           ================================================================ */}
       {partners && partners.length > 0 && (
-        <section className="border-t border-[var(--color-border)]" style={{
-          background: "radial-gradient(ellipse 50% 62% at 10% 50%,rgba(0,109,143,.06),transparent 62%),var(--color-surface)",
-        }}>
-          <div className="mx-auto max-w-[var(--content-max)] px-[var(--page-gutter-desktop)] py-14 max-md:px-[var(--page-gutter-mobile)]">
-            <RevealSection className="mb-10 flex items-end justify-between gap-6">
+        <section className="home-partners-section">
+          <div className="mx-auto max-w-[var(--content-max)] px-[var(--page-gutter-desktop)] py-20 max-md:px-[var(--page-gutter-mobile)] max-md:py-16">
+            <RevealSection className="mb-10 flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
               <div>
                 <p className="mb-2 text-xs font-[800] tracking-[0.08em] text-[var(--color-action)]">PARTNERS</p>
                 <h2 className="text-[var(--font-heading-lg-size)] font-[var(--font-heading-lg-weight)] leading-[var(--font-heading-lg-line-height)] text-[var(--color-primary)]">
@@ -267,7 +266,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </RevealSection>
             {partners.map((p, i) => (
               <RevealSection key={p.id} delayMs={i * 120}>
-                <div className="partner-row flex items-center gap-6 rounded-[var(--product-card-radius)] border border-[var(--color-border)] bg-white p-6 shadow-[0_4px_18px_rgba(11,42,61,.06)] transition-all duration-300 ease-out">
+                <div className="partner-row flex flex-col items-center gap-6 rounded-[var(--product-card-radius)] bg-white p-6 text-center shadow-[0_8px_32px_rgba(11,42,61,.08)] transition-all duration-300 ease-out sm:flex-row sm:text-left">
                   <div className="flex h-[104px] w-[184px] flex-shrink-0 items-center justify-center rounded-[8px] bg-white p-2">
                     {p.logo ? (
                       <Image src={p.logo} alt={en ? "Grundfos" : p.name} width={368} height={208} className="max-h-full max-w-full object-contain" />

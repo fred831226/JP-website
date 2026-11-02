@@ -30,7 +30,7 @@ Production deployment、兩個正式網域與首頁回應均已核對為 Ready�
 ## 後續變更原則
 
 - 後續小型設計、文案或版面調整仍須走 branch、驗證、commit-bound Preview 與 Production 授權流程；不得直接修改線上部署。
-- 英文版目前**尚未開始，也未被列為現有 V1 路由**。啟動前應先確認內容翻譯、網址／canonical／hreflang、SEO、導覽與驗收範圍，再以獨立變更發布；不得以暫時或機器翻譯頁取代正式英文內容。
+- 英文版的既有五個公開路由已納入 V1；2026-11-02 的範圍與內容核准見 [`english-v1-scope.md`](../product/english-v1-scope.md)。新增英文內容仍需另行覆核。
 - 任何下一次發布完成後，更新本文件的 source commit、Production deployment、檢查時間與網域驗證結果，並保留上一個 known-good deployment 供 rollback 流程使用。
 
 ## 仍需獨立治理的事項

@@ -73,10 +73,15 @@ function routeForAppPage(path) {
   return `/zh-tw/${suffix}`;
 }
 
+function publishedLocalizedRoutes(chineseRoute, knownRoutes = []) {
+  const englishRoute = chineseRoute === "/zh-tw/" ? "/en" : chineseRoute.replace(/^\/zh-tw/, "/en");
+  return knownRoutes.includes(englishRoute) ? [chineseRoute, englishRoute] : [chineseRoute];
+}
+
 export function publicRoutesForPath(inputPath, routeInventory = {}) {
   const path = normalizePath(inputPath);
   const appRoute = routeForAppPage(path);
-  if (appRoute) return [appRoute];
+  if (appRoute) return publishedLocalizedRoutes(appRoute, routeInventory.all);
   if (/\/src\/app\/\[locale\]\/layout\.tsx$/.test(path)
     || /\/src\/app\/(?:robots|sitemap)\.ts$/.test(path)
     || /\/src\/app\/globals\.css$/.test(path)
@@ -84,11 +89,12 @@ export function publicRoutesForPath(inputPath, routeInventory = {}) {
     || /\/src\/data\/(?:navigation|site)\.json$/.test(path)
     || /\/public\/media\//.test(path)
     || /redirects\.json$/.test(path)) return [...(routeInventory.all ?? [])];
-  if (/\/src\/data\/(?:company)\.json$/.test(path)) return ["/zh-tw/company"];
-  if (/\/src\/data\/(?:contact)\.json$/.test(path)) return ["/zh-tw/contact"];
-  if (/\/src\/data\/(?:partners)\.json$/.test(path)) return ["/zh-tw/partners"];
+  if (/\/src\/data\/(?:company)\.json$/.test(path)) return publishedLocalizedRoutes("/zh-tw/company", routeInventory.all);
+  if (/\/src\/data\/(?:contact)\.json$/.test(path)) return publishedLocalizedRoutes("/zh-tw/contact", routeInventory.all);
+  if (/\/src\/data\/(?:partners)\.json$/.test(path)) return publishedLocalizedRoutes("/zh-tw/partners", routeInventory.all);
   if (/\/src\/data\/(?:services|projects)\.json$/.test(path)) return ["/zh-tw/services"];
-  if (/\/src\/data\/(?:home|hero)\.json$/.test(path)) return ["/zh-tw/"];
+  if (/\/src\/data\/(?:home|hero)\.json$/.test(path)) return publishedLocalizedRoutes("/zh-tw/", routeInventory.all);
+  if (/\/src\/(?:data\/en\.json|lib\/content\/en\.ts)$/.test(path)) return (routeInventory.all ?? []).filter((route) => route === "/en" || route.startsWith("/en/"));
   if (/(?:catalog|source-catalog)/.test(path)) return [...(routeInventory.catalog ?? ["/zh-tw/products"])];
   return [];
 }
@@ -257,7 +263,7 @@ function validateRollback(rollback, preview) {
 
 function removedRoutesForPath(path, knownRoutes) {
   const staticRoute = routeForAppPage(path);
-  if (staticRoute) return [staticRoute];
+  if (staticRoute) return publishedLocalizedRoutes(staticRoute, knownRoutes);
 
   const dynamicRoute = normalizePath(path).match(/^website\/src\/app\/\[locale\]\/(series|types)\/\[slug\]\/page\.tsx$/);
   if (!dynamicRoute) return [];

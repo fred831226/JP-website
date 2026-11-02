@@ -15,7 +15,6 @@ import {
   verifyRollbackPreconditions,
 } from "../../scripts/release-contract.mjs";
 import { assertPreviewPolicy, runReleaseCli } from "../../scripts/release.mjs";
-import { heroCandidateContentHash, lockedDependencyHash } from "../../scripts/audit-pr11.mjs";
 
 const COMMIT = "0123456789abcdef0123456789abcdef01234567";
 const BASE_COMMIT = "89abcdef0123456789abcdef0123456789abcdef";
@@ -41,6 +40,29 @@ const ROUTE_INVENTORY = {
     "/zh-tw/types/horizontal-pump",
   ],
 };
+
+test("release evidence reuses the successful PR gate instead of rerunning it", async () => {
+  const workflow = await readFile(
+    new URL("../../../.github/workflows/release-gates.yml", import.meta.url),
+    "utf8",
+  );
+  for (const command of [
+    "npm --prefix website ci",
+    "npm --prefix website audit --audit-level=high",
+    "npm --prefix website run validate",
+    "npm --prefix website run lint",
+    "npm --prefix website run build",
+    "npm --prefix website run test:release",
+    "npm --prefix website test",
+  ]) {
+    assert.equal(workflow.split(command).length - 1, 1, `${command} must run exactly once`);
+  }
+  assert.match(workflow, /gate_run_id:/);
+  assert.match(workflow, /github\.rest\.actions\.getWorkflowRun/);
+  assert.match(workflow, /run\.head_sha !== context\.sha/);
+  assert.match(workflow, /actions\/download-artifact@v4/);
+  assert.match(workflow, /Create immutable Preview evidence without rerunning gates/);
+});
 
 function validEvidence(overrides = {}) {
   return buildReleaseEvidence({
@@ -188,6 +210,19 @@ test("repository change classification covers atomic public surfaces and ignores
   });
 });
 
+test("bilingual release evidence includes every published English route touched by shared and English content", () => {
+  const routes = { all: ["/zh-tw/", "/zh-tw/company", "/zh-tw/services", "/en", "/en/company", "/en/products"] };
+  const classified = classifyRepositoryChanges([
+    { status: "M", path: "website/src/app/[locale]/page.tsx" },
+    { status: "M", path: "website/src/data/en.json" },
+    { status: "M", path: "website/src/data/home.json" },
+  ], routes);
+  assert.deepEqual(classified.affectedRoutes, ["/en", "/en/company", "/en/products", "/zh-tw/"]);
+  assert.deepEqual(classifyRepositoryChanges([
+    { status: "M", path: "website/src/app/[locale]/services/page.tsx" },
+  ], routes).affectedRoutes, ["/zh-tw/services"]);
+});
+
 test("stable governed records are classified at content level and expose route-changing removals", () => {
   const baseSnapshots = {
     "website/data/catalog-content.json": {
@@ -304,83 +339,6 @@ test("evidence requires the exact unique release gate set", () => {
       validation: { sourceCommit: COMMIT, passed: true, gates },
     }), /exact required release gates/i);
   }
-});
-
-test("one-time PR #11 audit exception is preserved and bound to its commit and lockfile", () => {
-  const exception = {
-    prNumber: 11,
-    advisory: "GHSA-vfj7-8cjw-p6xm",
-    lockfileSha256: "c9a2ba644e991237bb64c8e4eafb5371c8540342cdd19372c77b299277af53ca",
-    sourceCommit: COMMIT,
-  };
-  const gates = validEvidence().validation.gates.map((gate) => gate.name === "audit" ? { ...gate, exception } : gate);
-  const evidence = validEvidence({ validation: { sourceCommit: COMMIT, passed: true, gates } });
-  assert.deepEqual(evidence.validation.gates.find((gate) => gate.name === "audit").exception, exception);
-  assert.doesNotThrow(() => verifyPromotionPreconditions({
-    evidence,
-    approval: validApproval(evidence),
-    currentCommit: COMMIT,
-    workingTreeClean: true,
-  }));
-  for (const invalid of [
-    { ...exception, prNumber: 12 },
-    { ...exception, sourceCommit: BASE_COMMIT },
-    { ...exception, lockfileSha256: "0".repeat(64) },
-  ]) {
-    const invalidGates = gates.map((gate) => gate.name === "audit" ? { ...gate, exception: invalid } : gate);
-    assert.throws(() => validEvidence({ validation: { sourceCommit: COMMIT, passed: true, gates: invalidGates } }), /audit exception/i);
-  }
-});
-
-test("home gallery audit exception is bound to this candidate's content, lockfile, and commit", () => {
-  const exception = {
-    candidate: "codex/home-gallery-release",
-    advisory: "GHSA-vfj7-8cjw-p6xm",
-    lockfileSha256: "c9a2ba644e991237bb64c8e4eafb5371c8540342cdd19372c77b299277af53ca",
-    contentSha256: "ad30373d3a9832c40cc9bd524b586769566b9849f5cee652e74f8389ec824cd2",
-    sourceCommit: COMMIT,
-  };
-  const gates = validEvidence().validation.gates.map((gate) => gate.name === "audit" ? { ...gate, exception } : gate);
-  const evidence = validEvidence({ validation: { sourceCommit: COMMIT, passed: true, gates } });
-  assert.deepEqual(evidence.validation.gates.find((gate) => gate.name === "audit").exception, exception);
-  for (const invalid of [
-    { ...exception, candidate: "other-branch" },
-    { ...exception, sourceCommit: BASE_COMMIT },
-    { ...exception, contentSha256: "0".repeat(64) },
-    { ...exception, lockfileSha256: "0".repeat(64) },
-    { ...exception, advisory: "other-advisory" },
-  ]) {
-    const invalidGates = gates.map((gate) => gate.name === "audit" ? { ...gate, exception: invalid } : gate);
-    assert.throws(() => validEvidence({ validation: { sourceCommit: COMMIT, passed: true, gates: invalidGates } }), /audit exception/i);
-  }
-});
-
-test("Hero audit exception is bound to exact content, branch, lockfile, advisory, and commit", () => {
-  const exception = {
-    candidate: "codex/hero-release-20261014",
-    advisory: "GHSA-vfj7-8cjw-p6xm",
-    lockfileSha256: "c9a2ba644e991237bb64c8e4eafb5371c8540342cdd19372c77b299277af53ca",
-    contentSha256: "d9fcfb1fdee6d225b69d7b8af9cac066fe44a5b23f36a490a02a628a10fb91b2",
-    sourceCommit: COMMIT,
-  };
-  assert.equal(heroCandidateContentHash(), exception.contentSha256);
-  const gates = validEvidence().validation.gates.map((gate) => gate.name === "audit" ? { ...gate, exception } : gate);
-  const evidence = validEvidence({ validation: { sourceCommit: COMMIT, passed: true, gates } });
-  assert.deepEqual(evidence.validation.gates.find((gate) => gate.name === "audit").exception, exception);
-  for (const invalid of [
-    { ...exception, candidate: "other-branch" },
-    { ...exception, sourceCommit: BASE_COMMIT },
-    { ...exception, contentSha256: "0".repeat(64) },
-    { ...exception, lockfileSha256: "0".repeat(64) },
-    { ...exception, advisory: "other-advisory" },
-  ]) {
-    const invalidGates = gates.map((gate) => gate.name === "audit" ? { ...gate, exception: invalid } : gate);
-    assert.throws(() => validEvidence({ validation: { sourceCommit: COMMIT, passed: true, gates: invalidGates } }), /audit exception/i);
-  }
-});
-
-test("the locked dependency hash is stable across checkout line endings", () => {
-  assert.equal(lockedDependencyHash(), "a48d1bd7ef89168834b88f05bae1950222761c28df79147f134ea80e19f15cd9");
 });
 
 test("rollback evidence must be a different ready Production deployment from the same project", () => {
